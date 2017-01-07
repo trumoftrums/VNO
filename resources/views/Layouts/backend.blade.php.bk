@@ -1,0 +1,11 @@
+<html>
+<head>
+    <title>VietNamOTO.Net - @yield('title')</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" type="text/css" href="../js/dhtmlx5/dhtmlx.css"/>
+    <link rel="stylesheet" type="text/css" href="../js/dhtmlx5/fonts/font_roboto/roboto.css"/>
+    <script src="../js/dhtmlx5/dhtmlx.js"></script>
+</head>
+@yield('body')
+</html>
