@@ -54,11 +54,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '103.15.51.74'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'w99t_vno_dev'),
-            'username' => env('DB_USERNAME', 'w99t_vno_dev'),
-            'password' => env('DB_PASSWORD', 'VNOashkjh45377HFFT'),
+            'host' => env('DB_HOST', ''),
+            'port' => env('DB_PORT', ''),
+            'database' => env('DB_DATABASE', ''),
+            'username' => env('DB_USERNAME', ''),
+            'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
