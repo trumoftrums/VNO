@@ -60,13 +60,13 @@
                 </li>
 
                 <li>
-                    <a href="css_animation.html"><i class="fa fa-magic"></i> <span class="nav-label">CSS Animations </span><span class="label label-info pull-right">62</span></a>
+                    <a href="css_animation.html"><i class="fa fa-magic"></i> <span class="nav-label">Quản lý bài viết </span><span class="label label-info pull-right">62</span></a>
                 </li>
                 <li class="landing_link">
-                    <a target="_blank" href="landing.html"><i class="fa fa-star"></i> <span class="nav-label">Landing Page</span> <span class="label label-warning pull-right">NEW</span></a>
+                    <a target="_blank" href="landing.html"><i class="fa fa-star"></i> <span class="nav-label">Quản lý tin tức</span> <span class="label label-warning pull-right">NEW</span></a>
                 </li>
                 <li class="special_link">
-                    <a href="package.html"><i class="fa fa-database"></i> <span class="nav-label">Package</span></a>
+                    <a href="package.html"><i class="fa fa-database"></i> <span class="nav-label">Quản lý salon</span></a>
                 </li>
             </ul>
 
@@ -86,7 +86,7 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+                        <span class="m-r-sm text-muted welcome-message">Welcome to VNO</span>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
