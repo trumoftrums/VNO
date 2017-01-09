@@ -35,7 +35,7 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="../backend/img/profile_small.jpg" />
+                            <img alt="image" class="img-circle" src="../uploads/users/lee.png" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
@@ -53,20 +53,24 @@
                     </div>
                 </li>
                 <li class="active">
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Quản lý user</span> <span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Quản lý user</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li class="active"><a href="index.html">Danh sách</a></li>
+                        <li class="active"><a href="#">Danh sách</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="css_animation.html"><i class="fa fa-magic"></i> <span class="nav-label">Quản lý bài viết </span><span class="label label-info pull-right">62</span></a>
+                    <a href="#"><i class="fa fa-magic"></i> <span class="nav-label">Quản lý bài viết </span><span class="label label-info pull-right">62</span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="#">Bài viết</a></li>
+                        <li><a href="#">Loại xe</a></li>
+                    </ul>
                 </li>
                 <li class="landing_link">
-                    <a target="_blank" href="landing.html"><i class="fa fa-star"></i> <span class="nav-label">Quản lý tin tức</span> <span class="label label-warning pull-right">NEW</span></a>
+                    <a target="_blank" href="#"><i class="fa fa-star"></i> <span class="nav-label">Quản lý tin tức</span> <span class="label label-warning pull-right">NEW</span></a>
                 </li>
                 <li class="special_link">
-                    <a href="package.html"><i class="fa fa-database"></i> <span class="nav-label">Quản lý salon</span></a>
+                    <a href="#"><i class="fa fa-database"></i> <span class="nav-label">Quản lý salon</span></a>
                 </li>
             </ul>
 
@@ -199,11 +203,8 @@
 
             </nav>
         </div>
-        <div id="layoutObj" class="row  border-bottom white-bg dashboard-header">
-            @yield('content')
 
-        </div>
-
+        @yield('content')
     </div>
     <div class="small-chat-box fadeInRight animated">
 
@@ -714,7 +715,7 @@
                 showMethod: 'slideDown',
                 timeOut: 4000
             };
-            toastr.success('Responsive Admin Theme', 'Welcome to INSPINIA');
+            toastr.success('Last login: 2017-01-07 22:01:00', 'Welcome to VNO');
 
         }, 1300);
 

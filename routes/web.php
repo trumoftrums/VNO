@@ -22,5 +22,7 @@ Route::group(['prefix' => 'admin'], function()
     // Controllers Within The "App\Http\Controllers\Admin" Namespace
     Route::get('/dashboard', 'Admin\DashboardController@index');
     Route::get('/', 'Admin\DashboardController@index');
+    Route::get('/login', 'Auth\LoginController@login');
+    Route::post('/login', 'Auth\LoginController@login');
 });
 
