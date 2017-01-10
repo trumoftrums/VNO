@@ -36,8 +36,8 @@
                         </div>
                     </div>
                     <div class="log-reg">
-                        <span><img src="./images/icon-login.png"/> Đăng nhập</span>
-                        <span><img src="./images/icon-reg.png"/> Đăng kí</span>
+                        <span data-toggle="modal" data-target="#myModalLog"><img src="./images/icon-login.png"/> Đăng nhập</span>
+                        <span data-toggle="modal" data-target="#myModalReg"><img src="./images/icon-reg.png"/> Đăng kí</span>
                         <img class="icon-avatar" src="./images/icon-avatar.png"/>
                     </div>
                 </div>
@@ -238,6 +238,82 @@
                 <p>User: <span>3000</span></p>
             </div>
         </div>
+</div>
+<!-- Modal Register-->
+<div id="myModalReg" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <img src="./images/icon-close-popup.png"/>
+                </button>
+                <img class="img-logo-popup" src="./images/logo.png"/>
+                <img class="img-slogan-popup" src="./images/slogan-reg.png"/>
+            </div>
+            <div class="modal-body">
+                <p class="p-in-pop">HÃY ĐĂNG KÝ ĐỂ NHẬN THÔNG TIN VÀ TÍCH ĐIỂM NHẬN GIẢI THƯỞNG KHI LÀ THÀNH VIÊN CỦA VIETNAMOTO.NET</p>
+                <form action="#" class="form-reg">
+                    <ul>
+                        <li>
+                            <span>Số điện thoại:</span>
+                            <input class="inp form-control" name="phone"/>
+                        </li>
+                        <li>
+                            <span>Mật khẩu:</span>
+                            <input type="password" class="inp form-control" name="pass"/>
+                        </li>
+                        <li>
+                            <span>Nhập lại mật khẩu:</span>
+                            <input class="inp form-control" type="password" name="re-pass"/>
+                        </li>
+                        <li>
+                            <input class="bt-in-pop" type="submit" value="Đăng ký"/>
+                        </li>
+                    </ul>
+                </form>
+                <p class="p-in-pop">KHI ĐĂNG KÝ TỨC LÀ BẠN ĐÃ CHẤP NHẬN MỌI ĐIỀU KHOẢN TỪ VIETNAMOTO.NET</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Modal Login-->
+<div id="myModalLog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <img src="./images/icon-close-popup.png"/>
+                </button>
+                <img class="img-logo-popup" src="./images/logo.png"/>
+                <img class="img-slogan-popup" src="./images/slogan-reg.png"/>
+            </div>
+            <div class="modal-body">
+                <form action="#" class="form-reg">
+                    <ul>
+                        <li>
+                            <span>Số điện thoại:</span>
+                            <input class="inp form-control" name="phone"/>
+                        </li>
+                        <li>
+                            <span>Mật khẩu:</span>
+                            <input type="password" class="inp form-control" name="pass"/>
+                        </li>
+                        <li>
+                            <input class="bt-in-pop" type="submit" value="Đăng nhập"/>
+                        </li>
+                    </ul>
+                    <a class="a-forgot" href="#"><img src="./images/icon-question.png"/> Bạn quân mật khẩu của mình?</a>
+                    <span class="spa-reg"><img src="./images/icon-reg.png"/> Bạn chưa có tài khoản. Hãy <a class="a-regs" href="#">đăng ký</a> cùng chúng tôi</span>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p class="p-in-pop" style="padding: 0px 60px;">HÃY ĐĂNG BÀI VÀ CHIA SẼ ĐỂ TÍCH ĐIỂM ĐỂ NHẬN GIẢI THƯỞNG TỪ VIETNAMOTO.NET</p>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
     (function($) {

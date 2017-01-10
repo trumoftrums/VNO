@@ -639,3 +639,82 @@
     background-color: #0c834a;
     border-color: #0c834a;
 }
+.img-logo-popup{
+    width: 16%;
+    float: left;
+    margin-left: 30px;
+}
+.img-slogan-popup{
+    float: right;
+    margin-right: 45px;
+    margin-top: 15px;
+    width: 55%;
+}
+.modal-header{
+    border-bottom: 1px solid #056839;
+}
+.modal-header .close img{
+    margin: -7px -7px 0px 0px;
+}
+.modal-content{
+    background: #e5e5e5;
+    box-shadow: 1px 1px 12px 2px #999;
+}
+.p-in-pop{
+    color: #056839;
+    text-align: center;
+}
+.modal-dialog{
+    width: 480px;
+}
+.form-reg ul li{
+    list-style: none;
+    float: left;
+    width: 100%;
+    line-height: 25px;
+    text-align: center;
+}
+.form-reg ul li span{
+    float: left;
+    width: 130px;
+    padding-top: 15px;
+    color: #3e3e3e;
+    text-align: left;
+}
+.form-reg ul li .inp{
+    float: left;
+    width: 60%;
+    color: #999;
+    border: none;
+    border-bottom: 1px solid #aeaeae;
+    box-shadow: none;
+    border-radius: 0px;
+    background: none;
+}
+.form-reg ul li .bt-in-pop{
+    background: #056839;
+    border: none;
+    padding: 5px 80px;
+    border-radius: 5px;
+    font-size: 16px;
+    margin: 25px;
+    color: #fff;
+}
+.form-reg ul li .bt-in-pop:hover{
+    opacity:0.8;
+}
+.form-reg .a-forgot{
+    width: 100%;
+    float: left;
+    color: #333;
+    text-align: center;
+}
+.form-reg .spa-reg{
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+.form-reg .a-regs{
+    color: #056839;
+}
+
