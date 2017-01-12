@@ -650,9 +650,6 @@
     margin-top: 15px;
     width: 55%;
 }
-.modal-header{
-    border-bottom: 1px solid #056839;
-}
 .modal-header .close img{
     margin: -7px -7px 0px 0px;
 }
@@ -709,6 +706,7 @@
     float: left;
     color: #333;
     text-align: center;
+    padding: 5px 0px;
 }
 .form-reg .spa-reg{
     text-align: center;
@@ -718,4 +716,18 @@
 .form-reg .a-regs{
     color: #056839;
 }
-
+.img-line{
+    height: 2px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: -5px;
+}
+.social-popup{
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+.social-popup a img{
+    height: 25px;
+    margin-left: 15px;
+}
