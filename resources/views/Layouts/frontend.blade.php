@@ -251,6 +251,7 @@
                 <img class="img-logo-popup" src="./images/logo.png"/>
                 <img class="img-slogan-popup" src="./images/slogan-reg.png"/>
             </div>
+            <img class="img-line" src="./images/line.png"/>
             <div class="modal-body">
                 <p class="p-in-pop">HÃY ĐĂNG KÝ ĐỂ NHẬN THÔNG TIN VÀ TÍCH ĐIỂM NHẬN GIẢI THƯỞNG KHI LÀ THÀNH VIÊN CỦA VIETNAMOTO.NET</p>
                 <form action="#" class="form-reg">
@@ -290,6 +291,7 @@
                 <img class="img-logo-popup" src="./images/logo.png"/>
                 <img class="img-slogan-popup" src="./images/slogan-reg.png"/>
             </div>
+            <img class="img-line" src="./images/line.png"/>
             <div class="modal-body">
                 <form action="#" class="form-reg">
                     <ul>
@@ -309,8 +311,15 @@
                     <span class="spa-reg"><img src="./images/icon-reg.png"/> Bạn chưa có tài khoản. Hãy <a class="a-regs" href="#">đăng ký</a> cùng chúng tôi</span>
                 </form>
             </div>
+            <img class="img-line" src="./images/line.png"/>
             <div class="modal-footer">
                 <p class="p-in-pop" style="padding: 0px 60px;">HÃY ĐĂNG BÀI VÀ CHIA SẼ ĐỂ TÍCH ĐIỂM ĐỂ NHẬN GIẢI THƯỞNG TỪ VIETNAMOTO.NET</p>
+                <div class="social-popup">
+                    <a href="#"><img src="./images/icon-fb.png"/></a>
+                    <a href="#"><img src="./images/icon-twitter.png"/></a>
+                    <a href="#"><img src="./images/icon-yb.png"/></a>
+                    <a href="#"><img src="./images/icon-google.png"/></a>
+                </div>
             </div>
         </div>
     </div>
