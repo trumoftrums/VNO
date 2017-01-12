@@ -59,6 +59,7 @@
             mygrid = myLayout.cells("a").attachGrid();
             mygrid.setImagePath("../js/dhtmlx5/imgs/");
             mygrid.init();
+            mygrid.loadXML("getbaiviet");
         }
         $(document ).ready(function() {
 
@@ -70,7 +71,7 @@
         });
         function adjust_size(){
             var pr = $( window );
-            var h = pr.height() - $("#toolbar_top").height();
+            var h = pr.height() - $("#toolbar_top").height()-5;
             var w = pr.width() - $("#menu-left").width();
             $("#layoutObj").css("height",h);
             $("#layoutObj").css("width",w);

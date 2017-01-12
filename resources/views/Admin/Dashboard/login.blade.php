@@ -33,9 +33,9 @@
                 <input type="text" name="username" class="form-control" placeholder="Username" required="required">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" required="required">
+                <input type="password" name="password"  class="form-control" placeholder="Password" required="required">
             </div>
-            <button type="submit" name="password" class="btn btn-primary block full-width m-b">Login</button>
+            <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
 
             <a href="#"><small>Forgot password?</small></a>
         </form>

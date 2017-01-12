@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Hash;
 use Request;
 use Auth;
 class LoginController extends Controller
@@ -28,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin/dashboard';
 
     /**
      * Create a new controller instance.
@@ -41,40 +42,33 @@ class LoginController extends Controller
     }
     public function login()
     {
+
         if(Request::has('username')){
+            //echo 'cai meo';exit();
             $rules = array(
                 'username'    => 'required',
-                'password' => 'required|alphaNum|min:6'
+                'password' => 'required|alphaNum|min:4'
             );
-//            $data = Form::input('password', 'name', 'value');
-//            var_dump($data);exit();
             $uri = Request::path();
-
+            $this->redirectTo =$uri;
             $validator = Validator::make(Input::all(), $rules);
-
             if ($validator->fails()) {
                 return Redirect::to($uri)
                     ->withErrors($validator)
                     ->withInput(Input::except('password'));
-            } else {
-
-                // create our user data for the authentication
+            }else{
                 $userdata = array(
                     'username'     => Input::get('username'),
-                    'password'  => md5(Input::get('password')),
+                    'password'  => Input::get('password'),
                     'status' =>'Actived'
                 );
-
-
                 if (Auth::attempt($userdata)) {
-
-                    echo 'SUCCESS!';
-
-                } else {
+                    return Redirect::to("admin/dashboard");
+                }
+                else {
                     return Redirect::to($uri);
 
                 }
-
             }
         }
         return view('Admin\Dashboard.login');
