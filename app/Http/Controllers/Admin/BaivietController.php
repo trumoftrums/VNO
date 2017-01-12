@@ -51,10 +51,10 @@ class BaivietController extends Controller {
         foreach ($datas as $v){
             $content .=  '<row id="'.$v->id.'">';
             $content .=  '<cell><![CDATA['.$no.']]></cell>';
-            $content .=  '<cell><![CDATA['.$v->Title.']]></cell>';
-            $content .=  '<cell><![CDATA['.$v->Description.']]></cell>';
-            $content .=  '<cell><![CDATA['.$v->PublishedDate.']]></cell>';
-            $content .=  '<cell><![CDATA['.$v->StatusId.']]></cell>';
+            $content .=  '<cell><![CDATA['.$v->tieu_de.']]></cell>';
+            $content .=  '<cell><![CDATA['.$v->mo_ta.']]></cell>';
+            $content .=  '<cell><![CDATA['.$v->published.']]></cell>';
+            $content .=  '<cell><![CDATA['.$v->status.']]></cell>';
             $content .='</row>';
             $no++;
         }

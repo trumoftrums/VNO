@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Models\Nhomthongso;
 use Request;
-use App\Models\Baiviet;
+use App\Models\Thongtinxe;
+use DB;
 class DashboardController extends Controller {
 
     /**
@@ -13,10 +15,25 @@ class DashboardController extends Controller {
      */
     public function index()
     {
-        $data =  array(
+        $info =  array(
             'title' =>'Admin DashBoard',
             'content' =>'This is admin dashboard page'
         );
-        return view('Admin\Dashboard.index')->with($data);
+        $thongtinxe = Thongtinxe::where('status',1)->get();
+        $thongtinxe = $thongtinxe->toArray();
+
+        $nhomthongso = Nhomthongso::where('status',1)->get();
+        foreach ($nhomthongso as $ts){
+            var_dump($ts);
+            var_dump($ts->relatedThongso);
+        }
+        exit();
+
+        $datas = array(
+            'info' => $info,
+            'thongtinxe' =>$thongtinxe
+        );
+
+        return view('Admin\Dashboard.index')->with($datas);
     }
 }
