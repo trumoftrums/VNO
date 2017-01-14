@@ -11,5 +11,16 @@ use Illuminate\Database\Eloquent\Model;
  */
 abstract class UsersFactory extends Model
 {
-
+    public static function addUser($params)
+    {
+        $dataUser = [
+            'username' => $params['phone'],
+            'phone' => $params['phone'],
+            'email' => null,
+            'status' => 'Actived',
+            'password' => bcrypt($params['password']),
+            'group' => 2
+        ];
+        Users::insert($dataUser);
+    }
 }
