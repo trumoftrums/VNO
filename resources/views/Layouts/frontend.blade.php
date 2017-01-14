@@ -10,8 +10,9 @@
     <script src="js/jquery.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/jquery.simplyscroll.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
-<body>
+<body ng-app="myApp">
 <div class="container-fluid">
     <div class="header">
         <div class="first-col">
@@ -37,7 +38,7 @@
                     </div>
                     <div class="log-reg">
                         <span data-toggle="modal" data-target="#myModalLog"><img src="./images/icon-login.png"/> Đăng nhập</span>
-                        <span data-toggle="modal" data-target="#myModalReg"><img src="./images/icon-reg.png"/> Đăng kí</span>
+                        <span data-toggle="modal" id="openModalReg" data-target="#myModalReg"><img src="./images/icon-reg.png"/> Đăng kí</span>
                         <img class="icon-avatar" src="./images/icon-avatar.png"/>
                     </div>
                 </div>
@@ -240,7 +241,7 @@
         </div>
 </div>
 <!-- Modal Register-->
-<div id="myModalReg" class="modal fade" role="dialog">
+<div ng-controller="registerCtrl" id="myModalReg" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -253,34 +254,48 @@
             </div>
             <img class="img-line" src="./images/line.png"/>
             <div class="modal-body">
-                <p class="p-in-pop">HÃY ĐĂNG KÝ ĐỂ NHẬN THÔNG TIN VÀ TÍCH ĐIỂM NHẬN GIẢI THƯỞNG KHI LÀ THÀNH VIÊN CỦA VIETNAMOTO.NET</p>
-                <form action="#" class="form-reg">
-                    <ul>
-                        <li>
-                            <span>Số điện thoại:</span>
-                            <input class="inp form-control" name="phone"/>
-                        </li>
-                        <li>
-                            <span>Mật khẩu:</span>
-                            <input type="password" class="inp form-control" name="pass"/>
-                        </li>
-                        <li>
-                            <span>Nhập lại mật khẩu:</span>
-                            <input class="inp form-control" type="password" name="re-pass"/>
-                        </li>
-                        <li>
-                            <input class="bt-in-pop" type="submit" value="Đăng ký"/>
-                        </li>
-                    </ul>
-                </form>
-                <p class="p-in-pop">KHI ĐĂNG KÝ TỨC LÀ BẠN ĐÃ CHẤP NHẬN MỌI ĐIỀU KHOẢN TỪ VIETNAMOTO.NET</p>
+                <div  class="before-reg">
+                    <p class="p-in-pop">HÃY ĐĂNG KÝ ĐỂ NHẬN THÔNG TIN VÀ TÍCH ĐIỂM NHẬN GIẢI THƯỞNG KHI LÀ THÀNH VIÊN CỦA VIETNAMOTO.NET</p>
+                    <form class="form-reg" id="form-reg">
+                        <ul>
+                            <li>
+                                <span>Số điện thoại:</span>
+                                <input ng-model="formData.phone" class="inp form-control" name="phone"/>
+                            </li>
+                            <li>
+                                <span>Mật khẩu:</span>
+                                <input ng-model="formData.password" type="password" class="inp form-control" name="pass"/>
+                            </li>
+                            <li>
+                                <span>Nhập lại mật khẩu:</span>
+                                <input ng-model="formData.repassword" class="inp form-control" type="password" name="re-pass"/>
+                            </li>
+                            <li>
+                                <input ng-click="clickRegister()" class="bt-in-pop" type="button" value="Đăng ký"/>
+                            </li>
+                        </ul>
+                    </form>
+                    <p class="p-in-pop">KHI ĐĂNG KÝ TỨC LÀ BẠN ĐÃ CHẤP NHẬN MỌI ĐIỀU KHOẢN TỪ VIETNAMOTO.NET</p>
+                </div>
+                <div class="after-reg" >
+                    <h3>ĐĂNG KÝ THÀNH CÔNG</h3>
+                    <H4>CHÀO MỪNG BẠN ĐẾN VỚI VIETNAMOTO.NET</H4>
+                    <span id="click-to-log-popup">CLICK ĐỂ ĐĂNG NHẬP VIETNAMOTO.NET</span>
+                    <p class="p-in-pop-reg" style="padding: 0px 60px;">HÃY ĐĂNG BÀI VÀ CHIA SẼ ĐỂ TÍCH ĐIỂM ĐỂ NHẬN GIẢI THƯỞNG TỪ VIETNAMOTO.NET</p>
+                    <div class="social-popup">
+                        <a href="#"><img src="./images/icon-fb.png"/></a>
+                        <a href="#"><img src="./images/icon-twitter.png"/></a>
+                        <a href="#"><img src="./images/icon-yb.png"/></a>
+                        <a href="#"><img src="./images/icon-google.png"/></a>
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
 </div>
 <!-- Modal Login-->
-<div id="myModalLog" class="modal fade" role="dialog">
+<div ng-controller="loginCtrl" id="myModalLog" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -293,23 +308,28 @@
             </div>
             <img class="img-line" src="./images/line.png"/>
             <div class="modal-body">
-                <form action="#" class="form-reg">
-                    <ul>
-                        <li>
-                            <span>Số điện thoại:</span>
-                            <input class="inp form-control" name="phone"/>
-                        </li>
-                        <li>
-                            <span>Mật khẩu:</span>
-                            <input type="password" class="inp form-control" name="pass"/>
-                        </li>
-                        <li>
-                            <input class="bt-in-pop" type="submit" value="Đăng nhập"/>
-                        </li>
-                    </ul>
-                    <a class="a-forgot" href="#"><img src="./images/icon-question.png"/> Bạn quân mật khẩu của mình?</a>
-                    <span class="spa-reg"><img src="./images/icon-reg.png"/> Bạn chưa có tài khoản. Hãy <a class="a-regs" href="#">đăng ký</a> cùng chúng tôi</span>
-                </form>
+                <div class="before-log">
+                    <form class="form-reg">
+                        <ul>
+                            <li>
+                                <span>Số điện thoại:</span>
+                                <input ng-model="formData.phone" ng-model="phone" class="inp form-control" name="phone"/>
+                            </li>
+                            <li>
+                                <span>Mật khẩu:</span>
+                                <input ng-model="formData.password" type="password" class="inp form-control" name="pass"/>
+                            </li>
+                            <li>
+                                <input ng-click="clickLogin()" class="bt-in-pop" type="button" value="Đăng nhập"/>
+                            </li>
+                        </ul>
+                        <a class="a-forgot" href="#"><img src="./images/icon-question.png"/> Bạn quân mật khẩu của mình?</a>
+                        <span class="spa-reg"><img src="./images/icon-reg.png"/> Bạn chưa có tài khoản. Hãy <a class="a-regs" href="#">đăng ký</a> cùng chúng tôi</span>
+                    </form>
+                </div>
+                <div class="after-log">
+                    dang9 nhap thanh cong
+                </div>
             </div>
             <img class="img-line" src="./images/line.png"/>
             <div class="modal-footer">
@@ -325,6 +345,54 @@
     </div>
 </div>
 <script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.controller('registerCtrl', function ($scope, $http) {
+        $('.after-reg').addClass('ng-hide');
+        $('.before-reg').removeClass('ng-hide');
+        $("#openModalReg").on('click', function () {
+            $('.after-reg').addClass('ng-hide');
+            $('.before-reg').removeClass('ng-hide');
+            $("#form-reg").trigger('reset');
+        });
+        $scope.clickRegister = function () {
+            $http({
+                method: 'POST',
+                url: '/register',
+                data: $.param($scope.formData),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .success(function (data) {
+                if (data.status) {
+                    $('.before-reg').addClass('ng-hide');
+                    $('.after-reg').removeClass('ng-hide');
+                }
+            });
+        }
+    });
+    app.controller('loginCtrl', function ($scope, $http) {
+        $('.after-log').addClass('ng-hide');
+        $('.before-log').removeClass('ng-hide');
+        $("#openModalLog").on('click', function () {
+            $('.after-log').addClass('ng-hide');
+            $('.before-log').removeClass('ng-hide');
+            $("#form-log").trigger('reset');
+        });
+        $scope.clickLogin = function () {
+            $http({
+                method: 'POST',
+                url: '/login-frontend',
+                data: $.param($scope.formData),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .success(function (data) {
+                console.log(data);
+                if (data.status) {
+                    $('.before-log').addClass('ng-hide');
+                    $('.after-log').removeClass('ng-hide');
+                }
+            });
+        }
+    });
     (function($) {
         $(function() { //on DOM ready
             $("#scroller").simplyScroll({
@@ -348,6 +416,11 @@
             }, function(){
                 $(this).children(":first").fadeOut('fast');
             });
+            $("#click-to-log-popup").click(function(){
+                $("#myModalLog").modal('show');
+                $("#myModalReg").modal('hide');
+            });
+
         });
     })(jQuery);
 </script>

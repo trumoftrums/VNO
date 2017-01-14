@@ -73,4 +73,41 @@ class LoginController extends Controller
         }
         return view('Admin\Dashboard.login');
     }
+
+    public function loginFrontend()
+    {
+        if(Request::has('phone')){
+            $rules = array(
+                'phone'    => 'required',
+                'password' => 'required|alphaNum|min:1'
+            );
+            $validator = Validator::make(Input::all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'success'
+                ]);
+            }else{
+                $userdata = array(
+                    'phone'     => Input::get('phone'),
+                    'password'  => Input::get('password'),
+                    'status' =>'Actived'
+                );
+                if (Auth::attempt($userdata)) {
+                    $id = Auth::id();
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'success',
+                        'id' => $id
+                    ]);
+                }
+                else {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'wrong password or username'
+                    ]);
+                }
+            }
+        }
+    }
 }

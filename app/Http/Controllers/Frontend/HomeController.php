@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Frontend;
 use App\Models\Users;
+use App\Models\UsersFactory;
+use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller {
 
@@ -13,12 +15,20 @@ class HomeController extends Controller {
      */
     public function index()
     {
-        /*$data = Users::where('id', 1)->first();
-        echo $data->password;exit();*/
         return View('Home.index', []);
     }
 
     public function users(){
         return View('Users.index', []);
+    }
+
+    public function register()
+    {
+        $param = Input::all();
+        UsersFactory::addUser($param);
+        return response()->json([
+            'status' => true,
+            'message' => 'success'
+        ]);
     }
 }
