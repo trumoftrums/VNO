@@ -22,10 +22,9 @@ class BaivietController extends Controller {
 
     public function get_bai_viet()
     {
+        $datas=array();
 //        $datas = Baiviet::all()->limit(50);
-        $datas = Baiviet::where('StatusId',3)
-            ->limit(50)
-            ->get();
+//        $datas = Baiviet::limit(50)->get();
 
 
         $content = '<?xml version="1.0" encoding="iso-8859-1" ?>';

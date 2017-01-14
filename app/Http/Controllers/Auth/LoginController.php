@@ -47,7 +47,7 @@ class LoginController extends Controller
             //echo 'cai meo';exit();
             $rules = array(
                 'username'    => 'required',
-                'password' => 'required|alphaNum|min:4'
+                'password' => 'required|alphaNum|min:1'
             );
             $uri = Request::path();
             $this->redirectTo =$uri;

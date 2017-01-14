@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Baiviet extends Model
 {
-    protected $table = 'op_baiviet';
+    protected $table = 'op_baiviets';
 }

@@ -23,7 +23,6 @@ Route::group(['prefix' => 'admin'], function()
     Route::get('/', 'Admin\DashboardController@index');
     Route::get('/login', 'Auth\LoginController@login');
     Route::post('/login', 'Auth\LoginController@login');
-    Route::get('/login', 'Auth\LoginController@login');
     Route::get('/getbaiviet', 'Admin\BaivietController@get_bai_viet');
     Route::post('/getbaiviet', 'Admin\BaivietController@get_bai_viet');
 });
