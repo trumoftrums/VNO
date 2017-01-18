@@ -131,7 +131,7 @@
                 if(!empty($thongtinxe)){
 
                     foreach ($thongtinxe as $k => $thongtin){
-                        $tab_content = '[{type: "settings", position: "label-left"},{type: "block", offsetLeft: 10, inputWidth: 900, list: [';
+                        $tab_content = '[{type: "settings", position: "label-left"},{type: "block", offsetLeft: 10, inputWidth: 980, list: [';
                         foreach ($thongtin['ls']  as  $kk => $nhomthongso){
                             $no =1;
                             foreach ($nhomthongso['ls'] as  $thongso){
@@ -140,11 +140,13 @@
                                 $tab_content .=Helper::dhtmlx_form($thongso);
                                 switch ($k){
                                     case 1:
-
+                                        if($no%3==0){
+                                            $tab_content .=',{type: "newcolumn"}';
+                                        }
                                         break;
                                     case 2:
-                                        if($tab_content)
-                                        $tab_content .='{type: "newcolumn"}';
+
+
                                         break;
                                     case 3:
 
@@ -159,7 +161,22 @@
                             $tab_content .=',';
 
                         }
-                        $tab_content .= '{type: "block", offsetLeft: 10, offsetTop: 50, name: "lst_button", width: 570, list: [{type: "button", offsetLeft: 80, value: "Save", name: "btnSave"}]}]}]';
+                        $tab_content .="]},";
+                        if($k==1){
+                            $tab_content .= '{type: "block", offsetLeft: 10, offsetTop: 50, name: "lst_image", width: 570, list: [';
+                            $tab_content .= '{type: "image", id:"photo1", name: "photo1", label: "", imageWidth: 126, imageHeight: 126, url: "../js/dhtmlx5/common/car.png"},';
+                            $tab_content .='{type: "newcolumn"},';
+                            $tab_content .= '{type: "image",id:"photo2", name: "photo2", label: "", imageWidth: 126, imageHeight: 62, url: "../js/dhtmlx5/common/car.png"},';
+                            $tab_content .= '{type: "image", id:"photo3",name: "photo3", label: "", imageWidth: 126, imageHeight: 62, url: "../js/dhtmlx5/common/car.png"},';
+                            $tab_content .='{type: "newcolumn"},';
+                            $tab_content .= '{type: "image", id:"photo4",name: "photo4", label: "", imageWidth: 62, imageHeight: 126, url: "../js/dhtmlx5/common/car.png"},';
+                            $tab_content .='{type: "newcolumn"},';
+                            $tab_content .= '{type: "image",id:"photo5", name: "photo5", label: "", imageWidth: 62, imageHeight: 126, url: "../js/dhtmlx5/common/car.png"}';
+                            $tab_content .="]},";
+                        }
+
+                        $tab_content .= '{type: "block", offsetLeft: 10, offsetTop: 50, name: "lst_button", width: 570, list: [{type: "button", offsetLeft: 80, value: "Save", name: "btnSave"}]}';
+                        $tab_content .=']';
 
 
 //                        echo 'var cfgform_'.$k.' ='.$tab_content;exit();

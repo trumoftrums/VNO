@@ -19,6 +19,9 @@ class DashboardController extends Controller {
             ->join('md_thongso', 'md_thongso.group', '=', 'md_nhom_thongso.id')
             ->select('md_thongso.*','md_nhom_thongso.name as nameNhom', 'md_nhom_thongso.id as idNhom',
                 'md_thongtinxe.id as idTab', 'md_thongtinxe.name as nameTab','md_nhom_thongso.hidden')
+            ->where('md_thongtinxe.status',1)
+            ->where('md_nhom_thongso.status',1)
+            ->where('md_thongso.status',1)
             ->get()->toArray();
 
 //       var_dump($res);exit();

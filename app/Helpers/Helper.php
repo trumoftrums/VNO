@@ -11,15 +11,15 @@ class Helper
 
             switch ($thongso['type']){
                 case "input":
-                    $content = '{type: "'.$thongso['type'].'", required: '.$thongso['required'].', name: "'.'thongso_'.$thongso['id'].'", labelAlign: "right", label: "'.$thongso['name'].'", labelWidth: 120, inputWidth: 150, value: "'.$thongso['default_value'].'", tooltip: "vui lòng nhập '.$thongso['name'].'"}';
+                    $content = '{type: "'.$thongso['type'].'", required: '.$thongso['required'].', name: "'.'thongso_'.$thongso['id'].'", labelAlign: "right", label: "'.$thongso['name'].'", labelWidth: 150, inputWidth: 150, value: "'.$thongso['default_value'].'", tooltip: "vui lòng nhập '.$thongso['name'].'"}';
                     break;
                 case "checkbox":
                     $content = '{type: "'.$thongso['type'].'", required: '.$thongso['required'].', name: "'.'thongso_'
-                        .$thongso['id'].'", labelAlign: "right", label: "'.$thongso['name'].'", labelWidth: 120, tooltip: "vui lòng nhập '.$thongso['name'].'"}';
+                        .$thongso['id'].'", labelAlign: "right", label: "'.$thongso['name'].'", labelWidth: 150, tooltip: "vui lòng nhập '.$thongso['name'].'"}';
                     break;
                 case "combo":
 
-                    $content = '{type: "'.$thongso['type'].'", label: "'.$thongso['name'].'", name: "'.'thongso_'.$thongso['id'].'", labelWidth: 120, inputWidth: 150, options:'.$thongso['options'].'}';
+                    $content = '{type: "'.$thongso['type'].'", labelAlign: "right", label: "'.$thongso['name'].'", name: "'.'thongso_'.$thongso['id'].'", labelWidth: 150, inputWidth: 150, options:'.$thongso['options'].'}';
 
                     //[{text: "2017", value: "AAC"},{text: "AC3", value: "AC3", selected: true},{text: "MP3", value: "MP3"},{text: "FLAC", value: "FLAC"}]
                     break;
