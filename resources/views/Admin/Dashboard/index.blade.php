@@ -38,6 +38,12 @@
     <script>
         var myLayout;
         var myWins = new dhtmlXWindows();
+        myWins.attachEvent("onContentLoaded", function(win){
+            console.log("onContentLoaded");
+            if(win.getId()=="w_add"){
+
+            }
+        });
         function doOnLoad() {
             myLayout = new dhtmlXLayoutObject({
                 parent: "layoutObj",
@@ -131,7 +137,7 @@
                 if(!empty($thongtinxe)){
 
                     foreach ($thongtinxe as $k => $thongtin){
-                        $tab_content = '[{type: "settings", position: "label-left"},{type: "block", offsetLeft: 10, inputWidth: 980, list: [';
+                        $tab_content = '[{type: "settings", position: "label-left"},{type: "block", offsetLeft: 10, width: 980, list: [';
                         foreach ($thongtin['ls']  as  $kk => $nhomthongso){
                             $no =1;
                             foreach ($nhomthongso['ls'] as  $thongso){
@@ -163,19 +169,19 @@
                         }
                         $tab_content .="]},";
                         if($k==1){
-                            $tab_content .= '{type: "block", offsetLeft: 10, offsetTop: 50, name: "lst_image", width: 570, list: [';
-                            $tab_content .= '{type: "image", id:"photo1", name: "photo1", label: "", imageWidth: 126, imageHeight: 126, url: "../js/dhtmlx5/common/car.png"},';
+                            $tab_content .= '{type: "block", offsetLeft: 10, offsetTop: 50, name: "lst_image", width: 980, align:"right", list: [';
+                            $tab_content .= '{type: "image", id:"photo1", name: "photo1", label: "", imageWidth: 150, imageHeight: 130, url: "../js/dhtmlx5/common/car.png"},';
                             $tab_content .='{type: "newcolumn"},';
-                            $tab_content .= '{type: "image",id:"photo2", name: "photo2", label: "", imageWidth: 126, imageHeight: 62, url: "../js/dhtmlx5/common/car.png"},';
-                            $tab_content .= '{type: "image", id:"photo3",name: "photo3", label: "", imageWidth: 126, imageHeight: 62, url: "../js/dhtmlx5/common/car.png"},';
+                            $tab_content .= '{type: "image",id:"photo2", name: "photo2", label: "", imageWidth: 150, imageHeight: 60, url: "../js/dhtmlx5/common/car.png"},';
+                            $tab_content .= '{type: "image", id:"photo3",name: "photo3", label: "", imageWidth: 150, imageHeight: 60, url: "../js/dhtmlx5/common/car.png"},';
                             $tab_content .='{type: "newcolumn"},';
-                            $tab_content .= '{type: "image", id:"photo4",name: "photo4", label: "", imageWidth: 62, imageHeight: 126, url: "../js/dhtmlx5/common/car.png"},';
+                            $tab_content .= '{type: "image", id:"photo4",name: "photo4", label: "", imageWidth: 60, imageHeight: 130, url: "../js/dhtmlx5/common/car.png"},';
                             $tab_content .='{type: "newcolumn"},';
-                            $tab_content .= '{type: "image",id:"photo5", name: "photo5", label: "", imageWidth: 62, imageHeight: 126, url: "../js/dhtmlx5/common/car.png"}';
+                            $tab_content .= '{type: "image",id:"photo5", name: "photo5", label: "", imageWidth: 60, imageHeight: 130, url: "../js/dhtmlx5/common/car.png"}';
                             $tab_content .="]},";
                         }
 
-                        $tab_content .= '{type: "block", offsetLeft: 10, offsetTop: 50, name: "lst_button", width: 570, list: [{type: "button", offsetLeft: 80, value: "Save", name: "btnSave"}]}';
+                        $tab_content .= '{type: "block", offsetLeft: 10, offsetTop: 50, name: "lst_button", width: 980, list: [{type: "button", offsetLeft: 80, value: "Save", name: "btnSave"}]}';
                         $tab_content .=']';
 
 
@@ -265,11 +271,28 @@
 //                wform.setItemValue("ppass", baiviet.pass);
 //            }
 
+            photo1 = $("input[value='photo1']" ).parent().parent().parent();
+            photo2 = $("input[value='photo2']" ).parent().parent().parent();
+            photo3 = $("input[value='photo3']" ).parent().parent().parent();
+            photo4 = $("input[value='photo4']" ).parent().parent().parent();
+            photo5 = $("input[value='photo5']" ).parent().parent().parent();
+
+            photo1.css("height","130px");
+            photo1.css("width","150px");
+            photo2.css("width","150px");
+            photo3.css("width","150px");
+            photo4.css("height","130px");
+            photo5.css("height","130px");
+
+            adjust_img_control();
+
         }
+        var photo1,photo2,photo3,photo4,photo5;
         $(document ).ready(function() {
 
             adjust_size();
             doOnLoad();
+
         });
         $( window ).resize(function() {
             adjust_size();
@@ -280,6 +303,26 @@
             var w = pr.width() - $("#menu-left").width();
             $("#layoutObj").css("height",h);
             $("#layoutObj").css("width",w);
+
+
+        }
+        function adjust_img_control() {
+
+            photo2.css("height","60px");
+            photo3.css("height","60px");
+            $("img.dhxform_image_img").each(function( index ) {
+                $(this).removeAttr( "style" );
+                $(this).css("margin","auto");
+                $(this).css("height","auto");
+                $(this).css("width","auto");
+                $(this).css("top","0");
+                $(this).css("left","auto");
+                $(this).css("bottom","auto");
+                $(this).css("right","auto");
+                $(this).css("max-height","100%");
+                $(this).css("max-width","100%");
+            });
+
         }
     </script>
 
