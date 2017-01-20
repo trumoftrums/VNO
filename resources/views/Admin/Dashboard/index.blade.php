@@ -29,6 +29,9 @@
         background-color: #0c834a !important;
         color: #FFFFFF !important;
     }
+    .dhxform_obj_material .dhxform_textarea{
+        border-width: 1px 1px 1px 1px !important;
+    }
 </style>
 <link rel="stylesheet" type="text/css" href="../js/dhtmlx5/dhtmlx.css"/>
 <link rel="stylesheet" type="text/css" href="../js/dhtmlx5/fonts/font_roboto/roboto.css"/>
@@ -69,7 +72,7 @@
                 }
             });
             myToolbar.setIconPath = "../js/dhtmlx5/common";
-            myToolbar.addButton("add", 0, "Thêm bài viết", "../js/dhtmlx5/common/add.png", "add.png");
+            myToolbar.addButton("add", 0, "Đăng bài viết", "../js/dhtmlx5/common/add.png", "add.png");
             myToolbar.addButton("edit",1, "Sửa bài viết", "../js/dhtmlx5/common/edit.png", "edit.png");
             myToolbar.addButton("delete",2, "Xóa bài viết", "../js/dhtmlx5/common/delete.png", "delete.png");
 
@@ -91,6 +94,7 @@
             mygrid.init();
             mygrid.loadXML("getbaiviet");
         }
+        var baiviet_form_tabbar;
         function add_baiviet(baiviet) {
             {{--var dbc  = "{!! Helper::test('this is how to use autoloading correctly!!') !!}";--}}
             {{--dhtmlx.alert(dbc);--}}
@@ -101,11 +105,11 @@
             var left = (viewportWidth / 2) - (wd / 2) ;
             var top = (viewportHeight / 2) - (hg / 2);
             var win = myWins.createWindow("w_add", left, top, wd, hg);
-            win.setText("Thêm xe bán");
+            win.setText("Đăng bài viết ... ");
             win.setModal(true);
             win.button("minmax").disable();
             win.button("park").disable();
-            var myTabbar = win.attachTabbar({
+            baiviet_form_tabbar = win.attachTabbar({
                 tabs: [
                     <?php
                         if(!empty($thongtinxe)){
@@ -137,13 +141,45 @@
                 if(!empty($thongtinxe)){
 
                     foreach ($thongtinxe as $k => $thongtin){
-                        $tab_content = '[{type: "settings", position: "label-left"},{type: "block", offsetLeft: 10, width: 980, list: [';
+                        $tab_content = "[";
+                        $noNhom = 1;
                         foreach ($thongtin['ls']  as  $kk => $nhomthongso){
+
+                            if(empty($nhomthongso["hidden"])){
+                                $tab_content .= '{type: "block", offsetLeft: 10, width: 980, list: [{type: "label", label: "'.$nhomthongso["nameNhom"].'"}]},';
+                            }
+                            $tab_content .= '{type: "block", offsetLeft: 10, width: 980, list: [';
                             $no =1;
                             foreach ($nhomthongso['ls'] as  $thongso){
 //                                var_dump(Helper::dhtmlx_form($thongso));exit();
                                 if($no>1) $tab_content .=',';
-                                $tab_content .=Helper::dhtmlx_form($thongso);
+                                $lbwidth = 150;
+                                $ipwidth = 150;
+                                switch ($k){
+                                    case 1:
+
+                                        break;
+                                    case 2:
+
+                                        $ipwidth = 20;
+                                        $lbwidth = 220;
+                                        break;
+                                    case 3:
+                                        if($thongso['type']=="input"){
+                                            $ipwidth = 710;
+                                            $lbwidth = 120;
+                                        }else{
+                                            $ipwidth = 20;
+                                            $lbwidth = 120;
+                                        }
+
+                                        break;
+                                    case 4:
+
+                                        break;
+                                    default: break;
+                                }
+                                $tab_content .=Helper::dhtmlx_form($thongso,$lbwidth,$ipwidth);
                                 switch ($k){
                                     case 1:
                                         if($no%3==0){
@@ -152,22 +188,26 @@
                                         break;
                                     case 2:
 
-
+                                        $tab_content .=',{type: "newcolumn"}';
                                         break;
                                     case 3:
-
+                                        if($no%2==0){
+                                            $tab_content .=',{type: "newcolumn"}';
+                                        }
                                         break;
                                     case 4:
-
+                                        if($no%2==0){
+                                            $tab_content .=',{type: "newcolumn"}';
+                                        }
                                         break;
                                     default: break;
                                 }
                                 $no++;
                             }
-                            $tab_content .=',';
+                            $tab_content .="]},";
 
                         }
-                        $tab_content .="]},";
+
                         if($k==1){
                             $tab_content .= '{type: "block", offsetLeft: 10, offsetTop: 50, name: "lst_image", width: 980, align:"right", list: [';
                             $tab_content .= '{type: "image", id:"photo1", name: "photo1", label: "", imageWidth: 150, imageHeight: 130, url: "../js/dhtmlx5/common/car.png"},';
@@ -180,96 +220,25 @@
                             $tab_content .= '{type: "image",id:"photo5", name: "photo5", label: "", imageWidth: 60, imageHeight: 130, url: "../js/dhtmlx5/common/car.png"}';
                             $tab_content .="]},";
                         }
+                        if($k == count($thongtinxe)){
+                            $tab_content .= '{type: "block", offsetRight: 10, offsetTop: 50, name: "lst_button", width: 980, list: [{type: "button", offsetLeft: 80, value: "Đăng bài",  name: "btnSave"},{type: "hidden", name:"csrf-token", value:"'.csrf_token().'"}]}';
+                        }else{
+                            $tab_content .= '{type: "block", offsetRight: 10, offsetTop: 50, name: "lst_button", width: 980, list: [{type: "button", offsetLeft: 80, value: "Tiếp tục >>>",name: "btnNext_'.$k.'"}]}';
+                        }
 
-                        $tab_content .= '{type: "block", offsetLeft: 10, offsetTop: 50, name: "lst_button", width: 980, list: [{type: "button", offsetLeft: 80, value: "Save", name: "btnSave"}]}';
                         $tab_content .=']';
-
-
-//                        echo 'var cfgform_'.$k.' ='.$tab_content;exit();
                         $arr_cfgform[$k] = $tab_content;
                     }
                 }
                 foreach ($arr_cfgform as $k=> $v){
                     echo 'var cfgform_'.$k .'='.$v.';  ';
-                    echo 'var wform_'.$k.' ='.'myTabbar.tabs("tab_'.$k.'").attachForm();  ';
+                    echo 'wform_'.$k.' ='.'baiviet_form_tabbar.tabs("tab_'.$k.'").attachForm();  ';
                     echo 'wform_'.$k.'.loadStruct(cfgform_'.$k.');  ';
+
+                    echo 'wform_'.$k.'.attachEvent("onButtonClick", function(btnID){btn_form_click(btnID,wform_'.$k.');});';
                 }
 
             ?>
-
-
-//            var cfgform_summary = [
-//                {type: "settings", position: "label-left"},
-//                {type: "block", offsetLeft: 10, inputWidth: 900, list: [
-//                    {type: "input", required: true, name: "tieu_de", labelAlign: "right", label: "Title", labelWidth: 80, inputWidth: 700, value: "", tooltip: "enter title", validate: "NotEmpty"},
-//                    {type: "input", inputHeight: 100, name: "mo_ta", labelAlign: "right", label: "Mô tả", labelWidth: 80, rows: 10, inputWidth: 700, value: "", tooltip: "Nhập nội dung mô tả chiếc xe"},
-//                    {type: "combo",  name: "tinh_tp", labelAlign: "right", label: "Tỉnh/TP", labelWidth: 80, inputWidth: 150,
-//                        options:[
-//                            {text: "Hồ Chi Minh", value: "1", selected: true},
-//                            {text: "Hà Nội", value: "2"},
-//                            {text: "Đà Nẵng", value: "3"},
-//                            {text: "Cần Thơ", value: "4"}
-//                        ]
-//                    },
-//                    {type: "input", name: "dia_chi", labelAlign: "right", label: "Địa chỉ", labelWidth: 80, inputWidth: 700, value: "", tooltip: "nhập địa chỉ bán xe"},
-//                    {type: "combo",  name: "loai_xe", labelAlign: "right", label: "Loại xe", labelWidth: 80, inputWidth: 150,
-//                        options:[
-//                            {text: "Camry", value: "1", selected: true},
-//                            {text: "Toyota", value: "2"},
-//                            {text: "Ford", value: "3"}
-//                        ]
-//                    }
-//
-//                ]},
-//                {type: "block", offsetLeft: 10, inputWidth: 900, list: [
-//
-//
-//
-//                    {type: "input", required: true, name: "gia_goc", labelAlign: "right", label: "Giá gốc", labelWidth: 80, inputWidth: 150, value: "", tooltip: "nhập giá gốc", validate: "NotEmpty"},
-//                    {type: "input",  required: true,name: "phone", labelAlign: "right", label: "Phone", labelWidth: 80, inputWidth: 150, value: "", tooltip: "nhập số điện thoại liên lạc"},
-//
-//                    {type: "input", name: "chu_xe", labelAlign: "right", label: "Tên chủ xe", labelWidth: 80, inputWidth: 150, value: "", tooltip: "nhập họ và tên chủ xe"},
-//                    {type: "newcolumn"},
-//                    {type: "input", required: true, name: "gia_sale", labelAlign: "right", label: "Giá đã sale", labelWidth: 100, inputWidth: 150, value: "", tooltip: "nhập giá sau khi sale", validate: "NotEmpty"},
-//                    {type: "input", name: "phone2", labelAlign: "right", label: "Phone 2", labelWidth: 100, inputWidth: 150, value: "", tooltip: "nhập số điện thoại khác nếu có"},
-//                    {type: "newcolumn"},
-//                    {type: "input", required: true, name: "donvi", labelAlign: "right", label: "Đơn vị", labelWidth: 100, inputWidth: 150, value: "VND", tooltip: "nhập đơn vị tiền tệ", validate: "NotEmpty"}
-//                ]},
-//                {type: "block", offsetLeft: 10, offsetTop: 50, name: "lst_button", width: 570, list: [
-//                    {type: "button", offsetLeft: 80, value: "Save", name: "btnSave"}
-//                ]}
-//
-//            ];
-//
-//
-//            wform.attachEvent("onButtonClick", function (name) {
-//                if (name == "btnCreate") {
-//                    if (wFormSummary.validate()) {
-//                        var e_title = wform.getItemValue("title", true);
-//                        var e_desc = wform.getItemValue("description", true);
-//                        var e_lmtime = wform.getItemValue("limittime", true);
-//                        var e_fr = wform.getItemValue("valid_fr", true);
-//                        var e_to = wform.getItemValue("valid_to", true);
-//                        var e_pass = wform.getItemValue("ppass", true);
-//
-//                    }
-//
-//                }
-//            });
-//            var input_valid_fr = form_add.getCalendar("valid_fr");
-//            var input_valid_to = form_add.getCalendar("valid_to");
-//            input_valid_fr.attachEvent("onClick", function (date) {
-//
-//                input_valid_to.setSensitiveRange(date, null);
-//            });
-//            if (baiviet != null) {
-//                wform.setItemValue("title", baiviet.title);
-//                wform.setItemValue("description", baiviet.desc);
-//                wform.setItemValue("valid_fr", baiviet.valid_fr);
-//                wform.setItemValue("valid_to", baiviet.valid_to);
-//                wform.setItemValue("limittime", baiviet.limittime);
-//                wform.setItemValue("ppass", baiviet.pass);
-//            }
 
             photo1 = $("input[value='photo1']" ).parent().parent().parent();
             photo2 = $("input[value='photo2']" ).parent().parent().parent();
@@ -322,6 +291,58 @@
                 $(this).css("max-height","100%");
                 $(this).css("max-width","100%");
             });
+
+        }
+        function  btn_form_click(btnId,wform) {
+//            dhtmlx.alert("btn_form_click::"+btnId);
+            var dt = btnId.split("_");
+            if(dt.length==2){
+                var tabID = parseInt(dt[1]);
+                if(wform.validate()){
+                    var nextTab  = tabID+1;
+                    baiviet_form_tabbar.tabs("tab_"+nextTab).setActive();
+                }else{
+                    dhtmlx.alert("Empty Validate!");
+                }
+
+
+            }else{
+                if(btnId=="btnSave"){
+                    var formData = [];
+                    for(var i =1;i<=4;i++){
+                        var form = 'wform_'+i;
+                        var values = (window[form]).getFormData();
+                        formData = formData.concat(values);
+                    };
+                    var token = $('input[name="csrf-token"]').attr('value');
+                    $.ajax({
+                        url: '/admin/save_bai_viet',
+                        dataType: "json",
+                        cache: false,
+                        type: 'post',
+                        data: {
+                            formData: formData
+                        },
+                        beforeSend: function(xhr){
+
+                            xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        },
+                        success: function (data) {
+                            console.log(data);
+
+
+                        },
+                        error: function () {
+                            dhtmlx.alert("Error,Please try again!");
+                        }
+                    });
+                }
+            }
+
+
+        }
+        function  save_bai_viet() {
+
 
         }
     </script>

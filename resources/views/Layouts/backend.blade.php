@@ -14,6 +14,8 @@
     <script src="../backend/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="../backend/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
+    <script src="../backend/js/formtoken.js"></script>
+
     <link href="../backend/css/bootstrap.min.css" rel="stylesheet">
     <link href="../backend/font-awesome/css/font-awesome.css" rel="stylesheet">
 

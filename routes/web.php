@@ -27,5 +27,6 @@ Route::group(['prefix' => 'admin'], function()
     Route::post('/login', 'Auth\LoginController@login');
     Route::get('/getbaiviet', 'Admin\BaivietController@get_bai_viet');
     Route::post('/getbaiviet', 'Admin\BaivietController@get_bai_viet');
+    Route::post('/save_bai_viet', 'Admin\BaivietController@save_bai_viet');
 });
 
