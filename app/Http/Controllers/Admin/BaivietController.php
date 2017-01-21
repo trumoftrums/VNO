@@ -128,52 +128,59 @@ class BaivietController extends Controller {
 
                 }
             }
+
             $tieude = trim($tieude);
-            DB::beginTransaction();
-            $bv = new Baiviet;
-            $bv->userid = Auth::id();
-            $bv->tieu_de = $tieude;
-            $bv->mo_ta = $mota;
-            $bv->thongso = json_encode($thongso);
-            $r1 = $bv->save();
+            if(!empty($tieude) && !empty($mota)){
+                DB::beginTransaction();
+                $bv = new Baiviet;
+                $bv->userid = Auth::id();
+                $bv->tieu_de = $tieude;
+                $bv->mo_ta = $mota;
+                $bv->thongso = json_encode($thongso);
+                $r1 = $bv->save();
 
-            //get thongso need index
+                //get thongso need index
 //            $needindexs = Thongso::select('id','name')->where('md_thongso.status',1)->where('md_thongso.need_index',1)->get()->toArray();
-            if($r1){
-                $r2 = true;
-                $needindexs = DB::table('md_thongso')->where('md_thongso.status',1)->where('md_thongso.need_index',1)->pluck('id')->toArray();
-                if(!empty($needindexs)){
-                    foreach ($thongso as $k => $v){
-                        $arrk = explode("_",$k);
-                        if(count($arrk)==2 && in_array($arrk[1],$needindexs)){
-                            $save_index = new Baivietindex;
-                            $save_index->baivietID = $bv->id;
-                            $save_index->author = Auth::id();
-                            $save_index->index_key = $arrk[1];
-                            $save_index->index_key_str = $k;
-                            $save_index->index_value = $v;
-                            if($arrk[1]==$this->THONGSO_MOTA){
+                if ($r1) {
+                    $r2 = true;
+                    $needindexs = DB::table('md_thongso')->where('md_thongso.status', 1)->where('md_thongso.need_index', 1)->pluck('id')->toArray();
+                    if (!empty($needindexs)) {
+                        foreach ($thongso as $k => $v) {
+                            $arrk = explode("_", $k);
+                            if (count($arrk) == 2 && in_array($arrk[1], $needindexs)) {
+                                $save_index = new Baivietindex;
+                                $save_index->baivietID = $bv->id;
+                                $save_index->author = Auth::id();
+                                $save_index->index_key = $arrk[1];
+                                $save_index->index_key_str = $k;
+                                $save_index->index_value = $v;
+                                if ($arrk[1] == $this->THONGSO_MOTA) {
 
-                                $save_index->index_value =$this->convert_vi_to_en($v);
-                                $save_index->index_value = $this->clean($save_index->index_value);
+                                    $save_index->index_value = $this->convert_vi_to_en($v);
+                                    $save_index->index_value = $this->clean($save_index->index_value);
+                                }
+                                $r2 = $save_index->save();
+                                if (!$r2) {
+                                    DB::rollback();
+                                    break;
+                                }
                             }
-                            $r2 = $save_index->save();
-                            if(!$r2){
-                                DB::rollback();
-                                break;
-                            }
+
                         }
-
                     }
                 }
-            }
-            if($r1 && $r2) {
-                DB::commit();
-                $result['result'] = true;
-                $result['mess'] = 'Đăng bài viết thành công!';
-            }else{
-                DB::rollback();
-                $result['mess'] = 'Có lỗi xảy ra, vui lòng thử lại sau ít phút!';
+                if ($r1 && $r2) {
+                    DB::commit();
+                    $result['result'] = true;
+                    $result['mess'] = 'Đăng bài viết thành công!';
+                } else {
+                    DB::rollback();
+                    $result['mess'] = 'Có lỗi xảy ra, vui lòng thử lại sau ít phút!';
+                }
+            }else {
+
+                $result['mess'] ='Vui lòng nhập đầy đủ thông tin bắt buộc (có dấu sao màu đỏ)';
+
             }
 
         }else{

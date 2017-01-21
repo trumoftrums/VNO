@@ -316,46 +316,58 @@
                     var nextTab  = tabID+1;
                     baiviet_form_tabbar.tabs("tab_"+nextTab).setActive();
                 }else{
-                    dhtmlx.alert("Empty Validate!");
+                    dhtmlx.alert("Vui lòng nhập đầy đủ thông tin bắt buộc (có dấu sao màu đỏ) ");
                 }
 
 
             }else{
                 if(btnId=="btnSave"){
                     var formData = [];
+                    var cando = true;
                     for(var i =1;i<=4;i++){
                         var form = 'wform_'+i;
                         var values = (window[form]).getFormData();
-                        formData = formData.concat(values);
-                    };
-                    var token = $('input[name="csrf-token"]').attr('value');
-                    $.ajax({
-                        url: '/admin/save_bai_viet',
-                        dataType: "json",
-                        cache: false,
-                        type: 'post',
-                        data: {
-                            formData: formData
-                        },
-                        beforeSend: function(xhr){
-
-                            xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                        },
-                        success: function (data) {
-                            if(data.result){
-                                for(var i =1;i<=4;i++){
-                                    var form = 'wform_'+i;
-                                    var values = (window[form]).clearAll();
-                                };
-                            }
-                            dhtmlx.alert(data.mess);
-
-
-                        },
-                        error: function () {
-                            dhtmlx.alert("Error,Please try again!");
+                        cando = (window[form]).validate();
+                        if(!cando){
+                            break;
                         }
-                    });
+                        formData = formData.concat(values);
+
+                    };
+                    if(cando){
+                        var token = $('input[name="csrf-token"]').attr('value');
+                        $.ajax({
+                            url: '/admin/save_bai_viet',
+                            dataType: "json",
+                            cache: false,
+                            type: 'post',
+                            data: {
+                                formData: formData
+                            },
+                            beforeSend: function(xhr){
+
+                                xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                            },
+                            success: function (data) {
+                                if(data.result){
+                                    for(var i =1;i<=4;i++){
+                                        var form = 'wform_'+i;
+                                        var values = (window[form]).clearAll();
+                                    };
+                                }
+                                dhtmlx.alert(data.mess);
+
+
+                            },
+                            error: function () {
+                                dhtmlx.alert("Error,Please try again!");
+                            }
+                        });
+                    }else{
+                        dhtmlx.alert("Vui lòng nhập đầy đủ thông tin bắt buộc (có dấu sao màu đỏ) ");
+                        baiviet_form_tabbar.tabs("tab_1").setActive();
+                    }
+
                 }
             }
 
