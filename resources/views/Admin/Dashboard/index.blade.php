@@ -100,7 +100,7 @@
             {{--dhtmlx.alert(dbc);--}}
             var viewportWidth = $(window).width();
             var viewportHeight = $(window).height();
-            var wd = 1000;
+            var wd = 1020;
             var hg = $("#layoutObj").height()-50;
             var left = (viewportWidth / 2) - (wd / 2) ;
             var top = (viewportHeight / 2) - (hg / 2);
@@ -151,10 +151,12 @@
                             $tab_content .= '{type: "block", offsetLeft: 10, width: 980, list: [';
                             $no =1;
                             foreach ($nhomthongso['ls'] as  $thongso){
+//                                var_dump($nhomthongso);exit();
 //                                var_dump(Helper::dhtmlx_form($thongso));exit();
                                 if($no>1) $tab_content .=',';
                                 $lbwidth = 150;
                                 $ipwidth = 150;
+
                                 switch ($k){
                                     case 1:
 
@@ -179,12 +181,23 @@
                                         break;
                                     default: break;
                                 }
+                                if($thongso['id']==65){
+                                    $ipwidth = 450;
+                                }
+                                if($thongso['id']==67){
+                                    $ipwidth = 750;
+                                }
                                 $tab_content .=Helper::dhtmlx_form($thongso,$lbwidth,$ipwidth);
                                 switch ($k){
                                     case 1:
-                                        if($no%3==0){
+                                        if($thongso["idNhom"]==14){
                                             $tab_content .=',{type: "newcolumn"}';
+                                        }else{
+                                            if($no%3==0){
+                                                $tab_content .=',{type: "newcolumn"}';
+                                            }
                                         }
+
                                         break;
                                     case 2:
 
@@ -209,21 +222,21 @@
                         }
 
                         if($k==1){
-                            $tab_content .= '{type: "block", offsetLeft: 10, offsetTop: 50, name: "lst_image", width: 980, align:"right", list: [';
-                            $tab_content .= '{type: "image", id:"photo1", name: "photo1", label: "", imageWidth: 150, imageHeight: 130, url: "../js/dhtmlx5/common/car.png"},';
+                            $tab_content .= '{type: "block", offsetLeft: 160, offsetTop: 20, name: "lst_image", width: 800, align:"right", list: [';
+                            $tab_content .= '{type: "image", id:"photo1", name: "photo1", label: "",inputWidth: 150, inputHeight: 130, imageHeight: 130, url: "./tool/dhtmlxform_image" , value:"car.png"},';
                             $tab_content .='{type: "newcolumn"},';
-                            $tab_content .= '{type: "image",id:"photo2", name: "photo2", label: "", imageWidth: 150, imageHeight: 60, url: "../js/dhtmlx5/common/car.png"},';
-                            $tab_content .= '{type: "image", id:"photo3",name: "photo3", label: "", imageWidth: 150, imageHeight: 60, url: "../js/dhtmlx5/common/car.png"},';
+                            $tab_content .= '{type: "image",id:"photo2", name: "photo2", label: "", inputWidth: 150, inputHeight: 60, imageHeight: 60, url: "./tool/dhtmlxform_image", value:"car.png"},';
+                            $tab_content .= '{type: "image", id:"photo3",name: "photo3", label: "", inputWidth: 150, inputHeight: 60, imageHeight: 60, url: "./tool/dhtmlxform_image", value:"car.png"},';
                             $tab_content .='{type: "newcolumn"},';
-                            $tab_content .= '{type: "image", id:"photo4",name: "photo4", label: "", imageWidth: 60, imageHeight: 130, url: "../js/dhtmlx5/common/car.png"},';
+                            $tab_content .= '{type: "image", id:"photo4",name: "photo4", label: "", inputWidth: 60, inputHeight: 130,imageWidth: 60, url: "./tool/dhtmlxform_image", value:"car.png"},';
                             $tab_content .='{type: "newcolumn"},';
-                            $tab_content .= '{type: "image",id:"photo5", name: "photo5", label: "", imageWidth: 60, imageHeight: 130, url: "../js/dhtmlx5/common/car.png"}';
+                            $tab_content .= '{type: "image",id:"photo5", name: "photo5", label: "", inputWidth: 60, inputHeight: 130,imageWidth: 60, url: "./tool/dhtmlxform_image", value:"car.png"}';
                             $tab_content .="]},";
                         }
                         if($k == count($thongtinxe)){
                             $tab_content .= '{type: "block", offsetRight: 10, offsetTop: 50, name: "lst_button", width: 980, list: [{type: "button", offsetLeft: 80, value: "Đăng bài",  name: "btnSave"},{type: "hidden", name:"csrf-token", value:"'.csrf_token().'"}]}';
                         }else{
-                            $tab_content .= '{type: "block", offsetRight: 10, offsetTop: 50, name: "lst_button", width: 980, list: [{type: "button", offsetLeft: 80, value: "Tiếp tục >>>",name: "btnNext_'.$k.'"}]}';
+                            $tab_content .= '{type: "block",offsetRight: 10, offsetTop: 50, offsetBottom: 0, offsetRight: 0, name: "lst_button", width: 150, list: [{type: "button", offsetLeft: 80, value: "Tiếp tục >>>",name: "btnNext_'.$k.'"}]}';
                         }
 
                         $tab_content .=']';
@@ -236,24 +249,23 @@
                     echo 'wform_'.$k.'.loadStruct(cfgform_'.$k.');  ';
 
                     echo 'wform_'.$k.'.attachEvent("onButtonClick", function(btnID){btn_form_click(btnID,wform_'.$k.');});';
+
                 }
 
             ?>
+            wform_1.attachEvent("onImageUploadSuccess", function(name, value, extra){
+                console.log("onImageUploadSuccess::"+extra);
+            });
+            //wform_1.setItemValue("photo1", "car.png");
 
-            photo1 = $("input[value='photo1']" ).parent().parent().parent();
-            photo2 = $("input[value='photo2']" ).parent().parent().parent();
-            photo3 = $("input[value='photo3']" ).parent().parent().parent();
-            photo4 = $("input[value='photo4']" ).parent().parent().parent();
-            photo5 = $("input[value='photo5']" ).parent().parent().parent();
-
-            photo1.css("height","130px");
-            photo1.css("width","150px");
-            photo2.css("width","150px");
-            photo3.css("width","150px");
-            photo4.css("height","130px");
-            photo5.css("height","130px");
-
-            adjust_img_control();
+// fires when an image was uploaded incorrectly
+            wform_1.attachEvent("onImageUploadFail", function(name, extra){
+                console.log("onImageUploadFail::"+extra);
+            });
+            var temp = $(".dhxform_btn").parent().parent();
+            temp.css("right",0);
+            temp.css("bottom",0);
+            temp.css("position","absolute");
 
         }
         var photo1,photo2,photo3,photo4,photo5;
@@ -261,6 +273,8 @@
 
             adjust_size();
             doOnLoad();
+
+
 
         });
         $( window ).resize(function() {
@@ -328,7 +342,13 @@
                             xhr.setRequestHeader('X-CSRF-TOKEN', token);
                         },
                         success: function (data) {
-                            console.log(data);
+                            if(data.result){
+                                for(var i =1;i<=4;i++){
+                                    var form = 'wform_'+i;
+                                    var values = (window[form]).clearAll();
+                                };
+                            }
+                            dhtmlx.alert(data.mess);
 
 
                         },
