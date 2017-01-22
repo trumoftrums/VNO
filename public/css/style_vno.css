@@ -1,5 +1,5 @@
 .container-fluid {
-    height: 100vh;
+    /*height: 100vh;*/
     padding-right: 0px;
     padding-left: 0px;
     background: url("../images/bg-all-small.png");
@@ -854,7 +854,7 @@
 }
 .ul-cover-tab li{
     display: inline;
-    margin-right: 10px;
+    margin-right: 45px;
 }
 .ul-cover-tab li a{
     border: 1px solid #0c834a;
@@ -877,11 +877,12 @@
 .cover-tab{
     float: left;
     width: 100%;
+    border-top: 1px solid #0c834a;
+    margin-top: 12px;
 }
 #info{
     width: 100%;
     float: left;
-    border-top: 1px solid #0c834a;
     margin-top: 10px;
 }
 .div-info-user{
@@ -889,6 +890,7 @@
     float: left;
     border-right: 1px solid #0c834a;
     margin-top: 10px;
+    text-align: center;
 }
 .div-user-info-last{
     border-right:none;
@@ -897,14 +899,48 @@
     text-align: center;
     color: #0c834a;
     margin: 8px;
+    padding: 0px 15%;
     font-size: 16px;
+    line-height: 22px;
 }
 .div-info-user li{
-
+    list-style: none;
+    float: left;
+    width: 100%;
+    line-height: 25px;
 }
 .div-info-user li span{
-
+    float: left;
+    width: 140px;
+    margin-top: 10px;
+    text-align: left;
 }
 .div-info-user li input.text-inp{
-
+    border: none;
+    width: 18vw;
+    border-bottom: 1px dotted #999;
+    background: none;
+    float: left;
+}
+.div-info-user input.bt-complete{
+    background: #0c834a;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    padding: 8px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 30px;
+}
+.div-info-user input.bt-complete:hover{
+    opacity:0.8;
+}
+#post{
+    float: left;
+    position: absolute;
+    width: 62%;
+    margin-top: 10px;
+}
+textarea:focus, input:focus{
+    outline: none;
 }
