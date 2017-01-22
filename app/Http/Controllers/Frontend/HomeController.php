@@ -31,4 +31,9 @@ class HomeController extends Controller {
             'message' => 'success'
         ]);
     }
+
+    public function userInfo()
+    {
+        return View('Users.index', []);
+    }
 }

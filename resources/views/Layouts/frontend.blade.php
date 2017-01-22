@@ -37,9 +37,22 @@
                         </div>
                     </div>
                     <div class="log-reg">
-                        <span data-toggle="modal" data-target="#myModalLog"><img src="./images/icon-login.png"/> Đăng nhập</span>
-                        <span data-toggle="modal" id="openModalReg" data-target="#myModalReg"><img src="./images/icon-reg.png"/> Đăng kí</span>
-                        <img class="icon-avatar" src="./images/icon-avatar.png"/>
+                        <span class="login-signup" data-toggle="modal" data-target="#myModalLog"><img src="./images/icon-login.png"/> Đăng nhập</span>
+                        <span class="login-signup" data-toggle="modal" id="openModalReg" data-target="#myModalReg"><img src="./images/icon-reg.png"/> Đăng kí</span>
+                        <div class="dropdown" style="float:left;">
+                            <img class="icon-avatar" src="./images/icon-avatar.png" data-toggle="dropdown"/>
+                            <div class="dropdown-menu cover-logout">
+                                <div class="cover-avatar-logout">
+                                    <img src="./images/icon-avatar.png"/>
+                                    <div class="info-user">
+                                        <p>User: <span>0549148774</span></p>
+                                        <p>Bài đăng: <span>100</span></p>
+                                    </div>
+                                </div>
+                                <a class="bt-logout-homepage bt-logout" href="/thong-tin-user">Trang cá nhân</a>
+                                <a class="bt-homepage bt-logout-homepage" href="/logout">Đăng xuất</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="logo">
