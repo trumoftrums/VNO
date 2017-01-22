@@ -31,7 +31,7 @@
 .menu-log-reg .log-reg{
     float: right;
 }
-.menu-log-reg .log-reg span{
+.menu-log-reg .log-reg .login-signup{
     margin: 12px 5px 0px 0px;
     float: left;
     color: #000;
@@ -39,7 +39,7 @@
     border: 1px dotted #f0f0f0;
     padding: 2px 3px;
 }
-.menu-log-reg .log-reg span:hover{
+.menu-log-reg .log-reg .login-signup:hover{
     border:1px solid #555555;
     padding: 2px 3px;
     border-radius: 4px;
@@ -48,6 +48,58 @@
     float: left;
     margin-top: 5px;
     margin-right: 5px;
+    cursor: pointer;
+}
+.menu-log-reg .log-reg .icon-avatar{
+    opacity: 0.8;
+}
+.cover-logout{
+    top: 43px !important;
+    left: -176px !important;
+    background: #fff !important;
+    border: 1px solid #0c834a !important;
+    width: 215px;
+    opacity: 0.9;
+    border-radius: 3px !important;
+}
+.cover-logout .cover-avatar-logout{
+    border-bottom: 1px solid #0c834a;
+    float: left;
+}
+.cover-logout .cover-avatar-logout img{
+    float: left;
+    width: 32%;
+}
+.cover-logout .cover-avatar-logout .info-user{
+    width: 68%;
+    float: left;
+    margin-top: 10px;
+    font-weight: 600;
+}
+.cover-logout .cover-avatar-logout .info-user p{
+    float: left;
+    font-size: 12px;
+    padding: 0px;
+    margin: 0px;
+}
+.cover-logout .cover-avatar-logout .info-user span{
+    color: #0c834a;
+}
+.cover-logout a.bt-logout-homepage{
+    color: #fff;
+    background: #0c834a;
+    border-radius: 3px;
+    padding: 3px 6px;
+    font-size: 13px;
+    margin: 7px 0px 3px 0px;
+}
+.cover-logout a.bt-logout{
+    float: right;
+    margin-right: 8px;
+}
+.cover-logout a.bt-homepage{
+    float: left;
+    margin-left: 8px;
 }
 .menu-log-reg .icon-menu{
     margin: 15px;
@@ -769,4 +821,90 @@
 }
 #click-to-log-popup:hover{
     opacity: 0.8;
+}
+.banner-profile{
+    float: left;
+}
+.banner-profile .img-banner-profile{
+    width: 100%;
+}
+.banner-profile .cover-avatar-profile{
+    position: absolute;
+    float: left;
+    margin-top: 2vw;
+    margin-left: 1vw;
+}
+.banner-profile .cover-avatar-profile img{
+    width: 100px;
+    float: left;
+}
+.banner-profile .cover-avatar-profile p{
+    float: left;
+    color: #fff;
+    font-size: 18px;
+    margin-top: 2vw;
+    margin-left: 10px;
+}
+.ul-cover-tab{
+    float: left;
+    border: none;
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+.ul-cover-tab li{
+    display: inline;
+    margin-right: 10px;
+}
+.ul-cover-tab li a{
+    border: 1px solid #0c834a;
+    padding: 9px 5vw;
+    font-size: 16px;
+    background: #fff;
+    color: #2d2d2d;
+}
+.ul-cover-tab li.active a{
+    background: #0c834a;
+    text-decoration: none;
+    color:#fff;
+}
+.ul-cover-tab li a:hover{
+    background: #0c834a;
+    text-decoration: none;
+    color:#fff;
+    opacity:0.8;
+}
+.cover-tab{
+    float: left;
+    width: 100%;
+}
+#info{
+    width: 100%;
+    float: left;
+    border-top: 1px solid #0c834a;
+    margin-top: 10px;
+}
+.div-info-user{
+    width: 50%;
+    float: left;
+    border-right: 1px solid #0c834a;
+    margin-top: 10px;
+}
+.div-user-info-last{
+    border-right:none;
+}
+.div-info-user h3{
+    text-align: center;
+    color: #0c834a;
+    margin: 8px;
+    font-size: 16px;
+}
+.div-info-user li{
+
+}
+.div-info-user li span{
+
+}
+.div-info-user li input.text-inp{
+
 }

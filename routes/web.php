@@ -15,8 +15,8 @@ Route::get('/', 'HomeController@index');
 Route::get('/user', 'HomeController@users');
 Route::post('/register', 'HomeController@register');
 Route::post('/login-frontend', 'Auth\LoginController@loginFrontend');
-
-Route::get('/about', 'AboutController@index');
+Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/thong-tin-user', 'HomeController@userInfo');
 
 Route::group(['prefix' => 'admin'], function()
 {

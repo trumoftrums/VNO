@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -72,6 +73,14 @@ class LoginController extends Controller
             }
         }
         return view('Admin\Dashboard.login');
+    }
+
+    public function logout()
+    {
+        //Auth::logout();
+        Session::flush();
+        return Redirect::to('/');
+
     }
 
     public function loginFrontend()
