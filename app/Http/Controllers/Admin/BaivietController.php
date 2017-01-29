@@ -18,6 +18,7 @@ class BaivietController extends Controller {
     private $THONGSO_TITLE =array(20,25,22);
     private $THONGSO_MOTA =67;
     private $NOT_ALLOW_INDEX_CHAR = array("'",'"',"`","]","[","}","{","!","~","#","^","&","*","$","+",",",".","\xE1","\xBB","\x9Bi");
+    private  $ARR_PHOTO = array("photo1","photo2","photo3","photo4","photo5");
     public function index()
     {
         $data =  array(
@@ -53,13 +54,20 @@ class BaivietController extends Controller {
         if(!empty($baiviets)){
 
             $idarr = array();
+            $str_id ="(";
             foreach ($baiviets as $v){
                 $idarr[] = $v['id'];
                 $arr_final[$v['id']] = $v;
-            }
-            $baiviet_indexs = Baivietindex::join('md_thongso', 'md_thongso.id', '=', 'op_baiviet_indexs.index_key')
-                ->where('op_baiviet_indexs.baivietID',$idarr)->where('op_baiviet_indexs.index_key','<>',$this->THONGSO_MOTA)->get()->toArray();
 
+                $str_id .="'".$v['id']."',";
+            }
+            $str_id = substr($str_id,0,strlen($str_id)-1);
+            $str_id .= ")";
+
+//            var_dump($idarr);exit();
+            $baiviet_indexs = Baivietindex::join('md_thongso', 'md_thongso.id', '=', 'op_baiviet_indexs.index_key')
+                ->whereIn('op_baiviet_indexs.baivietID',$idarr)->where('op_baiviet_indexs.index_key','<>',$this->THONGSO_MOTA)->get()->toArray();
+//            var_dump($baiviet_indexs);exit();
             if(!empty($baiviet_indexs)){
                 foreach ($baiviet_indexs as $v){
                     $arr_final[$v['baivietID']][$v['index_key']]= $v['index_value'];
@@ -72,20 +80,24 @@ class BaivietController extends Controller {
 
         $no =1;
         foreach ($arr_final as $v){
-//            var_dump($v);exit();
+//            var_dump($v);
             $content .=  '<row id="'.$v['id'].'">';
             $content .=  '<cell><![CDATA['.$no.']]></cell>';
             $mota = str_replace("\"","",$v['mo_ta']);
             $content .=  '<cell title="'.$mota.'"><![CDATA['.$v['tieu_de'].']]></cell>';
             foreach ($order_thongso_key as $kid){
-                $content .=  '<cell><![CDATA['.$v[$kid].']]></cell>';
+                if(isset($v[$kid])){
+                    $content .=  '<cell><![CDATA['.$v[$kid].']]></cell>';
+                }else{
+                    $content .=  '<cell><![CDATA[]]></cell>';
+                }
+
             }
             $content .=  '<cell><![CDATA['.$v['published'].']]></cell>';
             $content .=  '<cell><![CDATA['.$v['status'].']]></cell>';
             $content .='</row>';
             $no++;
         }
-
         $content .=  '</rows>';
 
         return response($content)
@@ -94,8 +106,41 @@ class BaivietController extends Controller {
             ]);
 //        return view('Admin\Baiviet.get_bai_viet')->header('Content-Type', 'text/xml')->with($datas);
     }
+    public function get_bai_viet_edit()
+    {
 
-    public function save_bai_viet(Request $request){
+        $result =array(
+            'result'=>false,
+            'mess' =>''
+        );
+        $formData =  Request::all() ;
+        if(!empty($formData['bvid'])){
+
+            $bvid = $formData['bvid'];
+            $baiviets = Baiviet::where('status','<>','DELETED')->where('id',$bvid)->limit(1)->get()->toArray();
+            if(!empty($baiviets)){
+                $result['result'] = true;
+                $bv = $baiviets[0];
+                $bv['thongso'] = json_decode($bv["thongso"]);
+                $bv['token'] = csrf_token();
+                $result["data"] = $bv;
+
+            }else{
+                $result['mess'] = "Không tìm thấy bài viết";
+            }
+
+
+
+        }else{
+            $result['mess'] = "Không tìm thấy bài viết";
+        }
+
+        return response($result)
+            ->withHeaders([
+                'Content-Type' => 'application/json'
+        ]);
+    }
+    public function save_bai_viet(){
 
 
         $result =array(
@@ -109,10 +154,12 @@ class BaivietController extends Controller {
             // The user is logged in...
 
             $formData =  Request::all()['formData'] ;
-//        var_dump($formData);exit();
+            //var_dump($formData);exit();
             $tieude = "";
+            $bvid = null;
             $mota = "";
             $thongso = array();
+            $photo =array();
             foreach ($formData as $v){
                 foreach ($v as $k=> $dt){
                     $thongso[$k] = $dt;
@@ -124,6 +171,14 @@ class BaivietController extends Controller {
                         if($arrk[1]==$this->THONGSO_MOTA){
                             $mota = $dt;
                         }
+
+
+                    }
+                    if(in_array($k,$this->ARR_PHOTO)){
+                        $photo[$k] = $dt;
+                    }
+                    if($k=="id"){
+                        $bvid = $dt;
                     }
 
                 }
@@ -133,11 +188,26 @@ class BaivietController extends Controller {
             if(!empty($tieude) && !empty($mota)){
                 DB::beginTransaction();
                 $bv = new Baiviet;
-                $bv->userid = Auth::id();
+
                 $bv->tieu_de = $tieude;
                 $bv->mo_ta = $mota;
+
                 $bv->thongso = json_encode($thongso);
-                $r1 = $bv->save();
+                foreach ($photo as $k =>$v){
+                    $bv->{$k} = $v;
+                }
+                $r1 = true;
+                if(!empty($bvid)){
+//                    var_dump($bv->toArray());exit();
+                    $bv->updated_by = Auth::id();
+                    $r1 = Baiviet::where('id',$bvid)->update($bv->toArray());
+                    $bv->id = $bvid;
+
+                }else{
+                    $bv->userid = Auth::id();
+                    $r1 = $bv->save();
+                }
+
 
                 //get thongso need index
 //            $needindexs = Thongso::select('id','name')->where('md_thongso.status',1)->where('md_thongso.need_index',1)->get()->toArray();
@@ -159,7 +229,20 @@ class BaivietController extends Controller {
                                     $save_index->index_value = $this->convert_vi_to_en($v);
                                     $save_index->index_value = $this->clean($save_index->index_value);
                                 }
-                                $r2 = $save_index->save();
+                                $rd = true;
+                                if(!empty($bvid)){
+                                    //update
+                                    $rd = Baivietindex::where('baivietID',$bv->id)->where('index_key',$arrk[1])->delete();
+
+
+                                }
+
+                                if($rd){
+                                    $r2 = $save_index->save();
+                                }else{
+                                    $r2 = false;
+                                }
+
                                 if (!$r2) {
                                     DB::rollback();
                                     break;
@@ -213,5 +296,36 @@ class BaivietController extends Controller {
       $str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", "Y", $str);
       $str = preg_replace("/(Đ)/","D", $str);
       return $str;
+    }
+
+    public function del_bai_viet(){
+
+        $result =array(
+            'result'=>false,
+            'mess' =>''
+        );
+
+
+
+        if (Auth::check()) {
+            $formData = Request::all();
+            $bvid = $formData['baivietID'];
+            $r = Baiviet::where('id',$bvid)->update(["status"=>"DELETED"]);
+            if($r){
+                $result['result'] = true;
+                $result['mess'] = "Xóa bài viết thành công";
+            }else{
+                $result['mess'] = "Xóa không thành công, vui lòng thử lại!!";
+            }
+
+
+        }else{
+            $result['mess'] ='Vui lòng đăng nhập để sử dụng chức năng này ';
+        }
+        return response($result)
+            ->withHeaders([
+            'Content-Type' => 'application/json'
+        ]);
+
     }
 }

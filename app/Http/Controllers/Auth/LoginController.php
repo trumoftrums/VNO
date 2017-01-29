@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -65,6 +66,7 @@ class LoginController extends Controller
                 );
                 if (Auth::attempt($userdata)) {
                     return Redirect::to("admin/dashboard");
+
                 }
                 else {
                     return Redirect::to($uri);

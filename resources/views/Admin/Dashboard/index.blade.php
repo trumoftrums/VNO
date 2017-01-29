@@ -42,7 +42,7 @@
         var myLayout;
         var myWins = new dhtmlXWindows();
         myWins.attachEvent("onContentLoaded", function(win){
-            console.log("onContentLoaded");
+//            console.log("onContentLoaded");
             if(win.getId()=="w_add"){
 
             }
@@ -75,29 +75,91 @@
             myToolbar.addButton("add", 0, "Đăng bài viết", "../js/dhtmlx5/common/add.png", "add.png");
             myToolbar.addButton("edit",1, "Sửa bài viết", "../js/dhtmlx5/common/edit.png", "edit.png");
             myToolbar.addButton("delete",2, "Xóa bài viết", "../js/dhtmlx5/common/delete.png", "delete.png");
+            myToolbar.addButton("refresh",3, "Làm mới", "../js/dhtmlx5/common/refresh.png", "refresh.png");
 
             myToolbar.attachEvent("onClick", function (id) {
                 if (id == "add") {
                     add_baiviet(null);
                 }
                 if (id == "edit") {
-                    if (mygrid._selectionArea) {
+                    if (mygrid.getSelected() != null &&  mygrid._selectionArea) {
                         dhtmlx.alert("Please select 1 row!");
                     } else {
+                        var bvid =  mygrid.getSelectedRowId();
+                        var token = "{{csrf_token()}}";
+
+                        $.ajax({
+                            url: '/admin/getbaivietedit',
+                            dataType: "json",
+                            cache: false,
+                            type: 'post',
+                            data: {
+                                bvid: bvid
+                            },
+                            beforeSend: function(xhr){
+
+                                xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                            },
+                            success: function (data) {
+                                if(data.result){
+                                    add_baiviet(data.data);
+
+                                }else{
+                                    dhtmlx.alert(data.mess);
+                                }
+                            },
+                            error: function () {
+                                dhtmlx.alert("Error,Please try again!");
+                            }
+                        });
+
 
                     }
+                }
+
+                if(id=="delete"){
+                    if (mygrid.getSelectedRowId() != null && mygrid.getSelectedRowId() != "undefined" &&  mygrid._selectionArea) {
+                        dhtmlx.alert("Please select 1 row!");
+                    } else {
+                        var bvid = mygrid.getSelectedRowId();
+                        dhtmlx.confirm({
+                            title: "Xóa bài viết",
+                            type:"confirm-warning",
+                            text: "Bạn chắc chắn muốn xóa bài viết này?",
+                            callback: function(ok) {
+                                if(ok){
+                                    delete_baiviet(bvid)
+                                }
+
+                            }
+                        });
+                    }
+
+                }
+
+                if(id=="refresh"){
+                    mygrid.loadXML("getbaiviet");
                 }
 
             });
             mygrid = myLayout.cells("a").attachGrid();
             mygrid.setImagePath("../js/dhtmlx5/imgs/");
             mygrid.init();
+            mygrid.attachEvent("onXLE", function(grid_obj,count){
+                myLayout.cells("a").progressOff();
+            });
+            mygrid.attachEvent("onXLS", function(grid_obj){
+                myLayout.cells("a").progressOn();
+            });
             mygrid.loadXML("getbaiviet");
+
         }
         var baiviet_form_tabbar;
         function add_baiviet(baiviet) {
             {{--var dbc  = "{!! Helper::test('this is how to use autoloading correctly!!') !!}";--}}
             {{--dhtmlx.alert(dbc);--}}
+
+            var baiviet_thongso;
             var viewportWidth = $(window).width();
             var viewportHeight = $(window).height();
             var wd = 1020;
@@ -105,7 +167,14 @@
             var left = (viewportWidth / 2) - (wd / 2) ;
             var top = (viewportHeight / 2) - (hg / 2);
             var win = myWins.createWindow("w_add", left, top, wd, hg);
-            win.setText("Đăng bài viết ... ");
+            if(baiviet !== null && baiviet !=="undefined"){
+                win.setText("Sửa bài viết ... ");
+                baiviet_thongso = baiviet.thongso;
+
+            }else{
+                win.setText("Đăng bài viết ... ");
+            }
+
             win.setModal(true);
             win.button("minmax").disable();
             win.button("park").disable();
@@ -153,6 +222,7 @@
                             foreach ($nhomthongso['ls'] as  $thongso){
 //                                var_dump($nhomthongso);exit();
 //                                var_dump(Helper::dhtmlx_form($thongso));exit();
+
                                 if($no>1) $tab_content .=',';
                                 $lbwidth = 150;
                                 $ipwidth = 150;
@@ -222,15 +292,16 @@
                         }
 
                         if($k==1){
+
                             $tab_content .= '{type: "block", offsetLeft: 160, offsetTop: 20, name: "lst_image", width: 800, align:"right", list: [';
-                            $tab_content .= '{type: "image", id:"photo1", name: "photo1", label: "",inputWidth: 150, inputHeight: 130, imageHeight: 130, url: "./tool/dhtmlxform_image" , value:"car.png"},';
+                            $tab_content .= '{type: "image", id:"photo1", name: "photo1", label: "",inputWidth: 150, inputHeight: 130, imageHeight: 130, url: "./tool/dhtmlxform_image", value:baiviet.photo1},';
                             $tab_content .='{type: "newcolumn"},';
-                            $tab_content .= '{type: "image",id:"photo2", name: "photo2", label: "", inputWidth: 150, inputHeight: 60, imageHeight: 60, url: "./tool/dhtmlxform_image", value:"car.png"},';
-                            $tab_content .= '{type: "image", id:"photo3",name: "photo3", label: "", inputWidth: 150, inputHeight: 60, imageHeight: 60, url: "./tool/dhtmlxform_image", value:"car.png"},';
+                            $tab_content .= '{type: "image",id:"photo2", name: "photo2", label: "", inputWidth: 150, inputHeight: 60, imageHeight: 60, url: "./tool/dhtmlxform_image", value:baiviet.photo2},';
+                            $tab_content .= '{type: "image", id:"photo3",name: "photo3", label: "", inputWidth: 150, inputHeight: 60, imageHeight: 60, url: "./tool/dhtmlxform_image", value:baiviet.photo3},';
                             $tab_content .='{type: "newcolumn"},';
-                            $tab_content .= '{type: "image", id:"photo4",name: "photo4", label: "", inputWidth: 60, inputHeight: 130,imageWidth: 60, url: "./tool/dhtmlxform_image", value:"car.png"},';
+                            $tab_content .= '{type: "image", id:"photo4",name: "photo4", label: "", inputWidth: 60, inputHeight: 130,imageWidth: 60, url: "./tool/dhtmlxform_image", value:baiviet.photo4},';
                             $tab_content .='{type: "newcolumn"},';
-                            $tab_content .= '{type: "image",id:"photo5", name: "photo5", label: "", inputWidth: 60, inputHeight: 130,imageWidth: 60, url: "./tool/dhtmlxform_image", value:"car.png"}';
+                            $tab_content .= '{type: "image",id:"photo5", name: "photo5", label: "", inputWidth: 60, inputHeight: 130,imageWidth: 60, url: "./tool/dhtmlxform_image", value:baiviet.photo5}';
                             $tab_content .="]},";
                         }
                         if($k == count($thongtinxe)){
@@ -254,11 +325,8 @@
 
             ?>
             wform_1.attachEvent("onImageUploadSuccess", function(name, value, extra){
-                console.log("onImageUploadSuccess::"+extra);
-            });
-            //wform_1.setItemValue("photo1", "car.png");
 
-// fires when an image was uploaded incorrectly
+            });
             wform_1.attachEvent("onImageUploadFail", function(name, extra){
                 console.log("onImageUploadFail::"+extra);
             });
@@ -266,6 +334,52 @@
             temp.css("right",0);
             temp.css("bottom",0);
             temp.css("position","absolute");
+            var token = "{{csrf_token()}}";
+            {{--if(baiviet.token != null && baiviet.token != "undefined"){--}}
+                {{--token = baiviet.token;--}}
+            {{--}else{--}}
+                {{--token = "{{csrf_token()}}";--}}
+            {{--}--}}
+            $( ".dhxform_image_form" ).append('<input type="hidden" name="_token" value="'+token+'" />');
+            $(".dhxform_image_img").attr("title","Click vào đây để upload hình");
+
+            if(baiviet_thongso != null && baiviet_thongso !="undefined"){
+                var itemid = {type: "hidden", name:"id", value:baiviet.id};
+                wform_1.addItem(null,itemid,0,0);
+//                wform_1.setItemValue("photo1",baiviet.photo1);
+//                wform_1.setItemValue("photo2",baiviet.photo2);
+//                wform_1.setItemValue("photo3",baiviet.photo3);
+//                wform_1.setItemValue("photo4",baiviet.photo4);
+//                wform_1.setItemValue("photo5",baiviet.photo5);
+                wform_1.forEachItem(function(name){
+                    if(baiviet_thongso[name] != null && baiviet_thongso[name] !="undefined"){
+                        wform_1.setItemValue(name,baiviet_thongso[name]);
+                   //     console.log(name+":"+baiviet_thongso[name]);
+                    }
+                });
+
+                wform_2.forEachItem(function(name){
+                    if(baiviet_thongso[name] != null && baiviet_thongso[name] !="undefined"){
+                        wform_2.setItemValue(name,baiviet_thongso[name]);
+                //        console.log(name+":"+baiviet_thongso[name]);
+                    }
+                });
+                wform_3.forEachItem(function(name){
+                    if(baiviet_thongso[name] != null && baiviet_thongso[name] !="undefined"){
+                        wform_3.setItemValue(name,baiviet_thongso[name]);
+//                        console.log(name+":"+baiviet_thongso[name]);
+                    }
+                });
+                wform_4.forEachItem(function(name){
+                    if(baiviet_thongso[name] != null && baiviet_thongso[name] !="undefined"){
+                        wform_4.setItemValue(name,baiviet_thongso[name]);
+//                        console.log(name+":"+baiviet_thongso[name]);
+                    }
+                });
+
+
+            }
+
 
         }
         var photo1,photo2,photo3,photo4,photo5;
@@ -336,6 +450,7 @@
                     };
                     if(cando){
                         var token = $('input[name="csrf-token"]').attr('value');
+                        console.log(token);
                         $.ajax({
                             url: '/admin/save_bai_viet',
                             dataType: "json",
@@ -352,12 +467,10 @@
                                 if(data.result){
                                     for(var i =1;i<=4;i++){
                                         var form = 'wform_'+i;
-                                        var values = (window[form]).clearAll();
+                                        (window[form]).clear();
                                     };
                                 }
                                 dhtmlx.alert(data.mess);
-
-
                             },
                             error: function () {
                                 dhtmlx.alert("Error,Please try again!");
@@ -373,8 +486,29 @@
 
 
         }
-        function  save_bai_viet() {
+        function delete_baiviet(baivietID) {
+            if(baivietID != null && baivietID != "undefined"){
+                $.ajax({
+                    url: '/admin/delbaiviet',
+                    dataType: "json",
+                    cache: false,
+                    type: 'post',
+                    data: {
+                        baivietID: baivietID
+                    },
+                    beforeSend: function(xhr){
 
+//                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    },
+                    success: function (data) {
+                        mygrid.loadXML("getbaiviet");
+                        dhtmlx.alert(data.mess);
+                    },
+                    error: function () {
+                        dhtmlx.alert("Error,Please try again!");
+                    }
+                });
+            }
 
         }
     </script>

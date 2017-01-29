@@ -2,6 +2,12 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 class ToolController extends Controller {
+    /**
+     * ToolController constructor.
+     */
+    public function __construct()
+    {
+    }
 
     /**
      * Show the profile for the given user.
@@ -19,12 +25,11 @@ class ToolController extends Controller {
     {
         if (@$_REQUEST["action"] == "loadImage") {
 
-            var_dump($_REQUEST);exit();
             // load any default image
             $i = "uploads/car.png";
 
             // check if requested image exists
-            $k = "uploads/".md5($_REQUEST["itemValue"]);
+            $k = "uploads/baiviet/".$_REQUEST["itemValue"];
             if (file_exists($k)) $i = $k;
 
             // output image
@@ -34,18 +39,23 @@ class ToolController extends Controller {
         }
         if (@$_REQUEST["action"] == "uploadImage") {
 
-            $k = md5($_FILES["file"]["filename"]);
+//            var_dump($_FILES);exit();
+            $k = md5($_FILES["file"]["name"]);
 
             // make sure you added security checks for $k variable here
-            @unlink("uploads/".$k);
-
-            // and here...
-            move_uploaded_file($_FILES["file"]["tmp_name"], "uploads/".$k);
-
+            $path = "uploads/baiviet/";
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            $path .= $k;
+            if(!file_exists($path)){
+                move_uploaded_file($_FILES["file"]["tmp_name"],$path);
+            }
             header("Content-Type: text/html; charset=utf-8");
             print_r("{state: true, itemId: '".@$_REQUEST["itemId"]."', itemValue: '".$k."'}");
 
         }
+
 
     }
 

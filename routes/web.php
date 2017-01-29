@@ -27,8 +27,11 @@ Route::group(['prefix' => 'admin'], function()
     Route::post('/login', 'Auth\LoginController@login');
     Route::get('/getbaiviet', 'Admin\BaivietController@get_bai_viet');
     Route::post('/getbaiviet', 'Admin\BaivietController@get_bai_viet');
+    Route::post('/getbaivietedit', 'Admin\BaivietController@get_bai_viet_edit');
+    Route::post('/delbaiviet', 'Admin\BaivietController@del_bai_viet');
     Route::post('/save_bai_viet', 'Admin\BaivietController@save_bai_viet');
     Route::post('/tool/dhtmlxform_image', 'Admin\ToolController@dhtmlxform_image');
+    Route::get('/tool/dhtmlxform_image', 'Admin\ToolController@dhtmlxform_image');
 //    Route::get('/tool/dhtmlxform_image/{id}', function ($id) {
 //
 //    })->where('id', '[0-9]+');

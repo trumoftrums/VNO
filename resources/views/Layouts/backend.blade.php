@@ -47,7 +47,7 @@
                             <li><a href="contacts.html">Contacts</a></li>
                             <li><a href="mailbox.html">Mailbox</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li><a href="../logout">Logout</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">
@@ -65,7 +65,7 @@
                     <a href="#"><i class="fa fa-magic"></i> <span class="nav-label">Quản lý bài viết </span><span class="label label-info pull-right">62</span></a>
                     <ul class="nav nav-second-level">
                         <li class="active"><a href="#">Bài viết</a></li>
-                        <li><a href="#">Loại xe</a></li>
+
                     </ul>
                 </li>
                 <li class="landing_link">
@@ -192,7 +192,7 @@
 
 
                     <li>
-                        <a href="login.html">
+                        <a href="../logout">
                             <i class="fa fa-sign-out"></i> Log out
                         </a>
                     </li>

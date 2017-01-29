@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use App\Models\Nhomthongso;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use Request;
 use App\Models\Thongtinxe;
 use DB;
@@ -15,6 +16,9 @@ class DashboardController extends Controller {
      */
     public function index()
     {
+        if(!Auth::check()){
+            return Redirect::to("admin/login");
+        }
        $res = Thongtinxe::join('md_nhom_thongso', 'md_nhom_thongso.parentid', '=', 'md_thongtinxe.id')
             ->join('md_thongso', 'md_thongso.group', '=', 'md_nhom_thongso.id')
             ->select('md_thongso.*','md_nhom_thongso.name as nameNhom', 'md_nhom_thongso.id as idNhom',
