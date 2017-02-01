@@ -36,4 +36,16 @@ class HomeController extends Controller {
     {
         return View('Users.index', []);
     }
+    public function news()
+    {
+        return View('News.list-news', []);
+    }
+    public function newsDetail($id, $name)
+    {
+        return View('News.detail-news', []);
+    }
+    public function postDetail($id, $name)
+    {
+        return View('Post.detail-post', []);
+    }
 }

@@ -4,13 +4,13 @@
     <title>Vietnam Oto</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/jquery.simplyscroll.css">
-    <link rel="stylesheet" href="css/style_vno.css">
-    <script src="js/jquery.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="js/jquery.simplyscroll.min.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/jquery.simplyscroll.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/style_vno.css') }}">
+    <script src="{{ URL::asset('js/jquery.min.js') }}" type="text/javascript"></script>
+    <script src="{{ URL::asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="{{ URL::asset('js/jquery.simplyscroll.min.js') }}" type="text/javascript"></script>
+    <script src="{{ URL::asset('js/angular.min.js') }}"></script>
 </head>
 <body ng-app="myApp">
 <div class="container-fluid">
@@ -21,29 +21,29 @@
                     <div class="menu">
                         <div class="dropdown">
                             <span class="icon-menu" data-toggle="dropdown">
-                                <img src="./images/icon-menu.png"/>
+                                <img src="{{ URL::asset('images/icon-menu.png') }}"/>
                             </span>
                             <ul class="dropdown-menu">
-                                <span class="close-menu"> <img src="./images/icon-close-menu.png"/> </span>
+                                <span class="close-menu"> <img src="{{ URL::asset('images/icon-close-menu.png') }}"/> </span>
                                 <li><a href="#">Trang Chủ</a></li>
                                 <li><a href="#">Vip Showroom/ Salon Oto</a></li>
                                 <li><a href="#">Địa Chỉ Sửa Xe/ Độ Xe Uy Tín</a></li>
                                 <li><a href="#">Thông tin cứu hộ trên toàn quốc</a></li>
                                 <li><a href="#">Góc giao lưu/ Chia sẻ</a></li>
-                                <li><a href="#">Tin tức về xe</a></li>
+                                <li><a href="/tin-tuc">Tin tức về xe</a></li>
                                 <li><a href="#">Quy định & Hướng dẫn</a></li>
                                 <li><a class="last" href="#">Liên hệ</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="log-reg">
-                        <span class="login-signup" data-toggle="modal" data-target="#myModalLog"><img src="./images/icon-login.png"/> Đăng nhập</span>
-                        <span class="login-signup" data-toggle="modal" id="openModalReg" data-target="#myModalReg"><img src="./images/icon-reg.png"/> Đăng kí</span>
+                        <span class="login-signup" data-toggle="modal" data-target="#myModalLog"><img src="{{ URL::asset('images/icon-login.png')}}"/> Đăng nhập</span>
+                        <span class="login-signup" data-toggle="modal" id="openModalReg" data-target="#myModalReg"><img src="{{ URL::asset('images/icon-reg.png')}}"/> Đăng kí</span>
                         <div class="dropdown" style="float:left;">
-                            <img class="icon-avatar" src="./images/icon-avatar.png" data-toggle="dropdown"/>
+                            <img class="icon-avatar" src="{{ URL::asset('images/icon-avatar.png')}}" data-toggle="dropdown"/>
                             <div class="dropdown-menu cover-logout">
                                 <div class="cover-avatar-logout">
-                                    <img src="./images/icon-avatar.png"/>
+                                    <img src="{{ URL::asset('images/icon-avatar.png')}}"/>
                                     <div class="info-user">
                                         <p>User: <span>0549148774</span></p>
                                         <p>Bài đăng: <span>100</span></p>
@@ -58,15 +58,15 @@
                 <div class="logo">
                     <div class="social">
                         <ul>
-                            <li><a href="#"><img src="./images/icon-fb.png" /></a> </li>
-                            <li><a href="#"><img src="./images/icon-twitter.png" /></a> </li>
-                            <li><a href="#"><img src="./images/icon-yb.png" /></a> </li>
+                            <li><a href="#"><img src="{{ URL::asset('images/icon-fb.png')}}" /></a> </li>
+                            <li><a href="#"><img src="{{ URL::asset('images/icon-twitter.png')}}" /></a> </li>
+                            <li><a href="#"><img src="{{ URL::asset('images/icon-yb.png')}}" /></a> </li>
                         </ul>
                     </div>
-                    <a href="#"><img class="logo-vno" src="./images/logo.png"/></a>
+                    <a href="#"><img class="logo-vno" src="{{ URL::asset('images/logo.png')}}"/></a>
                 </div>
                 <div class="slogan">
-                    <a href="#"><img src="./images/slogan.png"/></a>
+                    <a href="#"><img src="{{ URL::asset('images/slogan.png')}}"/></a>
                 </div>
             </div>
             <div class="slide-show">
@@ -74,7 +74,7 @@
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
                             <h3 class="name-slide">2013 Acura NSX</h3>
-                            <img class="img-slide" src="./images/slides/slide 01.png"/>
+                            <img class="img-slide" src="{{ URL::asset('images/slides/slide 01.png')}}"/>
                             <div class="info-slide">
                                 <ul>
                                     <li>
@@ -94,12 +94,12 @@
                                 <span class="price">1.000.000.000 VND</br>
                                     <small>{bao gồm thuế}</small>
                                 </span>
-                                <a href="#">CHI TIẾT <img class="icon-arrow" src="./images/icon-arrow.png"/></a>
+                                <a href="#">CHI TIẾT <img class="icon-arrow" src="{{ URL::asset('images/icon-arrow.png')}}"/></a>
                             </div>
                         </div>
                         <div class="item">
                             <h3 class="name-slide">2013 Acura NSX</h3>
-                            <img class="img-slide" src="./images/slides/slide 01.png"/>
+                            <img class="img-slide" src="{{ URL::asset('images/slides/slide 01.png')}}"/>
                             <div class="info-slide">
                                 <ul>
                                     <li>
@@ -119,7 +119,7 @@
                                 <span class="price">2.000.000.000 VND</br>
                                     <small>{bao gồm thuế}</small>
                                 </span>
-                                <a href="#">CHI TIẾT <img class="icon-arrow" src="./images/icon-arrow.png"/></a>
+                                <a href="#">CHI TIẾT <img class="icon-arrow" src="{{ URL::asset('images/icon-arrow.png')}}"/></a>
                             </div>
                         </div>
                     </div>
@@ -167,57 +167,57 @@
             </div>
             <div class="list-services">
                 <div class="item-service">
-                    <img class="icon-service" src="./images/icon-ser01.png"/>
-                    <p>VIP SHOWROOM/ SALON OTO <img class="icon-arrow-right" src="./images/icon-arrow-right.png"/></p>
+                    <img class="icon-service" src="{{ URL::asset('images/icon-ser01.png')}}"/>
+                    <p>VIP SHOWROOM/ SALON OTO <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                 </div>
                 <div class="item-service">
-                    <img class="icon-service" src="./images/icon-ser02.png"/>
-                    <p>ĐỊA CHỈ ĐỘ XE/<br> SỬA XE UY TÍN <img class="icon-arrow-right" src="./images/icon-arrow-right.png"/></p>
+                    <img class="icon-service" src="{{ URL::asset('images/icon-ser02.png')}}"/>
+                    <p>ĐỊA CHỈ ĐỘ XE/<br> SỬA XE UY TÍN <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                 </div>
                 <div class="item-service">
-                    <img class="icon-service" src="./images/icon-ser03.png"/>
-                    <p>THÔNG TIN CỨU HỘ TRÊN TOÀN QUỐC <img class="icon-arrow-right" src="./images/icon-arrow-right.png"/></p>
+                    <img class="icon-service" src="{{ URL::asset('images/icon-ser03.png')}}"/>
+                    <p>THÔNG TIN CỨU HỘ TRÊN TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                 </div>
                 <div class="item-service">
-                    <img class="icon-service" src="./images/icon-ser04.png"/>
-                    <p>GÓC GIAO LƯU/<br> CHIA SẺ <img class="icon-arrow-right" src="./images/icon-arrow-right.png"/></p>
+                    <img class="icon-service" src="{{ URL::asset('images/icon-ser04.png')}}"/>
+                    <p>GÓC GIAO LƯU/<br> CHIA SẺ <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                 </div>
             </div>
             <div class="list-news">
-                <h3 class="title-list-news"><img src="./images/icon-news.png" />TIN TỨC MỚI CẬP NHẬT</h3>
+                <h3 class="title-list-news"><img src="{{ URL::asset('images/icon-news.png')}}" />TIN TỨC MỚI CẬP NHẬT</h3>
                 <ul id="scroller">
                     <li class="item-news">
-                        <a href="#"><img src="./images/news01.png"/></a>
+                        <a href="#"><img src="{{ URL::asset('images/news01.png')}}"/></a>
                         <span>01/01/2017 8:30 AM</span>
                         <a class="title-item-news" href="#">Các dòng xe dành cho quý ông việt</a>
                         <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
                     </li>
                     <li class="item-news">
-                        <a href="#"><img src="./images/news02.png"/></a>
+                        <a href="#"><img src="{{ URL::asset('images/news02.png')}}"/></a>
                         <span>01/01/2017 8:30 AM</span>
                         <a class="title-item-news" href="#">Chương trình giải thưởng từ VNO</a>
                         <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
                     </li>
                     <li class="item-news">
-                        <a href="#"><img src="./images/news03.png"/></a>
+                        <a href="#"><img src="{{ URL::asset('images/news03.png')}}"/></a>
                         <span>01/01/2017 8:30 AM</span>
                         <a class="title-item-news" href="#">Thăm showroom mới của MISHUBISHI</a>
                         <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
                     </li>
                     <li class="item-news">
-                        <a href="#"><img src="./images/news01.png"/></a>
+                        <a href="#"><img src="{{ URL::asset('images/news01.png')}}"/></a>
                         <span>01/01/2017 8:30 AM</span>
                         <a class="title-item-news" href="#">Các dòng xe dành cho quý ông việt</a>
                         <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
                     </li>
                     <li class="item-news">
-                        <a href="#"><img src="./images/news02.png"/></a>
+                        <a href="#"><img src="{{ URL::asset('images/news02.png')}}"/></a>
                         <span>01/01/2017 8:30 AM</span>
                         <a class="title-item-news" href="#">Chương trình giải thưởng từ VNO</a>
                         <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
                     </li>
                     <li class="item-news">
-                        <a href="#"><img src="./images/news03.png"/></a>
+                        <a href="#"><img src="{{ URL::asset('images/news03.png')}}"/></a>
                         <span>01/01/2017 8:30 AM</span>
                         <a class="title-item-news" href="#">Thăm showroom mới của MISHUBISHI</a>
                         <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
@@ -240,7 +240,7 @@
                     <li><a href="#">Địa chỉ sửa xe<br>độ xe uy tín</a> </li>
                     <li><a href="#">Thông tin cứu hộ<br>trên toàn quốc</a> </li>
                     <li><a href="#">Góc giao lưu<br>Chia sẻ</a> </li>
-                    <li><a href="#">Tin tức về xe</a> </li>
+                    <li><a href="{{ URL::to('tin-tuc') }}">Tin tức về xe</a> </li>
                     <li><a href="#">Quy định &<br>Hướng dẫn</a> </li>
                 </ul>
             </div>
@@ -260,12 +260,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
-                    <img src="./images/icon-close-popup.png"/>
+                    <img src="{{ URL::asset('images/icon-close-popup.png')}}"/>
                 </button>
-                <img class="img-logo-popup" src="./images/logo.png"/>
-                <img class="img-slogan-popup" src="./images/slogan-reg.png"/>
+                <img class="img-logo-popup" src="{{ URL::asset('images/logo.png')}}"/>
+                <img class="img-slogan-popup" src="{{ URL::asset('images/slogan-reg.png')}}"/>
             </div>
-            <img class="img-line" src="./images/line.png"/>
+            <img class="img-line" src="{{ URL::asset('images/line.png')}}"/>
             <div class="modal-body">
                 <div  class="before-reg">
                     <p class="p-in-pop">HÃY ĐĂNG KÝ ĐỂ NHẬN THÔNG TIN VÀ TÍCH ĐIỂM NHẬN GIẢI THƯỞNG KHI LÀ THÀNH VIÊN CỦA VIETNAMOTO.NET</p>
@@ -296,10 +296,10 @@
                     <span id="click-to-log-popup">CLICK ĐỂ ĐĂNG NHẬP VIETNAMOTO.NET</span>
                     <p class="p-in-pop-reg" style="padding: 0px 60px;">HÃY ĐĂNG BÀI VÀ CHIA SẼ ĐỂ TÍCH ĐIỂM ĐỂ NHẬN GIẢI THƯỞNG TỪ VIETNAMOTO.NET</p>
                     <div class="social-popup">
-                        <a href="#"><img src="./images/icon-fb.png"/></a>
-                        <a href="#"><img src="./images/icon-twitter.png"/></a>
-                        <a href="#"><img src="./images/icon-yb.png"/></a>
-                        <a href="#"><img src="./images/icon-google.png"/></a>
+                        <a href="#"><img src="{{ URL::asset('images/icon-fb.png')}}"/></a>
+                        <a href="#"><img src="{{ URL::asset('images/icon-twitter.png')}}"/></a>
+                        <a href="#"><img src="{{ URL::asset('images/icon-yb.png')}}"/></a>
+                        <a href="#"><img src="{{ URL::asset('images/icon-google.png')}}"/></a>
                     </div>
                 </div>
             </div>
@@ -314,12 +314,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
-                    <img src="./images/icon-close-popup.png"/>
+                    <img src="{{ URL::asset('images/icon-close-popup.png')}}"/>
                 </button>
-                <img class="img-logo-popup" src="./images/logo.png"/>
-                <img class="img-slogan-popup" src="./images/slogan-reg.png"/>
+                <img class="img-logo-popup" src="{{ URL::asset('images/logo.png')}}"/>
+                <img class="img-slogan-popup" src="{{ URL::asset('images/slogan-reg.png')}}"/>
             </div>
-            <img class="img-line" src="./images/line.png"/>
+            <img class="img-line" src="{{ URL::asset('images/line.png')}}"/>
             <div class="modal-body">
                 <div class="before-log">
                     <form class="form-reg">
@@ -336,22 +336,22 @@
                                 <input ng-click="clickLogin()" class="bt-in-pop" type="button" value="Đăng nhập"/>
                             </li>
                         </ul>
-                        <a class="a-forgot" href="#"><img src="./images/icon-question.png"/> Bạn quân mật khẩu của mình?</a>
-                        <span class="spa-reg"><img src="./images/icon-reg.png"/> Bạn chưa có tài khoản. Hãy <a class="a-regs" href="#">đăng ký</a> cùng chúng tôi</span>
+                        <a class="a-forgot" href="#"><img src="{{ URL::asset('images/icon-question.png')}}"/> Bạn quân mật khẩu của mình?</a>
+                        <span class="spa-reg"><img src="{{ URL::asset('images/icon-reg.png')}}"/> Bạn chưa có tài khoản. Hãy <a class="a-regs" href="#">đăng ký</a> cùng chúng tôi</span>
                     </form>
                 </div>
                 <div class="after-log">
                     dang9 nhap thanh cong
                 </div>
             </div>
-            <img class="img-line" src="./images/line.png"/>
+            <img class="img-line" src="{{ URL::asset('images/line.png')}}"/>
             <div class="modal-footer">
                 <p class="p-in-pop" style="padding: 0px 60px;">HÃY ĐĂNG BÀI VÀ CHIA SẼ ĐỂ TÍCH ĐIỂM ĐỂ NHẬN GIẢI THƯỞNG TỪ VIETNAMOTO.NET</p>
                 <div class="social-popup">
-                    <a href="#"><img src="./images/icon-fb.png"/></a>
-                    <a href="#"><img src="./images/icon-twitter.png"/></a>
-                    <a href="#"><img src="./images/icon-yb.png"/></a>
-                    <a href="#"><img src="./images/icon-google.png"/></a>
+                    <a href="#"><img src="{{ URL::asset('images/icon-fb.png')}}"/></a>
+                    <a href="#"><img src="{{ URL::asset('images/icon-twitter.png')}}"/></a>
+                    <a href="#"><img src="{{ URL::asset('images/icon-yb.png')}}"/></a>
+                    <a href="#"><img src="{{ URL::asset('images/icon-google.png')}}"/></a>
                 </div>
             </div>
         </div>

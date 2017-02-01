@@ -17,6 +17,9 @@ Route::post('/register', 'HomeController@register');
 Route::post('/login-frontend', 'Auth\LoginController@loginFrontend');
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('/thong-tin-user', 'HomeController@userInfo');
+Route::get('/tin-tuc', 'HomeController@news');
+Route::get('/tin-tuc/{id}/{name}', 'HomeController@newsDetail');
+Route::get('/bai-dang/{id}/{name}', 'HomeController@postDetail');
 
 Route::group(['prefix' => 'admin'], function()
 {
