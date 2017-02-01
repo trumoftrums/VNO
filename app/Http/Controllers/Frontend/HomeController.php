@@ -48,4 +48,8 @@ class HomeController extends Controller {
     {
         return View('Post.detail-post', []);
     }
+    public function freePost()
+    {
+        return View('Post.free-post', []);
+    }
 }

@@ -336,7 +336,7 @@
                                 <input ng-click="clickLogin()" class="bt-in-pop" type="button" value="Đăng nhập"/>
                             </li>
                         </ul>
-                        <a class="a-forgot" href="#"><img src="{{ URL::asset('images/icon-question.png')}}"/> Bạn quân mật khẩu của mình?</a>
+                        <a class="a-forgot" href="#"><img src="{{ URL::asset('images/icon-question.png')}}"/> Bạn quên mật khẩu của mình?</a>
                         <span class="spa-reg"><img src="{{ URL::asset('images/icon-reg.png')}}"/> Bạn chưa có tài khoản. Hãy <a class="a-regs" href="#">đăng ký</a> cùng chúng tôi</span>
                     </form>
                 </div>

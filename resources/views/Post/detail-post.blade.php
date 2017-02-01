@@ -124,7 +124,7 @@
                 </div>
             </div>
             <div class="related-post">
-                <p><img src="{{ URL::asset('images/icon-title-news.png')}}"/> có thể bạn cũng thích</p>
+                <p class="title-related-post"><img src="{{ URL::asset('images/icon-title-news.png')}}"/> có thể bạn cũng thích</p>
                 <div class="list-related-post">
                     <ul id="scrollerRelatedPost">
                         <li class="item">

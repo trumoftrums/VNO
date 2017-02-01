@@ -598,7 +598,7 @@
     float: left;
     color: #2d2d2d;
     font-size: 13px;
-    height: 5.3vw;
+    height: 5.2vw;
     text-align: center;
 }
 .footer .menu-bottom ul li a:hover{
@@ -1293,10 +1293,14 @@ textarea:focus, input:focus{
     border-top: 2px dotted #0c834a;
     margin-top: 20px;
 }
-.related-post p{
+.related-post p.title-related-post{
     font-size: 16px;
     text-transform: uppercase;
     margin-top: 5px;
+    margin-bottom: 3px;
+}
+.related-post p.title-related-post img{
+    width:11px;
 }
 #tab4 .p-thuoc-tinh-post{
     margin-top: 15px !important;
@@ -1305,10 +1309,11 @@ textarea:focus, input:focus{
     float: left;
     width: 100%;
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: 14px;
     border-bottom: 1px solid #0c834a;
     color: #0c834a;
     margin-top: 5px;
+    font-weight:600;
 }
 #tab3 .checkbox-inline{
     padding: 6px 0px;
@@ -1359,4 +1364,21 @@ textarea:focus, input:focus{
     margin-top: -8px;
     font-size: 13px;
     width: 100%;
+}
+.header-free-post{
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+.header-free-post .avatar-free-post{
+    width: 110px;
+    margin-top: 10px;
+}
+.header-free-post .user-name-free-post{
+    color: #0c834a;
+    text-transform: uppercase;
+}
+.header-free-post .user-name-free-post .line-free-post{
+    width: 50px;
+    border-top: 1px solid #0c834a;
 }

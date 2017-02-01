@@ -20,6 +20,7 @@ Route::get('/thong-tin-user', 'HomeController@userInfo');
 Route::get('/tin-tuc', 'HomeController@news');
 Route::get('/tin-tuc/{id}/{name}', 'HomeController@newsDetail');
 Route::get('/bai-dang/{id}/{name}', 'HomeController@postDetail');
+Route::get('/dang-tin', 'HomeController@freePost');
 
 Route::group(['prefix' => 'admin'], function()
 {
