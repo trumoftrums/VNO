@@ -186,42 +186,14 @@
             <div class="list-news">
                 <h3 class="title-list-news"><img src="{{ URL::asset('images/icon-news.png')}}" />TIN TỨC MỚI CẬP NHẬT</h3>
                 <ul id="scroller">
+                    @foreach($listNewsHome as $val)
                     <li class="item-news">
-                        <a href="#"><img src="{{ URL::asset('images/news01.png')}}"/></a>
-                        <span>01/01/2017 8:30 AM</span>
-                        <a class="title-item-news" href="#">Các dòng xe dành cho quý ông việt</a>
-                        <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
+                        <a href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}"><img src="{{ URL::asset($val->image)}}"/></a>
+                        <span>{{date_format(date_create($val->created_date), 'd/m/Y H:i a')}}</span>
+                        <a class="title-item-news" href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}">{{$val->title}}</a>
+                        <a class="bt-detail-news" href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}">Chi tiết<small> >> </small></a>
                     </li>
-                    <li class="item-news">
-                        <a href="#"><img src="{{ URL::asset('images/news02.png')}}"/></a>
-                        <span>01/01/2017 8:30 AM</span>
-                        <a class="title-item-news" href="#">Chương trình giải thưởng từ VNO</a>
-                        <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
-                    </li>
-                    <li class="item-news">
-                        <a href="#"><img src="{{ URL::asset('images/news03.png')}}"/></a>
-                        <span>01/01/2017 8:30 AM</span>
-                        <a class="title-item-news" href="#">Thăm showroom mới của MISHUBISHI</a>
-                        <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
-                    </li>
-                    <li class="item-news">
-                        <a href="#"><img src="{{ URL::asset('images/news01.png')}}"/></a>
-                        <span>01/01/2017 8:30 AM</span>
-                        <a class="title-item-news" href="#">Các dòng xe dành cho quý ông việt</a>
-                        <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
-                    </li>
-                    <li class="item-news">
-                        <a href="#"><img src="{{ URL::asset('images/news02.png')}}"/></a>
-                        <span>01/01/2017 8:30 AM</span>
-                        <a class="title-item-news" href="#">Chương trình giải thưởng từ VNO</a>
-                        <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
-                    </li>
-                    <li class="item-news">
-                        <a href="#"><img src="{{ URL::asset('images/news03.png')}}"/></a>
-                        <span>01/01/2017 8:30 AM</span>
-                        <a class="title-item-news" href="#">Thăm showroom mới của MISHUBISHI</a>
-                        <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
         </div>

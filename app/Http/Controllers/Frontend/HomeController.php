@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller {
 
+    public function __construct()
+    {
+
+    }
     /**
      * Show the profile for the given user.
      *
@@ -47,17 +51,22 @@ class HomeController extends Controller {
             'listNews' => $res
         ]);
     }
-    public function newsDetail($id, $name)
+    public function newsDetail($id)
     {
         $res = News::where('op_news.id', $id)
             ->leftJoin('md_users', 'md_users.id', '=', 'op_news.userid')
             ->select('op_news.*', 'md_users.username')
             ->first();
+        $relatedNews = News::where('status', News::STATUS_ACTIVE)
+            ->limit(5)
+            ->whereNotIn('id', [$res->id])
+            ->get();
         return View('News.detail-news', [
-            'detailNews' => $res
+            'detailNews' => $res,
+            'relatedNews' => $relatedNews
         ]);
     }
-    public function postDetail($id, $name)
+    public function postDetail($id)
     {
         return View('Post.detail-post', []);
     }
