@@ -1,8 +1,9 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Frontend;
+use App\Http\Controllers\Controller;
 use App\Models\Users;
 use App\Models\UsersFactory;
+use App\News;
 use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller {
@@ -38,11 +39,23 @@ class HomeController extends Controller {
     }
     public function news()
     {
-        return View('News.list-news', []);
+        $res = News::where('op_news.status', News::STATUS_ACTIVE)
+            ->leftJoin('md_users', 'md_users.id', '=', 'op_news.userid')
+            ->select('op_news.*', 'md_users.username')
+            ->get();
+        return View('News.list-news', [
+            'listNews' => $res
+        ]);
     }
     public function newsDetail($id, $name)
     {
-        return View('News.detail-news', []);
+        $res = News::where('op_news.id', $id)
+            ->leftJoin('md_users', 'md_users.id', '=', 'op_news.userid')
+            ->select('op_news.*', 'md_users.username')
+            ->first();
+        return View('News.detail-news', [
+            'detailNews' => $res
+        ]);
     }
     public function postDetail($id, $name)
     {

@@ -25,12 +25,12 @@
                             </span>
                             <ul class="dropdown-menu">
                                 <span class="close-menu"> <img src="{{ URL::asset('images/icon-close-menu.png') }}"/> </span>
-                                <li><a href="#">Trang Chủ</a></li>
+                                <li><a href="{{ URL::to('') }}">Trang Chủ</a></li>
                                 <li><a href="#">Vip Showroom/ Salon Oto</a></li>
                                 <li><a href="#">Địa Chỉ Sửa Xe/ Độ Xe Uy Tín</a></li>
                                 <li><a href="#">Thông tin cứu hộ trên toàn quốc</a></li>
                                 <li><a href="#">Góc giao lưu/ Chia sẻ</a></li>
-                                <li><a href="/tin-tuc">Tin tức về xe</a></li>
+                                <li><a href="{{ URL::to('/tin-tuc') }}">Tin tức về xe</a></li>
                                 <li><a href="#">Quy định & Hướng dẫn</a></li>
                                 <li><a class="last" href="#">Liên hệ</a></li>
                             </ul>
@@ -63,10 +63,10 @@
                             <li><a href="#"><img src="{{ URL::asset('images/icon-yb.png')}}" /></a> </li>
                         </ul>
                     </div>
-                    <a href="#"><img class="logo-vno" src="{{ URL::asset('images/logo.png')}}"/></a>
+                    <a href="{{ URL::to('') }}"><img class="logo-vno" src="{{ URL::asset('images/logo.png')}}"/></a>
                 </div>
                 <div class="slogan">
-                    <a href="#"><img src="{{ URL::asset('images/slogan.png')}}"/></a>
+                    <a href="{{ URL::to('') }}"><img src="{{ URL::asset('images/slogan.png')}}"/></a>
                 </div>
             </div>
             <div class="slide-show">
@@ -163,7 +163,7 @@
         </div>
         <div class="last-col">
             <div class="avatar">
-                <a class="bt-reg-free" href="#">Đăng tin miễn phí</a>
+                <a class="bt-reg-free" href="{{ URL::to('/dang-tin-free') }}">Đăng tin miễn phí</a>
             </div>
             <div class="list-services">
                 <div class="item-service">
@@ -235,7 +235,7 @@
             </div>
             <div class="menu-bottom">
                 <ul>
-                    <li><a href="#">Trang chủ</a> </li>
+                    <li><a href="{{ URL::to('') }}">Trang chủ</a> </li>
                     <li><a href="#">Vip Showroom<br>Salon Oto</a> </li>
                     <li><a href="#">Địa chỉ sửa xe<br>độ xe uy tín</a> </li>
                     <li><a href="#">Thông tin cứu hộ<br>trên toàn quốc</a> </li>
