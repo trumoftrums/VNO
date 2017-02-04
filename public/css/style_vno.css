@@ -49,8 +49,9 @@
     margin-top: 5px;
     margin-right: 5px;
     cursor: pointer;
+    width:40px;
 }
-.menu-log-reg .log-reg .icon-avatar{
+.menu-log-reg .log-reg .icon-avatar:hover{
     opacity: 0.8;
 }
 .cover-logout{
@@ -68,7 +69,8 @@
 }
 .cover-logout .cover-avatar-logout img{
     float: left;
-    width: 32%;
+    width: 55px;
+    margin: 3px;
 }
 .cover-logout .cover-avatar-logout .info-user{
     width: 68%;
@@ -1394,7 +1396,7 @@ textarea:focus, input:focus{
     border-top: 1px solid #0c834a;
 }
 .error-valid {
-    display: block;
+    font-style: italic;
     color: rgba(255, 0, 0, 0.86);
     float: left;
     font-size: 12px;

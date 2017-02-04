@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\News;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,11 +17,15 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('Layouts.frontend', function ($view)
         {
+            $user = Auth::user();
             $listNewsHome = News::where('status', News::STATUS_ACTIVE)
                 ->orderBy('id', 'desc')
                 ->limit(6)
                 ->get();
-            $view->with('listNewsHome', $listNewsHome);
+            $view->with([
+                'listNewsHome' => $listNewsHome,
+                'user' => $user
+                ]);
         });
     }
 

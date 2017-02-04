@@ -45,7 +45,7 @@ class HomeController extends Controller {
         }
     }
 
-    public function userInfo()
+    public function userInfo($id)
     {
         return View('Users.index', []);
     }

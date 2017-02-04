@@ -37,21 +37,29 @@
                         </div>
                     </div>
                     <div class="log-reg">
-                        <span class="login-signup" data-toggle="modal" data-target="#myModalLog"><img src="{{ URL::asset('images/icon-login.png')}}"/> Đăng nhập</span>
+                        <span class="login-signup" data-toggle="modal" ng-click="clickOpenModalLog()" data-target="#myModalLog"><img src="{{ URL::asset('images/icon-login.png')}}"/> Đăng nhập</span>
                         <span class="login-signup" data-toggle="modal" ng-click="clickOpenModal()" id="openModalReg" data-target="#myModalReg"><img src="{{ URL::asset('images/icon-reg.png')}}"/> Đăng kí</span>
                         <div class="dropdown" style="float:left;">
-                            <img class="icon-avatar" src="{{ URL::asset('images/icon-avatar.png')}}" data-toggle="dropdown"/>
+                            <img class="icon-avatar img-circle"
+                                 @if(\Illuminate\Support\Facades\Auth::check())
+                                    src="{{ URL::asset($user->avatar)}}"
+                                 @else
+                                    src="{{ URL::asset('images/icon-avatar.png')}}"
+                                 @endif
+                                 data-toggle="dropdown"/>
+                            @if(\Illuminate\Support\Facades\Auth::check())
                             <div class="dropdown-menu cover-logout">
                                 <div class="cover-avatar-logout">
-                                    <img src="{{ URL::asset('images/icon-avatar.png')}}"/>
+                                    <img class="img-circle" src="{{ URL::asset($user->avatar)}}"/>
                                     <div class="info-user">
-                                        <p>User: <span>0549148774</span></p>
+                                        <p>User: <span>{{$user->username}}</span></p>
                                         <p>Bài đăng: <span>100</span></p>
                                     </div>
                                 </div>
-                                <a class="bt-logout-homepage bt-logout" href="/thong-tin-user">Trang cá nhân</a>
+                                <a class="bt-logout-homepage bt-logout" href="{{ URL::to('/thong-tin-user/'.$user->id) }}">Trang cá nhân</a>
                                 <a class="bt-homepage bt-logout-homepage" href="/logout">Đăng xuất</a>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -239,7 +247,7 @@
             </div>
             <img class="img-line" src="{{ URL::asset('images/line.png')}}"/>
             <div class="modal-body">
-                <div ng-show="showBefore" class="before-reg">
+                <div ng-show="showBefore">
                     <p class="p-in-pop">HÃY ĐĂNG KÝ ĐỂ NHẬN THÔNG TIN VÀ TÍCH ĐIỂM NHẬN GIẢI THƯỞNG KHI LÀ THÀNH VIÊN CỦA VIETNAMOTO.NET</p>
                     <form class="form-reg" id="form-reg" name="regForm" ng-submit="clickRegister()" novalidate>
                         <ul>
@@ -257,6 +265,7 @@
                                 <span>Nhập lại mật khẩu:</span>
                                 <input ng-model="formData.repassword" class="inp form-control" type="password" name="repass" required/>
                                 <p ng-show="regForm.repass.$invalid && regForm.$submitted" class="error-valid">Bạn chưa nhập lại mật khẩu.</p>
+                                <p ng-show="matchpassword" class="error-valid">Mật khẩu nhập lại chưa đúng.</p>
                                 <p ng-show="existphone" class="error-valid">Số điện thoại này đã đăng ký. Xin vui lòng nhập số điện thoại khác!</p>
                             </li>
                             <li>
@@ -266,7 +275,7 @@
                     </form>
                     <p class="p-in-pop">KHI ĐĂNG KÝ TỨC LÀ BẠN ĐÃ CHẤP NHẬN MỌI ĐIỀU KHOẢN TỪ VIETNAMOTO.NET</p>
                 </div>
-                <div ng-show="showAfter" class="after-reg" >
+                <div ng-show="showAfter" class="after-reg">
                     <h3>ĐĂNG KÝ THÀNH CÔNG</h3>
                     <H4>CHÀO MỪNG BẠN ĐẾN VỚI VIETNAMOTO.NET</H4>
                     <span id="click-to-log-popup">CLICK ĐỂ ĐĂNG NHẬP VIETNAMOTO.NET</span>
@@ -297,28 +306,27 @@
             </div>
             <img class="img-line" src="{{ URL::asset('images/line.png')}}"/>
             <div class="modal-body">
-                <div class="before-log">
-                    <form class="form-reg">
-                        <ul>
-                            <li>
-                                <span>Số điện thoại:</span>
-                                <input ng-model="formData.phone" ng-model="phone" class="inp form-control" name="phone"/>
-                            </li>
-                            <li>
-                                <span>Mật khẩu:</span>
-                                <input ng-model="formData.password" type="password" class="inp form-control" name="pass"/>
-                            </li>
-                            <li>
-                                <input ng-click="clickLogin()" class="bt-in-pop" type="button" value="Đăng nhập"/>
-                            </li>
-                        </ul>
-                        <a class="a-forgot" href="#"><img src="{{ URL::asset('images/icon-question.png')}}"/> Bạn quên mật khẩu của mình?</a>
-                        <span class="spa-reg"><img src="{{ URL::asset('images/icon-reg.png')}}"/> Bạn chưa có tài khoản. Hãy <a class="a-regs" href="#">đăng ký</a> cùng chúng tôi</span>
-                    </form>
-                </div>
-                <div class="after-log">
-                    dang9 nhap thanh cong
-                </div>
+                <form class="form-reg" name="logForm" ng-submit="clickLogin()" novalidate>
+                    <ul>
+                        <li>
+                            <span>Số điện thoại:</span>
+                            <input ng-model="formDataLog.phone" ng-model="phone" class="inp form-control" type="number" name="phone" required/>
+                            <p ng-show="logForm.phone.$invalid && logForm.$submitted" class="error-valid">Bạn chưa nhập số điện thoại.</p>
+                            <p ng-show="notexistphone" class="error-valid">Số điện thoại này chưa được đăng ký</p>
+                        </li>
+                        <li>
+                            <span>Mật khẩu:</span>
+                            <input ng-model="formDataLog.password" type="password" class="inp form-control" name="pass" required/>
+                            <p ng-show="logForm.pass.$invalid && logForm.$submitted" class="error-valid">Bạn chưa nhập mật khẩu.</p>
+                            <p ng-show="wrongpass" class="error-valid">Mật khẩu chưa đúng</p>
+                        </li>
+                        <li>
+                            <input class="bt-in-pop" type="submit" value="Đăng nhập"/>
+                        </li>
+                    </ul>
+                    <a class="a-forgot" href="#"><img src="{{ URL::asset('images/icon-question.png')}}"/> Bạn quên mật khẩu của mình?</a>
+                    <span class="spa-reg"><img src="{{ URL::asset('images/icon-reg.png')}}"/> Bạn chưa có tài khoản. Hãy <a class="a-regs" href="#">đăng ký</a> cùng chúng tôi</span>
+                </form>
             </div>
             <img class="img-line" src="{{ URL::asset('images/line.png')}}"/>
             <div class="modal-footer">
@@ -336,8 +344,6 @@
 <script type="text/javascript">
     var app = angular.module('myApp', []);
     app.controller('registerCtrl', function ($scope, $http) {
-        $scope.showAfter = false;
-        $scope.showBefore = true;
         function resetForm(){
             $scope.regForm.$setPristine();
             $scope.regForm.$setUntouched();
@@ -354,7 +360,48 @@
                 $scope.existphone = false;
             }
         });
-        $scope.existphone = false;
+        $scope.$watch('formData.repassword', function () {
+            var pass = $scope.formData.password;
+            var repass = $scope.formData.repassword;
+            if (typeof repass !== 'undefined') {
+                if (typeof pass !== 'undefined') {
+                    if (repass != pass) {
+                        $scope.matchpassword = true;
+                    } else {
+                        $scope.matchpassword = false;
+                    }
+                } else {
+                    $scope.matchpassword = false;
+                }
+            } else {
+                $scope.matchpassword = false;
+            }
+        });
+        $scope.$watch('formData.password', function () {
+            var repass = $scope.formData.repassword;
+            var pass = $scope.formData.password;
+            if (typeof pass !== 'undefined') {
+                if (typeof repass !== 'undefined') {
+                    if (repass != pass) {
+                        $scope.matchpassword = true;
+                    } else {
+                        $scope.matchpassword = false;
+                    }
+                } else {
+                    $scope.matchpassword = false;
+                }
+            } else {
+                $scope.matchpassword = false;
+            }
+        });
+        function resetValidateForm(){
+            $scope.showAfter = false;
+            $scope.showBefore = true;
+            $scope.existphone = false;
+            $scope.notexistphone = false;
+            $scope.wrongpass = false;
+        };
+        resetValidateForm();
         $scope.clickRegister = function () {
             if ($scope.regForm.$valid) {
                 $http({
@@ -373,31 +420,43 @@
                 });
             }
         }
-    });
-    app.controller('loginCtrl', function ($scope, $http) {
-        $('.after-log').addClass('ng-hide');
-        $('.before-log').removeClass('ng-hide');
-        $("#openModalLog").on('click', function () {
-            $('.after-log').addClass('ng-hide');
-            $('.before-log').removeClass('ng-hide');
-            $("#form-log").trigger('reset');
+        $scope.$watch('formDataLog.phone', function () {
+            if ($scope.notexistphone == true) {
+                $scope.notexistphone = false;
+            }
         });
+        $scope.$watch('formDataLog.password', function () {
+            if ($scope.wrongpass == true) {
+                $scope.wrongpass = false;
+            }
+        });
+        $scope.clickOpenModalLog = function(){
+            $scope.logForm.$setPristine();
+            $scope.logForm.$setUntouched();
+            $scope.notexistphone = false;
+            $scope.wrongpass = false;
+        };
         $scope.clickLogin = function () {
             $http({
                 method: 'POST',
                 url: '/login-frontend',
-                data: $.param($scope.formData),
+                data: $.param($scope.formDataLog),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
             .success(function (data) {
-                console.log(data);
-                if (data.status) {
-                    $('.before-log').addClass('ng-hide');
-                    $('.after-log').removeClass('ng-hide');
+                if (data.status == true) {
+                    location.reload();
+                }else{
+                    if (data.message == 'phone_not_exit') {
+                        $scope.notexistphone = true;
+                    } else {
+                        $scope.wrongpass = true;
+                    }
                 }
             });
         }
     });
+
     (function($) {
         $(function() { //on DOM ready
             $("#scroller").simplyScroll({
