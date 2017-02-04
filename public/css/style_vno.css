@@ -1402,3 +1402,11 @@ textarea:focus, input:focus{
     font-size: 12px;
     margin-bottom: -15px;
 }
+.welcome-user{
+    float: left;
+    color: #0c834a;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-right: 5px;
+    font-style: italic;
+}

@@ -37,12 +37,20 @@
                         </div>
                     </div>
                     <div class="log-reg">
-                        <span class="login-signup" data-toggle="modal" ng-click="clickOpenModalLog()" data-target="#myModalLog"><img src="{{ URL::asset('images/icon-login.png')}}"/> Đăng nhập</span>
-                        <span class="login-signup" data-toggle="modal" ng-click="clickOpenModal()" id="openModalReg" data-target="#myModalReg"><img src="{{ URL::asset('images/icon-reg.png')}}"/> Đăng kí</span>
+                        @if(\Illuminate\Support\Facades\Auth::check())
+                            <p class="welcome-user">Chào {{$user->username}}</p>
+                        @else
+                            <span class="login-signup" data-toggle="modal" ng-click="clickOpenModalLog()" data-target="#myModalLog"><img src="{{ URL::asset('images/icon-login.png')}}"/> Đăng nhập</span>
+                            <span class="login-signup" data-toggle="modal" ng-click="clickOpenModal()" id="openModalReg" data-target="#myModalReg"><img src="{{ URL::asset('images/icon-reg.png')}}"/> Đăng kí</span>
+                        @endif
                         <div class="dropdown" style="float:left;">
                             <img class="icon-avatar img-circle"
                                  @if(\Illuminate\Support\Facades\Auth::check())
+                                    @if($user->avatar != null)
                                     src="{{ URL::asset($user->avatar)}}"
+                                    @else
+                                    src="{{ URL::asset('images/icon-avatar.png')}}"
+                                    @endif
                                  @else
                                     src="{{ URL::asset('images/icon-avatar.png')}}"
                                  @endif
@@ -50,13 +58,19 @@
                             @if(\Illuminate\Support\Facades\Auth::check())
                             <div class="dropdown-menu cover-logout">
                                 <div class="cover-avatar-logout">
-                                    <img class="img-circle" src="{{ URL::asset($user->avatar)}}"/>
+                                    <img class="img-circle"
+                                         @if($user->avatar != null)
+                                         src="{{ URL::asset($user->avatar)}}"
+                                         @else
+                                         src="{{ URL::asset('images/icon-avatar.png')}}"
+                                         @endif
+                                    />
                                     <div class="info-user">
                                         <p>User: <span>{{$user->username}}</span></p>
-                                        <p>Bài đăng: <span>100</span></p>
+                                        <p>Bài đăng: <span>{{$totalPost}}</span></p>
                                     </div>
                                 </div>
-                                <a class="bt-logout-homepage bt-logout" href="{{ URL::to('/thong-tin-user/'.$user->id) }}">Trang cá nhân</a>
+                                <a class="bt-logout-homepage bt-logout" href="{{ URL::to('/thong-tin-user') }}">Trang cá nhân</a>
                                 <a class="bt-homepage bt-logout-homepage" href="/logout">Đăng xuất</a>
                             </div>
                             @endif
@@ -278,7 +292,7 @@
                 <div ng-show="showAfter" class="after-reg">
                     <h3>ĐĂNG KÝ THÀNH CÔNG</h3>
                     <H4>CHÀO MỪNG BẠN ĐẾN VỚI VIETNAMOTO.NET</H4>
-                    <span id="click-to-log-popup">CLICK ĐỂ ĐĂNG NHẬP VIETNAMOTO.NET</span>
+                    <span ng-click="clickToLogPopup()" id="click-to-log-popup">CLICK ĐỂ ĐĂNG NHẬP VIETNAMOTO.NET</span>
                     <p class="p-in-pop-reg" style="padding: 0px 60px;">HÃY ĐĂNG BÀI VÀ CHIA SẼ ĐỂ TÍCH ĐIỂM ĐỂ NHẬN GIẢI THƯỞNG TỪ VIETNAMOTO.NET</p>
                     <div class="social-popup">
                         <a href="#"><img src="{{ URL::asset('images/icon-fb.png')}}"/></a>
@@ -325,7 +339,7 @@
                         </li>
                     </ul>
                     <a class="a-forgot" href="#"><img src="{{ URL::asset('images/icon-question.png')}}"/> Bạn quên mật khẩu của mình?</a>
-                    <span class="spa-reg"><img src="{{ URL::asset('images/icon-reg.png')}}"/> Bạn chưa có tài khoản. Hãy <a class="a-regs" href="#">đăng ký</a> cùng chúng tôi</span>
+                    <span class="spa-reg"><img src="{{ URL::asset('images/icon-reg.png')}}"/> Bạn chưa có tài khoản. Hãy <a ng-click="clickToRegPopup()" class="a-regs" href="#">đăng ký</a> cùng chúng tôi</span>
                 </form>
             </div>
             <img class="img-line" src="{{ URL::asset('images/line.png')}}"/>
@@ -344,14 +358,11 @@
 <script type="text/javascript">
     var app = angular.module('myApp', []);
     app.controller('registerCtrl', function ($scope, $http) {
-        function resetForm(){
-            $scope.regForm.$setPristine();
-            $scope.regForm.$setUntouched();
-        };
         $scope.clickOpenModal = function(){
             $scope.showAfter = false;
             $scope.showBefore = true;
-            resetForm();
+            $scope.regForm.$setPristine();
+            $scope.regForm.$setUntouched();
             $scope.formData = {};
             $scope.existphone = false;
         };
@@ -419,7 +430,7 @@
                     }
                 });
             }
-        }
+        };
         $scope.$watch('formDataLog.phone', function () {
             if ($scope.notexistphone == true) {
                 $scope.notexistphone = false;
@@ -455,6 +466,61 @@
                 }
             });
         }
+        $scope.clickToLogPopup = function(){
+            $("#myModalLog").modal('show');
+            $("#myModalReg").modal('hide');
+            $scope.logForm.$setPristine();
+            $scope.logForm.$setUntouched();
+            $scope.notexistphone = false;
+            $scope.wrongpass = false;
+        };
+        $scope.clickToRegPopup = function(){
+            $("#myModalLog").modal('hide');
+            $("#myModalReg").modal('show');
+            $scope.showAfter = false;
+            $scope.showBefore = true;
+            $scope.regForm.$setPristine();
+            $scope.regForm.$setUntouched();
+            $scope.formData = {};
+            $scope.existphone = false;
+        };
+        //update info user
+        $scope.formDataInfo = {
+            username: '{{$user->username}}',
+            phone: '{{$user->phone}}',
+            email: '{{$user->email}}',
+            address: '{{$user->address}}',
+            major: '{{$user->major}}',
+            hobby: '{{$user->hobby}}'
+        };
+        $scope.clickUpdateInfo = function () {
+            $http({
+                method: 'POST',
+                url: '/update-info-user',
+                data: $.param($scope.formDataInfo),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .success(function (data) {
+                if (data.status == true) {
+                    alert('update thanh cong');
+                }
+            });
+        };
+
+        //change password
+        $scope.clickChangePassword = function(){
+            $http({
+                method: 'POST',
+                url: '/change-password',
+                data: $.param($scope.formDataChangePass),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .success(function (data) {
+                if (data.status == true) {
+                    alert('update thanh cong');
+                }
+            });
+        }
     });
 
     (function($) {
@@ -480,11 +546,6 @@
             }, function(){
                 $(this).children(":first").fadeOut('fast');
             });
-            $("#click-to-log-popup").click(function(){
-                $("#myModalLog").modal('show');
-                $("#myModalReg").modal('hide');
-            });
-
         });
     })(jQuery);
 </script>

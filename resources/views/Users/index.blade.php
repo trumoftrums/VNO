@@ -3,41 +3,47 @@
 @section('content')
     <div class="banner-profile">
         <div class="cover-avatar-profile">
-            <img class="img-circle" src="./images/nghiem_bao_pic.png"/>
-            <p>Nghiem Bao</p>
+            <img class="img-circle"
+                 @if($user->avatar != null)
+                 src="{{ URL::asset($user->avatar)}}"
+                 @else
+                 src="{{ URL::asset('images/icon-avatar.png')}}"
+            @endif
+            />
+            <p>{{$user->username}}</p>
         </div>
-        <img class="img-banner-profile" src="./images/img-profile-user.png"/>
+        <img class="img-banner-profile" src="{{ URL::asset('images/img-profile-user.png')}}"/>
     </div>
     <ul class="ul-cover-tab">
         <li class="active"><a data-toggle="tab" href="#info">CẬP NHẬT THÔNG TIN</a></li>
-        <li><a data-toggle="tab" href="#post">TỒNG BÀI ĐĂNG (100)</a></li>
+        <li><a data-toggle="tab" href="#post">TỒNG BÀI ĐĂNG ({{$totalPost}})</a></li>
     </ul>
 
     <div class="cover-tab tab-content">
         <div id="info" class="tab-pane fade in active">
             <div class="div-info-user">
                 <h3>BỔ SUNG THÔNG TIN ĐỂ CHÚNG TA HIỂU NHAU HƠN BẠN NHÉ!</h3>
-                <form>
+                <form name="infoForm" ng-submit="clickUpdateInfo()" novalidate>
                     <ul>
-                        <li><span>Nickname: </span><input class="text-inp" type="text" name="nickname"/></li>
-                        <li><span>Email của bạn: </span><input class="text-inp" name="email"/></li>
-                        <li><span>Số điện thoại: </span><input class="text-inp" name="phone"/></li>
-                        <li><span>Địa chỉ: </span><input class="text-inp" name="address"/></li>
-                        <li><span>Lĩnh vực kinh doanh: </span><input class="text-inp" name="career"/></li>
-                        <li><span>Sở thích: </span><input class="text-inp" name="hobbi"/></li>
+                        <li><span>Nickname: </span><input ng-model="formDataInfo.username" class="text-inp" type="text" name="nickname"/></li>
+                        <li><span>Email của bạn: </span><input ng-model="formDataInfo.email" class="text-inp" name="email"/></li>
+                        <li><span>Số điện thoại: </span><input ng-model="formDataInfo.phone" class="text-inp" name="phone"/></li>
+                        <li><span>Địa chỉ: </span><input ng-model="formDataInfo.address" class="text-inp" name="address"/></li>
+                        <li><span>Lĩnh vực kinh doanh: </span><input ng-model="formDataInfo.major" class="text-inp" name="career"/></li>
+                        <li><span>Sở thích: </span><input class="text-inp" ng-model="formDataInfo.hobby" name="hobby"/></li>
                     </ul>
-                    <input class="bt-complete" type="button" value="Hoàn thành"/>
+                    <input class="bt-complete" type="submit" value="Hoàn thành"/>
                 </form>
             </div>
             <div class="div-info-user div-user-info-last">
                 <h3>THAY ĐỔI PASSWORD</h3>
-                <form>
+                <form  name="changePasswordForm" ng-submit="clickChangePassword()" novalidate>
                     <ul>
-                        <li><span>Số điện thoại: </span><input class="text-inp" name="phone"/></li>
-                        <li><span>Mật khẩu cũ: </span><input class="text-inp" name="phone"/></li>
-                        <li><span>Mật khẩu mới: </span><input class="text-inp" name="phone"/></li>
+                        <li><span>*Số điện thoại: </span><input ng-model="formDataChangePass.phone" required type="number" class="text-inp" name="phone"/></li>
+                        <li><span>*Mật khẩu cũ: </span><input ng-model="formDataChangePass.password" required class="text-inp" name="phone"/></li>
+                        <li><span>*Mật khẩu mới: </span><input ng-model="formDataChangePass.newpassword" required class="text-inp" name="phone"/></li>
                     </ul>
-                    <input class="bt-complete" type="button" value="Thay đổi"/>
+                    <input class="bt-complete" type="submit" value="Thay đổi"/>
                 </form>
             </div>
         </div>

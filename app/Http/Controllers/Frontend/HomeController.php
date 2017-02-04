@@ -1,9 +1,11 @@
 <?php namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Baiviet;
 use App\Models\Users;
 use App\Models\UsersFactory;
 use App\News;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller {
@@ -45,9 +47,46 @@ class HomeController extends Controller {
         }
     }
 
-    public function userInfo($id)
+    public function userInfo()
     {
-        return View('Users.index', []);
+        $user = Auth::user();
+        $listPost = Baiviet::where('userid', $user->id)->get();
+        $totalPost = Baiviet::where('userid', $user->id)->count();
+        return View('Users.index', [
+            'user' => $user,
+            'listPost' => $listPost,
+            'totalPost' => $totalPost
+        ]);
+    }
+    public function updateUserInfo()
+    {
+        $data = Input::all();
+        $user = Auth::user();
+        Users::where('id', $user->id)->update([
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'address' => $data['address'],
+            'major' => $data['major'],
+            'hobby' => $data['hobby']
+        ]);
+        return response()->json([
+            'status' => true,
+            'message' => 'update success'
+        ]);
+    }
+
+    public function changePassword()
+    {
+        $data = Input::all();
+        $user = Auth::user();
+        Users::where('id', $user->id)->update([
+            'password' => bcrypt($data['newpassword'])
+        ]);
+        return response()->json([
+            'status' => true,
+            'message' => 'change password success'
+        ]);
     }
     public function news()
     {
