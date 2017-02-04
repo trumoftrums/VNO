@@ -30,11 +30,19 @@ class HomeController extends Controller {
     public function register()
     {
         $param = Input::all();
-        UsersFactory::addUser($param);
-        return response()->json([
-            'status' => true,
-            'message' => 'success'
-        ]);
+        $checkPhone = Users::where('phone', $param['phone'])->first();
+        if (count($checkPhone) == 0) {
+            UsersFactory::addUser($param);
+            return response()->json([
+                'status' => true,
+                'message' => 'success'
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Số điện thoại này đã đăng ký. Xin vui lòng nhập số điện thoại khác!'
+            ]);
+        }
     }
 
     public function userInfo()
