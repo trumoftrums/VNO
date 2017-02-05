@@ -49,204 +49,30 @@
         </ul>
     </div>
     <div class="list-items">
+        @foreach($listPost as $item)
         <div class="col-md-4 item">
             <div class="inner-item">
                 <div class="hover-item">
                     <div class="cover-zoom">
-                        <a href="#"><img src="./images/icon-zoom.png"/></a>
-                        <a class="detail" href="#">Xem Chi Tiết</a>
+                        <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><img src="./images/icon-zoom.png"/></a>
+                        <a class="detail" href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}">Xem Chi Tiết</a>
                     </div>
                 </div>
                 <div class="left-item">
                     <img src="./images/item-car.png"/>
-                    <span class="price">2.706.000.000 VND</span>
+                    <span class="price">{{$item->thongso['thongso_65']}} VND</span>
                 </div>
                 <div class="right-item">
-                    <h4>LEXUS NX300H-2016</h4>
-                    <p>- Tình trạng: Xe mới</p>
-                    <p>- Dòng xe: SUV/ Crossover</p>
-                    <p>- Năm SX: 2013</p>
-                    <p>- Phun xăng điện tử</p>
-                    <p class="phone-address-item">- TPHCM - 090 000 000</p>
+                    <h4>{{$item->tieu_de}}</h4>
+                    <p>- Tình trạng: {{$item->thongso['thongso_24']}}</p>
+                    <p>- Dòng xe: {{$item->thongso['thongso_25']}}</p>
+                    <p>- Năm SX: {{$item->thongso['thongso_22']}}</p>
+                    <p>- {{$item->thongso['thongso_31']}}</p>
+                    <p class="phone-address-item">- {{$item->thongso['thongso_62']}} - {{$item->thongso['thongso_63']}}</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 item">
-            <div class="inner-item">
-                <div class="hover-item">
-                    <div class="cover-zoom">
-                        <a href="#"><img src="./images/icon-zoom.png"/></a>
-                        <a class="detail" href="#">Xem Chi Tiết</a>
-                    </div>
-                </div>
-                <div class="left-item">
-                    <img src="./images/item-car.png"/>
-                    <span class="price">2.706.000.000 VND</span>
-                </div>
-                <div class="right-item">
-                    <h4>LEXUS NX300H-2016</h4>
-                    <p>- Tình trạng: Xe mới</p>
-                    <p>- Dòng xe: SUV/ Crossover</p>
-                    <p>- Năm SX: 2013</p>
-                    <p>- Phun xăng điện tử</p>
-                    <p class="phone-address-item">- TPHCM - 090 000 000</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 item">
-            <div class="inner-item">
-                <div class="hover-item">
-                    <div class="cover-zoom">
-                        <a href="#"><img src="./images/icon-zoom.png"/></a>
-                        <a class="detail" href="#">Xem Chi Tiết</a>
-                    </div>
-                </div>
-                <div class="left-item">
-                    <img src="./images/item-car.png"/>
-                    <span class="price">2.706.000.000 VND</span>
-                </div>
-                <div class="right-item">
-                    <h4>LEXUS NX300H-2016</h4>
-                    <p>- Tình trạng: Xe mới</p>
-                    <p>- Dòng xe: SUV/ Crossover</p>
-                    <p>- Năm SX: 2013</p>
-                    <p>- Phun xăng điện tử</p>
-                    <p class="phone-address-item">- TPHCM - 090 000 000</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 item">
-            <div class="inner-item">
-                <div class="hover-item">
-                    <div class="cover-zoom">
-                        <a href="#"><img src="./images/icon-zoom.png"/></a>
-                        <a class="detail" href="#">Xem Chi Tiết</a>
-                    </div>
-                </div>
-                <div class="left-item">
-                    <img src="./images/item-car.png"/>
-                    <span class="price">2.706.000.000 VND</span>
-                </div>
-                <div class="right-item">
-                    <h4>LEXUS NX300H-2016</h4>
-                    <p>- Tình trạng: Xe mới</p>
-                    <p>- Dòng xe: SUV/ Crossover</p>
-                    <p>- Năm SX: 2013</p>
-                    <p>- Phun xăng điện tử</p>
-                    <p class="phone-address-item">- TPHCM - 090 000 000</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 item">
-            <div class="inner-item">
-                <div class="hover-item">
-                    <div class="cover-zoom">
-                        <a href="#"><img src="./images/icon-zoom.png"/></a>
-                        <a class="detail" href="#">Xem Chi Tiết</a>
-                    </div>
-                </div>
-                <div class="left-item">
-                    <img src="./images/item-car.png"/>
-                    <span class="price">2.706.000.000 VND</span>
-                </div>
-                <div class="right-item">
-                    <h4>LEXUS NX300H-2016</h4>
-                    <p>- Tình trạng: Xe mới</p>
-                    <p>- Dòng xe: SUV/ Crossover</p>
-                    <p>- Năm SX: 2013</p>
-                    <p>- Phun xăng điện tử</p>
-                    <p class="phone-address-item">- TPHCM - 090 000 000</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 item">
-            <div class="inner-item">
-                <div class="hover-item">
-                    <div class="cover-zoom">
-                        <a href="#"><img src="./images/icon-zoom.png"/></a>
-                        <a class="detail" href="#">Xem Chi Tiết</a>
-                    </div>
-                </div>
-                <div class="left-item">
-                    <img src="./images/item-car.png"/>
-                    <span class="price">2.706.000.000 VND</span>
-                </div>
-                <div class="right-item">
-                    <h4>LEXUS NX300H-2016</h4>
-                    <p>- Tình trạng: Xe mới</p>
-                    <p>- Dòng xe: SUV/ Crossover</p>
-                    <p>- Năm SX: 2013</p>
-                    <p>- Phun xăng điện tử</p>
-                    <p class="phone-address-item">- TPHCM - 090 000 000</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 item">
-            <div class="inner-item">
-                <div class="hover-item">
-                    <div class="cover-zoom">
-                        <a href="#"><img src="./images/icon-zoom.png"/></a>
-                        <a class="detail" href="#">Xem Chi Tiết</a>
-                    </div>
-                </div>
-                <div class="left-item">
-                    <img src="./images/item-car.png"/>
-                    <span class="price">2.706.000.000 VND</span>
-                </div>
-                <div class="right-item">
-                    <h4>LEXUS NX300H-2016</h4>
-                    <p>- Tình trạng: Xe mới</p>
-                    <p>- Dòng xe: SUV/ Crossover</p>
-                    <p>- Năm SX: 2013</p>
-                    <p>- Phun xăng điện tử</p>
-                    <p class="phone-address-item">- TPHCM - 090 000 000</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 item">
-            <div class="inner-item">
-                <div class="hover-item">
-                    <div class="cover-zoom">
-                        <a href="#"><img src="./images/icon-zoom.png"/></a>
-                        <a class="detail" href="#">Xem Chi Tiết</a>
-                    </div>
-                </div>
-                <div class="left-item">
-                    <img src="./images/item-car.png"/>
-                    <span class="price">2.706.000.000 VND</span>
-                </div>
-                <div class="right-item">
-                    <h4>LEXUS NX300H-2016</h4>
-                    <p>- Tình trạng: Xe mới</p>
-                    <p>- Dòng xe: SUV/ Crossover</p>
-                    <p>- Năm SX: 2013</p>
-                    <p>- Phun xăng điện tử</p>
-                    <p class="phone-address-item">- TPHCM - 090 000 000</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 item">
-            <div class="inner-item">
-                <div class="hover-item">
-                    <div class="cover-zoom">
-                        <a href="#"><img src="./images/icon-zoom.png"/></a>
-                        <a class="detail" href="#">Xem Chi Tiết</a>
-                    </div>
-                </div>
-                <div class="left-item">
-                    <img src="./images/item-car.png"/>
-                    <span class="price">2.706.000.000 VND</span>
-                </div>
-                <div class="right-item">
-                    <h4>LEXUS NX300H-2016</h4>
-                    <p>- Tình trạng: Xe mới</p>
-                    <p>- Dòng xe: SUV/ Crossover</p>
-                    <p>- Năm SX: 2013</p>
-                    <p>- Phun xăng điện tử</p>
-                    <p class="phone-address-item">- TPHCM - 090 000 000</p>
-                </div>
-            </div>
-        </div>
+        @endforeach
         <div class="paging-div">
             <nav aria-label="Page navigation">
                 <ul class="pagination pagination-sm">

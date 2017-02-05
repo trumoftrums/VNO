@@ -943,7 +943,7 @@
     padding: 8px 30px;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 .div-info-user input.bt-complete:hover{
     opacity:0.8;
@@ -1405,8 +1405,14 @@ textarea:focus, input:focus{
 .welcome-user{
     float: left;
     color: #0c834a;
-    font-weight: 600;
     margin-top: 15px;
     margin-right: 5px;
     font-style: italic;
+}
+.alert-update-success{
+    float: left;
+    padding:5px;
+    margin-bottom: 0px;
+    display: none;
+    width: 95%;
 }

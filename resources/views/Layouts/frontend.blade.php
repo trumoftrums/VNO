@@ -38,7 +38,7 @@
                     </div>
                     <div class="log-reg">
                         @if(\Illuminate\Support\Facades\Auth::check())
-                            <p class="welcome-user">Chào {{$user->username}}</p>
+                            <p class="welcome-user">Chào <strong>{{$user->username}}</strong></p>
                         @else
                             <span class="login-signup" data-toggle="modal" ng-click="clickOpenModalLog()" data-target="#myModalLog"><img src="{{ URL::asset('images/icon-login.png')}}"/> Đăng nhập</span>
                             <span class="login-signup" data-toggle="modal" ng-click="clickOpenModal()" id="openModalReg" data-target="#myModalReg"><img src="{{ URL::asset('images/icon-reg.png')}}"/> Đăng kí</span>
@@ -448,23 +448,25 @@
             $scope.wrongpass = false;
         };
         $scope.clickLogin = function () {
-            $http({
-                method: 'POST',
-                url: '/login-frontend',
-                data: $.param($scope.formDataLog),
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            })
-            .success(function (data) {
-                if (data.status == true) {
-                    location.reload();
-                }else{
-                    if (data.message == 'phone_not_exit') {
-                        $scope.notexistphone = true;
+            if ($scope.logForm.$valid) {
+                $http({
+                    method: 'POST',
+                    url: '/login-frontend',
+                    data: $.param($scope.formDataLog),
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                .success(function (data) {
+                    if (data.status == true) {
+                        location.reload();
                     } else {
-                        $scope.wrongpass = true;
+                        if (data.message == 'phone_not_exit') {
+                            $scope.notexistphone = true;
+                        } else {
+                            $scope.wrongpass = true;
+                        }
                     }
-                }
-            });
+                });
+            }
         }
         $scope.clickToLogPopup = function(){
             $("#myModalLog").modal('show');
@@ -485,14 +487,17 @@
             $scope.existphone = false;
         };
         //update info user
+        $scope.formDataInfo = {};
+        @if(\Illuminate\Support\Facades\Auth::check())
         $scope.formDataInfo = {
             username: '{{$user->username}}',
-            phone: '{{$user->phone}}',
+            phone: parseInt('{{$user->phone}}'),
             email: '{{$user->email}}',
             address: '{{$user->address}}',
             major: '{{$user->major}}',
             hobby: '{{$user->hobby}}'
         };
+        @endif
         $scope.clickUpdateInfo = function () {
             $http({
                 method: 'POST',
@@ -502,24 +507,40 @@
             })
             .success(function (data) {
                 if (data.status == true) {
-                    alert('update thanh cong');
+                    $("#success-alert-update").fadeTo(2000, 500).slideUp(500, function(){
+                        $("#success-alert-update").slideUp(500);
+                    });
                 }
             });
         };
 
         //change password
         $scope.clickChangePassword = function(){
-            $http({
-                method: 'POST',
-                url: '/change-password',
-                data: $.param($scope.formDataChangePass),
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            })
-            .success(function (data) {
-                if (data.status == true) {
-                    alert('update thanh cong');
-                }
-            });
+            if ($scope.changePasswordForm.$valid) {
+                $http({
+                    method: 'POST',
+                    url: '/change-password',
+                    data: $.param($scope.formDataChangePass),
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                .success(function (data) {
+                    if (data.status == true) {
+                        $("#success-alert-change").fadeTo(2000, 500).slideUp(500, function () {
+                            $("#success-alert-change").slideUp(500);
+                        });
+                    } else {
+                        if (data.message == 'wrong_phone') {
+                            $("#wrong-phone-alert-change").fadeTo(2000, 500).slideUp(500, function () {
+                                $("#wrong-pass-alert-change").slideUp(500);
+                            });
+                        } else {
+                            $("#wrong-pass-alert-change").fadeTo(2000, 500).slideUp(500, function () {
+                                $("#wrong-pass-alert-change").slideUp(500);
+                            });
+                        }
+                    }
+                });
+            }
         }
     });
 
