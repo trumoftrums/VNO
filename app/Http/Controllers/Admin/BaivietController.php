@@ -34,12 +34,12 @@ class BaivietController extends Controller {
         $content .=  '<rows>';
         $content .=  '<head>';
         $content .='<column style="font-weight: bold" type="ro" width="50" sort="int">No</column>';
-        $content .='<column style="font-weight: bold" type="ro" width="*" sort="int">Tiêu Đề</column>';
+        $content .='<column style="font-weight: bold" type="ro" width="*" sort="str">Tiêu Đề</column>';
         $needindexs = Thongso::where('status',1)->where('need_index',1)->where('id','<>',$this->THONGSO_MOTA)->get()->toArray();
         $order_thongso_key =array();
         if(!empty($needindexs)) {
             foreach ($needindexs as $v) {
-                $content .='<column id="thongso_'.$v['id'].'" style="font-weight: bold" type="ro" width="100" sort="int">'.$v['name'].'</column>';
+                $content .='<column id="thongso_'.$v['id'].'" style="font-weight: bold" type="ro" width="100" sort="str">'.$v['name'].'</column>';
                 $order_thongso_key[] = $v['id'];
             }
         }

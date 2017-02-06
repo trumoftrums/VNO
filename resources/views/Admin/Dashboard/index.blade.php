@@ -75,7 +75,8 @@
             myToolbar.addButton("add", 0, "Đăng bài viết", "../js/dhtmlx5/common/add.png", "add.png");
             myToolbar.addButton("edit",1, "Sửa bài viết", "../js/dhtmlx5/common/edit.png", "edit.png");
             myToolbar.addButton("delete",2, "Xóa bài viết", "../js/dhtmlx5/common/delete.png", "delete.png");
-            myToolbar.addButton("refresh",3, "Làm mới", "../js/dhtmlx5/common/refresh.png", "refresh.png");
+            myToolbar.addButton("publish",3, "Publish", "../js/dhtmlx5/common/publish.png", "publish.png");
+            myToolbar.addButton("refresh",4, "Làm mới", "../js/dhtmlx5/common/refresh.png", "refresh.png");
 
             myToolbar.attachEvent("onClick", function (id) {
                 if (id == "add") {
@@ -140,6 +141,10 @@
                 if(id=="refresh"){
                     mygrid.loadXML("getbaiviet");
                 }
+                if(id == "publish"){
+
+                }
+
 
             });
             mygrid = myLayout.cells("a").attachGrid();
@@ -173,8 +178,14 @@
 
             }else{
                 win.setText("Đăng bài viết ... ");
+                baiviet = new Object();
+                baiviet.photo1  ="noimage.png";
+                baiviet.photo2  ="noimage.png";
+                baiviet.photo3  ="noimage.png";
+                baiviet.photo4  ="noimage.png";
+                baiviet.photo5  ="noimage.png";
             }
-
+//            console.log(baiviet);
             win.setModal(true);
             win.button("minmax").disable();
             win.button("park").disable();
@@ -346,34 +357,25 @@
             if(baiviet_thongso != null && baiviet_thongso !="undefined"){
                 var itemid = {type: "hidden", name:"id", value:baiviet.id};
                 wform_1.addItem(null,itemid,0,0);
-//                wform_1.setItemValue("photo1",baiviet.photo1);
-//                wform_1.setItemValue("photo2",baiviet.photo2);
-//                wform_1.setItemValue("photo3",baiviet.photo3);
-//                wform_1.setItemValue("photo4",baiviet.photo4);
-//                wform_1.setItemValue("photo5",baiviet.photo5);
                 wform_1.forEachItem(function(name){
                     if(baiviet_thongso[name] != null && baiviet_thongso[name] !="undefined"){
                         wform_1.setItemValue(name,baiviet_thongso[name]);
-                   //     console.log(name+":"+baiviet_thongso[name]);
                     }
                 });
 
                 wform_2.forEachItem(function(name){
                     if(baiviet_thongso[name] != null && baiviet_thongso[name] !="undefined"){
                         wform_2.setItemValue(name,baiviet_thongso[name]);
-                //        console.log(name+":"+baiviet_thongso[name]);
                     }
                 });
                 wform_3.forEachItem(function(name){
                     if(baiviet_thongso[name] != null && baiviet_thongso[name] !="undefined"){
                         wform_3.setItemValue(name,baiviet_thongso[name]);
-//                        console.log(name+":"+baiviet_thongso[name]);
                     }
                 });
                 wform_4.forEachItem(function(name){
                     if(baiviet_thongso[name] != null && baiviet_thongso[name] !="undefined"){
                         wform_4.setItemValue(name,baiviet_thongso[name]);
-//                        console.log(name+":"+baiviet_thongso[name]);
                     }
                 });
 
