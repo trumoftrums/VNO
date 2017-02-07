@@ -11,12 +11,18 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
-Route::get('/user', 'HomeController@users');
-Route::post('/register', 'HomeController@register');
+Route::get('/', 'Frontend\HomeController@index');
+Route::get('/user', 'Frontend\HomeController@users');
+Route::post('/register', 'Frontend\HomeController@register');
 Route::post('/login-frontend', 'Auth\LoginController@loginFrontend');
 Route::get('/logout', 'Auth\LoginController@logout');
-Route::get('/thong-tin-user', 'HomeController@userInfo');
+Route::get('/thong-tin-user', 'Frontend\HomeController@userInfo');
+Route::post('/update-info-user', 'Frontend\HomeController@updateUserInfo');
+Route::post('/change-password', 'Frontend\HomeController@changePassword');
+Route::get('/tin-tuc', 'Frontend\HomeController@news');
+Route::get('/tin-tuc/{id}/{name}', 'Frontend\HomeController@newsDetail');
+Route::get('/bai-dang/{id}/{name}', 'Frontend\HomeController@postDetail');
+Route::get('/dang-tin-free', 'Frontend\HomeController@freePost');
 
 Route::group(['prefix' => 'admin'], function()
 {

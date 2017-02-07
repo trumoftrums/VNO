@@ -4,15 +4,15 @@
     <title>Vietnam Oto</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/jquery.simplyscroll.css">
-    <link rel="stylesheet" href="css/style_vno.css">
-    <script src="js/jquery.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="js/jquery.simplyscroll.min.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/jquery.simplyscroll.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/style_vno.css') }}">
+    <script src="{{ URL::asset('js/jquery.min.js') }}" type="text/javascript"></script>
+    <script src="{{ URL::asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="{{ URL::asset('js/jquery.simplyscroll.min.js') }}" type="text/javascript"></script>
+    <script src="{{ URL::asset('js/angular.min.js') }}"></script>
 </head>
-<body ng-app="myApp">
+<body ng-app="myApp" ng-controller="registerCtrl">
 <div class="container-fluid">
     <div class="header">
         <div class="first-col">
@@ -21,52 +21,74 @@
                     <div class="menu">
                         <div class="dropdown">
                             <span class="icon-menu" data-toggle="dropdown">
-                                <img src="./images/icon-menu.png"/>
+                                <img src="{{ URL::asset('images/icon-menu.png') }}"/>
                             </span>
                             <ul class="dropdown-menu">
-                                <span class="close-menu"> <img src="./images/icon-close-menu.png"/> </span>
-                                <li><a href="#">Trang Chủ</a></li>
+                                <span class="close-menu"> <img src="{{ URL::asset('images/icon-close-menu.png') }}"/> </span>
+                                <li><a href="{{ URL::to('') }}">Trang Chủ</a></li>
                                 <li><a href="#">Vip Showroom/ Salon Oto</a></li>
                                 <li><a href="#">Địa Chỉ Sửa Xe/ Độ Xe Uy Tín</a></li>
                                 <li><a href="#">Thông tin cứu hộ trên toàn quốc</a></li>
                                 <li><a href="#">Góc giao lưu/ Chia sẻ</a></li>
-                                <li><a href="#">Tin tức về xe</a></li>
+                                <li><a href="{{ URL::to('/tin-tuc') }}">Tin tức về xe</a></li>
                                 <li><a href="#">Quy định & Hướng dẫn</a></li>
                                 <li><a class="last" href="#">Liên hệ</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="log-reg">
-                        <span class="login-signup" data-toggle="modal" data-target="#myModalLog"><img src="./images/icon-login.png"/> Đăng nhập</span>
-                        <span class="login-signup" data-toggle="modal" id="openModalReg" data-target="#myModalReg"><img src="./images/icon-reg.png"/> Đăng kí</span>
+                        @if(\Illuminate\Support\Facades\Auth::check())
+                            <p class="welcome-user">Chào <strong>{{$user->username}}</strong></p>
+                        @else
+                            <span class="login-signup" data-toggle="modal" ng-click="clickOpenModalLog()" data-target="#myModalLog"><img src="{{ URL::asset('images/icon-login.png')}}"/> Đăng nhập</span>
+                            <span class="login-signup" data-toggle="modal" ng-click="clickOpenModal()" id="openModalReg" data-target="#myModalReg"><img src="{{ URL::asset('images/icon-reg.png')}}"/> Đăng kí</span>
+                        @endif
                         <div class="dropdown" style="float:left;">
-                            <img class="icon-avatar" src="./images/icon-avatar.png" data-toggle="dropdown"/>
+                            <img class="icon-avatar img-circle"
+                                 @if(\Illuminate\Support\Facades\Auth::check())
+                                    @if($user->avatar != null)
+                                    src="{{ URL::asset($user->avatar)}}"
+                                    @else
+                                    src="{{ URL::asset('images/icon-avatar.png')}}"
+                                    @endif
+                                 @else
+                                    src="{{ URL::asset('images/icon-avatar.png')}}"
+                                 @endif
+                                 data-toggle="dropdown"/>
+                            @if(\Illuminate\Support\Facades\Auth::check())
                             <div class="dropdown-menu cover-logout">
                                 <div class="cover-avatar-logout">
-                                    <img src="./images/icon-avatar.png"/>
+                                    <img class="img-circle"
+                                         @if($user->avatar != null)
+                                         src="{{ URL::asset($user->avatar)}}"
+                                         @else
+                                         src="{{ URL::asset('images/icon-avatar.png')}}"
+                                         @endif
+                                    />
                                     <div class="info-user">
-                                        <p>User: <span>0549148774</span></p>
-                                        <p>Bài đăng: <span>100</span></p>
+                                        <p>User: <span>{{$user->username}}</span></p>
+                                        <p>Bài đăng: <span>{{$totalPost}}</span></p>
                                     </div>
                                 </div>
-                                <a class="bt-logout-homepage bt-logout" href="/thong-tin-user">Trang cá nhân</a>
+                                <a class="bt-logout-homepage bt-logout" href="{{ URL::to('/thong-tin-user') }}">Trang cá nhân</a>
                                 <a class="bt-homepage bt-logout-homepage" href="/logout">Đăng xuất</a>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
                 <div class="logo">
                     <div class="social">
                         <ul>
-                            <li><a href="#"><img src="./images/icon-fb.png" /></a> </li>
-                            <li><a href="#"><img src="./images/icon-twitter.png" /></a> </li>
-                            <li><a href="#"><img src="./images/icon-yb.png" /></a> </li>
+                            <li><a href="#"><img src="{{ URL::asset('images/icon-fb.png')}}" /></a> </li>
+                            <li><a href="#"><img src="{{ URL::asset('images/icon-twitter.png')}}" /></a> </li>
+                            <li><a href="#"><img src="{{ URL::asset('images/icon-yb.png')}}" /></a> </li>
                         </ul>
                     </div>
-                    <a href="#"><img class="logo-vno" src="./images/logo.png"/></a>
+                    <a href="{{ URL::to('') }}"><img class="logo-vno" src="{{ URL::asset('images/logo.png')}}"/></a>
                 </div>
                 <div class="slogan">
-                    <a href="#"><img src="./images/slogan.png"/></a>
+                    <a href="{{ URL::to('') }}"><img src="{{ URL::asset('images/slogan.png')}}"/></a>
                 </div>
             </div>
             <div class="slide-show">
@@ -74,7 +96,7 @@
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
                             <h3 class="name-slide">2013 Acura NSX</h3>
-                            <img class="img-slide" src="./images/slides/slide 01.png"/>
+                            <img class="img-slide" src="{{ URL::asset('images/slides/slide 01.png')}}"/>
                             <div class="info-slide">
                                 <ul>
                                     <li>
@@ -94,12 +116,12 @@
                                 <span class="price">1.000.000.000 VND</br>
                                     <small>{bao gồm thuế}</small>
                                 </span>
-                                <a href="#">CHI TIẾT <img class="icon-arrow" src="./images/icon-arrow.png"/></a>
+                                <a href="#">CHI TIẾT <img class="icon-arrow" src="{{ URL::asset('images/icon-arrow.png')}}"/></a>
                             </div>
                         </div>
                         <div class="item">
                             <h3 class="name-slide">2013 Acura NSX</h3>
-                            <img class="img-slide" src="./images/slides/slide 01.png"/>
+                            <img class="img-slide" src="{{ URL::asset('images/slides/slide 01.png')}}"/>
                             <div class="info-slide">
                                 <ul>
                                     <li>
@@ -119,7 +141,7 @@
                                 <span class="price">2.000.000.000 VND</br>
                                     <small>{bao gồm thuế}</small>
                                 </span>
-                                <a href="#">CHI TIẾT <img class="icon-arrow" src="./images/icon-arrow.png"/></a>
+                                <a href="#">CHI TIẾT <img class="icon-arrow" src="{{ URL::asset('images/icon-arrow.png')}}"/></a>
                             </div>
                         </div>
                     </div>
@@ -163,65 +185,37 @@
         </div>
         <div class="last-col">
             <div class="avatar">
-                <a class="bt-reg-free" href="#">Đăng tin miễn phí</a>
+                <a class="bt-reg-free" href="{{ URL::to('/dang-tin-free') }}">Đăng tin miễn phí</a>
             </div>
             <div class="list-services">
                 <div class="item-service">
-                    <img class="icon-service" src="./images/icon-ser01.png"/>
-                    <p>VIP SHOWROOM/ SALON OTO <img class="icon-arrow-right" src="./images/icon-arrow-right.png"/></p>
+                    <img class="icon-service" src="{{ URL::asset('images/icon-ser01.png')}}"/>
+                    <p>VIP SHOWROOM/ SALON OTO <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                 </div>
                 <div class="item-service">
-                    <img class="icon-service" src="./images/icon-ser02.png"/>
-                    <p>ĐỊA CHỈ ĐỘ XE/<br> SỬA XE UY TÍN <img class="icon-arrow-right" src="./images/icon-arrow-right.png"/></p>
+                    <img class="icon-service" src="{{ URL::asset('images/icon-ser02.png')}}"/>
+                    <p>ĐỊA CHỈ ĐỘ XE/<br> SỬA XE UY TÍN <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                 </div>
                 <div class="item-service">
-                    <img class="icon-service" src="./images/icon-ser03.png"/>
-                    <p>THÔNG TIN CỨU HỘ TRÊN TOÀN QUỐC <img class="icon-arrow-right" src="./images/icon-arrow-right.png"/></p>
+                    <img class="icon-service" src="{{ URL::asset('images/icon-ser03.png')}}"/>
+                    <p>THÔNG TIN CỨU HỘ TRÊN TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                 </div>
                 <div class="item-service">
-                    <img class="icon-service" src="./images/icon-ser04.png"/>
-                    <p>GÓC GIAO LƯU/<br> CHIA SẺ <img class="icon-arrow-right" src="./images/icon-arrow-right.png"/></p>
+                    <img class="icon-service" src="{{ URL::asset('images/icon-ser04.png')}}"/>
+                    <p>GÓC GIAO LƯU/<br> CHIA SẺ <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                 </div>
             </div>
             <div class="list-news">
-                <h3 class="title-list-news"><img src="./images/icon-news.png" />TIN TỨC MỚI CẬP NHẬT</h3>
+                <h3 class="title-list-news"><img src="{{ URL::asset('images/icon-news.png')}}" />TIN TỨC MỚI CẬP NHẬT</h3>
                 <ul id="scroller">
+                    @foreach($listNewsHome as $val)
                     <li class="item-news">
-                        <a href="#"><img src="./images/news01.png"/></a>
-                        <span>01/01/2017 8:30 AM</span>
-                        <a class="title-item-news" href="#">Các dòng xe dành cho quý ông việt</a>
-                        <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
+                        <a href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}"><img src="{{ URL::asset($val->image)}}"/></a>
+                        <span>{{date_format(date_create($val->created_date), 'd/m/Y H:i a')}}</span>
+                        <a class="title-item-news" href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}">{{$val->title}}</a>
+                        <a class="bt-detail-news" href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}">Chi tiết<small> >> </small></a>
                     </li>
-                    <li class="item-news">
-                        <a href="#"><img src="./images/news02.png"/></a>
-                        <span>01/01/2017 8:30 AM</span>
-                        <a class="title-item-news" href="#">Chương trình giải thưởng từ VNO</a>
-                        <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
-                    </li>
-                    <li class="item-news">
-                        <a href="#"><img src="./images/news03.png"/></a>
-                        <span>01/01/2017 8:30 AM</span>
-                        <a class="title-item-news" href="#">Thăm showroom mới của MISHUBISHI</a>
-                        <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
-                    </li>
-                    <li class="item-news">
-                        <a href="#"><img src="./images/news01.png"/></a>
-                        <span>01/01/2017 8:30 AM</span>
-                        <a class="title-item-news" href="#">Các dòng xe dành cho quý ông việt</a>
-                        <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
-                    </li>
-                    <li class="item-news">
-                        <a href="#"><img src="./images/news02.png"/></a>
-                        <span>01/01/2017 8:30 AM</span>
-                        <a class="title-item-news" href="#">Chương trình giải thưởng từ VNO</a>
-                        <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
-                    </li>
-                    <li class="item-news">
-                        <a href="#"><img src="./images/news03.png"/></a>
-                        <span>01/01/2017 8:30 AM</span>
-                        <a class="title-item-news" href="#">Thăm showroom mới của MISHUBISHI</a>
-                        <a class="bt-detail-news" href="#">Chi tiết<small> >> </small></a>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
@@ -235,12 +229,12 @@
             </div>
             <div class="menu-bottom">
                 <ul>
-                    <li><a href="#">Trang chủ</a> </li>
+                    <li><a href="{{ URL::to('') }}">Trang chủ</a> </li>
                     <li><a href="#">Vip Showroom<br>Salon Oto</a> </li>
                     <li><a href="#">Địa chỉ sửa xe<br>độ xe uy tín</a> </li>
                     <li><a href="#">Thông tin cứu hộ<br>trên toàn quốc</a> </li>
                     <li><a href="#">Góc giao lưu<br>Chia sẻ</a> </li>
-                    <li><a href="#">Tin tức về xe</a> </li>
+                    <li><a href="{{ URL::to('tin-tuc') }}">Tin tức về xe</a> </li>
                     <li><a href="#">Quy định &<br>Hướng dẫn</a> </li>
                 </ul>
             </div>
@@ -254,52 +248,57 @@
         </div>
 </div>
 <!-- Modal Register-->
-<div ng-controller="registerCtrl" id="myModalReg" class="modal fade" role="dialog">
+<div id="myModalReg" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
-                    <img src="./images/icon-close-popup.png"/>
+                    <img src="{{ URL::asset('images/icon-close-popup.png')}}"/>
                 </button>
-                <img class="img-logo-popup" src="./images/logo.png"/>
-                <img class="img-slogan-popup" src="./images/slogan-reg.png"/>
+                <img class="img-logo-popup" src="{{ URL::asset('images/logo.png')}}"/>
+                <img class="img-slogan-popup" src="{{ URL::asset('images/slogan-reg.png')}}"/>
             </div>
-            <img class="img-line" src="./images/line.png"/>
+            <img class="img-line" src="{{ URL::asset('images/line.png')}}"/>
             <div class="modal-body">
-                <div  class="before-reg">
+                <div ng-show="showBefore">
                     <p class="p-in-pop">HÃY ĐĂNG KÝ ĐỂ NHẬN THÔNG TIN VÀ TÍCH ĐIỂM NHẬN GIẢI THƯỞNG KHI LÀ THÀNH VIÊN CỦA VIETNAMOTO.NET</p>
-                    <form class="form-reg" id="form-reg">
+                    <form class="form-reg" id="form-reg" name="regForm" ng-submit="clickRegister()" novalidate>
                         <ul>
                             <li>
                                 <span>Số điện thoại:</span>
-                                <input ng-model="formData.phone" class="inp form-control" name="phone"/>
+                                <input ng-model="formData.phone" class="inp form-control" name="phone" required type="number"/>
+                                <p ng-show="regForm.phone.$invalid && regForm.$submitted" class="error-valid">Bạn chưa nhập số điện thoại.</p>
                             </li>
                             <li>
                                 <span>Mật khẩu:</span>
-                                <input ng-model="formData.password" type="password" class="inp form-control" name="pass"/>
+                                <input ng-model="formData.password" type="password" class="inp form-control" name="pass" required/>
+                                <p ng-show="regForm.pass.$invalid && regForm.$submitted" class="error-valid">Bạn chưa nhập mật khẩu.</p>
                             </li>
                             <li>
                                 <span>Nhập lại mật khẩu:</span>
-                                <input ng-model="formData.repassword" class="inp form-control" type="password" name="re-pass"/>
+                                <input ng-model="formData.repassword" class="inp form-control" type="password" name="repass" required/>
+                                <p ng-show="regForm.repass.$invalid && regForm.$submitted" class="error-valid">Bạn chưa nhập lại mật khẩu.</p>
+                                <p ng-show="matchpassword" class="error-valid">Mật khẩu nhập lại chưa đúng.</p>
+                                <p ng-show="existphone" class="error-valid">Số điện thoại này đã đăng ký. Xin vui lòng nhập số điện thoại khác!</p>
                             </li>
                             <li>
-                                <input ng-click="clickRegister()" class="bt-in-pop" type="button" value="Đăng ký"/>
+                                <input class="bt-in-pop" type="submit" value="Đăng ký"/>
                             </li>
                         </ul>
                     </form>
                     <p class="p-in-pop">KHI ĐĂNG KÝ TỨC LÀ BẠN ĐÃ CHẤP NHẬN MỌI ĐIỀU KHOẢN TỪ VIETNAMOTO.NET</p>
                 </div>
-                <div class="after-reg" >
+                <div ng-show="showAfter" class="after-reg">
                     <h3>ĐĂNG KÝ THÀNH CÔNG</h3>
                     <H4>CHÀO MỪNG BẠN ĐẾN VỚI VIETNAMOTO.NET</H4>
-                    <span id="click-to-log-popup">CLICK ĐỂ ĐĂNG NHẬP VIETNAMOTO.NET</span>
+                    <span ng-click="clickToLogPopup()" id="click-to-log-popup">CLICK ĐỂ ĐĂNG NHẬP VIETNAMOTO.NET</span>
                     <p class="p-in-pop-reg" style="padding: 0px 60px;">HÃY ĐĂNG BÀI VÀ CHIA SẼ ĐỂ TÍCH ĐIỂM ĐỂ NHẬN GIẢI THƯỞNG TỪ VIETNAMOTO.NET</p>
                     <div class="social-popup">
-                        <a href="#"><img src="./images/icon-fb.png"/></a>
-                        <a href="#"><img src="./images/icon-twitter.png"/></a>
-                        <a href="#"><img src="./images/icon-yb.png"/></a>
-                        <a href="#"><img src="./images/icon-google.png"/></a>
+                        <a href="#"><img src="{{ URL::asset('images/icon-fb.png')}}"/></a>
+                        <a href="#"><img src="{{ URL::asset('images/icon-twitter.png')}}"/></a>
+                        <a href="#"><img src="{{ URL::asset('images/icon-yb.png')}}"/></a>
+                        <a href="#"><img src="{{ URL::asset('images/icon-google.png')}}"/></a>
                     </div>
                 </div>
             </div>
@@ -308,50 +307,49 @@
     </div>
 </div>
 <!-- Modal Login-->
-<div ng-controller="loginCtrl" id="myModalLog" class="modal fade" role="dialog">
+<div id="myModalLog" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
-                    <img src="./images/icon-close-popup.png"/>
+                    <img src="{{ URL::asset('images/icon-close-popup.png')}}"/>
                 </button>
-                <img class="img-logo-popup" src="./images/logo.png"/>
-                <img class="img-slogan-popup" src="./images/slogan-reg.png"/>
+                <img class="img-logo-popup" src="{{ URL::asset('images/logo.png')}}"/>
+                <img class="img-slogan-popup" src="{{ URL::asset('images/slogan-reg.png')}}"/>
             </div>
-            <img class="img-line" src="./images/line.png"/>
+            <img class="img-line" src="{{ URL::asset('images/line.png')}}"/>
             <div class="modal-body">
-                <div class="before-log">
-                    <form class="form-reg">
-                        <ul>
-                            <li>
-                                <span>Số điện thoại:</span>
-                                <input ng-model="formData.phone" ng-model="phone" class="inp form-control" name="phone"/>
-                            </li>
-                            <li>
-                                <span>Mật khẩu:</span>
-                                <input ng-model="formData.password" type="password" class="inp form-control" name="pass"/>
-                            </li>
-                            <li>
-                                <input ng-click="clickLogin()" class="bt-in-pop" type="button" value="Đăng nhập"/>
-                            </li>
-                        </ul>
-                        <a class="a-forgot" href="#"><img src="./images/icon-question.png"/> Bạn quân mật khẩu của mình?</a>
-                        <span class="spa-reg"><img src="./images/icon-reg.png"/> Bạn chưa có tài khoản. Hãy <a class="a-regs" href="#">đăng ký</a> cùng chúng tôi</span>
-                    </form>
-                </div>
-                <div class="after-log">
-                    dang9 nhap thanh cong
-                </div>
+                <form class="form-reg" name="logForm" ng-submit="clickLogin()" novalidate>
+                    <ul>
+                        <li>
+                            <span>Số điện thoại:</span>
+                            <input ng-model="formDataLog.phone" ng-model="phone" class="inp form-control" type="number" name="phone" required/>
+                            <p ng-show="logForm.phone.$invalid && logForm.$submitted" class="error-valid">Bạn chưa nhập số điện thoại.</p>
+                            <p ng-show="notexistphone" class="error-valid">Số điện thoại này chưa được đăng ký</p>
+                        </li>
+                        <li>
+                            <span>Mật khẩu:</span>
+                            <input ng-model="formDataLog.password" type="password" class="inp form-control" name="pass" required/>
+                            <p ng-show="logForm.pass.$invalid && logForm.$submitted" class="error-valid">Bạn chưa nhập mật khẩu.</p>
+                            <p ng-show="wrongpass" class="error-valid">Mật khẩu chưa đúng</p>
+                        </li>
+                        <li>
+                            <input class="bt-in-pop" type="submit" value="Đăng nhập"/>
+                        </li>
+                    </ul>
+                    <a class="a-forgot" href="#"><img src="{{ URL::asset('images/icon-question.png')}}"/> Bạn quên mật khẩu của mình?</a>
+                    <span class="spa-reg"><img src="{{ URL::asset('images/icon-reg.png')}}"/> Bạn chưa có tài khoản. Hãy <a ng-click="clickToRegPopup()" class="a-regs" href="#">đăng ký</a> cùng chúng tôi</span>
+                </form>
             </div>
-            <img class="img-line" src="./images/line.png"/>
+            <img class="img-line" src="{{ URL::asset('images/line.png')}}"/>
             <div class="modal-footer">
                 <p class="p-in-pop" style="padding: 0px 60px;">HÃY ĐĂNG BÀI VÀ CHIA SẼ ĐỂ TÍCH ĐIỂM ĐỂ NHẬN GIẢI THƯỞNG TỪ VIETNAMOTO.NET</p>
                 <div class="social-popup">
-                    <a href="#"><img src="./images/icon-fb.png"/></a>
-                    <a href="#"><img src="./images/icon-twitter.png"/></a>
-                    <a href="#"><img src="./images/icon-yb.png"/></a>
-                    <a href="#"><img src="./images/icon-google.png"/></a>
+                    <a href="#"><img src="{{ URL::asset('images/icon-fb.png')}}"/></a>
+                    <a href="#"><img src="{{ URL::asset('images/icon-twitter.png')}}"/></a>
+                    <a href="#"><img src="{{ URL::asset('images/icon-yb.png')}}"/></a>
+                    <a href="#"><img src="{{ URL::asset('images/icon-google.png')}}"/></a>
                 </div>
             </div>
         </div>
@@ -360,52 +358,192 @@
 <script type="text/javascript">
     var app = angular.module('myApp', []);
     app.controller('registerCtrl', function ($scope, $http) {
-        $('.after-reg').addClass('ng-hide');
-        $('.before-reg').removeClass('ng-hide');
-        $("#openModalReg").on('click', function () {
-            $('.after-reg').addClass('ng-hide');
-            $('.before-reg').removeClass('ng-hide');
-            $("#form-reg").trigger('reset');
+        $scope.clickOpenModal = function(){
+            $scope.showAfter = false;
+            $scope.showBefore = true;
+            $scope.regForm.$setPristine();
+            $scope.regForm.$setUntouched();
+            $scope.formData = {};
+            $scope.existphone = false;
+        };
+        $scope.$watch('formData.phone', function () {
+            if ($scope.existphone == true) {
+                $scope.existphone = false;
+            }
         });
+        $scope.$watch('formData.repassword', function () {
+            var pass = $scope.formData.password;
+            var repass = $scope.formData.repassword;
+            if (typeof repass !== 'undefined') {
+                if (typeof pass !== 'undefined') {
+                    if (repass != pass) {
+                        $scope.matchpassword = true;
+                    } else {
+                        $scope.matchpassword = false;
+                    }
+                } else {
+                    $scope.matchpassword = false;
+                }
+            } else {
+                $scope.matchpassword = false;
+            }
+        });
+        $scope.$watch('formData.password', function () {
+            var repass = $scope.formData.repassword;
+            var pass = $scope.formData.password;
+            if (typeof pass !== 'undefined') {
+                if (typeof repass !== 'undefined') {
+                    if (repass != pass) {
+                        $scope.matchpassword = true;
+                    } else {
+                        $scope.matchpassword = false;
+                    }
+                } else {
+                    $scope.matchpassword = false;
+                }
+            } else {
+                $scope.matchpassword = false;
+            }
+        });
+        function resetValidateForm(){
+            $scope.showAfter = false;
+            $scope.showBefore = true;
+            $scope.existphone = false;
+            $scope.notexistphone = false;
+            $scope.wrongpass = false;
+        };
+        resetValidateForm();
         $scope.clickRegister = function () {
-            $http({
-                method: 'POST',
-                url: '/register',
-                data: $.param($scope.formData),
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            })
-            .success(function (data) {
-                if (data.status) {
-                    $('.before-reg').addClass('ng-hide');
-                    $('.after-reg').removeClass('ng-hide');
-                }
-            });
-        }
-    });
-    app.controller('loginCtrl', function ($scope, $http) {
-        $('.after-log').addClass('ng-hide');
-        $('.before-log').removeClass('ng-hide');
-        $("#openModalLog").on('click', function () {
-            $('.after-log').addClass('ng-hide');
-            $('.before-log').removeClass('ng-hide');
-            $("#form-log").trigger('reset');
+            if ($scope.regForm.$valid) {
+                $http({
+                    method: 'POST',
+                    url: '/register',
+                    data: $.param($scope.formData),
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                .success(function (data) {
+                    if (data.status == true) {
+                        $scope.showAfter = true;
+                        $scope.showBefore = false;
+                    } else {
+                        $scope.existphone = true;
+                    }
+                });
+            }
+        };
+        $scope.$watch('formDataLog.phone', function () {
+            if ($scope.notexistphone == true) {
+                $scope.notexistphone = false;
+            }
         });
+        $scope.$watch('formDataLog.password', function () {
+            if ($scope.wrongpass == true) {
+                $scope.wrongpass = false;
+            }
+        });
+        $scope.clickOpenModalLog = function(){
+            $scope.logForm.$setPristine();
+            $scope.logForm.$setUntouched();
+            $scope.notexistphone = false;
+            $scope.wrongpass = false;
+        };
         $scope.clickLogin = function () {
+            if ($scope.logForm.$valid) {
+                $http({
+                    method: 'POST',
+                    url: '/login-frontend',
+                    data: $.param($scope.formDataLog),
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                .success(function (data) {
+                    if (data.status == true) {
+                        location.reload();
+                    } else {
+                        if (data.message == 'phone_not_exit') {
+                            $scope.notexistphone = true;
+                        } else {
+                            $scope.wrongpass = true;
+                        }
+                    }
+                });
+            }
+        }
+        $scope.clickToLogPopup = function(){
+            $("#myModalLog").modal('show');
+            $("#myModalReg").modal('hide');
+            $scope.logForm.$setPristine();
+            $scope.logForm.$setUntouched();
+            $scope.notexistphone = false;
+            $scope.wrongpass = false;
+        };
+        $scope.clickToRegPopup = function(){
+            $("#myModalLog").modal('hide');
+            $("#myModalReg").modal('show');
+            $scope.showAfter = false;
+            $scope.showBefore = true;
+            $scope.regForm.$setPristine();
+            $scope.regForm.$setUntouched();
+            $scope.formData = {};
+            $scope.existphone = false;
+        };
+        //update info user
+        $scope.formDataInfo = {};
+        @if(\Illuminate\Support\Facades\Auth::check())
+        $scope.formDataInfo = {
+            username: '{{$user->username}}',
+            phone: parseInt('{{$user->phone}}'),
+            email: '{{$user->email}}',
+            address: '{{$user->address}}',
+            major: '{{$user->major}}',
+            hobby: '{{$user->hobby}}'
+        };
+        @endif
+        $scope.clickUpdateInfo = function () {
             $http({
                 method: 'POST',
-                url: '/login-frontend',
-                data: $.param($scope.formData),
+                url: '/update-info-user',
+                data: $.param($scope.formDataInfo),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
             .success(function (data) {
-                console.log(data);
-                if (data.status) {
-                    $('.before-log').addClass('ng-hide');
-                    $('.after-log').removeClass('ng-hide');
+                if (data.status == true) {
+                    $("#success-alert-update").fadeTo(2000, 500).slideUp(500, function(){
+                        $("#success-alert-update").slideUp(500);
+                    });
                 }
             });
+        };
+
+        //change password
+        $scope.clickChangePassword = function(){
+            if ($scope.changePasswordForm.$valid) {
+                $http({
+                    method: 'POST',
+                    url: '/change-password',
+                    data: $.param($scope.formDataChangePass),
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                .success(function (data) {
+                    if (data.status == true) {
+                        $("#success-alert-change").fadeTo(2000, 500).slideUp(500, function () {
+                            $("#success-alert-change").slideUp(500);
+                        });
+                    } else {
+                        if (data.message == 'wrong_phone') {
+                            $("#wrong-phone-alert-change").fadeTo(2000, 500).slideUp(500, function () {
+                                $("#wrong-pass-alert-change").slideUp(500);
+                            });
+                        } else {
+                            $("#wrong-pass-alert-change").fadeTo(2000, 500).slideUp(500, function () {
+                                $("#wrong-pass-alert-change").slideUp(500);
+                            });
+                        }
+                    }
+                });
+            }
         }
     });
+
     (function($) {
         $(function() { //on DOM ready
             $("#scroller").simplyScroll({
@@ -429,11 +567,6 @@
             }, function(){
                 $(this).children(":first").fadeOut('fast');
             });
-            $("#click-to-log-popup").click(function(){
-                $("#myModalLog").modal('show');
-                $("#myModalReg").modal('hide');
-            });
-
         });
     })(jQuery);
 </script>
