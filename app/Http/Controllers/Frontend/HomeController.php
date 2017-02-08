@@ -158,8 +158,10 @@ class HomeController extends Controller {
             ->select('op_baiviets.*', 'md_users.username')
             ->first();
         $detailPost->thongso = json_decode($detailPost->thongso,true);
+        $list_thongso = Thongso::where('filter',1)->get()->toArray();
         return View('Post.detail-post', [
-            'detailPost' => $detailPost
+            'detailPost' => $detailPost,
+            'list_thongso'=>$list_thongso
         ]);
     }
     public function freePost()

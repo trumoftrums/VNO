@@ -154,8 +154,10 @@
                     <div class="form-filter">
                         <input type="text" class="form-control" name="keyword" placeholder="Từ khóa..."/>
                         <?php
+                            if(!empty($list_thongso)){
                         foreach($list_thongso as $item){
                             echo \App\Helpers\Helper::search_field($item,$item["name"]);
+                        }
                         }
 
                         ?>
