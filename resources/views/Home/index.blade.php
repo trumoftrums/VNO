@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="left-item">
-                    <img src="./images/item-car.png"/>
+                    <img src="./uploads/baiviet/{{$item->photo1}}"/>
                     <span class="price">{{$item->thongso['thongso_65']}} VND</span>
                 </div>
                 <div class="right-item">

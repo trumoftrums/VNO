@@ -32,6 +32,9 @@
     .dhxform_obj_material .dhxform_textarea{
         border-width: 1px 1px 1px 1px !important;
     }
+    div.gridbox table.row20px tr  td img{
+        max-height:60px !important;
+    }
 </style>
 <link rel="stylesheet" type="text/css" href="../js/dhtmlx5/dhtmlx.css"/>
 <link rel="stylesheet" type="text/css" href="../js/dhtmlx5/fonts/font_roboto/roboto.css"/>
@@ -119,9 +122,11 @@
                 }
 
                 if(id=="delete"){
-                    if (mygrid.getSelectedRowId() != null && mygrid.getSelectedRowId() != "undefined" &&  mygrid._selectionArea) {
-                        dhtmlx.alert("Please select 1 row!");
-                    } else {
+                    var selectedId = mygrid.getSelectedRowId();
+                    if (selectedId == null) {
+                        dhtmlx.alert("Vui lòng chọn 1 bài viết");
+                    }
+                     else {
                         var bvid = mygrid.getSelectedRowId();
                         dhtmlx.confirm({
                             title: "Xóa bài viết",
@@ -142,7 +147,24 @@
                     mygrid.loadXML("getbaiviet");
                 }
                 if(id == "publish"){
+                    var selectedId = mygrid.getSelectedRowId();
+                    if (selectedId == null) {
+                        dhtmlx.alert("Vui lòng chọn 1 bài viết");
+                    }
+                    else {
+                        var bvid = mygrid.getSelectedRowId();
+                        dhtmlx.confirm({
+                            title: "Public bài viết",
+                            type:"confirm-warning",
+                            text: "Bạn chắc chắn muốn public bài viết này?",
+                            callback: function(ok) {
+                                if(ok){
+                                    pub_baiviet(bvid);
+                                }
 
+                            }
+                        });
+                    }
                 }
 
 
@@ -156,6 +178,7 @@
             mygrid.attachEvent("onXLS", function(grid_obj){
                 myLayout.cells("a").progressOn();
             });
+            mygrid.setAwaitedRowHeight(25);
             mygrid.loadXML("getbaiviet");
 
         }
@@ -316,7 +339,7 @@
                             $tab_content .="]},";
                         }
                         if($k == count($thongtinxe)){
-                            $tab_content .= '{type: "block", offsetRight: 10, offsetTop: 50, name: "lst_button", width: 980, list: [{type: "button", offsetLeft: 80, value: "Đăng bài",  name: "btnSave"},{type: "hidden", name:"csrf-token", value:"'.csrf_token().'"}]}';
+                            $tab_content .= '{type: "block", offsetRight: 10, offsetTop: 50, name: "lst_button", width: 980, list: [{type: "button", offsetLeft: 80, value: "Lưu nháp",  name: "btnSave"},{type: "button", offsetLeft: 80, value: "Đăng bài",  name: "btnPublish"},{type: "hidden", name:"csrf-token", value:"'.csrf_token().'"}]}';
                         }else{
                             $tab_content .= '{type: "block",offsetRight: 10, offsetTop: 50, offsetBottom: 0, offsetRight: 0, name: "lst_button", width: 150, list: [{type: "button", offsetLeft: 80, value: "Tiếp tục >>>",name: "btnNext_'.$k.'"}]}';
                         }
@@ -437,7 +460,7 @@
 
 
             }else{
-                if(btnId=="btnSave"){
+                if(btnId=="btnSave" || btnId =="btnPublish"){
                     var formData = [];
                     var cando = true;
                     for(var i =1;i<=4;i++){
@@ -452,14 +475,19 @@
                     };
                     if(cando){
                         var token = $('input[name="csrf-token"]').attr('value');
-                        console.log(token);
+//                        console.log(token);
+                        var publish = false;
+                        if(btnId =="btnPublish") {
+                            publish =true;
+                        }
                         $.ajax({
                             url: '/admin/save_bai_viet',
                             dataType: "json",
                             cache: false,
                             type: 'post',
                             data: {
-                                formData: formData
+                                formData: formData,
+                                publish:publish
                             },
                             beforeSend: function(xhr){
 
@@ -492,6 +520,31 @@
             if(baivietID != null && baivietID != "undefined"){
                 $.ajax({
                     url: '/admin/delbaiviet',
+                    dataType: "json",
+                    cache: false,
+                    type: 'post',
+                    data: {
+                        baivietID: baivietID
+                    },
+                    beforeSend: function(xhr){
+
+//                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    },
+                    success: function (data) {
+                        mygrid.loadXML("getbaiviet");
+                        dhtmlx.alert(data.mess);
+                    },
+                    error: function () {
+                        dhtmlx.alert("Error,Please try again!");
+                    }
+                });
+            }
+
+        }
+        function pub_baiviet(baivietID) {
+            if(baivietID != null && baivietID != "undefined"){
+                $.ajax({
+                    url: '/admin/pubbaiviet',
                     dataType: "json",
                     cache: false,
                     type: 'post',

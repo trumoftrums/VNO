@@ -23,10 +23,12 @@ class HomeController extends Controller {
      */
     public function index()
     {
-        $listPost = Baiviet::where('status', 'DRAF')->get();
+        $listPost = Baiviet::where('status', 'PUBLIC')->get();
         foreach ($listPost as $item){
             $item->thongso = json_decode($item->thongso,true);
         }
+//        $listPost =$listPost->toArray();
+//        var_dump($listPost);exit();
         return View('Home.index', [
             'listPost' => $listPost
         ]);

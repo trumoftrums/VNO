@@ -34,6 +34,7 @@ class BaivietController extends Controller {
         $content .=  '<rows>';
         $content .=  '<head>';
         $content .='<column style="font-weight: bold" type="ro" width="50" sort="int">No</column>';
+        $content .='<column style="font-weight: bold" type="img" width="150" sort="na">Ảnh</column>';
         $content .='<column style="font-weight: bold" type="ro" width="*" sort="str">Tiêu Đề</column>';
         $needindexs = Thongso::where('status',1)->where('need_index',1)->where('id','<>',$this->THONGSO_MOTA)->get()->toArray();
         $order_thongso_key =array();
@@ -44,8 +45,8 @@ class BaivietController extends Controller {
             }
         }
 
-        $content .='<column style="font-weight: bold" type="ro" width="120" sort="int">Published</column>';
-        $content .='<column style="font-weight: bold" type="ro" width="50" sort="int">Status</column>';
+        $content .='<column style="font-weight: bold" type="ro" width="150" sort="int">Published</column>';
+        $content .='<column style="font-weight: bold" type="ro" width="100" sort="int">Status</column>';
         $content .= '</head>';
 
 
@@ -83,6 +84,7 @@ class BaivietController extends Controller {
 //            var_dump($v);
             $content .=  '<row id="'.$v['id'].'">';
             $content .=  '<cell><![CDATA['.$no.']]></cell>';
+            $content .=  '<cell style="max-height: 60px !important;"><![CDATA[/uploads/baiviet/'.$v['photo1'].']]></cell>';
             $mota = str_replace("\"","",$v['mo_ta']);
             $content .=  '<cell title="'.$mota.'"><![CDATA['.$v['tieu_de'].']]></cell>';
             foreach ($order_thongso_key as $kid){
@@ -188,6 +190,16 @@ class BaivietController extends Controller {
             if(!empty($tieude) && !empty($mota)){
                 DB::beginTransaction();
                 $bv = new Baiviet;
+                $pub =false;
+                if(isset(Request::all()['publish'])){
+                    $pub = Request::all()['publish'] ;
+                }
+                if($pub){
+                    $bv->status = "PUBLIC";
+                    $bv->published = date("Y-m-d H:i:s");
+                }else{
+                    $bv->status = "DRAFT";
+                }
 
                 $bv->tieu_de = $tieude;
                 $bv->mo_ta = $mota;
@@ -326,6 +338,48 @@ class BaivietController extends Controller {
             ->withHeaders([
             'Content-Type' => 'application/json'
         ]);
+
+    }
+    public function pub_bai_viet(){
+
+        $result =array(
+            'result'=>false,
+            'mess' =>''
+        );
+
+
+
+        if (Auth::check()) {
+            $formData = Request::all();
+            $bvid = $formData['baivietID'];
+            $ck =  Baiviet::where('id',$bvid)->get()->toArray();
+            if(!empty($ck)){
+                $bv = $ck[0];
+                if($bv['status']!="PUBLIC"){
+                    $r = Baiviet::where('id',$bvid)->update(["status"=>"PUBLIC","published"=>date("Y-m-d H:i:s")]);
+                    if($r){
+                        $result['result'] = true;
+                        $result['mess'] = "Public bài viết thành công";
+                    }else{
+                        $result['mess'] = "Public không thành công, vui lòng thử lại!!";
+                    }
+                }else{
+                    $result['mess'] = "Bài viết này đã public rồi!!!";
+                }
+
+            }else{
+                $result['mess'] = "Bài viết không tồn tại!!";
+            }
+
+
+
+        }else{
+            $result['mess'] ='Vui lòng đăng nhập để sử dụng chức năng này ';
+        }
+        return response($result)
+            ->withHeaders([
+                'Content-Type' => 'application/json'
+            ]);
 
     }
 }
