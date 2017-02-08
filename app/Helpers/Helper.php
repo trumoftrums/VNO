@@ -50,40 +50,48 @@ class Helper
 
         $content = "";
         if(!empty($thongso)){
-            $content .='<select class="form-control" name="branch">';
-            if(!empty($default_value)){
-                $content .='<option value="">'.$default_value.'</option>';
-            }
-            $options = str_replace("[{","",$thongso['options']);
-            if(!empty($options)){
-                $arr_options = explode("},{",$options);
-                if(!empty($arr_options)){
-                    foreach ($arr_options as  $v){
-                        $arr2 = explode(",",$v);
+            switch ($thongso['type']){
+                case "combo":
+                    $content .='<select class="form-control" name="thongso_'.$thongso['id'].'">';
+                    if(!empty($default_value)){
+                        $content .='<option value="">'.$default_value.'</option>';
+                    }
+                    $options = str_replace("[{","",$thongso['options']);
+                    if(!empty($options)){
+                        $arr_options = explode("},{",$options);
+                        if(!empty($arr_options)){
+                            foreach ($arr_options as  $v){
+                                $arr2 = explode(",",$v);
 
-                        if(count($arr2)==2){
-                            $value = "";
-                            $text ="";
-                            foreach ($arr2 as $v2){
-                                if(strpos($v2,"value")){
-                                    $value = self::get_string_between($v2,'"','"');
-                                }else{
-                                    $text = self::get_string_between($v2,'"','"');
+                                if(count($arr2)==2){
+                                    $value = "";
+                                    $text ="";
+                                    foreach ($arr2 as $v2){
+                                        if(strpos($v2,"value")){
+                                            $value = self::get_string_between($v2,'"','"');
+                                        }else{
+                                            $text = self::get_string_between($v2,'"','"');
+                                        }
+                                    }
+                                    if(!empty($value) || !empty($text)){
+                                        $content .='<option value="'.$value.'">'.$text.'</option>';
+                                    }
                                 }
-                            }
-                            if(!empty($value) || !empty($text)){
-                                $content .='<option value="'.$value.'">'.$text.'</option>';
+
+
+
                             }
                         }
 
-
-
                     }
-                }
 
+                    $content .='</select>';
+                    break;
+                case "input":
+                    break;
+                default: break;
             }
 
-            $content .='</select>';
         }
 
 

@@ -159,6 +159,13 @@
                         }
 
                         ?>
+                        <select class="form-control" name="thongso_65">
+                            <option value="">Giá tiền</option>
+                            <option value="<500000000"><500.000.000</option>
+                            <option value="<1000000000"><1.000.000.000</option>
+                            <option value=">1000000000">>1.000.000.000</option>
+                        </select>
+
                     </div>
                     <input class="bt-submit-filter" type="submit" value=" ">
                 </form>
