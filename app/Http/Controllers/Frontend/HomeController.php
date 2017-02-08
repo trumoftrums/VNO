@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Controller;
 use App\Models\Baiviet;
+use App\Models\Baivietindex;
+use App\Models\Thongso;
 use App\Models\Users;
 use App\Models\UsersFactory;
 use App\News;
@@ -29,8 +31,12 @@ class HomeController extends Controller {
         }
 //        $listPost =$listPost->toArray();
 //        var_dump($listPost);exit();
+        //get list filter fields
+        $list_thongso = Thongso::where('filter',1)->get()->toArray();
+
         return View('Home.index', [
-            'listPost' => $listPost
+            'listPost' => $listPost,
+            'list_thongso'=>$list_thongso
         ]);
     }
 
@@ -159,5 +165,22 @@ class HomeController extends Controller {
     public function freePost()
     {
         return View('Post.free-post', []);
+    }
+    public function search_post(){
+        $searchform =array();
+        if(isset(Request::all()['searchform'])){
+            $searchform =  Request::all()['searchform'] ;
+        }
+        $conditions = array();
+        foreach($searchform as $k => $v){
+            $conditions[] = array($k,$v);
+        }
+        $posts_idx = Baivietindex::where($conditions)->distinct('baivietID')->get()->toArray();
+        if(!empty($posts_idx)){
+
+        }else{
+
+        }
+
     }
 }

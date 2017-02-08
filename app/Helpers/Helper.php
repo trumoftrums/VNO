@@ -45,4 +45,56 @@ class Helper
 
         return $content;
     }
+
+    public  static  function  search_field($thongso = array(),$default_value = null){
+
+        $content = "";
+        if(!empty($thongso)){
+            $content .='<select class="form-control" name="branch">';
+            if(!empty($default_value)){
+                $content .='<option value="">'.$default_value.'</option>';
+            }
+            $options = str_replace("[{","",$thongso['options']);
+            if(!empty($options)){
+                $arr_options = explode("},{",$options);
+                if(!empty($arr_options)){
+                    foreach ($arr_options as  $v){
+                        $arr2 = explode(",",$v);
+
+                        if(count($arr2)==2){
+                            $value = "";
+                            $text ="";
+                            foreach ($arr2 as $v2){
+                                if(strpos($v2,"value")){
+                                    $value = self::get_string_between($v2,'"','"');
+                                }else{
+                                    $text = self::get_string_between($v2,'"','"');
+                                }
+                            }
+                            if(!empty($value) || !empty($text)){
+                                $content .='<option value="'.$value.'">'.$text.'</option>';
+                            }
+                        }
+
+
+
+                    }
+                }
+
+            }
+
+            $content .='</select>';
+        }
+
+
+        return $content;
+    }
+    private static function get_string_between($string, $start, $end){
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
+    }
 }

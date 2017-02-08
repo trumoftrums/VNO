@@ -153,30 +153,12 @@
                 <form action="#" method="post">
                     <div class="form-filter">
                         <input type="text" class="form-control" name="keyword" placeholder="Từ khóa..."/>
-                        <select class="form-control" name="branch">
-                            <option>Hãng xe</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                        <select class="form-control" name="branch">
-                            <option>Dòng xe</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                        <select class="form-control" name="branch">
-                            <option>Giá tiền</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                        <select class="form-control last" name="branch">
-                            <option>Tỉnh/Thành</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
+                        <?php
+                        foreach($list_thongso as $item){
+                            echo \App\Helpers\Helper::search_field($item,$item["name"]);
+                        }
+
+                        ?>
                     </div>
                     <input class="bt-submit-filter" type="submit" value=" ">
                 </form>
