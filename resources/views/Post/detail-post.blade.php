@@ -1,18 +1,143 @@
 @extends('Layouts.frontend')
 
 @section('content')
+    <style>
+        .row > .column {
+            padding: 0 8px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .column {
+            float: left;
+            width: 25%;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: black;
+        }
+
+        /* Modal Content */
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #058c04;
+            position: absolute;
+            top: -30px;
+            right: -20px;
+            font-size: 35px;
+            font-weight: bold;
+            opacity: 1;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #999;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .mySlides {
+            display: none;
+        }
+
+        /* Next & previous buttons */
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        .caption-container {
+            text-align: center;
+            background-color: black;
+            padding: 2px 16px;
+            color: white;
+        }
+
+        img.demo {
+            opacity: 0.6;
+        }
+
+        .active,
+        .demo:hover {
+            opacity: 1;
+        }
+
+        img.hover-shadow {
+            transition: 0.3s
+        }
+
+        .hover-shadow:hover {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+        }
+    </style>
     <div class="detail-post">
         <div class="header-post">
             <h3><img src="{{ URL::asset('images/icon-title-news.png')}}"/> {{$detailPost->tieu_de}}</h3>
             <p>Đăng bởi <span>{{$detailPost->username}}</span> - {{date_format(date_create($detailPost->created_at), 'd/m/Y H:i a')}}</p>
             <div class="cover-img-post">
-                <img class="pic01" src="{{ URL::asset('images/post/img-post-01.png')}}"/>
+                <img class="pic01" onclick="openModal();currentSlide(1)" class="hover-shadow" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo1)}}"/>
                 <div class="cover-two-img-post">
-                    <img src="{{ URL::asset('images/post/img-post-02.png')}}"/><br>
-                    <img src="{{ URL::asset('images/post/img-post-03.png')}}"/>
+                    <img onclick="openModal();currentSlide(2)" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo2)}}"/><br>
+                    <img onclick="openModal();currentSlide(3)" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo3)}}"/>
                 </div>
-                <img  class="pic04" src="{{ URL::asset('images/post/img-post-04.png')}}"/>
-                <img  class="pic05" src="{{ URL::asset('images/post/img-post-05.png')}}"/>
+                <img onclick="openModal();currentSlide(4)" class="pic04" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo4)}}"/>
+                <img onclick="openModal();currentSlide(5)" class="pic05" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo5)}}"/>
             </div>
         </div>
         <div class="info-post">
@@ -125,36 +250,84 @@
                 <p class="title-related-post"><img src="{{ URL::asset('images/icon-title-news.png')}}"/> có thể bạn cũng thích</p>
                 <div class="list-related-post">
                     <ul id="scrollerRelatedPost">
+                        @foreach($listPostRelated as $item)
                         <li class="item">
-                            <a href="#"><img src="./images/icon-salon.png"></a>
+                            <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><img src="{{ URL::asset('uploads/baiviet/'.$item->photo1)}}"></a>
                             <div class="caption">
-                                <a href="#"><h3>lexus nx300h 2016</h3></a>
-                                <p>2.300.000.000 VND</p>
-                                <p>Hồ Chí Minh</p>
+                                <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><h3>{{$item->tieu_de}}</h3></a>
+                                <p>{{$item->thongso['thongso_65']}} VND</p>
+                                <p>{{$item->thongso['thongso_62']}}</p>
                             </div>
                         </li>
-                        <li class="item">
-                            <a href="#"><img src="./images/icon-salon.png"></a>
-                            <div class="caption">
-                                <a href="#"><h3>lexus nx300h 2016</h3></a>
-                                <p>2.300.000.000 VND</p>
-                                <p>Hồ Chí Minh</p>
-                            </div>
-                        </li>
-                        <li class="item">
-                            <a href="#"><img src="./images/icon-salon.png"></a>
-                            <div class="caption">
-                                <a href="#"><h3>lexus nx300h 2016</h3></a>
-                                <p>2.300.000.000 VND</p>
-                                <p>Hồ Chí Minh</p>
-                            </div>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+    <div id="myModal" class="modal" style="background-color: rgba(59, 66, 60, 0.73);">
+
+        <div class="modal-content" style="width:40%;">
+            <span class="close cursor" onclick="closeModal()">&times;</span>
+            <div class="mySlides">
+                <div class="numbertext">1 / 5</div>
+                <img src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo1)}}" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">2 / 5</div>
+                <img src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo2)}}" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">3 / 5</div>
+                <img src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo3)}}" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">4 / 5</div>
+                <img src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo4)}}" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">5 / 5</div>
+                <img src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo5)}}" style="width:100%">
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+    </div>
     <script  type="text/javascript">
+        function openModal() {
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex-1].style.display = "block";
+        }
         (function($) {
             $(function() { //on DOM ready
                 $("#scrollerRelatedPost").simplyScroll({

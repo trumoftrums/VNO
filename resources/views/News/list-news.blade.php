@@ -23,6 +23,9 @@
                     </div>
                 </div>
                 @endforeach
+                <div class="paging-div">
+                    {{ $listNews->links() }}
+                </div>
             </div>
         </div>
     </div>
