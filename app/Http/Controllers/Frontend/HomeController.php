@@ -166,7 +166,14 @@ class HomeController extends Controller {
     }
     public function freePost()
     {
-        return View('Post.free-post', []);
+        if(Auth::check()){
+            $user = Auth::user();
+            return View('Post.free-post', [
+                'user' => $user
+            ]);
+        }else{
+            return redirect('/');
+        }
     }
     public function search_post(){
         $searchform =array();

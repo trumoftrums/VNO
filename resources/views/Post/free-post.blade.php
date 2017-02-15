@@ -3,10 +3,16 @@
 @section('content')
     <div class="detail-post">
         <div class="header-free-post">
-            <img class="avatar-free-post img-circle" src="{{ URL::asset('images/nghiem_bao_pic.png')}}"/>
+            <img class="avatar-free-post img-circle"
+                 @if($user->avatar != null)
+                 src="{{ URL::asset($user->avatar)}}"
+                 @else
+                 src="{{ URL::asset('images/icon-avatar.png')}}"
+                    @endif
+            />
             <h4 class="user-name-free-post">
                 <img class="line-free-post" src="{{ URL::asset('images/line.png')}}"/>
-                Thang nguyen
+                {{$user->username}}
                 <img class="line-free-post" src="{{ URL::asset('images/line.png')}}"/>
             </h4>
         </div>

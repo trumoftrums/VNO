@@ -176,7 +176,13 @@
         </div>
         <div class="last-col">
             <div class="avatar">
-                <a class="bt-reg-free" href="{{ URL::to('/dang-tin-free') }}">Đăng tin miễn phí</a>
+                <a class="bt-reg-free"
+                   @if(\Illuminate\Support\Facades\Auth::check())
+                        href="{{ URL::to('/dang-tin-free') }}"
+                   @else
+                        data-toggle="modal" ng-click="clickOpenModalLog()" data-target="#myModalLog"
+                   @endif
+                >Đăng tin miễn phí</a>
             </div>
             <div class="list-services">
                 <div class="item-service">
