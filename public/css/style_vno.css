@@ -7,10 +7,12 @@
 .header{
     float: left;
     width:100%;
+    height:700px;
 }
 .header .first-col{
     width: 22%;
-    height: auto;
+    height: inherit;
+    background: #ccc;
     float: left;
     box-shadow: 1px 1px 7px 1px #ccc;
 }
@@ -238,8 +240,9 @@
 }
 .header .center-content-col{
     width: 62%;
-    height: auto;
+    height: inherit;
     float: left;
+    position: relative;
     margin-left: 0.5%;
     margin-right: 0.5%;
     margin-bottom: 5px;
@@ -449,8 +452,9 @@
 }
 .header .last-col{
     width: 15%;
-    height: auto;
+    height: inherit;
     float: left;
+    background: #efefef;
     box-shadow: 1px 0px 12px 1px #ccc;
 }
 .header .last-col .avatar{
@@ -651,6 +655,8 @@
     border-top: 2px dotted #0c834a;
     margin-top: 10px;
     padding-top: 7px;
+    bottom: 2px;
+    position: absolute;
 }
 .list-salon .item{
     float: left;
@@ -976,7 +982,7 @@ textarea:focus, input:focus{
 }
 .news-page .list-news-page{
     float: left;
-    height: 495px;
+    height: 520px;
     width: 100%;
     overflow: auto;
 }
