@@ -7,10 +7,12 @@
 .header{
     float: left;
     width:100%;
+    height:700px;
 }
 .header .first-col{
     width: 22%;
-    height: auto;
+    height: inherit;
+    background: #ccc;
     float: left;
     box-shadow: 1px 1px 7px 1px #ccc;
 }
@@ -238,8 +240,9 @@
 }
 .header .center-content-col{
     width: 62%;
-    height: auto;
+    height: inherit;
     float: left;
+    position: relative;
     margin-left: 0.5%;
     margin-right: 0.5%;
     margin-bottom: 5px;
@@ -410,7 +413,8 @@
 .header .center-content-col .list-items .item .left-item img{
     float: left;
     width: 100%;
-    height: 95px;
+    min-width: 50px;
+    height: 90px;
 }
 .header .center-content-col .list-items .item .left-item .price{
     background: #0c834a;
@@ -448,8 +452,9 @@
 }
 .header .last-col{
     width: 15%;
-    height: auto;
+    height: inherit;
     float: left;
+    background: #efefef;
     box-shadow: 1px 0px 12px 1px #ccc;
 }
 .header .last-col .avatar{
@@ -650,6 +655,8 @@
     border-top: 2px dotted #0c834a;
     margin-top: 10px;
     padding-top: 7px;
+    bottom: 2px;
+    position: absolute;
 }
 .list-salon .item{
     float: left;
@@ -975,7 +982,7 @@ textarea:focus, input:focus{
 }
 .news-page .list-news-page{
     float: left;
-    height: 495px;
+    height: 520px;
     width: 100%;
     overflow: auto;
 }
@@ -1013,7 +1020,7 @@ textarea:focus, input:focus{
 .item-news-page .cover-info-item-news .bt-chi-tiet-news{
     background: #676767;
     color: #fff;
-    padding: 3px 8px;
+    padding: 2px 6px;
     margin-left: 20px;
     font-size: 13px;
     border-radius: 10px;
@@ -1358,6 +1365,7 @@ textarea:focus, input:focus{
     float: left;
     height: 45px;
     margin-top: 7px;
+    width: 55px;
 }
 .list-related-post .item .caption{
     float: left;

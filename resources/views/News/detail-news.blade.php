@@ -3,6 +3,9 @@
     .container-fluid{
         background: none !important;
     }
+    .news-page .list-news-page{
+        height:555px !important;
+    }
 </style>
 @section('content')
     <div class="news-page">

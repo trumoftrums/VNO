@@ -14,6 +14,7 @@ use Request;
 
 class HomeController extends Controller {
 
+    const POST_PER_PAGE = 9;
     public function __construct()
     {
 
@@ -26,15 +27,14 @@ class HomeController extends Controller {
      */
     public function index()
     {
-        $listPost = Baiviet::where('status', 'PUBLIC')->get();
-
+        $listPost = Baiviet::where('status', 'PUBLIC')->paginate(self::POST_PER_PAGE);
         foreach ($listPost as $item){
             $item->thongso = json_decode($item->thongso,true);
         }
 //        $listPost =$listPost->toArray();
 //        var_dump($listPost);exit();
         //get list filter fields
-//        $list_thongso = Thongso::where('filter',1)->get()->toArray();
+        $list_thongso = Thongso::where('filter',1)->get()->toArray();
 
         return View('Home.index', [
             'listPost' => $listPost,
@@ -91,7 +91,7 @@ class HomeController extends Controller {
     public function userInfo()
     {
         $user = Auth::user();
-        $listPost = Baiviet::where('userid', $user->id)->get();
+        $listPost = Baiviet::where('userid', $user->id)->paginate(self::POST_PER_PAGE);;
         foreach ($listPost as $item){
             $item->thongso = json_decode($item->thongso,true);
         }
@@ -157,7 +157,7 @@ class HomeController extends Controller {
         $res = News::where('op_news.status', News::STATUS_ACTIVE)
             ->leftJoin('md_users', 'md_users.id', '=', 'op_news.userid')
             ->select('op_news.*', 'md_users.username')
-            ->get();
+            ->paginate(self::POST_PER_PAGE);
         return View('News.list-news', [
             'listNews' => $res
         ]);
@@ -183,10 +183,19 @@ class HomeController extends Controller {
             ->leftJoin('md_users', 'md_users.id', '=', 'op_baiviets.userid')
             ->select('op_baiviets.*', 'md_users.username')
             ->first();
+        $listPostRelated = Baiviet::where('status', 'PUBLIC')
+            ->limit(5)
+            ->whereNotIn('id', [$detailPost->id])
+            ->get();
+        foreach ($listPostRelated as $item){
+            $item->thongso = json_decode($item->thongso,true);
+        }
         $detailPost->thongso = json_decode($detailPost->thongso,true);
-//        $list_thongso = Thongso::where('filter',1)->get()->toArray();
+        $list_thongso = Thongso::where('filter',1)->get()->toArray();
         return View('Post.detail-post', [
             'detailPost' => $detailPost,
+            'listPostRelated' => $listPostRelated,
+            'list_thongso'=>$list_thongso
 //            'list_thongso'=>$list_thongso
         ]);
     }
