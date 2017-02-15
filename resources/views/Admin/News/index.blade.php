@@ -39,6 +39,8 @@
 <link rel="stylesheet" type="text/css" href="../js/dhtmlx5/dhtmlx.css"/>
 <link rel="stylesheet" type="text/css" href="../js/dhtmlx5/fonts/font_roboto/roboto.css"/>
 <script src="../js/dhtmlx5/dhtmlx.js"></script>
+<script src="../js/ckeditor/ckeditor.js"></script>
+<script src="../js/ckeditor/samples/js/sample.js"></script>
 @section('content')
     <div id="layoutObj" class="row  border-bottom white-bg dashboard-header"></div>
     <script>
@@ -207,21 +209,65 @@
             win.button("park").disable();
 
 
-            wform_1.attachEvent("onImageUploadSuccess", function(name, value, extra){
+            wform = win.attachForm();
+            var cfgform1 = [
+                {type: "settings", position: "label-left"},
+                {type: "block", offsetLeft: 10, inputWidth: 980, list: [
+                    {type: "input", name: "title",required:true, label: "Tiêu đề", labelWidth: 70, inputWidth: 800},
+                    {type: "input", name: "summary", required:true,label: "Tóm tắt", labelWidth: 70, rows: 5, inputWidth: 800},
+                    {type: "input", id:"editor",required:true, name: "description", label: "Nội dung", rows: 12,labelWidth: 70, inputWidth: 800},
+                    {type: "image", id:"photo", required:true,name: "photo",labelWidth: 70, label: "Hình đại diện",inputWidth: 150, inputHeight: 130, imageHeight: 130, url: "./tool/dhtmlxform_image", value:""}
+                    ,{type: "button", offsetLeft: 70, value: "Save", name: "btnSave"}
+                ]}
+            ];
+            wform.loadStruct(cfgform1);
+            wform.attachEvent("onImageUploadSuccess", function(name, value, extra){
 
             });
-            wform_1.attachEvent("onImageUploadFail", function(name, extra){
+            wform.attachEvent("onImageUploadFail", function(name, extra){
                 console.log("onImageUploadFail::"+extra);
             });
 
+            wform.attachEvent("onClick", function (id) {
+                if(id=="btnSave"){
+                    if(wform.validate()){
+                        var formData = wform.getFormData();
+                        $.ajax({
+                            url: '/admin/save_news',
+                            dataType: "json",
+                            cache: false,
+                            type: 'post',
+                            data: {
+                                formData: formData
+                            },
+                            beforeSend: function(xhr){
 
+                                //xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                            },
+                            success: function (data) {
+                                wform.clear();
+                                dhtmlx.alert(data.mess);
+                            },
+                            error: function () {
+                                dhtmlx.alert("Error,Please try again!");
+                            }
+                        });
+                    }else {
+                        dhtmlx.alert("Vui lòng nhập đầy đủ thông tin bắt buộc (có dấu sao màu đỏ) ");
+                    }
+
+                }
+            });
+            var des_id = $( "textarea[name='description']" ).attr("id");
+            console.log(des_id);
+            initSample(des_id);
 
         }
-        var photo1,photo2,photo3,photo4,photo5;
         $(document ).ready(function() {
 
             adjust_size();
             doOnLoad();
+
 
 
 
