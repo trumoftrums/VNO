@@ -43,6 +43,7 @@ Route::group(['prefix' => 'admin'], function()
     Route::get('/posts', 'Admin\BaivietController@index');
     Route::get('/news', 'Admin\NewsController@index');
     Route::get('/getnews', 'Admin\NewsController@get_news');
+    Route::get('/save_news', 'Admin\NewsController@save_news');
 //    Route::get('/tool/dhtmlxform_image/{id}', function ($id) {
 //
 //    })->where('id', '[0-9]+');

@@ -191,7 +191,7 @@ class BaivietController extends Controller {
             // The user is logged in...
 
             $formData =  Request::all()['formData'] ;
-            //var_dump($formData);exit();
+//            var_dump($formData);exit();
             $tieude = "";
             $bvid = null;
             $mota = "";
@@ -220,7 +220,7 @@ class BaivietController extends Controller {
 
                 }
             }
-
+            $tieude = $formData[0]['thongso_20']." ".$formData[0]['thongso_25']." ".$formData[0]['thongso_22'];
             $tieude = trim($tieude);
             if(!empty($tieude) && !empty($mota)){
                 DB::beginTransaction();

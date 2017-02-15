@@ -109,7 +109,7 @@ class NewsController extends Controller {
                 'Content-Type' => 'application/json'
         ]);
     }
-    public function save_bai_viet(){
+    public function save_news(){
 
 
         $result =array(
@@ -123,69 +123,26 @@ class NewsController extends Controller {
             // The user is logged in...
 
             $formData =  Request::all()['formData'] ;
-            //var_dump($formData);exit();
-            $tieude = "";
-            $bvid = null;
-            $mota = "";
-            $thongso = array();
-            $photo =array();
-            foreach ($formData as $v){
-                foreach ($v as $k=> $dt){
-                    $thongso[$k] = $dt;
-                    $arrk = explode("_",$k);
-                    if(count($arrk)==2){
-                        if(in_array($arrk[1],$this->THONGSO_TITLE)){
-                            $tieude .= $dt." ";
-                        }
-                        if($arrk[1]==$this->THONGSO_MOTA){
-                            $mota = $dt;
-                        }
-
-
-                    }
-                    if(in_array($k,$this->ARR_PHOTO)){
-                        $photo[$k] = $dt;
-                    }
-                    if($k=="id"){
-                        $bvid = $dt;
-                    }
-
-                }
+            DB::beginTransaction();
+            $bv = new News();
+            if(isset(Request::all()['publish'])){
+                $pub = Request::all()['publish'];
             }
+            $bv->status = "AC";
+            $bv->set = date("Y-m-d H:i:s");
 
-            $tieude = trim($tieude);
-            if(!empty($tieude) && !empty($mota)){
-                DB::beginTransaction();
-                $bv = new Baiviet;
-                $pub =false;
-                if(isset(Request::all()['publish'])){
-                    $pub = Request::all()['publish'] ;
-                }
-                if($pub){
-                    $bv->status = "PUBLIC";
-                    $bv->published = date("Y-m-d H:i:s");
-                }else{
-                    $bv->status = "DRAFT";
-                }
-
-                $bv->tieu_de = $tieude;
-                $bv->mo_ta = $mota;
-
-                $bv->thongso = json_encode($thongso);
-                foreach ($photo as $k =>$v){
-                    $bv->{$k} = $v;
-                }
-                $r1 = true;
-                if(!empty($bvid)){
+            $bv->tieu_de = $tieude;
+            $bv->mo_ta = $mota;
+            if(!empty($bvid)){
 //                    var_dump($bv->toArray());exit();
-                    $bv->updated_by = Auth::id();
-                    $r1 = Baiviet::where('id',$bvid)->update($bv->toArray());
-                    $bv->id = $bvid;
+                $bv->updated_by = Auth::id();
+                $r1 = Baiviet::where('id',$bvid)->update($bv->toArray());
+                $bv->id = $bvid;
 
-                }else{
-                    $bv->userid = Auth::id();
-                    $r1 = $bv->save();
-                }
+            }else{
+                $bv->userid = Auth::id();
+                $r1 = $bv->save();
+            }
 
 
                 //get thongso need index
@@ -239,11 +196,7 @@ class NewsController extends Controller {
                     DB::rollback();
                     $result['mess'] = 'Có lỗi xảy ra, vui lòng thử lại sau ít phút!';
                 }
-            }else {
 
-                $result['mess'] ='Vui lòng nhập đầy đủ thông tin bắt buộc (có dấu sao màu đỏ)';
-
-            }
 
         }else{
             $result['mess'] ='Vui lòng đăng nhập để sử dụng chức năng này ';
