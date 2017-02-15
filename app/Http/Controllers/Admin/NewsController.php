@@ -2,13 +2,14 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Thongso;
+use App\News;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Baiviet;
 use App\Models\Baivietindex;
 use Request;
 use App\Models\Thongtinxe;
 use DB;
-class BaivietController extends Controller {
+class NewsController extends Controller {
 
     /**
      * Show the profile for the given user.
@@ -16,54 +17,27 @@ class BaivietController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    private $THONGSO_TITLE =array(20,25,22);
-    private $THONGSO_MOTA =67;
-    private $NOT_ALLOW_INDEX_CHAR = array("'",'"',"`","]","[","}","{","!","~","#","^","&","*","$","+",",",".","\xE1","\xBB","\x9Bi");
-    private  $ARR_PHOTO = array("photo1","photo2","photo3","photo4","photo5");
+
     public function index()
     {
         if(!Auth::check()){
             return Redirect::to("admin/login");
         }
-        $res = Thongtinxe::join('md_nhom_thongso', 'md_nhom_thongso.parentid', '=', 'md_thongtinxe.id')
-            ->join('md_thongso', 'md_thongso.group', '=', 'md_nhom_thongso.id')
-            ->select('md_thongso.*','md_nhom_thongso.name as nameNhom', 'md_nhom_thongso.id as idNhom',
-                'md_thongtinxe.id as idTab', 'md_thongtinxe.name as nameTab','md_nhom_thongso.hidden')
-            ->where('md_thongtinxe.status',1)
-            ->where('md_nhom_thongso.status',1)
-            ->where('md_thongso.status',1)
-            ->get()->toArray();
 
-//       var_dump($res);exit();
         $info =  array(
             'title' =>'Admin DashBoard',
             'content' =>'This is admin dashboard page'
         );
-//        $thongtinxe = Thongtinxe::where('status',1)->get();
-//        $thongtinxe = $thongtinxe->toArray();
-//        $nhomthongso = Nhomthongso::where('status',1)->get();
-        $thongtinxe = array();
-        foreach ($res as $v){
-            $thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['ls'][] = $v;
-            if(!isset($thongtinxe[$v['idTab']]['nameTab'])){
-                $thongtinxe[$v['idTab']]['nameTab'] = $v['nameTab'];
-            }
-            if(!isset($thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['nameNhom'])){
-                $thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['nameNhom'] = $v['nameNhom'];
-                $thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['hidden'] = $v['hidden'];
-            }
-        }
-//        var_dump($thongtinxe[2]);exit();
+
         $datas = array(
-            'name' =>'posts',
+            'name' =>'news',
             'info' => $info,
-            'thongtinxe' =>$thongtinxe
         );
 
-        return view('Admin\Baiviet.index')->with($datas);
+        return view('Admin\News.index')->with($datas);
     }
 
-    public function get_bai_viet()
+    public function get_news()
     {
         $content = '<?xml version="1.0" encoding="iso-8859-1" ?>';
         $content .=  '<rows>';
@@ -71,66 +45,24 @@ class BaivietController extends Controller {
         $content .='<column style="font-weight: bold" type="ro" width="50" sort="int">No</column>';
         $content .='<column style="font-weight: bold" type="img" width="150" sort="na">Ảnh</column>';
         $content .='<column style="font-weight: bold" type="ro" width="*" sort="str">Tiêu Đề</column>';
-        $needindexs = Thongso::where('status',1)->where('need_index',1)->where('id','<>',$this->THONGSO_MOTA)->get()->toArray();
-        $order_thongso_key =array();
-        if(!empty($needindexs)) {
-            foreach ($needindexs as $v) {
-                $content .='<column id="thongso_'.$v['id'].'" style="font-weight: bold" type="ro" width="100" sort="str">'.$v['name'].'</column>';
-                $order_thongso_key[] = $v['id'];
-            }
-        }
-
-        $content .='<column style="font-weight: bold" type="ro" width="150" sort="int">Published</column>';
+        $content .='<column style="font-weight: bold" type="ro" width="*" sort="str">Mô tả</column>';
+        $content .='<column style="font-weight: bold" type="ro" width="150" sort="int">Ngày tạo</column>';
+        $content .='<column style="font-weight: bold" type="ro" width="150" sort="int">Ngày sửa</column>';
         $content .='<column style="font-weight: bold" type="ro" width="100" sort="int">Status</column>';
         $content .= '</head>';
 
 
-        $baiviets = Baiviet::where('status','<>','DELETED')->get()->toArray();
-        $arr_final =array();
-        if(!empty($baiviets)){
-
-            $idarr = array();
-            $str_id ="(";
-            foreach ($baiviets as $v){
-                $idarr[] = $v['id'];
-                $arr_final[$v['id']] = $v;
-
-                $str_id .="'".$v['id']."',";
-            }
-            $str_id = substr($str_id,0,strlen($str_id)-1);
-            $str_id .= ")";
-
-//            var_dump($idarr);exit();
-            $baiviet_indexs = Baivietindex::join('md_thongso', 'md_thongso.id', '=', 'op_baiviet_indexs.index_key')
-                ->whereIn('op_baiviet_indexs.baivietID',$idarr)->where('op_baiviet_indexs.index_key','<>',$this->THONGSO_MOTA)->get()->toArray();
-//            var_dump($baiviet_indexs);exit();
-            if(!empty($baiviet_indexs)){
-                foreach ($baiviet_indexs as $v){
-                    $arr_final[$v['baivietID']][$v['index_key']]= $v['index_value'];
-                }
-
-            }
-
-        }
-//        var_dump($arr_final);exit();
-
+        $arr_final = News::where('status','<>','DE')->get()->toArray();
         $no =1;
         foreach ($arr_final as $v){
 //            var_dump($v);
             $content .=  '<row id="'.$v['id'].'">';
             $content .=  '<cell><![CDATA['.$no.']]></cell>';
-            $content .=  '<cell style="max-height: 60px !important;"><![CDATA[/uploads/baiviet/'.$v['photo1'].']]></cell>';
-            $mota = str_replace("\"","",$v['mo_ta']);
-            $content .=  '<cell title="'.$mota.'"><![CDATA['.$v['tieu_de'].']]></cell>';
-            foreach ($order_thongso_key as $kid){
-                if(isset($v[$kid])){
-                    $content .=  '<cell><![CDATA['.$v[$kid].']]></cell>';
-                }else{
-                    $content .=  '<cell><![CDATA[]]></cell>';
-                }
-
-            }
-            $content .=  '<cell><![CDATA['.$v['published'].']]></cell>';
+            $content .=  '<cell style="max-height: 60px !important;"><![CDATA['.$v['thumbnail'].']]></cell>';
+            $content .=  '<cell><![CDATA['.$v['title'].']]></cell>';
+            $content .=  '<cell><![CDATA['.$v['summary'].']]></cell>';
+            $content .=  '<cell><![CDATA['.$v['created_date'].']]></cell>';
+            $content .=  '<cell><![CDATA['.$v['updated_date'].']]></cell>';
             $content .=  '<cell><![CDATA['.$v['status'].']]></cell>';
             $content .='</row>';
             $no++;

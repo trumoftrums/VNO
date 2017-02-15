@@ -55,24 +55,20 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Quản lý user</span> <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="#">Danh sách</a></li>
-                    </ul>
+                    <a href="/admin/dashboard"><i class="fa fa-th-large"></i> <span class="nav-label">Tổng quan</span> <span class="fa arrow"></span></a>
+                </li>
+                <li>
+                    <a href="/admin/user"><i class="fa fa-th-large"></i> <span class="nav-label">Quản lý user</span> <span class="fa arrow"></span></a>
                 </li>
 
-                <li class="active">
-                    <a href="#"><i class="fa fa-magic"></i> <span class="nav-label">Quản lý bài viết </span><span class="label label-info pull-right">62</span></a>
-                    <ul class="nav nav-second-level">
-                        <li class="active"><a href="#">Bài viết</a></li>
-
-                    </ul>
+                <li <?php if($name=="posts") echo 'class="active"';?> >
+                    <a href="/admin/posts"><i class="fa fa-magic"></i> <span class="nav-label">Quản lý bài viết </span><span class="label label-info pull-right">62</span></a>
                 </li>
-                <li class="landing_link">
-                    <a target="_blank" href="#"><i class="fa fa-star"></i> <span class="nav-label">Quản lý tin tức</span> <span class="label label-warning pull-right">NEW</span></a>
+                <li>
+                    <a href="/admin/news"><i class="fa fa-star"></i> <span class="nav-label">Quản lý tin tức</span> <span class="label label-warning pull-right">NEW</span></a>
                 </li>
-                <li class="special_link">
-                    <a href="#"><i class="fa fa-database"></i> <span class="nav-label">Quản lý salon</span></a>
+                <li>
+                    <a href="/admin/salons"><i class="fa fa-database"></i> <span class="nav-label">Quản lý salon</span></a>
                 </li>
             </ul>
 

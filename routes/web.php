@@ -39,6 +39,10 @@ Route::group(['prefix' => 'admin'], function()
     Route::post('/save_bai_viet', 'Admin\BaivietController@save_bai_viet');
     Route::post('/tool/dhtmlxform_image', 'Admin\ToolController@dhtmlxform_image');
     Route::get('/tool/dhtmlxform_image', 'Admin\ToolController@dhtmlxform_image');
+
+    Route::get('/posts', 'Admin\BaivietController@index');
+    Route::get('/news', 'Admin\NewsController@index');
+    Route::get('/getnews', 'Admin\NewsController@get_news');
 //    Route::get('/tool/dhtmlxform_image/{id}', function ($id) {
 //
 //    })->where('id', '[0-9]+');
