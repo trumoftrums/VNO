@@ -229,7 +229,9 @@
             });
 
             wform.attachEvent("onClick", function (id) {
+                console.log("Click button"+id);
                 if(id=="btnSave"){
+
                     if(wform.validate()){
                         var formData = wform.getFormData();
                         $.ajax({

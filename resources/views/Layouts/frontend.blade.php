@@ -150,9 +150,9 @@
         </div>
         <div class="center-content-col">
             <div class="filter">
-                <form action="#" method="post">
+                <form action="" method="post" name="searchform" >
                     <div class="form-filter">
-                        <input type="text" class="form-control" name="keyword" placeholder="Từ khóa..."/>
+                        <input type="text" class="form-control" name="searchform[keyword]" placeholder="Từ khóa..."/>
                         <?php
                             if(!empty($list_thongso)){
                         foreach($list_thongso as $item){
@@ -161,7 +161,7 @@
                         }
 
                         ?>
-                        <select class="form-control" name="thongso_65">
+                        <select class="form-control" name="searchform[thongso_65]">
                             <option value="">Giá tiền</option>
                             <option value="<500000000"><500.000.000</option>
                             <option value="<1000000000"><1.000.000.000</option>

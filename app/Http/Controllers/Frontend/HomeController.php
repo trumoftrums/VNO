@@ -10,6 +10,7 @@ use App\News;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
+use Request;
 
 class HomeController extends Controller {
 
@@ -26,17 +27,42 @@ class HomeController extends Controller {
     public function index()
     {
         $listPost = Baiviet::where('status', 'PUBLIC')->get();
+
         foreach ($listPost as $item){
             $item->thongso = json_decode($item->thongso,true);
         }
 //        $listPost =$listPost->toArray();
 //        var_dump($listPost);exit();
         //get list filter fields
-        $list_thongso = Thongso::where('filter',1)->get()->toArray();
+//        $list_thongso = Thongso::where('filter',1)->get()->toArray();
 
         return View('Home.index', [
             'listPost' => $listPost,
-            'list_thongso'=>$list_thongso
+//            'list_thongso'=>$list_thongso
+        ]);
+    }
+    public function index_post()
+    {
+        $listPost = array();
+//        var_dump(Request::all());exit();
+//        if(isset(Request::all()['searchform'])){
+//
+//            $formData =  Request::all()['searchform'] ;
+//            $listPost = $this->search_post($formData);
+//        }else{
+//            $listPost = Baiviet::where('status', 'PUBLIC')->get();
+//            foreach ($listPost as $item){
+//                $item->thongso = json_decode($item->thongso,true);
+//            }
+//        }
+        $listPost = Baiviet::where('status', 'PUBLIC')->get();
+        foreach ($listPost as $item){
+            $item->thongso = json_decode($item->thongso,true);
+        }
+
+
+        return View('Home.index', [
+            'listPost' => $listPost,
         ]);
     }
 
@@ -158,10 +184,10 @@ class HomeController extends Controller {
             ->select('op_baiviets.*', 'md_users.username')
             ->first();
         $detailPost->thongso = json_decode($detailPost->thongso,true);
-        $list_thongso = Thongso::where('filter',1)->get()->toArray();
+//        $list_thongso = Thongso::where('filter',1)->get()->toArray();
         return View('Post.detail-post', [
             'detailPost' => $detailPost,
-            'list_thongso'=>$list_thongso
+//            'list_thongso'=>$list_thongso
         ]);
     }
     public function freePost()
@@ -175,21 +201,45 @@ class HomeController extends Controller {
             return redirect('/');
         }
     }
-    public function search_post(){
-        $searchform =array();
-        if(isset(Request::all()['searchform'])){
-            $searchform =  Request::all()['searchform'] ;
-        }
+    private function search_post($searchform =array()){
         $conditions = array();
+        $kw = "";
         foreach($searchform as $k => $v){
-            $conditions[] = array($k,$v);
+            if(!empty($v)){
+                if($v!="keyword"){
+                    $conditions[] = array(
+                        array('index_key_str','=',$k),
+                        array('index_value',"=",$v)
+
+                    );
+                }else{
+                    $kw = strtolower($v);
+                }
+
+
+            }
+
+
         }
         $posts_idx = Baivietindex::where($conditions)->distinct('baivietID')->get()->toArray();
+        $finaldata =array();
         if(!empty($posts_idx)){
-
-        }else{
+            $listPost = Baiviet::where('status', 'PUBLIC')->whereIn($posts_idx)->get();
+            foreach ($listPost as $item){
+                $item->thongso = json_decode($item->thongso,true);
+                if(!empty($kw)){
+                    $tieude = $item->thongso['thongso_20']." ".$item->thongso['thongso_25']." ".$item->thongso['thongso_22'];
+                    $tieude = strtolower($tieude);
+                    if(strpos($tieude,$kw) !== false){
+                        $finaldata[] = $item;
+                    }
+                }else{
+                    $finaldata[] = $item;
+                }
+            }
 
         }
+        return $finaldata;
 
     }
 }
