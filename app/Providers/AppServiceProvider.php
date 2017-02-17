@@ -6,6 +6,7 @@ use App\Models\Baiviet;
 use App\News;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Thongso;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,10 +29,13 @@ class AppServiceProvider extends ServiceProvider
                 $user = Auth::user();
                 $totalPost = Baiviet::where('userid', $user->id)->count();
             }
+            $list_thongso = Thongso::where('filter',1)->get()->toArray();
+
             $view->with([
                 'listNewsHome' => $listNewsHome,
                 'user' => $user,
-                'totalPost' => $totalPost
+                'totalPost' => $totalPost,
+                'list_thongso'=>$list_thongso
             ]);
         });
     }

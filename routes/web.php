@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'Frontend\HomeController@index');
+Route::post('/', 'Frontend\HomeController@index_post');
 Route::get('/user', 'Frontend\HomeController@users');
 Route::post('/register', 'Frontend\HomeController@register');
 Route::post('/login-frontend', 'Auth\LoginController@loginFrontend');

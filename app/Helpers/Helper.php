@@ -52,7 +52,7 @@ class Helper
         if(!empty($thongso)){
             switch ($thongso['type']){
                 case "combo":
-                    $content .='<select class="form-control" name="thongso_'.$thongso['id'].'">';
+                    $content .='<select class="form-control" name="searchform[thongso_'.$thongso['id'].']">';
                     if(!empty($default_value)){
                         $content .='<option value="">'.$default_value.'</option>';
                     }

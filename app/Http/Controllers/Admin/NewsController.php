@@ -61,8 +61,8 @@ class NewsController extends Controller {
             $content .=  '<cell style="max-height: 60px !important;"><![CDATA['.$v['thumbnail'].']]></cell>';
             $content .=  '<cell><![CDATA['.$v['title'].']]></cell>';
             $content .=  '<cell><![CDATA['.$v['summary'].']]></cell>';
-            $content .=  '<cell><![CDATA['.$v['created_date'].']]></cell>';
-            $content .=  '<cell><![CDATA['.$v['updated_date'].']]></cell>';
+            $content .=  '<cell><![CDATA['.$v['created_at'].']]></cell>';
+            $content .=  '<cell><![CDATA['.$v['updated_at'].']]></cell>';
             $content .=  '<cell><![CDATA['.$v['status'].']]></cell>';
             $content .='</row>';
             $no++;
@@ -123,80 +123,12 @@ class NewsController extends Controller {
             // The user is logged in...
 
             $formData =  Request::all()['formData'] ;
-            DB::beginTransaction();
+            debug($formData);exit();
             $bv = new News();
-            if(isset(Request::all()['publish'])){
-                $pub = Request::all()['publish'];
-            }
+
             $bv->status = "AC";
-            $bv->set = date("Y-m-d H:i:s");
-
-            $bv->tieu_de = $tieude;
-            $bv->mo_ta = $mota;
-            if(!empty($bvid)){
-//                    var_dump($bv->toArray());exit();
-                $bv->updated_by = Auth::id();
-                $r1 = Baiviet::where('id',$bvid)->update($bv->toArray());
-                $bv->id = $bvid;
-
-            }else{
-                $bv->userid = Auth::id();
-                $r1 = $bv->save();
-            }
-
-
-                //get thongso need index
-//            $needindexs = Thongso::select('id','name')->where('md_thongso.status',1)->where('md_thongso.need_index',1)->get()->toArray();
-                if ($r1) {
-                    $r2 = true;
-                    $needindexs = DB::table('md_thongso')->where('md_thongso.status', 1)->where('md_thongso.need_index', 1)->pluck('id')->toArray();
-                    if (!empty($needindexs)) {
-                        foreach ($thongso as $k => $v) {
-                            $arrk = explode("_", $k);
-                            if (count($arrk) == 2 && in_array($arrk[1], $needindexs)) {
-                                $save_index = new Baivietindex;
-                                $save_index->baivietID = $bv->id;
-                                $save_index->author = Auth::id();
-                                $save_index->index_key = $arrk[1];
-                                $save_index->index_key_str = $k;
-                                $save_index->index_value = $v;
-                                if ($arrk[1] == $this->THONGSO_MOTA) {
-
-                                    $save_index->index_value = $this->convert_vi_to_en($v);
-                                    $save_index->index_value = $this->clean($save_index->index_value);
-                                }
-                                $rd = true;
-                                if(!empty($bvid)){
-                                    //update
-                                    $rd = Baivietindex::where('baivietID',$bv->id)->where('index_key',$arrk[1])->delete();
-
-
-                                }
-
-                                if($rd){
-                                    $r2 = $save_index->save();
-                                }else{
-                                    $r2 = false;
-                                }
-
-                                if (!$r2) {
-                                    DB::rollback();
-                                    break;
-                                }
-                            }
-
-                        }
-                    }
-                }
-                if ($r1 && $r2) {
-                    DB::commit();
-                    $result['result'] = true;
-                    $result['mess'] = 'Đăng bài viết thành công!';
-                } else {
-                    DB::rollback();
-                    $result['mess'] = 'Có lỗi xảy ra, vui lòng thử lại sau ít phút!';
-                }
-
+            $bv->userid = Auth::id();
+            $r1 = $bv->save();
 
         }else{
             $result['mess'] ='Vui lòng đăng nhập để sử dụng chức năng này ';
