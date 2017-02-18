@@ -44,7 +44,7 @@
                             <span class="login-signup" data-toggle="modal" ng-click="clickOpenModal()" id="openModalReg" data-target="#myModalReg"><img src="{{ URL::asset('images/icon-reg.png')}}"/> Đăng kí</span>
                         @endif
                         <div class="dropdown" style="float:left;">
-                            <img class="icon-avatar img-circle"
+                            <img class="icon-avatar img-circle" id="ava-img-small"
                                  @if(\Illuminate\Support\Facades\Auth::check())
                                     @if($user->avatar != null)
                                     src="{{ URL::asset($user->avatar)}}"
@@ -58,7 +58,7 @@
                             @if(\Illuminate\Support\Facades\Auth::check())
                             <div class="dropdown-menu cover-logout">
                                 <div class="cover-avatar-logout">
-                                    <img class="img-circle"
+                                    <img class="img-circle" id="ava-img-dropdown"
                                          @if($user->avatar != null)
                                          src="{{ URL::asset($user->avatar)}}"
                                          @else
@@ -563,6 +563,30 @@
                 $( this ).children(":first").fadeIn('fast');
             }, function(){
                 $(this).children(":first").fadeOut('fast');
+            });
+            $("#userfile").change(function () {
+                $('#upload_file').submit();
+            });
+            $('#upload_file').submit(function () {
+                var formData = new FormData($(this)[0]);
+                $.ajax({
+                    url: '/upload-avatar',
+                    type: 'POST',
+                    enctype: 'multipart/form-data',
+                    data: formData,
+                    async: false,
+                    success: function (result) {
+                        if(result != 'NO_CHANGE'){
+                            $("#ava-img").attr('src', result);
+                            $("#ava-img-small").attr('src', result);
+                            $("#ava-img-dropdown").attr('src', result);
+                        }
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+                return false;
             });
         });
     })(jQuery);

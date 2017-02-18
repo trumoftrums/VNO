@@ -24,6 +24,7 @@ Route::get('/tin-tuc', 'Frontend\HomeController@news');
 Route::get('/tin-tuc/{id}/{name}', 'Frontend\HomeController@newsDetail');
 Route::get('/bai-dang/{id}/{name}', 'Frontend\HomeController@postDetail');
 Route::get('/dang-tin-free', 'Frontend\HomeController@freePost');
+Route::post('/upload-avatar', 'Frontend\HomeController@uploadAvatar');
 
 Route::group(['prefix' => 'admin'], function()
 {

@@ -199,6 +199,25 @@ class HomeController extends Controller {
 //            'list_thongso'=>$list_thongso
         ]);
     }
+
+    public function uploadAvatar()
+    {
+        $user = Auth::user();
+        if ($_FILES["userfile"]["name"] != '') {
+            $k = md5($_FILES["userfile"]["name"]);
+            $path = "uploads/users/";
+            $path .= $k;
+            move_uploaded_file($_FILES["userfile"]["tmp_name"], $path);
+            Users::where('id', $user->id)->update([
+                'avatar' => $path
+            ]);
+            return $path;
+        } else {
+            return 'NO_CHANGE';
+        }
+
+    }
+
     public function freePost()
     {
         if(Auth::check()){

@@ -3,7 +3,11 @@
 @section('content')
     <div class="banner-profile">
         <div class="cover-avatar-profile">
-            <img class="img-circle"
+            <form method="post" action="" id="upload_file" enctype="multipart/form-data">
+                <span class="change-ava">Thay đổi</span>
+                <input type="file" name="userfile" id="userfile" size="20" class="upload-avatar" alt="Thay đổi avatar"/>
+            </form>
+            <img class="img-circle" id="ava-img"
                  @if($user->avatar != null)
                  src="{{ URL::asset($user->avatar)}}"
                  @else
