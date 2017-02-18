@@ -576,9 +576,11 @@
                     data: formData,
                     async: false,
                     success: function (result) {
-                        $("#ava-img").attr('src', result);
-                        $("#ava-img-small").attr('src', result);
-                        $("#ava-img-dropdown").attr('src', result);
+                        if(result != 'NO_CHANGE'){
+                            $("#ava-img").attr('src', result);
+                            $("#ava-img-small").attr('src', result);
+                            $("#ava-img-dropdown").attr('src', result);
+                        }
                     },
                     cache: false,
                     contentType: false,
