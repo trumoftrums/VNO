@@ -55,7 +55,7 @@ class HomeController extends Controller {
 //                $item->thongso = json_decode($item->thongso,true);
 //            }
 //        }
-        $listPost = Baiviet::where('status', 'PUBLIC')->get();
+        $listPost = Baiviet::where('status', 'PUBLIC')->paginate(self::POST_PER_PAGE);
         foreach ($listPost as $item){
             $item->thongso = json_decode($item->thongso,true);
         }
