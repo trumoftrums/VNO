@@ -22,6 +22,15 @@ Route::post('/update-info-user', 'Frontend\HomeController@updateUserInfo');
 Route::post('/change-password', 'Frontend\HomeController@changePassword');
 Route::get('/tin-tuc', 'Frontend\HomeController@news');
 Route::get('/tin-tuc/{id}/{name}', 'Frontend\HomeController@newsDetail');
+
+Route::get('/thong-tin-cuu-ho/{city}', 'Frontend\ServiceController@supportCar');
+
+Route::get('/do-xe-uy-tin/{city}', 'Frontend\ServiceController@designCar');
+Route::get('/do-xe-uy-tin/{id}/{name}', 'Frontend\ServiceController@designCarDetail');
+
+Route::get('/vip-salon/{city}', 'Frontend\ServiceController@vipSalon');
+Route::get('/vip-salon/{id}/{name}', 'Frontend\ServiceController@vipSalonDetail');
+
 Route::get('/bai-dang/{id}/{name}', 'Frontend\HomeController@postDetail');
 Route::get('/dang-tin-free', 'Frontend\HomeController@freePost');
 Route::post('/upload-avatar', 'Frontend\HomeController@uploadAvatar');

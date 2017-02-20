@@ -3,6 +3,7 @@
 <head>
     <title>Vietnam Oto</title>
     <meta charset="utf-8">
+    <link href="{{ URL::asset('images/logo.png') }}" rel="shortcut icon" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/jquery.simplyscroll.css') }}">
@@ -26,9 +27,9 @@
                             <ul class="dropdown-menu">
                                 <span class="close-menu"> <img src="{{ URL::asset('images/icon-close-menu.png') }}"/> </span>
                                 <li><a href="{{ URL::to('') }}">Trang Chủ</a></li>
-                                <li><a href="#">Vip Showroom/ Salon Oto</a></li>
-                                <li><a href="#">Địa Chỉ Sửa Xe/ Độ Xe Uy Tín</a></li>
-                                <li><a href="#">Thông tin cứu hộ trên toàn quốc</a></li>
+                                <li><a href="{{ URL::to('vip-salon/all') }}">Vip Showroom/ Salon Oto</a></li>
+                                <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Địa Chỉ Sửa Xe/ Độ Xe Uy Tín</a></li>
+                                <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Thông tin cứu hộ trên toàn quốc</a></li>
                                 <li><a href="#">Góc giao lưu/ Chia sẻ</a></li>
                                 <li><a href="{{ URL::to('/tin-tuc') }}">Tin tức về xe</a></li>
                                 <li><a href="#">Quy định & Hướng dẫn</a></li>
@@ -186,20 +187,28 @@
             </div>
             <div class="list-services">
                 <div class="item-service">
-                    <img class="icon-service" src="{{ URL::asset('images/icon-ser01.png')}}"/>
-                    <p>VIP SHOWROOM/ SALON OTO <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                    <a href="{{ URL::to('vip-salon/all') }}">
+                        <img class="icon-service" src="{{ URL::asset('images/icon-ser01.png')}}"/>
+                        <p>VIP SHOWROOM/<br> SALON OTO <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                    </a>
                 </div>
                 <div class="item-service">
-                    <img class="icon-service" src="{{ URL::asset('images/icon-ser02.png')}}"/>
-                    <p>ĐỊA CHỈ ĐỘ XE/<br> SỬA XE UY TÍN <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                    <a href="{{ URL::to('do-xe-uy-tin/all') }}">
+                        <img class="icon-service" src="{{ URL::asset('images/icon-ser02.png')}}"/>
+                        <p>ĐỊA CHỈ ĐỘ XE/<br> SỬA XE UY TÍN <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                    </a>
                 </div>
                 <div class="item-service">
-                    <img class="icon-service" src="{{ URL::asset('images/icon-ser03.png')}}"/>
-                    <p>THÔNG TIN CỨU HỘ TRÊN TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                    <a href="{{ URL::to('thong-tin-cuu-ho/all') }}">
+                        <img class="icon-service" src="{{ URL::asset('images/icon-ser03.png')}}"/>
+                        <p>THÔNG TIN CỨU HỘ<br> TRÊN TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                    </a>
                 </div>
                 <div class="item-service">
-                    <img class="icon-service" src="{{ URL::asset('images/icon-ser04.png')}}"/>
-                    <p>GÓC GIAO LƯU/<br> CHIA SẺ <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                    <a href="{{ URL::to('') }}">
+                        <img class="icon-service" src="{{ URL::asset('images/icon-ser04.png')}}"/>
+                        <p>GÓC GIAO LƯU/<br> CHIA SẺ <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                    </a>
                 </div>
             </div>
             <div class="list-news">
@@ -227,9 +236,9 @@
             <div class="menu-bottom">
                 <ul>
                     <li><a href="{{ URL::to('') }}">Trang chủ</a> </li>
-                    <li><a href="#">Vip Showroom<br>Salon Oto</a> </li>
-                    <li><a href="#">Địa chỉ sửa xe<br>độ xe uy tín</a> </li>
-                    <li><a href="#">Thông tin cứu hộ<br>trên toàn quốc</a> </li>
+                    <li><a href="{{ URL::to('vip-salon/all') }}">Vip Showroom<br>Salon Oto</a> </li>
+                    <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Địa chỉ sửa xe<br>độ xe uy tín</a> </li>
+                    <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Thông tin cứu hộ<br>trên toàn quốc</a> </li>
                     <li><a href="#">Góc giao lưu<br>Chia sẻ</a> </li>
                     <li><a href="{{ URL::to('tin-tuc') }}">Tin tức về xe</a> </li>
                     <li><a href="#">Quy định &<br>Hướng dẫn</a> </li>
@@ -550,6 +559,15 @@
                 manualMode: 'loop',
                 frameRate: 20,
                 speed: 1
+            });
+            $('#filter-city-support').on('change', function() {
+                window.location = '/thong-tin-cuu-ho/'+this.value;
+            });
+            $('#filter-city-design').on('change', function() {
+                window.location = '/do-xe-uy-tin/'+this.value;
+            });
+            $('#filter-city-salon').on('change', function() {
+                window.location = '/vip-salon/'+this.value;
             });
             $("#scrollerSalon").simplyScroll({
                 customClass: 'hori',

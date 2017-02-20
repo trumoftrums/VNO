@@ -6,6 +6,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Users extends Authenticatable
 {
     use Notifiable;
+
+    const GROUP_VIP_SALON = 3;
+    const ADMIN = 1;
+    const AUTHOR = 2;
     /**
      * The attributes that are mass assignable.
      *

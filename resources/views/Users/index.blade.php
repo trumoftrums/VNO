@@ -12,19 +12,25 @@
                  src="{{ URL::asset($user->avatar)}}"
                  @else
                  src="{{ URL::asset('images/icon-avatar.png')}}"
-            @endif
+                    @endif
             />
             <p>{{$user->username}}</p>
         </div>
-        <img class="img-banner-profile" src="{{ URL::asset('images/img-profile-user.png')}}"/>
+        <img class="img-banner-profile"
+             @if($user->avatar != null)
+             src="{{ URL::asset($user->image_profile)}}"
+             @else
+             src="{{ URL::asset('images/img-profile-user.png')}}"
+            @endif
+             />
     </div>
     <ul class="ul-cover-tab">
-        <li class="active"><a data-toggle="tab" href="#info">CẬP NHẬT THÔNG TIN</a></li>
-        <li><a data-toggle="tab" href="#post">TỒNG BÀI ĐĂNG ({{$totalPost}})</a></li>
+        <li @if($activeTab == '')class="active" @endif><a data-toggle="tab" href="#info">CẬP NHẬT THÔNG TIN</a></li>
+        <li @if($activeTab != '') class="active" @endif><a data-toggle="tab" href="#post">TỒNG BÀI ĐĂNG ({{$totalPost}})</a></li>
     </ul>
 
     <div class="cover-tab tab-content">
-        <div id="info" class="tab-pane fade in active">
+        <div id="info" class="tab-pane fade @if($activeTab == '') in active @endif">
             <div class="div-info-user">
                 <h3>BỔ SUNG THÔNG TIN ĐỂ CHÚNG TA HIỂU NHAU HƠN BẠN NHÉ!</h3>
                 <form name="infoForm" ng-submit="clickUpdateInfo()" novalidate>
@@ -77,14 +83,14 @@
                 </form>
             </div>
         </div>
-        <div id="post" class="tab-pane fade">
+        <div id="post" class="tab-pane fade @if($activeTab != '') in active @endif">
             <div class="list-items">
                 @foreach($listPost as $item)
                 <div class="col-md-4 item">
                     <div class="inner-item">
                         <div class="hover-item">
                             <div class="cover-zoom">
-                                <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><img src="./images/icon-zoom.png"/></a>
+                                <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><img src="{{ URL::asset('images/icon-zoom.png')}}"/></a>
                                 <a class="detail" href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}">Xem Chi Tiết</a>
                             </div>
                         </div>

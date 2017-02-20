@@ -7,6 +7,7 @@ use App\Models\Thongso;
 use App\Models\Users;
 use App\Models\UsersFactory;
 use App\News;
+use App\VipSalon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
@@ -31,6 +32,9 @@ class HomeController extends Controller {
         foreach ($listPost as $item){
             $item->thongso = json_decode($item->thongso,true);
         }
+        $listVipSalon = VipSalon::where('status', VipSalon::STATUS_ACTIVE)
+            ->limit(10)
+            ->get();
 //        $listPost =$listPost->toArray();
 //        var_dump($listPost);exit();
         //get list filter fields
@@ -38,6 +42,7 @@ class HomeController extends Controller {
 
         return View('Home.index', [
             'listPost' => $listPost,
+            'listVipSalon' => $listVipSalon,
 //            'list_thongso'=>$list_thongso
         ]);
     }
@@ -55,6 +60,7 @@ class HomeController extends Controller {
 //                $item->thongso = json_decode($item->thongso,true);
 //            }
 //        }
+
         $listPost = Baiviet::where('status', 'PUBLIC')->paginate(self::POST_PER_PAGE);
         foreach ($listPost as $item){
             $item->thongso = json_decode($item->thongso,true);
@@ -90,6 +96,7 @@ class HomeController extends Controller {
 
     public function userInfo()
     {
+        $active_tab2 = Input::get('page', '');
         $user = Auth::user();
         $listPost = Baiviet::where('userid', $user->id)->paginate(self::POST_PER_PAGE);;
         foreach ($listPost as $item){
@@ -99,7 +106,8 @@ class HomeController extends Controller {
         return View('Users.index', [
             'user' => $user,
             'listPost' => $listPost,
-            'totalPost' => $totalPost
+            'totalPost' => $totalPost,
+            'activeTab' => $active_tab2
         ]);
     }
     public function updateUserInfo()

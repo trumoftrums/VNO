@@ -79,27 +79,15 @@
     </div>
     <div class="list-salon">
         <ul id="scrollerSalon">
+            @foreach($listVipSalon as $salon)
             <li class="item">
-                <a href="#"><img src="./images/icon-salon.png"></a>
+                <a href="#"><img src="{{ URL::asset($salon->thumb)}}"></a>
                 <div class="caption">
-                    <a href="#"><h3>CHEVROLET HỒ CHÍ MINH</h3></a>
-                    <p>268 Kinh Dương Vương, Phường An Lạc, Quận Bình Tân</p>
+                    <a href="#"><h3>{{$salon->title}}</h3></a>
+                    <p>{{$salon->address}}</p>
                 </div>
             </li>
-            <li class="item">
-                <a href="#"><img src="./images/icon-salon.png"></a>
-                <div class="caption">
-                    <a href="#"><h3>CHEVROLET HỒ CHÍ MINH</h3></a>
-                    <p>268 Kinh Dương Vương, Phường An Lạc, Quận Bình Tân</p>
-                </div>
-            </li>
-            <li class="item">
-                <a href="#"><img src="./images/icon-salon.png"></a>
-                <div class="caption">
-                    <a href="#"><h3>CHEVROLET HỒ CHÍ MINH</h3></a>
-                    <p>268 Kinh Dương Vương, Phường An Lạc, Quận Bình Tân</p>
-                </div>
-            </li>
+            @endforeach
         </ul>
     </div>
 @stop
