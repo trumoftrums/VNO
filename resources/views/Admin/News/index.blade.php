@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('Layouts.backend')
 
 @section('title', $info["title"])
 <style>

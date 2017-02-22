@@ -35,6 +35,8 @@ Route::get('/bai-dang/{id}/{name}', 'Frontend\HomeController@postDetail');
 Route::get('/dang-tin-free', 'Frontend\HomeController@freePost');
 Route::post('/upload-avatar', 'Frontend\HomeController@uploadAvatar');
 
+Route::post('/baiviet/save_bai_viet', 'Frontend\HomeController@save_bai_viet');
+
 Route::group(['prefix' => 'admin'], function()
 {
     // Controllers Within The "App\Http\Controllers\Admin" Namespace
@@ -55,6 +57,7 @@ Route::group(['prefix' => 'admin'], function()
     Route::get('/news', 'Admin\NewsController@index');
     Route::get('/getnews', 'Admin\NewsController@get_news');
     Route::get('/save_news', 'Admin\NewsController@save_news');
+    Route::get('/baiviet/get_total_news', 'Admin\BaivietController@get_total_news');
 //    Route::get('/tool/dhtmlxform_image/{id}', function ($id) {
 //
 //    })->where('id', '[0-9]+');

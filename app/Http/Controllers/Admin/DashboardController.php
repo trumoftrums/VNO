@@ -28,6 +28,6 @@ class DashboardController extends Controller {
             'info'=>$info
         );
 
-        return view('Admin\Dashboard.index')->with($datas);
+        return view('Admin.Dashboard.index')->with($datas);
     }
 }

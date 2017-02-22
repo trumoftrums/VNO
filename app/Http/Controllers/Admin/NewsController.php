@@ -34,7 +34,7 @@ class NewsController extends Controller {
             'info' => $info,
         );
 
-        return view('Admin\News.index')->with($datas);
+        return view('Admin.News.index')->with($datas);
     }
 
     public function get_news()

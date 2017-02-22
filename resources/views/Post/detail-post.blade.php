@@ -166,10 +166,10 @@
                             <li><p>*Tỉnh thành: {{$detailPost->thongso['thongso_62']}}</p></li>
                         </ul>
                     </div>
-                    <p class="mo-ta">{{$detailPost->thongso['thongso_49']}}</p>
+                    <p class="mo-ta">{{$detailPost->thongso['thongso_67']}}</p>
                     <div class="price">
-                        <p class="p-price">{{$detailPost->thongso['thongso_65']}} VND</p>
-                        <p class="p-address">Đ/C: 02 Phạm Văn Đồng, P.Linh Đông, Q.Thủ Đức, TP. Hồ Chí Minh</p>
+                        <p class="p-price">{{number_format($detailPost->thongso['thongso_65'],0,",",".")}} VND</p>
+                        <p class="p-address">{{$detailPost->thongso['thongso_68']}}</p>
                         <p class="p-phone">Điện thoại: <span>{{$detailPost->thongso['thongso_63']}}</span></p>
                     </div>
                 </div>
@@ -221,7 +221,7 @@
                         <label class="checkbox-inline">*Quạt kính sau<input @if($detailPost->thongso['thongso_47'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
                         <label class="checkbox-inline">*Màn hình LCD<input @if($detailPost->thongso['thongso_48'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
                     </div>
-                    <p class="mo-ta">{{$detailPost->thongso['thongso_67']}}</p>
+                    <p class="mo-ta">{{$detailPost->thongso['thongso_49']}}</p>
                 </div>
                 <div id="tab4" class="tab-pane fade">
                     <div>

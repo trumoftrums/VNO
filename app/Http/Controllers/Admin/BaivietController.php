@@ -60,7 +60,7 @@ class BaivietController extends Controller {
             'thongtinxe' =>$thongtinxe
         );
 
-        return view('Admin\Baiviet.index')->with($datas);
+        return view('Admin.Baiviet.index')->with($datas);
     }
 
     public function get_bai_viet()
@@ -262,6 +262,21 @@ class BaivietController extends Controller {
                     $r2 = true;
                     $needindexs = DB::table('md_thongso')->where('md_thongso.status', 1)->where('md_thongso.need_index', 1)->pluck('id')->toArray();
                     if (!empty($needindexs)) {
+                        if(!empty($bvid)){
+                            //update
+                            $rd = Baivietindex::where('baivietID',$bv->id)->delete();
+
+
+                        }
+                        // index title post
+                        $save_index = new Baivietindex;
+                        $save_index->baivietID = $bv->id;
+                        $save_index->author = Auth::id();
+                        $save_index->index_key = 0;
+                        $save_index->index_key_str = 'tieude';
+                        $save_index->index_value = $tieude;
+                        $r2 = $save_index->save();
+
                         foreach ($thongso as $k => $v) {
                             $arrk = explode("_", $k);
                             if (count($arrk) == 2 && in_array($arrk[1], $needindexs)) {
@@ -276,19 +291,8 @@ class BaivietController extends Controller {
                                     $save_index->index_value = $this->convert_vi_to_en($v);
                                     $save_index->index_value = $this->clean($save_index->index_value);
                                 }
-                                $rd = true;
-                                if(!empty($bvid)){
-                                    //update
-                                    $rd = Baivietindex::where('baivietID',$bv->id)->where('index_key',$arrk[1])->delete();
 
-
-                                }
-
-                                if($rd){
-                                    $r2 = $save_index->save();
-                                }else{
-                                    $r2 = false;
-                                }
+                                $r2 = $save_index->save();
 
                                 if (!$r2) {
                                     DB::rollback();
@@ -302,7 +306,12 @@ class BaivietController extends Controller {
                 if ($r1 && $r2) {
                     DB::commit();
                     $result['result'] = true;
-                    $result['mess'] = 'Đăng bài viết thành công!';
+                    if($pub){
+                        $result['mess'] = 'Đăng bài viết thành công!';
+                    }else{
+                        $result['mess'] = 'Lưu bài viết thành công!';
+                    }
+
                 } else {
                     DB::rollback();
                     $result['mess'] = 'Có lỗi xảy ra, vui lòng thử lại sau ít phút!';
@@ -416,5 +425,14 @@ class BaivietController extends Controller {
                 'Content-Type' => 'application/json'
             ]);
 
+    }
+
+    public  function get_total_news(){
+        $tt = Baiviet::where('status','<>','DELETED')->count();
+        $result = array("tt"=>$tt);
+        return response($result)
+            ->withHeaders([
+                'Content-Type' => 'application/json'
+            ]);
     }
 }

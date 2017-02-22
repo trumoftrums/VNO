@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('Layouts.backend')
 
 @section('title', $info["title"])
 <style>
@@ -288,7 +288,7 @@
                                 if($thongso['id']==65){
                                     $ipwidth = 450;
                                 }
-                                if($thongso['id']==67){
+                                if($thongso['id']==67 || $thongso['id']==68){
                                     $ipwidth = 750;
                                 }
                                 $tab_content .=Helper::dhtmlx_form($thongso,$lbwidth,$ipwidth);

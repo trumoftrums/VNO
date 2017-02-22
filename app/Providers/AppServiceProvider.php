@@ -38,6 +38,31 @@ class AppServiceProvider extends ServiceProvider
                 'list_thongso'=>$list_thongso
             ]);
         });
+        view()->composer('Layouts.backend', function ($view)
+        {
+
+            $user = [];
+            if(Auth::check()){
+                $user = Auth::user();
+
+            }
+
+            $tt = $this->get_total_baiviet();
+            $ttn = $this->get_total_news();
+            $view->with([
+                'user' => $user,
+                'tt_baiviet' => $tt,
+                'tt_news'=>$ttn
+            ]);
+        });
+    }
+    private  function get_total_baiviet(){
+        $tt = Baiviet::where('status','<>','DELETED')->count();
+        return $tt;
+    }
+    private  function get_total_news(){
+        $tt = News::where('status','<>','DE')->count();
+        return $tt;
     }
 
     /**

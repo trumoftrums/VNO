@@ -33,6 +33,7 @@ class Helper
                     $content = '{type: "'.$thongso['type'].'", required: '.$thongso['required'].', value: "'.$value.'", name: "'.'thongso_'
                         .$thongso['id'].'", labelAlign: "right", label: "'.$thongso['name'].'", labelWidth: '.$lbwidth.', tooltip: "vui lòng nhập '.$thongso['name'].'"}';
                     break;
+
                 case "combo":
 
                     $content = '{type: "'.$thongso['type'].'" , value: "'.$value.'", required: '.$thongso['required'].', labelAlign: "right", label: "'.$thongso['name'].'", name: "'.'thongso_'.$thongso['id'].'", labelWidth: '.$lbwidth.', inputWidth: '.$ipWidth.', options:'.$thongso['options'].'}';
@@ -46,15 +47,15 @@ class Helper
         return $content;
     }
 
-    public  static  function  search_field($thongso = array(),$default_value = null){
+    public  static  function  search_field($thongso = array(),$init_value =null,$default_value = null){
 
         $content = "";
         if(!empty($thongso)){
             switch ($thongso['type']){
                 case "combo":
                     $content .='<select class="form-control" name="searchform[thongso_'.$thongso['id'].']">';
-                    if(!empty($default_value)){
-                        $content .='<option value="">'.$default_value.'</option>';
+                    if(!empty($init_value)){
+                        $content .='<option value="">'.$init_value.'</option>';
                     }
                     $options = str_replace("[{","",$thongso['options']);
                     if(!empty($options)){
@@ -74,7 +75,12 @@ class Helper
                                         }
                                     }
                                     if(!empty($value) || !empty($text)){
-                                        $content .='<option value="'.$value.'">'.$text.'</option>';
+                                        $selected ="";
+
+                                        if($default_value != null && $value == $default_value){
+                                            $selected = 'selected ="true"';
+                                        }
+                                        $content .='<option value="'.$value.'" '.$selected.'>'.$text.'</option>';
                                     }
                                 }
 

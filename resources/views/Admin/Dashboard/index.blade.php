@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('Layouts.backend')
 
 @section('title', $info["title"])
 <style>
@@ -57,6 +57,7 @@
                     left:   3
                 }
             });
+            myLayout.cells("a").hideHeader();
 
         }
         $(document ).ready(function() {

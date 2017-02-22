@@ -73,7 +73,7 @@ class LoginController extends Controller
                 }
             }
         }
-        return view('Admin\Dashboard.login');
+        return view('Admin.Dashboard.login');
     }
 
     public function logout()
