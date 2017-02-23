@@ -70,7 +70,7 @@ class BaivietController extends Controller {
         $content .=  '<head>';
         $content .='<column style="font-weight: bold" type="ro" width="50" sort="int">No</column>';
         $content .='<column style="font-weight: bold" type="img" width="150" sort="na">Ảnh</column>';
-        $content .='<column style="font-weight: bold" type="ro" width="*" sort="str">Tiêu Đề</column>';
+        $content .='<column style="font-weight: bold" type="ro" width="200" sort="str">Tiêu Đề</column>';
         $needindexs = Thongso::where('status',1)->where('need_index',1)->where('id','<>',$this->THONGSO_MOTA)->get()->toArray();
         $order_thongso_key =array();
         if(!empty($needindexs)) {
@@ -85,7 +85,7 @@ class BaivietController extends Controller {
         $content .= '</head>';
 
 
-        $baiviets = Baiviet::where('status','<>','DELETED')->get()->toArray();
+        $baiviets = Baiviet::where('status','<>','DELETED')->orderBy('updated_at', 'desc')->get()->toArray();
         $arr_final =array();
         if(!empty($baiviets)){
 
@@ -121,7 +121,8 @@ class BaivietController extends Controller {
             $content .=  '<cell><![CDATA['.$no.']]></cell>';
             $content .=  '<cell style="max-height: 60px !important;"><![CDATA[/uploads/baiviet/'.$v['photo1'].']]></cell>';
             $mota = str_replace("\"","",$v['mo_ta']);
-            $content .=  '<cell title="'.$mota.'"><![CDATA['.$v['tieu_de'].']]></cell>';
+//            $content .=  '<cell title="'.$mota.'"><![CDATA['.$v['tieu_de'].']]></cell>';
+            $content .=  '<cell><![CDATA['.$v['tieu_de'].']]></cell>';
             foreach ($order_thongso_key as $kid){
                 if(isset($v[$kid])){
                     $content .=  '<cell><![CDATA['.$v[$kid].']]></cell>';
