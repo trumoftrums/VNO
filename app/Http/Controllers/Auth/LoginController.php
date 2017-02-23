@@ -60,7 +60,7 @@ class LoginController extends Controller
                     ->withInput(Input::except('password'));
             }else{
                 $userdata = array(
-                    'username'     => Input::get('username'),
+                    'phone'     => Input::get('username'),
                     'password'  => Input::get('password'),
                     'status' =>'Actived'
                 );
