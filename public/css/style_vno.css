@@ -1,4 +1,6 @@
 .container-fluid {
+    position: relative;
+    float: left;
     /*height: 100vh;*/
     padding-right: 0px;
     padding-left: 0px;
@@ -1480,12 +1482,13 @@ textarea:focus, input:focus{
 }
 .item-support-page img{
     float: left;
-    width: 120px;
+    width: 25%;
     height: 90px;
 }
 .item-support-page .cover-info-support{
     float: left;
     margin-left: 5px;
+    width: 72%;
 }
 .item-support-page .cover-info-support h4{
     float: left;
@@ -1502,8 +1505,10 @@ textarea:focus, input:focus{
     margin-top: 2px;
 }
 .item-support-page .cover-info-support p{
-    margin: 0px;
-    font-size: 15px;
+    margin: -7px 0px 0px 0px;
+    font-size: 13px;
+    float: left;
+    width: 100%;
 }
 .form-filter-support-car{
     text-align: center;
