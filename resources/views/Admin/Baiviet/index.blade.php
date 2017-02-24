@@ -404,6 +404,40 @@
 
 
             }
+            var dhxCombo20 = wform_1.getCombo("thongso_20");
+            dhxCombo20.attachEvent("onKeyPressed",function(){
+                var val=dhxCombo20.getComboText();
+//                val=val.substr(0,val.length-1);
+                window.setTimeout(function(){
+                    if (!dhxCombo20.filterAny){
+                        dhxCombo20.setComboText(val);
+                        dhxCombo20.filterSelf();
+                    }
+                },1);
+            });
+            var dhxCombo22 = wform_1.getCombo("thongso_22");
+            dhxCombo22.attachEvent("onKeyPressed",function(){
+                var val=dhxCombo22.getComboText();
+//                val=val.substr(0,val.length-1);
+                window.setTimeout(function(){
+                    if (!dhxCombo22.filterAny){
+                        dhxCombo22.setComboText(val);
+                        dhxCombo22.filterSelf();
+                    }
+                },1);
+            });
+            var dhxCombo25 = wform_1.getCombo("thongso_25");
+            dhxCombo25.attachEvent("onKeyPressed",function(){
+                var val=dhxCombo25.getComboText();
+//                val=val.substr(0,val.length-1);
+                window.setTimeout(function(){
+                    if (!dhxCombo25.filterAny){
+                        dhxCombo25.setComboText(val);
+                        dhxCombo25.filterSelf();
+                    }
+                },1);
+            });
+            $( "textarea[name='thongso_67']" ).attr("maxlength","1250");
 
 
         }
@@ -501,6 +535,10 @@
                                     };
                                 }
                                 dhtmlx.alert(data.mess);
+                                if(publish){
+                                   // closeWindow();
+
+                                }
                             },
                             error: function () {
                                 dhtmlx.alert("Error,Please try again!");

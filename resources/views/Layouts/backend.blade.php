@@ -37,7 +37,7 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="../uploads/users/lee.png" />
+                            <img alt="image" class="img-circle" src="{{URL::asset($user->avatar)}}" width="50px" height="50px" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="block m-t-xs"> <strong class="font-bold">{{$user->username}}</strong>
