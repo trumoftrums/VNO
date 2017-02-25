@@ -25,10 +25,12 @@ class ServiceController extends Controller {
     public function supportCar($city)
     {
         $listSupportCar = SupportCar::where('status', SupportCar::STATUS_ACTIVE)
+            ->OrderBy('id', 'desc')
             ->paginate(16);
         if ($city) {
             if($city != 'all'){
                 $listSupportCar = SupportCar::where('status', SupportCar::STATUS_ACTIVE)
+                    ->OrderBy('id', 'desc')
                     ->where('city', $city)
                     ->paginate(16);
             }
@@ -42,10 +44,13 @@ class ServiceController extends Controller {
 
     public function designCar($city)
     {
-        $listDesignCar = DesignCar::where('status', DesignCar::STATUS_ACTIVE)->paginate(16);
+        $listDesignCar = DesignCar::where('status', DesignCar::STATUS_ACTIVE)
+            ->OrderBy('id', 'desc')
+            ->paginate(16);
         if ($city) {
             if($city != 'all'){
                 $listDesignCar = DesignCar::where('status', DesignCar::STATUS_ACTIVE)
+                    ->OrderBy('id', 'desc')
                     ->where('city', $city)
                     ->paginate(16);
             }
@@ -66,10 +71,13 @@ class ServiceController extends Controller {
 
     public function vipSalon($city)
     {
-        $listVipSalon = VipSalon::where('status', VipSalon::STATUS_ACTIVE)->paginate(16);
+        $listVipSalon = VipSalon::where('status', VipSalon::STATUS_ACTIVE)
+            ->OrderBy('id', 'desc')
+            ->paginate(16);
         if ($city) {
             if($city != 'all'){
                 $listVipSalon = VipSalon::where('status', VipSalon::STATUS_ACTIVE)
+                    ->OrderBy('id', 'desc')
                     ->where('city', $city)
                     ->paginate(16);
             }

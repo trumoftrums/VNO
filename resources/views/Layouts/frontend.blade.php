@@ -105,6 +105,21 @@
                                 <img class="img-slide" src="{{ URL::asset('images/slides/Accord.png')}}"/>
                             </a>
                         </div>
+                        <div class="item">
+                            <a target="_blank" href="http://mazdamotors.vn/san-pham/3/Mazda6.aspx">
+                                <img class="img-slide" src="{{ URL::asset('images/slides/Mazda-6.png')}}"/>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a target="_blank" href="http://www.chevrolet.com.vn/cars/trax/model-overview.html">
+                                <img class="img-slide" src="{{ URL::asset('images/slides/Chevrolet-Trax-2017.png')}}"/>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a target="_blank" href="http://www.mitsubishi-motors.com.vn/all-new-pajero-sport">
+                                <img class="img-slide" src="{{ URL::asset('images/slides/Pajero-Sport.png')}}"/>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -454,7 +454,7 @@
     width: 100%;
     color: #fff;
     text-align: center;
-    padding: 7px;
+    padding: 7px 0px;
     font-size: 0.85vw;
 }
 .header .center-content-col .list-items .item .right-item{
@@ -1251,7 +1251,7 @@ textarea:focus, input:focus{
 .ul-cover-tabs-post li a{
     border: 1px solid #0c834a;
     padding: 5px 0px;
-    width: 24%;
+    width: 23.7%;
     margin-right: 1%;
     border-bottom: none;
     font-size: 15px;
@@ -1301,9 +1301,12 @@ textarea:focus, input:focus{
     width: 100%;
     text-align: justify;
     background: #ededed;
-    padding: 10px;
+    padding: 1px 10px;
     line-height: 23px;
     margin-top: 5px;
+    max-height: 150px;
+    overflow: auto;
+    margin-bottom: 0px;
 }
 .cover-tab-post .price{
     float: left;
@@ -1316,6 +1319,7 @@ textarea:focus, input:focus{
     font-size: 22px;
     background: #0c834a;
     color: #fff;
+    height: 40px;
     padding: 5px 30px;
     margin: 0px;
 }
@@ -1323,6 +1327,7 @@ textarea:focus, input:focus{
     float: left;
     padding: 2px 15px;
     width: 40%;
+    height:40px;
     line-height: 18px;
     border-right: 1px solid #0c834a;
     margin-bottom: 0px;
@@ -1340,24 +1345,10 @@ textarea:focus, input:focus{
     float: left;
     width: 100%;
 }
-.cover-img-post .pic01{
+.cover-img-post img{
     float: left;
-    width: 30%;
-    height: 160px;
-}
-.cover-img-post .cover-two-img-post img{
-    float: left;
-    height: 80px;
-    width: 100%;
-}
-.cover-img-post .cover-two-img-post{
-    float: left;
-    width: 30%;
-}
-.cover-img-post .pic04,.cover-img-post .pic05{
-    float: left;
+    height: 130px;
     width: 20%;
-    height: 160px;
 }
 .related-post{
     float: left;
