@@ -468,14 +468,14 @@
     color: #0c834a;
     border-bottom: 1px solid #0c834a;
     padding: 0px 5px;
-    margin-top: 4px;
+    margin-top: 3px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
 .header .center-content-col .list-items .item .right-item p{
     margin: 0px;
-    font-size: 13px;
+    font-size: 12.5px;
     line-height: 16px;
 }
 .header .center-content-col .list-items .item .right-item span{
