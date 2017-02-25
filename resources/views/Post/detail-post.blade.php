@@ -131,13 +131,11 @@
             <h3><img src="{{ URL::asset('images/icon-title-news.png')}}"/> {{$detailPost->tieu_de}}</h3>
             <p>Đăng bởi <span>{{$detailPost->username}}</span> - {{date_format(date_create($detailPost->created_at), 'd/m/Y H:i a')}}</p>
             <div class="cover-img-post">
-                <img class="pic01" onclick="openModal();currentSlide(1)" class="hover-shadow" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo1)}}"/>
-                <div class="cover-two-img-post">
-                    <img onclick="openModal();currentSlide(2)" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo2)}}"/><br>
-                    <img onclick="openModal();currentSlide(3)" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo3)}}"/>
-                </div>
-                <img onclick="openModal();currentSlide(4)" class="pic04" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo4)}}"/>
-                <img onclick="openModal();currentSlide(5)" class="pic05" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo5)}}"/>
+                <img onclick="openModal();currentSlide(1)" class="hover-shadow" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo1)}}"/>
+                <img onclick="openModal();currentSlide(2)" class="hover-shadow" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo2)}}"/>
+                <img onclick="openModal();currentSlide(3)" class="hover-shadow" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo3)}}"/>
+                <img onclick="openModal();currentSlide(4)" class="hover-shadow" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo4)}}"/>
+                <img onclick="openModal();currentSlide(5)" class="hover-shadow" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo5)}}"/>
             </div>
         </div>
         <div class="info-post">
@@ -166,7 +164,9 @@
                             <li><p>*Tỉnh thành: {{$detailPost->thongso['thongso_62']}}</p></li>
                         </ul>
                     </div>
-                    <p class="mo-ta">{{$detailPost->thongso['thongso_67']}}</p>
+                    @if($detailPost->thongso['thongso_67'] != '')
+                        <p class="mo-ta" id="style-4">{{$detailPost->thongso['thongso_67']}}</p>
+                    @endif
                     <div class="price">
                         <p class="p-price">{{$detailPost->thongso['thongso_65']}} VND</p>
                         <p class="p-address">{{$detailPost->thongso['thongso_68']}}</p>
@@ -221,7 +221,9 @@
                         <label class="checkbox-inline">*Quạt kính sau<input @if($detailPost->thongso['thongso_47'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
                         <label class="checkbox-inline">*Màn hình LCD<input @if($detailPost->thongso['thongso_48'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
                     </div>
-                    <p class="mo-ta">{{$detailPost->thongso['thongso_49']}}</p>
+                    @if($detailPost->thongso['thongso_49'] != '')
+                        <p class="mo-ta" id="style-4">{{$detailPost->thongso['thongso_49']}}</p>
+                    @endif
                 </div>
                 <div id="tab4" class="tab-pane fade">
                     <div>

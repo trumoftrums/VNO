@@ -50,7 +50,7 @@
     </div>
     <div class="list-items">
         @foreach($listPost as $item)
-        <div class="col-md-4 item">
+        <div class="col-lg-4 col-md-6 col-sm-6 item">
             <div class="inner-item">
                 <div class="hover-item">
                     <div class="cover-zoom">

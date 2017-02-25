@@ -25,12 +25,14 @@ class ServiceController extends Controller {
     public function supportCar($city)
     {
         $listSupportCar = SupportCar::where('status', SupportCar::STATUS_ACTIVE)
-            ->paginate(6);
+            ->OrderBy('id', 'desc')
+            ->paginate(16);
         if ($city) {
             if($city != 'all'){
                 $listSupportCar = SupportCar::where('status', SupportCar::STATUS_ACTIVE)
+                    ->OrderBy('id', 'desc')
                     ->where('city', $city)
-                    ->paginate(6);
+                    ->paginate(16);
             }
         }
 
@@ -42,12 +44,15 @@ class ServiceController extends Controller {
 
     public function designCar($city)
     {
-        $listDesignCar = DesignCar::where('status', DesignCar::STATUS_ACTIVE)->paginate(6);
+        $listDesignCar = DesignCar::where('status', DesignCar::STATUS_ACTIVE)
+            ->OrderBy('id', 'desc')
+            ->paginate(16);
         if ($city) {
             if($city != 'all'){
                 $listDesignCar = DesignCar::where('status', DesignCar::STATUS_ACTIVE)
+                    ->OrderBy('id', 'desc')
                     ->where('city', $city)
-                    ->paginate(6);
+                    ->paginate(16);
             }
         }
         return View('Service.list-design-car', [
@@ -66,12 +71,15 @@ class ServiceController extends Controller {
 
     public function vipSalon($city)
     {
-        $listVipSalon = VipSalon::where('status', VipSalon::STATUS_ACTIVE)->paginate(6);
+        $listVipSalon = VipSalon::where('status', VipSalon::STATUS_ACTIVE)
+            ->OrderBy('id', 'desc')
+            ->paginate(16);
         if ($city) {
             if($city != 'all'){
                 $listVipSalon = VipSalon::where('status', VipSalon::STATUS_ACTIVE)
+                    ->OrderBy('id', 'desc')
                     ->where('city', $city)
-                    ->paginate(6);
+                    ->paginate(16);
             }
         }
         return View('Service.list-salon-car', [

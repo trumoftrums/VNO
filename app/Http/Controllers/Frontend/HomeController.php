@@ -30,7 +30,9 @@ class HomeController extends Controller {
      */
     public function index()
     {
-        $listPost = Baiviet::where('status', 'PUBLIC')->paginate(self::POST_PER_PAGE);
+        $listPost = Baiviet::where('status', 'PUBLIC')
+            ->OrderBy('id','desc')
+            ->paginate(self::POST_PER_PAGE);
         foreach ($listPost as $item){
             $item->thongso = json_decode($item->thongso,true);
         }
@@ -244,6 +246,7 @@ class HomeController extends Controller {
     {
         $res = News::where('op_news.status', News::STATUS_ACTIVE)
             ->leftJoin('md_users', 'md_users.id', '=', 'op_news.userid')
+            ->OrderBy('op_news.id','desc')
             ->select('op_news.*', 'md_users.username')
             ->paginate(self::POST_PER_PAGE);
         return View('News.list-news', [
@@ -257,6 +260,7 @@ class HomeController extends Controller {
             ->select('op_news.*', 'md_users.username')
             ->first();
         $relatedNews = News::where('status', News::STATUS_ACTIVE)
+            ->OrderBy('op_news.id','desc')
             ->limit(5)
             ->whereNotIn('id', [$res->id])
             ->get();
@@ -272,6 +276,7 @@ class HomeController extends Controller {
             ->select('op_baiviets.*', 'md_users.username')
             ->first();
         $listPostRelated = Baiviet::where('status', 'PUBLIC')
+            ->OrderBy('op_baiviets.id','desc')
             ->limit(5)
             ->whereNotIn('id', [$detailPost->id])
             ->get();
