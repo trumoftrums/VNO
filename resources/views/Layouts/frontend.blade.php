@@ -27,9 +27,9 @@
                             <ul class="dropdown-menu">
                                 <span class="close-menu"> <img src="{{ URL::asset('images/icon-close-menu.png') }}"/> </span>
                                 <li><a href="{{ URL::to('') }}">Trang Chủ</a></li>
-                                <li><a href="{{ URL::to('vip-salon/all') }}">Vip Showroom/ Salon Oto</a></li>
-                                <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Địa Chỉ Sửa Xe/ Độ Xe Uy Tín</a></li>
-                                <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Thông tin cứu hộ trên toàn quốc</a></li>
+                                <li><a href="{{ URL::to('vip-salon/all') }}">Showroom/ Salon Oto</a></li>
+                                <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Địa Chỉ Sửa Xe/ Độ Xe</a></li>
+                                <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Cứu hộ trên toàn quốc</a></li>
                                 <li><a href="#">Góc giao lưu/ Chia sẻ</a></li>
                                 <li><a href="{{ URL::to('/tin-tuc') }}">Tin tức về xe</a></li>
                                 <li><a href="#">Quy định & Hướng dẫn</a></li>
@@ -96,54 +96,14 @@
                 <div class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
-                            <h3 class="name-slide">2013 Acura NSX</h3>
-                            <img class="img-slide" src="{{ URL::asset('images/slides/slide 01.png')}}"/>
-                            <div class="info-slide">
-                                <ul>
-                                    <li>
-                                        <span class="first-col-info">Tình trạng: Xe mới</span>
-                                        <span class="last-col-info">Dòng xe: SUV/ Crossover</span>
-                                    </li>
-                                    <li>
-                                        <span class="first-col-info">Năm SX: 2013</span>
-                                        <span class="last-col-info">Thông tin: Phun xăng điện tử</span>
-                                    </li>
-                                    <li>
-                                        <p class="sdt-address">TPHCM - SDT: 0135 784 761</p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="bt-detail-slide">
-                                <span class="price">1.000.000.000 VND</br>
-                                    <small>{bao gồm thuế}</small>
-                                </span>
-                                <a href="#">CHI TIẾT <img class="icon-arrow" src="{{ URL::asset('images/icon-arrow.png')}}"/></a>
-                            </div>
+                            <a target="_blank" href="http://www.bmw.vn/vi/all-models/3-series/gran_turismo/2013/start.html">
+                                <img class="img-slide" src="{{ URL::asset('images/slides/BMW-Series-3-sedan.png')}}"/>
+                            </a>
                         </div>
                         <div class="item">
-                            <h3 class="name-slide">2013 Acura NSX</h3>
-                            <img class="img-slide" src="{{ URL::asset('images/slides/slide 01.png')}}"/>
-                            <div class="info-slide">
-                                <ul>
-                                    <li>
-                                        <span class="first-col-info">Tình trạng: Xe mới</span>
-                                        <span class="last-col-info">Dòng xe: SUV/ Crossover</span>
-                                    </li>
-                                    <li>
-                                        <span class="first-col-info">Năm SX: 2013</span>
-                                        <span class="last-col-info">Thông tin: Phun xăng điện tử</span>
-                                    </li>
-                                    <li>
-                                        <p class="sdt-address">TPHCM - SDT: 0135 784 761</p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="bt-detail-slide">
-                                <span class="price">2.000.000.000 VND</br>
-                                    <small>{bao gồm thuế}</small>
-                                </span>
-                                <a href="#">CHI TIẾT <img class="icon-arrow" src="{{ URL::asset('images/icon-arrow.png')}}"/></a>
-                            </div>
+                            <a target="_blank" href="https://hondaoto.com.vn/hondaaccord">
+                                <img class="img-slide" src="{{ URL::asset('images/slides/Accord.png')}}"/>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -196,19 +156,19 @@
                 <div class="item-service">
                     <a href="{{ URL::to('vip-salon/all') }}">
                         <img class="icon-service" src="{{ URL::asset('images/icon-ser01.png')}}"/>
-                        <p>VIP SHOWROOM/<br> SALON OTO <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                        <p>SHOWROOM/<br> SALON OTO <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                     </a>
                 </div>
                 <div class="item-service">
                     <a href="{{ URL::to('do-xe-uy-tin/all') }}">
                         <img class="icon-service" src="{{ URL::asset('images/icon-ser02.png')}}"/>
-                        <p>ĐỊA CHỈ ĐỘ XE/<br> SỬA XE UY TÍN <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                        <p>ĐỊA CHỈ ĐỘ XE/<br> SỬA XE <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                     </a>
                 </div>
                 <div class="item-service">
                     <a href="{{ URL::to('thong-tin-cuu-ho/all') }}">
                         <img class="icon-service" src="{{ URL::asset('images/icon-ser03.png')}}"/>
-                        <p>THÔNG TIN CỨU HỘ<br> TRÊN TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                        <p>CỨU HỘ TRÊN<br> TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                     </a>
                 </div>
                 <div class="item-service">
@@ -243,9 +203,9 @@
             <div class="menu-bottom">
                 <ul>
                     <li><a href="{{ URL::to('') }}">Trang chủ</a> </li>
-                    <li><a href="{{ URL::to('vip-salon/all') }}">Vip Showroom<br>Salon Oto</a> </li>
-                    <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Địa chỉ sửa xe<br>độ xe uy tín</a> </li>
-                    <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Thông tin cứu hộ<br>trên toàn quốc</a> </li>
+                    <li><a href="{{ URL::to('vip-salon/all') }}">Showroom<br>Salon Oto</a> </li>
+                    <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Địa chỉ sửa xe<br>độ xe</a> </li>
+                    <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Cứu hộ trên<br> toàn quốc</a> </li>
                     <li><a href="#">Góc giao lưu<br>Chia sẻ</a> </li>
                     <li><a href="{{ URL::to('tin-tuc') }}">Tin tức về xe</a> </li>
                     <li><a href="#">Quy định &<br>Hướng dẫn</a> </li>

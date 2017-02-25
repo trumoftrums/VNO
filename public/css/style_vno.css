@@ -263,7 +263,7 @@
     margin-top: 10px;
 }
 .slide-show img.img-slide{
-    width: 80%;
+    width: 100%;
     margin: 0px auto;
 }
 .slide-show .bt-detail-slide .icon-arrow{
@@ -469,6 +469,9 @@
     border-bottom: 1px solid #0c834a;
     padding: 0px 5px;
     margin-top: 4px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .header .center-content-col .list-items .item .right-item p{
     margin: 0px;
@@ -638,7 +641,7 @@
 .footer .info span{
     width: 100%;
     float: left;
-    font-size: 12px;
+    font-size: 0.8vw;
 }
 .footer .menu-bottom{
     float: left;
@@ -656,8 +659,8 @@
     padding: 29px 6px 0px 6px;
     float: left;
     color: #2d2d2d;
-    font-size: 13px;
-    height: 5.2vw;
+    font-size: 0.9vw;
+    height: 5.5vw;
     text-align: center;
 }
 .footer .menu-bottom ul li a:hover{
@@ -672,6 +675,7 @@
     float: left;
     padding-top: 1.8vw;
     margin-left: 2vw;
+    font-size: 0.9vw;
 }
 .social-bottom a{
     float: left;
@@ -683,6 +687,7 @@
 .social-bottom p{
     float: left;
     margin-left: 1vw;
+    margin-top: 5px;
     line-height: 10px;
 }
 .social-bottom p span{
@@ -1465,6 +1470,7 @@ textarea:focus, input:focus{
     margin-top: 15px;
     margin-right: 5px;
     font-style: italic;
+    font-size:1vw;
 }
 .alert-update-success{
     float: left;
