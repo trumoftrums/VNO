@@ -27,6 +27,12 @@
     .dhxcombolist_material{
         height:250px;
     }
+    #tab2 .dhxform_obj_material div.dhxform_item_label_left{
+        padding-top: 0px;
+    }
+    #tab4 .dhxform_obj_material div.dhxform_item_label_left{
+        padding-top: 6px;
+    }
 </style>
 @section('content')
     <div class="detail-post">
@@ -53,277 +59,243 @@
             </ul>
             <div class="cover-tab-post tab-content">
                 <div id="tab1" class="tab-pane fade in active" style="float: left;position:relative;width: 100%">
-
+                    <div class="cover-tab-free">
+                        <ul>
+                            <li>
+                                <div class="col-md-4">
+                                    <label>Thương hiệu xe</label>
+                                    <select class="free-post-input">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Dòng xe</label>
+                                    <select class="free-post-input">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Dáng xe</label>
+                                    <select class="free-post-input">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="col-md-4">
+                                    <label>Tình trạng</label>
+                                    <select class="free-post-input">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Năm sản xuất</label>
+                                    <select class="free-post-input">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>KM đã đi</label>
+                                    <select class="free-post-input">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="col-md-4">
+                                    <label>Màu sắc</label>
+                                    <input type="text" class="free-post-input">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Hệ thống nhiên liệu</label>
+                                    <select class="free-post-input">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Nhiên liệu</label>
+                                    <select class="free-post-input">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="col-md-4">
+                                    <label>Số ghế</label>
+                                    <select class="free-post-input">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Tỉnh thành</label>
+                                    <select class="free-post-input">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Giá tiền</label>
+                                    <input type="text" class="ip-price free-post-input" placeholder="Nhập giá tiền">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="col-md-4">
+                                    <label>Số điện thoại</label>
+                                    <input type="text" class="free-post-input">
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="lb-address">Địa chỉ</label>
+                                    <input type="text" class="ip-long free-post-input">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="col-md-5">
+                                    <textarea class="ip-descript" rows="5" id="comment" placeholder="Hãy nhập thông tin mô tả chi tiết"></textarea>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="cover-inp-upload">
+                                        <input type="file" class="upload-image img-upload-1" size="20"/>
+                                        <img src="{{ URL::asset('./images/1.png')}}"/>
+                                    </div>
+                                    <div class="cover-inp-upload">
+                                        <input type="file" class="upload-image img-upload-2" size="20"/>
+                                        <img src="{{ URL::asset('./images/2.png')}}"/>
+                                    </div>
+                                    <div class="cover-inp-upload">
+                                        <input type="file" class="upload-image img-upload-3" size="20"/>
+                                        <img src="{{ URL::asset('./images/3.png')}}"/>
+                                    </div>
+                                    <div class="cover-inp-upload">
+                                        <input type="file" class="upload-image img-upload-4" size="20"/>
+                                        <img src="{{ URL::asset('./images/4.png')}}"/>
+                                    </div>
+                                    <div class="cover-inp-upload">
+                                        <input type="file" class="upload-image img-upload-5" size="20"/>
+                                        <img src="{{ URL::asset('./images/5.png')}}"/>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <input type="submit" class="btn-next-free-post" value="TIẾP TỤC >>"/>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div id="tab2" class="tab-pane fade">
-
+                    <div>
+                        <p class="p-thuoc-tinh-post">túi khí an toàn</p>
+                        <label class="checkbox-inline">*Túi khí người lái<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Túi khí khách phía trước<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Túi khí khách phía sau<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Túi khí hai bên ghế<input type="checkbox" value=""></label>
+                    </div>
+                    <div>
+                        <p class="p-thuoc-tinh-post">phanh - điều khiển</p>
+                        <label class="checkbox-inline">*Chống bó cứng phanh(ABS)<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Phân bổ lực phanh điện tử<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Trợ lực phanh khẩn cấp(EBA)<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Điều khiển hành trình<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Tự động cân bằng điện tử(ESP)<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Hỗ trợ cảnh báo lùi<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Hệ thống kiểm soát trượt<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Chốt cửa an toàn<input type="checkbox" value=""></label>
+                    </div>
+                    <div>
+                        <p class="p-thuoc-tinh-post">khóa chống trộm</p>
+                        <label class="checkbox-inline">*Khóa cửa tự động<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Khóa cửa điều khiển từ xa<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Khóa động cơ<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Hệ thống báo trộm ngoại vi<input type="checkbox" value=""></label>
+                    </div>
+                    <div>
+                        <p class="p-thuoc-tinh-post">các thống số khác</p>
+                        <label class="checkbox-inline">*Đèn sương mù<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Đèn báo thắt dây an toàn<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Đèn phanh phụ thứ 3 lắp cao<input type="checkbox" value=""></label>
+                    </div>
+                    <div>
+                        <input type="submit" class="btn-next-free-post" value="TIẾP TỤC >>"/>
+                    </div>
                 </div>
                 <div id="tab3" class="tab-pane fade">
-
+                    <div>
+                        <label class="checkbox-inline">*Thiết bị định vị<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Thiết bị giải trí<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Kính chính diện<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Điều hòa sau<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Điều hòa trước<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Hỗ trợ xe tự động<input type="checkbox" value=""></label><br>
+                        <label class="checkbox-inline">*Sấy kính sau<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Kính màu<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Cửa sổ nóc<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Tay lái trợ lực<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Quạt kính sau<input type="checkbox" value=""></label>
+                        <label class="checkbox-inline">*Màn hình LCD<input type="checkbox" value=""></label>
+                    </div>
+                    <div>
+                        <p class="p-descript">MÔ TẢ THÊM</p>
+                        <textarea class="ip-descript" rows="5" id="comment" placeholder="Hãy nhập thông tin mô tả chi tiết"></textarea>
+                    </div>
+                    <div>
+                        <input type="submit" class="btn-next-free-post" value="TIẾP TỤC >>"/>
+                    </div>
                 </div>
                 <div id="tab4" class="tab-pane fade">
-
+                    <div>
+                        <p class="p-thuoc-tinh-post">kích thước/ Trọng lượng</p>
+                        <label class="checkbox-inline">*Chiều dài: <input type="text" class="free-post-input"></label>
+                        <label class="checkbox-inline">*Chiều rộng: <input type="text" class="free-post-input"></label>
+                        <label class="checkbox-inline">*Chiều cao: <input type="text" class="free-post-input"></label>
+                        <label class="checkbox-inline">*Trọng lượng không tải: <input type="text" class="free-post-input"></label>
+                        <label class="checkbox-inline">*Dung tích nhiên liệu: <input type="text" class="free-post-input"></label>
+                    </div>
+                    <div>
+                        <p class="p-thuoc-tinh-post">động cơ</p>
+                        <label class="checkbox-inline">*Động cơ: <input type="text" class="free-post-input"></label>
+                        <label class="checkbox-inline">*Kiểu động cơ: <input type="text" class="free-post-input"></label>
+                        <label class="checkbox-inline">*Dung tích xilanh: <input type="text" class="free-post-input"></label>
+                    </div>
+                    <div>
+                        <p class="p-thuoc-tinh-post">phanh giảm sóc-lốp</p>
+                        <label class="checkbox-inline">*Phanh: <input type="text" class="free-post-input"></label>
+                        <label class="checkbox-inline">*Giảm sóc: <input type="text" class="free-post-input"></label>
+                        <label class="checkbox-inline">*Lốp xe/ Vành mâm: <input type="text" class="free-post-input"></label>
+                    </div>
+                    <div>
+                        <input type="submit" class="btn-next-free-post" value="ĐĂNG BÀI"/>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        $(document ).ready(function() {
 
-            doOnLoad(null);
-
-        });
-        function doOnLoad(baiviet) {
-            if(baiviet !== null && baiviet !=="undefined"){
-                baiviet_thongso = baiviet.thongso;
-
-            }else{
-
-                baiviet = new Object();
-                baiviet.photo1  ="noimage.png";
-                baiviet.photo2  ="noimage.png";
-                baiviet.photo3  ="noimage.png";
-                baiviet.photo4  ="noimage.png";
-                baiviet.photo5  ="noimage.png";
-            }
-            myLayout1 = new dhtmlXLayoutObject({
-                parent: "tab1",
-                pattern: "1C",
-                offsets: {          // optional, offsets for fullscreen init
-                    top:    0,     // you can specify all four sides
-                    right:  0,     // or only the side where you want to have an offset
-                    bottom: 0,
-                    left:   0
-                }
-            });
-            myLayout2 = new dhtmlXLayoutObject({
-                parent: "tab2",
-                pattern: "1C",
-                offsets: {          // optional, offsets for fullscreen init
-                    top:    0,     // you can specify all four sides
-                    right:  0,     // or only the side where you want to have an offset
-                    bottom: 0,
-                    left:   0
-                }
-            });
-            myLayout3 = new dhtmlXLayoutObject({
-                parent: "tab3",
-                pattern: "1C",
-                offsets: {          // optional, offsets for fullscreen init
-                    top:    0,     // you can specify all four sides
-                    right:  0,     // or only the side where you want to have an offset
-                    bottom: 0,
-                    left:   0
-                }
-            });
-            myLayout4 = new dhtmlXLayoutObject({
-                parent: "tab4",
-                pattern: "1C",
-                offsets: {          // optional, offsets for fullscreen init
-                    top:    0,     // you can specify all four sides
-                    right:  0,     // or only the side where you want to have an offset
-                    bottom: 0,
-                    left:   0
-                }
-            });
-            myform1 = myLayout1.cells("a").attachForm();
-            myform2 = myLayout2.cells("a").attachForm();
-            myform3 = myLayout3.cells("a").attachForm();
-            myform4 = myLayout4.cells("a").attachForm();
-            myLayout1.cells("a").hideHeader();
-            myLayout2.cells("a").hideHeader();
-            myLayout3.cells("a").hideHeader();
-            myLayout4.cells("a").hideHeader();
-            <?php
-            $arr_cfgform =array();
-//            var_dump($thongtinxe);exit();
-            if(!empty($thongtinxe)){
-
-                foreach ($thongtinxe as $k => $thongtin){
-                    $tab_content = "[";
-                    $noNhom = 1;
-                    foreach ($thongtin['ls']  as  $kk => $nhomthongso){
-
-                        if(empty($nhomthongso["hidden"])){
-                            $tab_content .= '{type: "block", offsetLeft: 10, width: 980, list: [{type: "label", label: "'.$nhomthongso["nameNhom"].'"}]},';
-                        }
-                        $tab_content .= '{type: "block", offsetLeft: 10, width: 980, list: [';
-                        $no =1;
-                        foreach ($nhomthongso['ls'] as  $thongso){
-//                                var_dump($nhomthongso);exit();
-//                                var_dump(Helper::dhtmlx_form($thongso));exit();
-
-                            if($no>1) $tab_content .=',';
-                            $lbwidth = 120;
-                            $ipwidth = 120;
-
-                            switch ($k){
-                                case 1:
-
-                                    break;
-                                case 2:
-
-                                    //$ipwidth = 20;
-                                    //$lbwidth = 220;
-                                    break;
-                                case 3:
-                                    if($thongso['type']=="input"){
-                                        $ipwidth = 710;
-                                        $lbwidth = 120;
-                                    }else{
-                                        $ipwidth = 20;
-                                        $lbwidth = 120;
-                                    }
-
-                                    break;
-                                case 4:
-
-                                    break;
-                                default: break;
-                            }
-                            if($thongso['id']==65){
-                                $ipwidth = 450;
-                            }
-                            if($thongso['id']==67 || $thongso['id']==68){
-                                $ipwidth = 750;
-                            }
-                            $tab_content .=Helper::dhtmlx_form($thongso,$lbwidth,$ipwidth);
-                            switch ($k){
-                                case 1:
-                                    if($thongso["idNhom"]==14){
-                                        $tab_content .=',{type: "newcolumn"}';
-                                    }else{
-                                        if($no%3==0){
-                                            $tab_content .=',{type: "newcolumn"}';
-                                        }
-                                    }
-
-                                    break;
-                                case 2:
-                                    $tab_content .=',{type: "newcolumn"}';
-                                    break;
-                                case 3:
-                                    if($no%2==0){
-                                        $tab_content .=',{type: "newcolumn"}';
-                                    }
-                                    break;
-                                case 4:
-                                    if($no%2==0){
-                                        $tab_content .=',{type: "newcolumn"}';
-                                    }
-                                    break;
-                                default: break;
-                            }
-                            $no++;
-                        }
-                        $tab_content .="]},";
-
-                    }
-
-                    if($k==1){
-
-                        $tab_content .= '{type: "block", offsetLeft: 150, offsetTop: 20, name: "lst_image", width: 800, align:"right", list: [';
-                        $tab_content .= '{type: "image", id:"photo1", name: "photo1", label: "",inputWidth: 150, inputHeight: 130, imageHeight: 130, url: "./admin/tool/dhtmlxform_image", value:baiviet.photo1},';
-                        $tab_content .='{type: "newcolumn"},';
-                        $tab_content .= '{type: "image",id:"photo2", name: "photo2", label: "", inputWidth: 150, inputHeight: 60, imageHeight: 60, url: "./admin/tool/dhtmlxform_image", value:baiviet.photo2},';
-                        $tab_content .= '{type: "image", id:"photo3",name: "photo3", label: "", inputWidth: 150, inputHeight: 60, imageHeight: 60, url: "./admin/tool/dhtmlxform_image", value:baiviet.photo3},';
-                        $tab_content .='{type: "newcolumn"},';
-                        $tab_content .= '{type: "image", id:"photo4",name: "photo4", label: "", inputWidth: 60, inputHeight: 130,imageWidth: 60, url: "./admin/tool/dhtmlxform_image", value:baiviet.photo4},';
-                        $tab_content .='{type: "newcolumn"},';
-                        $tab_content .= '{type: "image",id:"photo5", name: "photo5", label: "", inputWidth: 60, inputHeight: 130,imageWidth: 60, url: "./admin/tool/dhtmlxform_image", value:baiviet.photo5}';
-                        $tab_content .="]},";
-                    }
-                    if($k == count($thongtinxe)){
-                        $tab_content .= '{type: "block", offsetRight: 10, offsetTop: 50, name: "lst_button", width: 980, list: [{type: "button", offsetLeft: 80, value: "Đăng bài",  name: "btnPublish"},{type: "hidden", name:"csrf-token", value:"'.csrf_token().'"}]}';
-                    }else{
-                        $tab_content .= '{type: "block",offsetRight: 10, offsetTop: 50, offsetBottom: 0, offsetRight: 0, name: "lst_button", width: 150, list: [{type: "button", offsetLeft: 80, value: "Tiếp tục >>>",name: "btnNext_'.$k.'"}]}';
-                    }
-
-                    $tab_content .=']';
-                    $arr_cfgform[$k] = $tab_content;
-                }
-                foreach ($arr_cfgform as $k=> $v){
-                    echo 'var cfgform_'.$k .'='.$v.';  ';
-                    echo 'myform'.$k.'.loadStruct(cfgform_'.$k.');  ';
-
-                    echo 'myform'.$k.'.attachEvent("onButtonClick", function(btnID){btn_form_click(btnID,myform'.$k.');});';
-
-                }
-            }
-            ?>
-            $(".dhxform_obj_material").removeAttr("style");
-            var wtab = $("#tab1 .dhxlayout_cont .dhx_cell_cont_layout").width();
-            $("#tab2 .dhxlayout_cont .dhx_cell_cont_layout").css("width",wtab);
-            $("#tab3 .dhxlayout_cont .dhx_cell_cont_layout").css("width",wtab);
-            $("#tab4 .dhxlayout_cont .dhx_cell_cont_layout").css("width",wtab);
-        }
-        function  btn_form_click(btnId,wform) {
-//            dhtmlx.alert("btn_form_click::"+btnId);
-            var dt = btnId.split("_");
-            if(dt.length==2){
-                var tabID = parseInt(dt[1]);
-                if(wform.validate()){
-                    // active tab +1
-
-
-                }else{
-                    dhtmlx.alert("Vui lòng nhập đầy đủ thông tin bắt buộc (có dấu sao màu đỏ) ");
-                }
-
-
-            }else{
-                if(btnId =="btnPublish"){
-                    var formData = [];
-                    var cando = true;
-                    for(var i =1;i<=4;i++){
-                        var form = 'myform'+i;
-                        var values = (window[form]).getFormData();
-                        cando = (window[form]).validate();
-                        if(!cando){
-                            break;
-                        }
-                        formData = formData.concat(values);
-
-                    };
-                    if(cando){
-                        var token = $('input[name="csrf-token"]').attr('value');
-                        var publish = false;
-                        $.ajax({
-                            url: '/baiviet/save_bai_viet',
-                            dataType: "json",
-                            cache: false,
-                            type: 'post',
-                            data: {
-                                formData: formData,
-                                publish:publish
-                            },
-                            beforeSend: function(xhr){
-
-                                xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                            },
-                            success: function (data) {
-                                if(data.result){
-                                    for(var i =1;i<=4;i++){
-                                        var form = 'myform'+i;
-                                        (window[form]).clear();
-                                    };
-                                }
-                                dhtmlx.alert(data.mess);
-                            },
-                            error: function () {
-                                dhtmlx.alert("Error,Please try again!");
-                            }
-                        });
-                    }else{
-                        dhtmlx.alert("Vui lòng nhập đầy đủ thông tin bắt buộc (có dấu sao màu đỏ) ");
-                        baiviet_form_tabbar.tabs("tab_1").setActive();
-                    }
-
-                }
-            }
-
-
-        }
-
-    </script>
 @stop

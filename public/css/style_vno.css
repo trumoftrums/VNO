@@ -1521,3 +1521,89 @@ textarea:focus, input:focus{
     background: #f5f5f5;
     border: 1px solid rgba(204, 204, 204, 0.24);
 }
+.cover-tab-free ul{
+    float: left;
+    width: 100%;
+    margin-left: 0px !important;
+    padding-left: 0px !important;
+}
+.cover-tab-free ul li{
+    list-style: none;
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+}
+
+.cover-tab-free ul li label{
+    font-weight: normal;
+    width: 30%;
+    float: left;
+}
+.cover-tab-free ul li .ip-price{
+    background: #0c834a;
+    color: #fff;
+    padding-left: 5px;
+}
+.ip-descript{
+    float: left;
+    width: 100%;
+    padding: 5px;
+    height:147px;
+}
+.cover-tab-free ul li .ip-long{
+    width: 83.5% !important;
+}
+.cover-tab-free ul li .free-post-input{
+    height: 30px;
+    width: 65%;
+    border: 1px solid #ccc;
+}
+.cover-tab-free ul li label.lb-address{
+    width: 14%;
+}
+.cover-tab-free ul li .upload-image{
+    position: absolute;
+    height: 140px;
+    width: 100px;
+    overflow: hidden;
+    padding-left: 100px;
+    cursor: pointer;
+}
+.cover-tab-free ul li .img-upload-1{
+    bottom: 3px;
+    left: 15px;
+}
+.cover-tab-free ul li .img-upload-2{
+    bottom: 3px;
+}
+.cover-tab-free ul li .img-upload-3{
+    bottom: 3px;
+}
+.cover-tab-free ul li .img-upload-4{
+    bottom: 3px;
+}
+.cover-tab-free ul li .img-upload-5{
+    bottom: 3px;
+}
+.cover-tab-free ul li .cover-inp-upload{
+    float: left;
+    width: 19.5%;
+    padding: 2px;
+}
+.cover-tab-free ul li .cover-inp-upload img{
+    width: 100%;
+}
+.btn-next-free-post{
+    float: right;
+    background: #0c834a;
+    border: none;
+    padding: 8px 25px;
+    color: #fff;
+    border-radius: 5px;
+}
+.btn-next-free-post:hover{
+    opacity: 0.8;
+}
+.p-descript{
+    color:#0c834a;
+}
