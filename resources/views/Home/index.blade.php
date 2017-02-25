@@ -60,7 +60,7 @@
                 </div>
                 <div class="left-item">
                     <img src="./uploads/baiviet/{{$item->photo1}}"/>
-                    <span class="price">{{number_format($item->thongso['thongso_65'],0,",",".")}} VND</span>
+                    <span class="price">{{$item->thongso['thongso_65']}} VND</span>
                 </div>
                 <div class="right-item">
                     <h4>{{$item->tieu_de}}</h4>

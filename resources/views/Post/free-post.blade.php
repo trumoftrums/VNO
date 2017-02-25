@@ -24,6 +24,9 @@
         margin-right: 10px;
         margin-left: 5px;
     }
+    .dhxcombolist_material{
+        height:250px;
+    }
 </style>
 @section('content')
     <div class="detail-post">
@@ -49,7 +52,7 @@
                 <li><a data-toggle="tab" href="#tab4">THÔNG TIN KỸ THUẬT</a></li>
             </ul>
             <div class="cover-tab-post tab-content">
-                <div id="tab1" class="tab-pane fade in active">
+                <div id="tab1" class="tab-pane fade in active" style="float: left;position:relative;width: 100%">
 
                 </div>
                 <div id="tab2" class="tab-pane fade">
