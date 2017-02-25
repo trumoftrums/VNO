@@ -158,7 +158,7 @@
                         <ul>
                             <li><p>*Hệ thống nhiên liệu: {{$detailPost->thongso['thongso_31']}}</p></li>
                             <li><p>*Nhiên liệu: {{$detailPost->thongso['thongso_32']}}</p></li>
-                            <li><p>*Dòng xe: {{$detailPost->thongso['thongso_25']}}</p></li>
+                            <li><p>*Dáng xe: {{$detailPost->thongso['thongso_25']}}</p></li>
                         </ul>
                         <ul class="final-ul">
                             <li><p>*Màu sắc: {{$detailPost->thongso['thongso_27']}}</p></li>
@@ -168,7 +168,7 @@
                     </div>
                     <p class="mo-ta">{{$detailPost->thongso['thongso_67']}}</p>
                     <div class="price">
-                        <p class="p-price">{{number_format($detailPost->thongso['thongso_65'],0,",",".")}} VND</p>
+                        <p class="p-price">{{$detailPost->thongso['thongso_65']}} VND</p>
                         <p class="p-address">{{$detailPost->thongso['thongso_68']}}</p>
                         <p class="p-phone">Điện thoại: <span>{{$detailPost->thongso['thongso_63']}}</span></p>
                     </div>
