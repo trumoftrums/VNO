@@ -16,7 +16,8 @@
         <div class="list-news-page" id="style-4">
             <div class="detail-news" >
                 <img class="thumb-item-news" src="{{ URL::asset($detailNews->image)}}"/>
-                {{$detailNews->description}}
+                {{--{{$detailNews->description}}--}}
+                <?php echo $detailNews->description; ?>
             </div>
             <div class="related-news">
                 <h3><img class="arrow-before-title" src="{{ URL::asset('images/icon-title-news.png')}}"/> TIN TỨC KHÁC</h3>
