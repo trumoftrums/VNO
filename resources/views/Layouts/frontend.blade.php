@@ -597,7 +597,7 @@
                 var h4 = ($(".title-list-news").height());
 
                 $(".vert").css({'height':(h_standard-h2-h3-h4-70)+'px'});
-                $(".simply-scroll-clip").css({'height':(h_standard-h2-h3-h4-50)+'px'});
+                $(".list-news .simply-scroll-clip").css({'height':(h_standard-h2-h3-h4-50)+'px'});
                 $(".first-col ,.header , .last-col").css({'height':(h_standard+10)+'px'});
             }
         });
