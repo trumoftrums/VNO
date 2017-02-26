@@ -436,4 +436,38 @@ class BaivietController extends Controller {
                 'Content-Type' => 'application/json'
             ]);
     }
+    public function uploadimg()
+    {
+        $result =array(
+            'result'=>false,
+            'url' =>'',
+            'mess' =>''
+        );
+        if(Auth::check()){
+            $user = Auth::user();
+//            var_dump($_FILES);exit();
+            if (isset($_FILES["file"]["tmp_name"])) {
+                $k = md5_file($_FILES["file"]["tmp_name"]);
+                $path = "uploads/baiviet/";
+                if(move_uploaded_file($_FILES["file"]["tmp_name"], $path.$k)){
+                    $result['result'] = true;
+                    $result['url'] = $path.$k;
+                }else{
+                    $result['mess'] = 'Upload failed!';
+                }
+
+
+            } else {
+                $result['mess'] = 'Not change';
+            }
+        }else{
+            $result['mess'] = 'You do not have permission!';
+        }
+        return response($result)
+            ->withHeaders([
+                'Content-Type' => 'application/json'
+            ]);
+
+
+    }
 }

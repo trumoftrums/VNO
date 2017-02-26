@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Request;
 use DB;
+use Illuminate\Support\Facades\Redirect;
 class HomeController extends Controller {
 
     const POST_PER_PAGE = 9;
@@ -341,10 +342,13 @@ class HomeController extends Controller {
         }
 //        var_dump($thongtinxe[2]);exit();
         $user = Auth::user();
+
+        $thongso = $this->get_thongso_init();
         $datas = array(
             'user' => $user,
             'info' => $info,
-            'thongtinxe' =>$thongtinxe
+            'thongtinxe' =>$thongtinxe,
+            'thongso'=>$thongso
         );
         return View('Post.free-post',$datas);
     }
@@ -414,37 +418,38 @@ class HomeController extends Controller {
         if (Auth::check()) {
             // The user is logged in...
 
-            $formData =  Request::all()['formData'] ;
+            $formData =  Request::all();
 //            var_dump($formData);exit();
             $tieude = "";
             $bvid = null;
             $mota = "";
             $thongso = array();
             $photo =array();
-            foreach ($formData as $v){
-                foreach ($v as $k=> $dt){
-                    $thongso[$k] = $dt;
-                    $arrk = explode("_",$k);
-                    if(count($arrk)==2){
-                        if(in_array($arrk[1],$this->THONGSO_TITLE)){
-                            $tieude .= $dt." ";
-                        }
-                        if($arrk[1]==$this->THONGSO_MOTA){
-                            $mota = $dt;
-                        }
 
+            foreach ($formData as $k=> $dt){
+                $thongso[$k] = $dt;
+                $arrk = explode("_",$k);
+                if(count($arrk)==2){
+                    if(in_array($arrk[1],$this->THONGSO_TITLE)){
+                        $tieude .= $dt." ";
+                    }
+                    if($arrk[1]==$this->THONGSO_MOTA){
+                        $mota = $dt;
+                    }
 
-                    }
-                    if(in_array($k,$this->ARR_PHOTO)){
-                        $photo[$k] = $dt;
-                    }
-                    if($k=="id"){
-                        $bvid = $dt;
-                    }
 
                 }
+                if(in_array($k,$this->ARR_PHOTO)){
+                    $arr = explode("/",$dt);
+                    $photo[$k] = $arr[count($arr)-1];
+                }
+                if($k=="id"){
+                    $bvid = $dt;
+                }
+
             }
-            $tieude = $formData[0]['thongso_20']." ".$formData[0]['thongso_25']." ".$formData[0]['thongso_22'];
+
+            $tieude = $formData['thongso_20']." ".$formData['thongso_25']." ".$formData['thongso_22'];
             $tieude = trim($tieude);
             if(!empty($tieude) && !empty($mota)){
                 DB::beginTransaction();
@@ -546,10 +551,7 @@ class HomeController extends Controller {
         }else{
             $result['mess'] ='Vui lòng đăng nhập để sử dụng chức năng này ';
         }
-        return response($result)
-            ->withHeaders([
-                'Content-Type' => 'application/json'
-            ]);
+        return Redirect::to("/dang-tin-free");
 
     }
     private function clean($string) {
@@ -573,5 +575,58 @@ class HomeController extends Controller {
         $str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", "Y", $str);
         $str = preg_replace("/(Đ)/","D", $str);
         return $str;
+    }
+    private function get_thongso_init(){
+        $list_thongso = Thongso::where('status',1)->get()->toArray();
+        //var_dump($list_thongso);exit();
+        $dt =array();
+        foreach ($list_thongso as $v){
+            $v['arr_options'] =  array();
+            if($v['type']=="combo" && !empty($v['options']) ){
+                $v['arr_options'] = $this->convert_option_to_array($v['options']);
+            }
+            $dt["thongso_".$v['id']] = $v;
+        }
+        return $dt;
+    }
+    private  function convert_option_to_array($options){
+        $options = str_replace("[{","",$options);
+        $result = array();
+        if(!empty($options)){
+            $arr_options = explode("},{",$options);
+            if(!empty($arr_options)){
+                foreach ($arr_options as  $v){
+                    $arr2 = explode(",",$v);
+
+                    if(count($arr2)==2){
+                        $value = "";
+                        $text ="";
+                        foreach ($arr2 as $v2){
+                            if(strpos($v2,"value")){
+                                $value = $this->get_string_between($v2,'"','"');
+                            }else{
+                                $text = $this->get_string_between($v2,'"','"');
+                            }
+                        }
+                        if(!empty($value) || !empty($text)){
+                           $result[$value]  =$text;
+                        }
+                    }
+
+
+
+                }
+            }
+
+        }
+        return $result;
+    }
+    private function get_string_between($string, $start, $end){
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
     }
 }

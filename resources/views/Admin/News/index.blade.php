@@ -95,7 +95,7 @@
                         var token = "{{csrf_token()}}";
 
                         $.ajax({
-                            url: '/admin/getbaivietedit',
+                            url: '/admin/getnewsedit',
                             dataType: "json",
                             cache: false,
                             type: 'post',
@@ -146,7 +146,7 @@
                 }
 
                 if(id=="refresh"){
-                    mygrid.loadXML("getbaiviet");
+                    mygrid.loadXML("getnews");
                 }
                 if(id == "publish"){
                     var selectedId = mygrid.getSelectedRowId();
@@ -187,7 +187,6 @@
         var baiviet_form_tabbar;
         function add_baiviet(baiviet) {
 
-            var baiviet_thongso;
             var viewportWidth = $(window).width();
             var viewportHeight = $(window).height();
             var wd = 1020;
@@ -195,13 +194,18 @@
             var left = (viewportWidth / 2) - (wd / 2) ;
             var top = (viewportHeight / 2) - (hg / 2);
             var win = myWins.createWindow("w_add", left, top, wd, hg);
+            var itemid = null;
             if(baiviet !== null && baiviet !=="undefined"){
+                itemid = {type: "hidden", name:"id", value:baiviet.id};
                 win.setText("Sửa tin tức ... ");
-
-
             }else{
                 win.setText("Đăng tin tức ... ");
                 baiviet = new Object();
+                baiviet.title = "";
+                baiviet.summary = "";
+                baiviet.description = "";
+                baiviet.thumnail = "";
+                baiviet.status = "";
             }
 //            console.log(baiviet);
             win.setModal(true);
@@ -213,27 +217,34 @@
             var cfgform1 = [
                 {type: "settings", position: "label-left"},
                 {type: "block", offsetLeft: 10, inputWidth: 980, list: [
-                    {type: "input", name: "title",required:true, label: "Tiêu đề", labelWidth: 70, inputWidth: 800},
-                    {type: "input", name: "summary", required:true,label: "Tóm tắt", labelWidth: 70, rows: 5, inputWidth: 800},
-                    {type: "input", id:"editor",required:true, name: "description", label: "Nội dung", rows: 12,labelWidth: 70, inputWidth: 800},
-                    {type: "image", id:"photo", required:true,name: "photo",labelWidth: 70, label: "Hình đại diện",inputWidth: 150, inputHeight: 130, imageHeight: 130, url: "./tool/dhtmlxform_image", value:""}
+                    {type: "input", name: "title",required:true, label: "Tiêu đề", labelWidth: 70, inputWidth: 800, value:baiviet.title},
+                    {type: "input", name: "summary", required:true,label: "Tóm tắt", labelWidth: 70, rows: 5, inputWidth: 800, value:baiviet.summary},
+                    {type: "input", id:"editor",name: "description", label: "Nội dung", rows: 12,labelWidth: 70, inputWidth: 800},
+                    {type: "image", id:"photo", required:true,name: "photo",labelWidth: 70, label: "Hình đại diện",inputWidth: 150, inputHeight: 130, imageHeight: 130, url: "./tool/dhtmlxform_image", value:baiviet.img}
                     ,{type: "button", offsetLeft: 70, value: "Save", name: "btnSave"}
                 ]}
             ];
             wform.loadStruct(cfgform1);
+            if(itemid != null){
+                wform.addItem(null,itemid,0,0);
+            }
+
             wform.attachEvent("onImageUploadSuccess", function(name, value, extra){
 
             });
             wform.attachEvent("onImageUploadFail", function(name, extra){
                 console.log("onImageUploadFail::"+extra);
             });
-
-            wform.attachEvent("onClick", function (id) {
+//            console.log("OK");
+            wform.attachEvent("onButtonClick", function (id) {
                 console.log("Click button"+id);
                 if(id=="btnSave"){
 
                     if(wform.validate()){
                         var formData = wform.getFormData();
+                        var description = CKEDITOR.instances[des_id].getData();
+                        formData.description = description;
+                        //console.log(formData);
                         $.ajax({
                             url: '/admin/save_news',
                             dataType: "json",
@@ -248,7 +259,9 @@
                             },
                             success: function (data) {
                                 wform.clear();
+                                CKupdate();
                                 dhtmlx.alert(data.mess);
+
                             },
                             error: function () {
                                 dhtmlx.alert("Error,Please try again!");
@@ -260,10 +273,17 @@
 
                 }
             });
-            var des_id = $( "textarea[name='description']" ).attr("id");
+            des_id = $( "textarea[name='description']" ).attr("id");
             console.log(des_id);
             initSample(des_id);
+            CKEDITOR.instances[des_id].setData(baiviet.description);
 
+        }
+        function CKupdate(){
+            for ( instance in CKEDITOR.instances ){
+                CKEDITOR.instances[des_id].updateElement();
+                CKEDITOR.instances[des_id].setData('');
+            }
         }
         $(document ).ready(function() {
 
@@ -286,94 +306,8 @@
 
 
         }
-        function adjust_img_control() {
-
-            photo2.css("height","60px");
-            photo3.css("height","60px");
-            $("img.dhxform_image_img").each(function( index ) {
-                $(this).removeAttr( "style" );
-                $(this).css("margin","auto");
-                $(this).css("height","auto");
-                $(this).css("width","auto");
-                $(this).css("top","0");
-                $(this).css("left","auto");
-                $(this).css("bottom","auto");
-                $(this).css("right","auto");
-                $(this).css("max-height","100%");
-                $(this).css("max-width","100%");
-            });
-
-        }
-        function  btn_form_click(btnId,wform) {
-//            dhtmlx.alert("btn_form_click::"+btnId);
-            var dt = btnId.split("_");
-            if(dt.length==2){
-                var tabID = parseInt(dt[1]);
-                if(wform.validate()){
-                    var nextTab  = tabID+1;
-                    baiviet_form_tabbar.tabs("tab_"+nextTab).setActive();
-                }else{
-                    dhtmlx.alert("Vui lòng nhập đầy đủ thông tin bắt buộc (có dấu sao màu đỏ) ");
-                }
 
 
-            }else{
-                if(btnId=="btnSave" || btnId =="btnPublish"){
-                    var formData = [];
-                    var cando = true;
-                    for(var i =1;i<=4;i++){
-                        var form = 'wform_'+i;
-                        var values = (window[form]).getFormData();
-                        cando = (window[form]).validate();
-                        if(!cando){
-                            break;
-                        }
-                        formData = formData.concat(values);
-
-                    };
-                    if(cando){
-                        var token = $('input[name="csrf-token"]').attr('value');
-//                        console.log(token);
-                        var publish = false;
-                        if(btnId =="btnPublish") {
-                            publish =true;
-                        }
-                        $.ajax({
-                            url: '/admin/save_bai_viet',
-                            dataType: "json",
-                            cache: false,
-                            type: 'post',
-                            data: {
-                                formData: formData,
-                                publish:publish
-                            },
-                            beforeSend: function(xhr){
-
-                                xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                            },
-                            success: function (data) {
-                                if(data.result){
-                                    for(var i =1;i<=4;i++){
-                                        var form = 'wform_'+i;
-                                        (window[form]).clear();
-                                    };
-                                }
-                                dhtmlx.alert(data.mess);
-                            },
-                            error: function () {
-                                dhtmlx.alert("Error,Please try again!");
-                            }
-                        });
-                    }else{
-                        dhtmlx.alert("Vui lòng nhập đầy đủ thông tin bắt buộc (có dấu sao màu đỏ) ");
-                        baiviet_form_tabbar.tabs("tab_1").setActive();
-                    }
-
-                }
-            }
-
-
-        }
         function delete_baiviet(baivietID) {
             if(baivietID != null && baivietID != "undefined"){
                 $.ajax({

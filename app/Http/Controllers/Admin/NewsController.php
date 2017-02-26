@@ -17,7 +17,8 @@ class NewsController extends Controller {
      * @param  int  $id
      * @return Response
      */
-
+    private $PATH_UPLOAD_IMG = "\\uploads\\baiviet\\";
+    private $URL_UPLOAD_IMG = "/uploads/baiviet/";
     public function index()
     {
         if(!Auth::check()){
@@ -75,7 +76,7 @@ class NewsController extends Controller {
             ]);
 //        return view('Admin\Baiviet.get_bai_viet')->header('Content-Type', 'text/xml')->with($datas);
     }
-    public function get_bai_viet_edit()
+    public function getnewsedit()
     {
 
         $result =array(
@@ -86,13 +87,12 @@ class NewsController extends Controller {
         if(!empty($formData['bvid'])){
 
             $bvid = $formData['bvid'];
-            $baiviets = Baiviet::where('status','<>','DELETED')->where('id',$bvid)->limit(1)->get()->toArray();
+            $baiviets = News::where('status','<>','DE')->where('id',$bvid)->limit(1)->get()->toArray();
             if(!empty($baiviets)){
                 $result['result'] = true;
-                $bv = $baiviets[0];
-                $bv['thongso'] = json_decode($bv["thongso"]);
-                $bv['token'] = csrf_token();
-                $result["data"] = $bv;
+                $img = explode("/",$baiviets[0]['thumbnail']);
+                $baiviets[0]['img'] = $img[count($img)-1];
+                $result["data"] = $baiviets[0];
 
             }else{
                 $result['mess'] = "Không tìm thấy bài viết";
@@ -123,12 +123,46 @@ class NewsController extends Controller {
             // The user is logged in...
 
             $formData =  Request::all()['formData'] ;
-            debug($formData);exit();
+//            var_dump($formData);exit();
             $bv = new News();
 
+
+            $bv->title = $formData['title'];
+            $bv->description = $formData['description'];
+            $bv->summary = $formData['summary'];
             $bv->status = "AC";
-            $bv->userid = Auth::id();
-            $r1 = $bv->save();
+
+
+            $bv->image =$this->URL_UPLOAD_IMG.$formData['photo'];
+            $thumnail = true;
+            $thumnail2 =true;
+//            echo public_path();exit();
+//            $thumnail = $this->generateThumbnail(public_path().$this->PATH_UPLOAD_IMG.$formData['photo'],290,138,80,"thumb1");
+//            $thumnail2 = $this->generateThumbnail(public_path().$this->PATH_UPLOAD_IMG.$formData['photo'],218,65,80,"thumb2");
+//            var_dump($thumnail);var_dump($thumnail2);
+//            exit();
+            $bv->thumbnail = $bv->image;
+            $bv->thumbnail2 = $bv->image;
+            if($thumnail && $thumnail2){
+                $r =true;
+                if(isset($formData['id']) && !empty($formData['id'])){
+                    $bvid = $formData['id'];
+                    $r = News::where('id',$bvid)->update($bv->toArray());
+                }else{
+                    $bv->userid = Auth::id();
+                    $r = $bv->save();
+                }
+
+                if($r){
+                    $result['result'] = true;
+                    $result['mess'] ='Đăng tin tức thành công!';
+                }else{
+                    $result['mess'] ='Lỗi, vui lòng thử lại!';
+                }
+            }else{
+                $result['mess'] ='Lỗi, vui lòng thử lại!';
+            }
+
 
         }else{
             $result['mess'] ='Vui lòng đăng nhập để sử dụng chức năng này ';
@@ -138,6 +172,26 @@ class NewsController extends Controller {
                 'Content-Type' => 'application/json'
             ]);
 
+    }
+    function generateThumbnail($img, $width, $height, $quality = 80,$thumb="thumb")
+    {
+        if (is_file($img)) {
+            $imagick = new Imagick(realpath($img));
+            $imagick->setImageFormat('jpeg');
+            $imagick->setImageCompression(Imagick::COMPRESSION_JPEG);
+            $imagick->setImageCompressionQuality($quality);
+            $imagick->thumbnailImage($width, $height, false, false);
+            $filename_no_ext = reset(explode('.', $img));
+            if (file_put_contents($filename_no_ext . '_'.$thumb, $imagick) === false) {
+                echo ("Could not put contents.");
+                return false;
+            }
+            return true;
+        }
+        else {
+            echo ("No valid image provided with {$img}.");
+        }
+        return false;
     }
     private function clean($string) {
         $string = str_replace($this->NOT_ALLOW_INDEX_CHAR, " ", $string);
@@ -234,4 +288,5 @@ class NewsController extends Controller {
             ]);
 
     }
+
 }
