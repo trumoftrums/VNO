@@ -211,25 +211,21 @@
     <div class="footer">
             <div class="info">
                 <p>Vietnamoto.net - Bản quyền @ 2017 Goldlands.vn</p>
-                <span>Địa chỉ: 02, Phạm Văn Đồng, P. Linh Đông, Q. Thủ Đức, Tp.HCM - Điện thoại: 0970 7777 929</span>
-                <span>Email: batdongsangoldlands@gmail.com</span>
-                <span>Website: www.vietnamoto.net - www.goldlands.vn</span>
+                <span>Địa chỉ: 02, Phạm Văn Đồng, P. Linh Đông, Q. Thủ Đức, Tp.HCM</span>
+                <span>Hotline: 0970 7777 929 - Email: batdongsangoldlands@gmail.com</span>
             </div>
             <div class="menu-bottom">
                 <ul>
-                    <li><a href="{{ URL::to('') }}">Trang chủ</a> </li>
+                    <li><a class="a-one-line" href="{{ URL::to('') }}">Trang chủ</a> </li>
                     <li><a href="{{ URL::to('vip-salon/all') }}">Showroom<br>Salon Oto</a> </li>
                     <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Địa chỉ sửa xe<br>độ xe</a> </li>
                     <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Cứu hộ trên<br> toàn quốc</a> </li>
                     <li><a href="#">Góc giao lưu<br>Chia sẻ</a> </li>
-                    <li><a href="{{ URL::to('tin-tuc') }}">Tin tức về xe</a> </li>
+                    <li><a class="a-one-line" href="{{ URL::to('tin-tuc') }}">Tin tức về xe</a> </li>
                     <li><a href="#">Quy định &<br>Hướng dẫn</a> </li>
                 </ul>
             </div>
             <div class="social-bottom">
-                <!--<a href="#"><img src="./images/icon-fb-bottom.png"/></a>
-                <a href="#"><img src="./images/icon-twitter-bottom.png"/></a>
-                <a href="#"><img src="./images/icon-yb-bottom.png"/></a>-->
                 <p>Truy cập: <span>300400</span></p><br>
                 <p>User: <span>3000</span></p>
             </div>

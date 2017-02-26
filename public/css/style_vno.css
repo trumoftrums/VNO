@@ -409,11 +409,13 @@
 }
 .header .center-content-col .list-items{
     margin-right: -5px;
+    margin-top: 8px;
+    float: left;
 }
 .header .center-content-col .list-items .item{
     padding-right: 5px;
     padding-left: 0px;
-    margin-bottom: 6px;
+    margin-bottom: 15px;
 }
 .header .center-content-col .list-items .item .inner-item{
     border: 1px solid #ccc;
@@ -446,7 +448,7 @@
     float: left;
     width: 100%;
     min-width: 50px;
-    height: 85px;
+    height: 94px;
 }
 .header .center-content-col .list-items .item .left-item .price{
     background: #0c834a;
@@ -468,8 +470,9 @@
     color: #0c834a;
     border-bottom: 1px solid #0c834a;
     padding: 0px 5px;
-    margin-top: 3px;
+    margin-top: 5px;
     text-overflow: ellipsis;
+    margin-bottom: 5px;
     overflow: hidden;
     white-space: nowrap;
 }
@@ -628,15 +631,17 @@
 }
 .footer .info{
     background: #0c834a;
-    width: 38%;
+    width: 36%;
     float: left;
+    height: 67px;
     color: #fff;
     padding: 5px;
 }
 .footer .info p{
-    font-weight: 600;
+    font-weight: normal;
     width: 100%;
     margin-bottom: 1px;
+    color: rgb(243, 237, 2);
 }
 .footer .info span{
     width: 100%;
@@ -656,11 +661,11 @@
     float: left;
 }
 .footer .menu-bottom ul li a{
-    padding: 29px 6px 0px 6px;
+    padding: 12px 6px 0px 6px;
     float: left;
     color: #2d2d2d;
     font-size: 0.9vw;
-    height: 5.5vw;
+    height: 67px;
     text-align: center;
 }
 .footer .menu-bottom ul li a:hover{
@@ -672,9 +677,9 @@
     width:11px;
 }
 .social-bottom{
-    float: left;
-    padding-top: 1.8vw;
-    margin-left: 2vw;
+    float: right;
+    padding-top: 17px;
+    margin-right: 3vw;
     font-size: 0.9vw;
 }
 .social-bottom a{
@@ -688,7 +693,7 @@
     float: left;
     margin-left: 1vw;
     margin-top: 5px;
-    line-height: 10px;
+    line-height: 4px;
 }
 .social-bottom p span{
     color: #0c834a;
@@ -696,13 +701,16 @@
 .social-bottom a img:hover{
     opacity:0.8;
 }
+.a-one-line{
+    padding-top: 24px !important;
+}
 .list-salon{
     float: left;
     width: 100%;
     border-top: 2px dotted #0c834a;
     margin-top: 10px;
     padding-top: 7px;
-    bottom: 2px;
+    bottom: -75px;
     position: absolute;
 }
 .list-salon .item{
@@ -1325,9 +1333,9 @@ textarea:focus, input:focus{
 }
 .cover-tab-post .price .p-address{
     float: left;
-    padding: 2px 15px;
-    width: 40%;
-    height:40px;
+    padding: 10px 5px 0px 10px;
+    width: 45%;
+    height: 40px;
     line-height: 18px;
     border-right: 1px solid #0c834a;
     margin-bottom: 0px;
@@ -1402,7 +1410,7 @@ textarea:focus, input:focus{
 .list-related-post .item{
     float: left;
     margin-left: 10px;
-    width: 300px;
+    width: 275px;
 }
 .list-related-post .item img{
     float: left;
@@ -1412,7 +1420,7 @@ textarea:focus, input:focus{
 }
 .list-related-post .item .caption{
     float: left;
-    width: 235px;
+    width: 210px;
     margin-left: 6px;
     border-right: 2px dotted #0c834a;
     height: 55px;

@@ -5,10 +5,29 @@
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img class="img-slide" src="./images/slide-top/slide01.png"/>
+                    <a target="_blank" href="http://kiamotorsvietnam.com.vn/Tin-tuc---su-kien-22/THACO-RA-MAT-KIA-OPTIMA-2016-VOI-GIA-BAN-CONG-BO-TU-915-TRIEU-DONG-851.html">
+                        <img class="img-slide" src="./images/slide-top/bn01.png"/>
+                    </a>
                 </div>
                 <div class="item">
-                    <img class="img-slide" src="./images/slide-top/slide01.png"/>
+                    <a target="_blank" href="http://www.rolls-roycemotorcars-hanoi.vn/ghost">
+                        <img class="img-slide" src="./images/slide-top/bn02.png"/>
+                    </a>
+                </div>
+                <div class="item">
+                    <a target="_blank" href="http://toyotaphumyhung.com.vn/xe-toyota-landcruiser/">
+                        <img class="img-slide" src="./images/slide-top/bn03.png"/>
+                    </a>
+                </div>
+                <div class="item">
+                    <a target="_blank" href="http://www.nissan.com.vn/news/thong-cao-bao-chi-nissan-ra-mat-phien-ban-np300-navara-mot-cau-so-tu-dong-moi/">
+                        <img class="img-slide" src="./images/slide-top/bn04.png"/>
+                    </a>
+                </div>
+                <div class="item">
+                    <a target="_blank" href="https://www.ford.com.vn/suvs/explorer/?intcmp=bb-fvn-hp-fvn-vhp-ford%20explorer-return">
+                        <img class="img-slide" src="./images/slide-top/bn05.png"/>
+                    </a>
                 </div>
             </div>
             <!-- Left and right controls -->
@@ -65,9 +84,9 @@
                 <div class="right-item">
                     <h4>{{$item->tieu_de}}</h4>
                     <p>- Tình trạng: {{$item->thongso['thongso_24']}}</p>
-                    <p>- Dòng xe: {{$item->thongso['thongso_25']}}</p>
+                    <p>- Dáng xe: {{$item->thongso['thongso_25']}}</p>
                     <p>- Năm SX: {{$item->thongso['thongso_22']}}</p>
-                    <p>- {{$item->thongso['thongso_31']}}</p>
+                    <p>- Nhiên liệu: {{$item->thongso['thongso_31']}}</p>
                     <p class="phone-address-item">- {{$item->thongso['thongso_62']}} - {{$item->thongso['thongso_63']}}</p>
                 </div>
             </div>
@@ -77,7 +96,7 @@
         <?php if(!empty($listPost)) echo $listPost->links() ?>
         </div>
     </div>
-    <div class="list-salon">
+    {{--<div class="list-salon">
         <ul id="scrollerSalon">
             @foreach($listVipSalon as $salon)
             <li class="item">
@@ -89,5 +108,5 @@
             </li>
             @endforeach
         </ul>
-    </div>
+    </div>--}}
 @stop

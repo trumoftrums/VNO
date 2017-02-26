@@ -101,9 +101,9 @@
                         <div class="right-item">
                             <h4>{{$item->tieu_de}}</h4>
                             <p>- Tình trạng: {{$item->thongso['thongso_24']}}</p>
-                            <p>- Dòng xe: {{$item->thongso['thongso_25']}}</p>
+                            <p>- Dáng xe: {{$item->thongso['thongso_25']}}</p>
                             <p>- Năm SX: {{$item->thongso['thongso_22']}}</p>
-                            <p>- {{$item->thongso['thongso_31']}}</p>
+                            <p>- Nhiên liệu: {{$item->thongso['thongso_31']}}</p>
                             <p class="phone-address-item">- {{$item->thongso['thongso_62']}} - {{$item->thongso['thongso_63']}}</p>
                         </div>
                     </div>
