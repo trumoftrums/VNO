@@ -1038,7 +1038,7 @@ textarea:focus, input:focus{
     padding-top: 10px;
     border-top: 1px solid #0c834a;
 }
-.news-page .header-news img{
+.news-page .header-news img.line-header{
     width:100%;
 }
 .news-page .list-news-page{

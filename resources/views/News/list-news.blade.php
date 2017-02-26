@@ -8,7 +8,7 @@
     <div class="news-page">
         <div class="header-news">
             <img class="img-header-news-page" src="{{ URL::asset('images/icon-news-page.png')}}"/>
-            <img src="{{ URL::asset('images/line-news-page.png')}}"/>
+            <img class="line-header" src="{{ URL::asset('images/line-news-page.png')}}"/>
         </div>
         <div class="list-news-page" id="style-4">
             <div class="inner-list-news-page" >
