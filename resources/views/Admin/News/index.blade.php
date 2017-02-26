@@ -80,8 +80,7 @@
             myToolbar.addButton("add", 0, "Đăng tin tức", "../js/dhtmlx5/common/add.png", "add.png");
             myToolbar.addButton("edit",1, "Sửa tin tức", "../js/dhtmlx5/common/edit.png", "edit.png");
             myToolbar.addButton("delete",2, "Xóa tin tức", "../js/dhtmlx5/common/delete.png", "delete.png");
-            myToolbar.addButton("publish",3, "Publish", "../js/dhtmlx5/common/publish.png", "publish.png");
-            myToolbar.addButton("refresh",4, "Làm mới", "../js/dhtmlx5/common/refresh.png", "refresh.png");
+            myToolbar.addButton("refresh",3, "Làm mới", "../js/dhtmlx5/common/refresh.png", "refresh.png");
 
             myToolbar.attachEvent("onClick", function (id) {
                 if (id == "add") {
@@ -148,26 +147,6 @@
                 if(id=="refresh"){
                     mygrid.loadXML("getnews");
                 }
-                if(id == "publish"){
-                    var selectedId = mygrid.getSelectedRowId();
-                    if (selectedId == null) {
-                        dhtmlx.alert("Vui lòng chọn 1 bài viết");
-                    }
-                    else {
-                        var bvid = mygrid.getSelectedRowId();
-                        dhtmlx.confirm({
-                            title: "Public bài viết",
-                            type:"confirm-warning",
-                            text: "Bạn chắc chắn muốn public bài viết này?",
-                            callback: function(ok) {
-                                if(ok){
-                                    pub_baiviet(bvid);
-                                }
-
-                            }
-                        });
-                    }
-                }
 
 
             });
@@ -219,9 +198,16 @@
                 {type: "block", offsetLeft: 10, inputWidth: 980, list: [
                     {type: "input", name: "title",required:true, label: "Tiêu đề", labelWidth: 70, inputWidth: 800, value:baiviet.title},
                     {type: "input", name: "summary", required:true,label: "Tóm tắt", labelWidth: 70, rows: 5, inputWidth: 800, value:baiviet.summary},
-                    {type: "input", id:"editor",name: "description", label: "Nội dung", rows: 12,labelWidth: 70, inputWidth: 800},
-                    {type: "image", id:"photo", required:true,name: "photo",labelWidth: 70, label: "Hình đại diện",inputWidth: 150, inputHeight: 130, imageHeight: 130, url: "./tool/dhtmlxform_image", value:baiviet.img}
-                    ,{type: "button", offsetLeft: 70, value: "Save", name: "btnSave"}
+                    {type: "input", id:"editor",name: "description", label: "Nội dung", rows: 12,labelWidth: 70, inputWidth: 800}
+
+                ]},
+                {type: "block", offsetLeft: 10, inputWidth: 980, list: [
+                    {type: "image", id:"photo", required:true,name: "photo",labelWidth: 70, label: "Hình đại diện",inputWidth: 221, inputHeight: 65, imageHeight: 65, url: "./tool/dhtmlxform_image", value:baiviet.img},
+                    {type: "newcolumn"},
+                    {type: "image", id:"thumbnail", required:true, offsetLeft:100 , name: "thumbnail",labelWidth: 80, label: "Thumbnail",inputWidth: 100, inputHeight: 65, imageHeight: 65, url: "./tool/dhtmlxform_image", value:baiviet.thumbnail}
+                ]},
+                {type: "block", offsetLeft: 10, inputWidth: 980, list: [
+                    {type: "button", offsetLeft: 70, value: "Save", name: "btnSave"}
                 ]}
             ];
             wform.loadStruct(cfgform1);
@@ -311,7 +297,7 @@
         function delete_baiviet(baivietID) {
             if(baivietID != null && baivietID != "undefined"){
                 $.ajax({
-                    url: '/admin/delbaiviet',
+                    url: '/admin/delnews',
                     dataType: "json",
                     cache: false,
                     type: 'post',
@@ -323,7 +309,7 @@
 //                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
                     },
                     success: function (data) {
-                        mygrid.loadXML("getbaiviet");
+                        mygrid.loadXML("getnews");
                         dhtmlx.alert(data.mess);
                     },
                     error: function () {
@@ -333,31 +319,7 @@
             }
 
         }
-        function pub_baiviet(baivietID) {
-            if(baivietID != null && baivietID != "undefined"){
-                $.ajax({
-                    url: '/admin/pubbaiviet',
-                    dataType: "json",
-                    cache: false,
-                    type: 'post',
-                    data: {
-                        baivietID: baivietID
-                    },
-                    beforeSend: function(xhr){
 
-//                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                    },
-                    success: function (data) {
-                        mygrid.loadXML("getbaiviet");
-                        dhtmlx.alert(data.mess);
-                    },
-                    error: function () {
-                        dhtmlx.alert("Error,Please try again!");
-                    }
-                });
-            }
-
-        }
     </script>
 
 @endsection

@@ -6,6 +6,7 @@ use App\Models\Baivietindex;
 use App\Models\Thongso;
 use App\Models\Thongtinxe;
 use App\Models\Users;
+use  App\Models\Submittoken;
 use App\Models\UsersFactory;
 use App\News;
 use App\VipSalon;
@@ -344,11 +345,28 @@ class HomeController extends Controller {
         $user = Auth::user();
 
         $thongso = $this->get_thongso_init();
+        $formData =  Request::all();
+        $result =array();
+        if(!empty($formData)){
+            //var_dump($formData);exit();
+            $hash = md5(json_encode($formData));
+            $ck = Submittoken::where("token",$hash)->count();
+            if($ck==0){
+                $result = $this->save_bai_viet($formData);
+                $tk = new Submittoken;
+                $tk->token = $hash;
+                $tk->userid = $user->id;
+                $tk->save();
+            }
+            $_POST = array();
+
+        }
         $datas = array(
             'user' => $user,
             'info' => $info,
             'thongtinxe' =>$thongtinxe,
-            'thongso'=>$thongso
+            'thongso'=>$thongso,
+            'result' =>$result
         );
         return View('Post.free-post',$datas);
     }
@@ -405,7 +423,7 @@ class HomeController extends Controller {
     private $THONGSO_MOTA =67;
     private $NOT_ALLOW_INDEX_CHAR = array("'",'"',"`","]","[","}","{","!","~","#","^","&","*","$","+",",",".","\xE1","\xBB","\x9Bi");
     private  $ARR_PHOTO = array("photo1","photo2","photo3","photo4","photo5");
-    public function save_bai_viet(){
+    private function save_bai_viet($formData){
 
 
         $result =array(
@@ -418,7 +436,7 @@ class HomeController extends Controller {
         if (Auth::check()) {
             // The user is logged in...
 
-            $formData =  Request::all();
+
 //            var_dump($formData);exit();
             $tieude = "";
             $bvid = null;
@@ -537,7 +555,7 @@ class HomeController extends Controller {
                 if ($r1 && $r2) {
                     DB::commit();
                     $result['result'] = true;
-                    $result['mess'] = 'Đăng bài viết thành công!, Bài viết của bạn đang được các quản trị viên kiểm tra và xác thực...';
+                    $result['mess'] = 'Đăng bài viết thành công!, Bài viết của bạn đang được các quản trị viên xử lý...';
                 } else {
                     DB::rollback();
                     $result['mess'] = 'Có lỗi xảy ra, vui lòng thử lại sau ít phút!';
@@ -551,7 +569,7 @@ class HomeController extends Controller {
         }else{
             $result['mess'] ='Vui lòng đăng nhập để sử dụng chức năng này ';
         }
-        return Redirect::to("/dang-tin-free");
+        return $result;
 
     }
     private function clean($string) {

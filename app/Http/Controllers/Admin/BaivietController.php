@@ -192,7 +192,7 @@ class BaivietController extends Controller {
             // The user is logged in...
 
             $formData =  Request::all()['formData'] ;
-//            var_dump($formData);exit();
+            var_dump($formData);exit();
             $tieude = "";
             $bvid = null;
             $mota = "";

@@ -258,34 +258,53 @@
                 <div id="tab2" class="tab-pane fade">
                     <div>
                         <p class="p-thuoc-tinh-post">túi khí an toàn</p>
-                        <label class="checkbox-inline">*Túi khí người lái<input type="checkbox" name="thongso_1" value=""></label>
-                        <label class="checkbox-inline">*Túi khí khách phía trước<input type="checkbox" name="thongso_2" value=""></label>
-                        <label class="checkbox-inline">*Túi khí khách phía sau<input type="checkbox" name="thongso_3" value=""></label>
-                        <label class="checkbox-inline">*Túi khí hai bên ghế<input type="checkbox" name="thongso_4" value=""></label>
+                        <input type='hidden' value='0' name='thongso_1'>
+                        <label class="checkbox-inline">*Túi khí người lái<input type="checkbox" name="thongso_1" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_2'>
+                        <label class="checkbox-inline">*Túi khí khách phía trước<input type="checkbox" name="thongso_2" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_3'>
+                        <label class="checkbox-inline">*Túi khí khách phía sau<input type="checkbox" name="thongso_3" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_4'>
+                        <label class="checkbox-inline">*Túi khí hai bên ghế<input type="checkbox" name="thongso_4" value="1"></label>
                     </div>
                     <div>
                         <p class="p-thuoc-tinh-post">phanh - điều khiển</p>
-                        <label class="checkbox-inline">*Chống bó cứng phanh(ABS)<input type="checkbox" name="thongso_5" value=""></label>
-                        <label class="checkbox-inline">*Phân bổ lực phanh điện tử<input type="checkbox" name="thongso_9" value=""></label>
-                        <label class="checkbox-inline">*Trợ lực phanh khẩn cấp(EBA)<input type="checkbox" name="thongso_6" value=""></label>
-                        <label class="checkbox-inline">*Điều khiển hành trình<input type="checkbox" name="thongso_7" value=""></label>
-                        <label class="checkbox-inline">*Tự động cân bằng điện tử(ESP)<input type="checkbox" name="thongso_10" value=""></label>
-                        <label class="checkbox-inline">*Hỗ trợ cảnh báo lùi<input type="checkbox" name="thongso_11"  value=""></label>
-                        <label class="checkbox-inline">*Hệ thống kiểm soát trượt<input type="checkbox" name="thongso_8" value=""></label>
-                        <label class="checkbox-inline">*Chốt cửa an toàn<input type="checkbox" name="thongso_12" value=""></label>
+                        <input type='hidden' value='0' name='thongso_5'>
+                        <label class="checkbox-inline">*Chống bó cứng phanh(ABS)<input type="checkbox" name="thongso_5" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_9'>
+                        <label class="checkbox-inline">*Phân bổ lực phanh điện tử<input type="checkbox" name="thongso_9" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_6'>
+                        <label class="checkbox-inline">*Trợ lực phanh khẩn cấp(EBA)<input type="checkbox" name="thongso_6" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_7'>
+                        <label class="checkbox-inline">*Điều khiển hành trình<input type="checkbox" name="thongso_7" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_10'>
+                        <label class="checkbox-inline">*Tự động cân bằng điện tử(ESP)<input type="checkbox" name="thongso_10" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_11'>
+                        <label class="checkbox-inline">*Hỗ trợ cảnh báo lùi<input type="checkbox" name="thongso_11"  value="1"></label>
+                        <input type='hidden' value='0' name='thongso_8'>
+                        <label class="checkbox-inline">*Hệ thống kiểm soát trượt<input type="checkbox" name="thongso_8" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_12'>
+                        <label class="checkbox-inline">*Chốt cửa an toàn<input type="checkbox" name="thongso_12" value="1></label>
                     </div>
                     <div>
                         <p class="p-thuoc-tinh-post">khóa chống trộm</p>
-                        <label class="checkbox-inline">*Khóa cửa tự động<input type="checkbox" name="thongso_13" value=""></label>
-                        <label class="checkbox-inline">*Khóa cửa điều khiển từ xa<input type="checkbox" name="thongso_15" value=""></label>
-                        <label class="checkbox-inline">*Khóa động cơ<input type="checkbox" name="thongso_14" value=""></label>
-                        <label class="checkbox-inline">*Hệ thống báo trộm ngoại vi<input type="checkbox" name="thongso_16" value=""></label>
+                        <input type='hidden' value='0' name='thongso_13'>
+                        <label class="checkbox-inline">*Khóa cửa tự động<input type="checkbox" name="thongso_13" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_15'>
+                        <label class="checkbox-inline">*Khóa cửa điều khiển từ xa<input type="checkbox" name="thongso_15" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_14'>
+                        <label class="checkbox-inline">*Khóa động cơ<input type="checkbox" name="thongso_14" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_16'>
+                        <label class="checkbox-inline">*Hệ thống báo trộm ngoại vi<input type="checkbox" name="thongso_16" value="1"></label>
                     </div>
                     <div>
                         <p class="p-thuoc-tinh-post">các thống số khác</p>
-                        <label class="checkbox-inline">*Đèn sương mù<input type="checkbox" name="thongso_17" value=""></label>
-                        <label class="checkbox-inline">*Đèn báo thắt dây an toàn<input type="checkbox" name="thongso_19" value=""></label>
-                        <label class="checkbox-inline">*Đèn phanh phụ thứ 3 lắp cao<input type="checkbox" name="thongso_18" value=""></label>
+                        <input type='hidden' value='0' name='thongso_17'>
+                        <label class="checkbox-inline">*Đèn sương mù<input type="checkbox" name="thongso_17" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_19'>
+                        <label class="checkbox-inline">*Đèn báo thắt dây an toàn<input type="checkbox" name="thongso_19" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_18'>
+                        <label class="checkbox-inline">*Đèn phanh phụ thứ 3 lắp cao<input type="checkbox" name="thongso_18" value="1"></label>
                     </div>
                     <div>
                         <input type="button" class="btn-next-free-post" id="btnNext_tab2" value="TIẾP TỤC >>"/>
@@ -293,18 +312,30 @@
                 </div>
                 <div id="tab3" class="tab-pane fade">
                     <div>
-                        <label class="checkbox-inline">*Thiết bị định vị<input type="checkbox"  name="thongso_36"  value=""></label>
-                        <label class="checkbox-inline">*Thiết bị giải trí<input type="checkbox"  name="thongso_38" value=""></label>
-                        <label class="checkbox-inline">*Kính chính diện<input type="checkbox"  name="thongso_37"  value=""></label>
-                        <label class="checkbox-inline">*Điều hòa sau<input type="checkbox"  name="thongso_39" value=""></label>
-                        <label class="checkbox-inline">*Điều hòa trước<input type="checkbox"  name="thongso_45" value=""></label>
-                        <label class="checkbox-inline">*Hỗ trợ xe tự động<input type="checkbox"  name="thongso_46"  value=""></label><br>
-                        <label class="checkbox-inline">*Sấy kính sau<input type="checkbox"  name="thongso_40" value=""></label>
-                        <label class="checkbox-inline">*Kính màu<input type="checkbox"  name="thongso_41" value=""></label>
-                        <label class="checkbox-inline">*Cửa sổ nóc<input type="checkbox"  name="thongso_43" value=""></label>
-                        <label class="checkbox-inline">*Tay lái trợ lực<input type="checkbox"  name="thongso_44" value=""></label>
-                        <label class="checkbox-inline">*Quạt kính sau<input type="checkbox"  name="thongso_47" value=""></label>
-                        <label class="checkbox-inline">*Màn hình LCD<input type="checkbox"  name="thongso_48" value=""></label>
+                        <input type='hidden' value='0' name='thongso_36'>
+                        <label class="checkbox-inline">*Thiết bị định vị<input type="checkbox"  name="thongso_36"  value="1"></label>
+                        <input type='hidden' value='0' name='thongso_38'>
+                        <label class="checkbox-inline">*Thiết bị giải trí<input type="checkbox"  name="thongso_38" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_37'>
+                        <label class="checkbox-inline">*Kính chính diện<input type="checkbox"  name="thongso_37"  value="1"></label>
+                        <input type='hidden' value='0' name='thongso_39'>
+                        <label class="checkbox-inline">*Điều hòa sau<input type="checkbox"  name="thongso_39" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_45'>
+                        <label class="checkbox-inline">*Điều hòa trước<input type="checkbox"  name="thongso_45" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_46'>
+                        <label class="checkbox-inline">*Hỗ trợ xe tự động<input type="checkbox"  name="thongso_46"  value="1"></label><br>
+                        <input type='hidden' value='0' name='thongso_40'>
+                        <label class="checkbox-inline">*Sấy kính sau<input type="checkbox"  name="thongso_40" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_41'>
+                        <label class="checkbox-inline">*Kính màu<input type="checkbox"  name="thongso_41" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_43'>
+                        <label class="checkbox-inline">*Cửa sổ nóc<input type="checkbox"  name="thongso_43" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_44'>
+                        <label class="checkbox-inline">*Tay lái trợ lực<input type="checkbox"  name="thongso_44" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_47'>
+                        <label class="checkbox-inline">*Quạt kính sau<input type="checkbox"  name="thongso_47" value="1"></label>
+                        <input type='hidden' value='0' name='thongso_48'>
+                        <label class="checkbox-inline">*Màn hình LCD<input type="checkbox"  name="thongso_48" value="1"></label>
                     </div>
                     <div>
                         <p class="p-descript">MÔ TẢ THÊM</p>
@@ -345,31 +376,39 @@
     </div>
 <script>
     $( document ).ready(function() {
-
+        <?php
+            if(isset($result) && !empty($result)){
+                echo 'dhtmlx.alert("'.$result['mess'].'")';
+            }
+        ?>
 
     });
     $("#fmbaiviet").submit(function( event ) {
         var cando = true;
-//        var formData = $( "#fmbaiviet" ).serializeArray();
-//        console.log(formData);
+        var photo = false;
         $( ".fm_required" ).each(function( index ) {
             var name = $(this).attr("name");
             var type = $(this).attr("type");
 
             var vl =$(this).val();
-//            if(type=="hidden"){
-//                vl = $("input[name='"+name+"']").attr("value");
-//            }
             //var vl = $("*[name='"+name+"']").val();
             console.log(index+":"+name+":"+type+":"+vl);
             if(vl == null ||vl=="undefined" || vl==""){
-                console.log("empty:"+$(this).attr("name"));
+//                console.log("empty:"+$(this).attr("name"));
+                if(name.startsWith("photo")){
+                    photo = true;
+                }
                 cando = false;
             }
         });
         if(!cando){
             event.preventDefault();
-            dhtmlx.alert("<strong>Vui lòng điền đầy đủ thông tin bắt buộc</strong>");
+            if(photo){
+                dhtmlx.alert("<strong>Vui lòng upload đủ 5 hình ảnh</strong>");
+            }else{
+                dhtmlx.alert("<strong>Vui lòng điền đầy đủ thông tin bắt buộc</strong>");
+            }
+
         }
 
     });
