@@ -22,7 +22,7 @@
                     <div class="menu">
                         <div class="dropdown">
                             <span class="icon-menu" data-toggle="dropdown">
-                                <img src="{{ URL::asset('images/icon-menu.png') }}"/>
+                                <img src="{{ URL::asset('images/menu-icon.png') }}"/>
                             </span>
                             <ul class="dropdown-menu">
                                 <span class="close-menu"> <img src="{{ URL::asset('images/icon-close-menu.png') }}"/> </span>
@@ -144,7 +144,7 @@
 
 
                         ?>
-                        <select class="form-control" name="searchform[thongso_65]">
+                        <select class="form-control inp-filter" style="border-right:none" name="searchform[thongso_65]">
                             <option value="">Giá tiền</option>
                             <option value="<500000000" <?php if(isset($searchform['thongso_65']) && $searchform['thongso_65']=="<500000000"){ echo 'selected="true"';}?> ><500.000.000</option>
                             <option value="<1000000000" <?php if(isset($searchform['thongso_65']) && $searchform['thongso_65']=="<1000000000"){ echo 'selected="true"';}?>><1.000.000.000</option>
@@ -538,6 +538,7 @@
                 frameRate: 20,
                 speed: 1
             });
+
             $('#filter-city-support').on('change', function() {
                 window.location = '/thong-tin-cuu-ho/'+this.value;
             });
@@ -584,7 +585,21 @@
                 });
                 return false;
             });
+            if ($(".center-content-col").length){
+                var h = ($(".center-content-col").height());
+                var h_first_col = ($(".first-col").height());
+                var h_standard = h;
+                if(h_first_col > h){
+                    h_standard = h_first_col;
+                }
+                var h2 = ($(".list-services").height());
+                var h3 = ($(".avatar").height());
+                var h4 = ($(".title-list-news").height());
 
+                $(".vert").css({'height':(h_standard-h2-h3-h4-70)+'px'});
+                $(".simply-scroll-clip").css({'height':(h_standard-h2-h3-h4-50)+'px'});
+                $(".first-col ,.header , .last-col").css({'height':(h_standard+10)+'px'});
+            }
         });
     })(jQuery);
 </script>

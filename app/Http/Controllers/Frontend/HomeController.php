@@ -32,7 +32,7 @@ class HomeController extends Controller {
     {
         $listPost = Baiviet::where('status', 'PUBLIC')
             ->OrderBy('id','desc')
-            ->paginate(self::POST_PER_PAGE);
+            ->paginate(18);
         foreach ($listPost as $item){
             $item->thongso = json_decode($item->thongso,true);
         }

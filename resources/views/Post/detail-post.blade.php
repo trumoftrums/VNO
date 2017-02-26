@@ -170,7 +170,7 @@
                     <div class="price">
                         <p class="p-price">{{$detailPost->thongso['thongso_65']}} VND</p>
                         <p class="p-address">{{$detailPost->thongso['thongso_68']}}</p>
-                        <p class="p-phone">Điện thoại: <span>{{$detailPost->thongso['thongso_63']}}</span></p>
+                        <p class="p-phone">ĐT: <span>{{$detailPost->thongso['thongso_63']}}</span></p>
                     </div>
                 </div>
                 <div id="tab2" class="tab-pane fade">

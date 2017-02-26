@@ -220,7 +220,7 @@
                                 <div class="col-md-5">
                                     <textarea type="textarea" class="ip-descript <?php if($thongso["thongso_67"]['required']=="true"){echo 'fm_required';}?>" rows="5" name="thongso_67" id="comment" maxlength="1200" placeholder="Hãy nhập thông tin mô tả chi tiết"></textarea>
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-7 parent-img-upload">
                                     <div class="cover-inp-upload">
 
                                         <input  type="file" class="upload-image img-upload-1" id="photo1" name="file_photo1" size="20"/>
@@ -317,23 +317,23 @@
                 <div id="tab4" class="tab-pane fade">
                     <div>
                         <p class="p-thuoc-tinh-post">kích thước/ Trọng lượng</p>
-                        <label class="checkbox-inline">*Chiều dài: <input type="text"  name="thongso_50" class="free-post-input onlynumber"></label>
-                        <label class="checkbox-inline">*Chiều rộng: <input type="text"  name="thongso_51" class="free-post-input onlynumber"></label>
-                        <label class="checkbox-inline">*Chiều cao: <input type="text"  name="thongso_52" class="free-post-input onlynumber"></label>
-                        <label class="checkbox-inline">*Trọng lượng không tải: <?php if($thongso["thongso_53"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text"  name="thongso_53" class="free-post-input onlynumber <?php if($thongso["thongso_53"]['required']=="true"){echo 'fm_required';}?>"></label>
-                        <label class="checkbox-inline">*Dung tích nhiên liệu: <?php if($thongso["thongso_54"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text"  name="thongso_54" class="free-post-input onlynumber <?php if($thongso["thongso_54"]['required']=="true"){echo 'fm_required';}?>"></label>
+                        <label class="checkbox-inline"><span>*Chiều dài:</span> <input type="text"  name="thongso_50" class="free-post-input onlynumber"></label>
+                        <label class="checkbox-inline"><span>*Chiều rộng:</span> <input type="text"  name="thongso_51" class="free-post-input onlynumber"></label>
+                        <label class="checkbox-inline"><span>*Chiều cao:</span> <input type="text"  name="thongso_52" class="free-post-input onlynumber"></label>
+                        <label class="checkbox-inline"><span>*Trọng lượng không tải:</span> <?php if($thongso["thongso_53"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text"  name="thongso_53" class="free-post-input onlynumber <?php if($thongso["thongso_53"]['required']=="true"){echo 'fm_required';}?>"></label>
+                        <label class="checkbox-inline"><span>*Dung tích nhiên liệu:</span> <?php if($thongso["thongso_54"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text"  name="thongso_54" class="free-post-input onlynumber <?php if($thongso["thongso_54"]['required']=="true"){echo 'fm_required';}?>"></label>
                     </div>
                     <div>
                         <p class="p-thuoc-tinh-post">động cơ</p>
-                        <label class="checkbox-inline">*Động cơ: <?php if($thongso["thongso_66"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text"  name="thongso_66"  class="free-post-input <?php if($thongso["thongso_66"]['required']=="true"){echo 'fm_required';}?>"></label>
-                        <label class="checkbox-inline">*Kiểu động cơ: <?php if($thongso["thongso_55"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text"  name="thongso_55"  class="free-post-input <?php if($thongso["thongso_55"]['required']=="true"){echo 'fm_required';}?>"></label>
-                        <label class="checkbox-inline">*Dung tích xilanh: <?php if($thongso["thongso_56"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text" name="thongso_56"  class="free-post-input onlynumber <?php if($thongso["thongso_56"]['required']=="true"){echo 'fm_required';}?>"></label>
+                        <label class="checkbox-inline"><span>*Động cơ:</span> <?php if($thongso["thongso_66"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text"  name="thongso_66"  class="free-post-input <?php if($thongso["thongso_66"]['required']=="true"){echo 'fm_required';}?>"></label>
+                        <label class="checkbox-inline"><span>*Kiểu động cơ:</span> <?php if($thongso["thongso_55"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text"  name="thongso_55"  class="free-post-input <?php if($thongso["thongso_55"]['required']=="true"){echo 'fm_required';}?>"></label>
+                        <label class="checkbox-inline"><span>*Dung tích xilanh:</span> <?php if($thongso["thongso_56"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text" name="thongso_56"  class="free-post-input onlynumber <?php if($thongso["thongso_56"]['required']=="true"){echo 'fm_required';}?>"></label>
                     </div>
                     <div>
                         <p class="p-thuoc-tinh-post">phanh giảm sóc-lốp</p>
-                        <label class="checkbox-inline">*Phanh: <?php if($thongso["thongso_57"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text"  name="thongso_57"  class="free-post-input <?php if($thongso["thongso_57"]['required']=="true"){echo 'fm_required';}?>"></label>
-                        <label class="checkbox-inline">*Giảm sóc: <?php if($thongso["thongso_58"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text"  name="thongso_58" class="free-post-input <?php if($thongso["thongso_58"]['required']=="true"){echo 'fm_required';}?>"></label>
-                        <label class="checkbox-inline">*Lốp xe/ Vành mâm: <?php if($thongso["thongso_59"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text"  name="thongso_59" class="free-post-input <?php if($thongso["thongso_59"]['required']=="true"){echo 'fm_required';}?>"></label>
+                        <label class="checkbox-inline"><span>*Phanh:</span> <?php if($thongso["thongso_57"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text"  name="thongso_57"  class="free-post-input <?php if($thongso["thongso_57"]['required']=="true"){echo 'fm_required';}?>"></label>
+                        <label class="checkbox-inline"><span>*Giảm sóc:</span> <?php if($thongso["thongso_58"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text"  name="thongso_58" class="free-post-input <?php if($thongso["thongso_58"]['required']=="true"){echo 'fm_required';}?>"></label>
+                        <label class="checkbox-inline"><span>*Lốp xe/<br> Vành mâm:</span> <?php if($thongso["thongso_59"]['required']=="true"){echo '<span style="color:red;">*</span>';}?><input type="text"  name="thongso_59" class="free-post-input <?php if($thongso["thongso_59"]['required']=="true"){echo 'fm_required';}?>"></label>
                     </div>
                     <div>
                         <input type="submit" class="btn-next-free-post" value="ĐĂNG BÀI"/>
