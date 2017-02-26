@@ -90,8 +90,12 @@ class NewsController extends Controller {
             $baiviets = News::where('status','<>','DE')->where('id',$bvid)->limit(1)->get()->toArray();
             if(!empty($baiviets)){
                 $result['result'] = true;
-                $img = explode("/",$baiviets[0]['thumbnail']);
+                $img = explode("/",$baiviets[0]['image']);
                 $baiviets[0]['img'] = $img[count($img)-1];
+
+                $thumbnail = explode("/",$baiviets[0]['thumbnail']);
+                $baiviets[0]['thumbnail'] = $thumbnail[count($thumbnail)-1];
+
                 $result["data"] = $baiviets[0];
 
             }else{
@@ -141,7 +145,7 @@ class NewsController extends Controller {
 //            $thumnail2 = $this->generateThumbnail(public_path().$this->PATH_UPLOAD_IMG.$formData['photo'],218,65,80,"thumb2");
 //            var_dump($thumnail);var_dump($thumnail2);
 //            exit();
-            $bv->thumbnail = $bv->image;
+            $bv->thumbnail = $this->URL_UPLOAD_IMG.$formData['thumbnail'];;
             $bv->thumbnail2 = $bv->image;
             if($thumnail && $thumnail2){
                 $r =true;
@@ -216,7 +220,7 @@ class NewsController extends Controller {
       return $str;
     }
 
-    public function del_bai_viet(){
+    public function del_news(){
 
         $result =array(
             'result'=>false,
@@ -228,7 +232,7 @@ class NewsController extends Controller {
         if (Auth::check()) {
             $formData = Request::all();
             $bvid = $formData['baivietID'];
-            $r = Baiviet::where('id',$bvid)->update(["status"=>"DELETED"]);
+            $r = News::where('id',$bvid)->update(["status"=>"DE"]);
             if($r){
                 $result['result'] = true;
                 $result['mess'] = "Xóa bài viết thành công";
@@ -244,48 +248,6 @@ class NewsController extends Controller {
             ->withHeaders([
             'Content-Type' => 'application/json'
         ]);
-
-    }
-    public function pub_bai_viet(){
-
-        $result =array(
-            'result'=>false,
-            'mess' =>''
-        );
-
-
-
-        if (Auth::check()) {
-            $formData = Request::all();
-            $bvid = $formData['baivietID'];
-            $ck =  Baiviet::where('id',$bvid)->get()->toArray();
-            if(!empty($ck)){
-                $bv = $ck[0];
-                if($bv['status']!="PUBLIC"){
-                    $r = Baiviet::where('id',$bvid)->update(["status"=>"PUBLIC","published"=>date("Y-m-d H:i:s")]);
-                    if($r){
-                        $result['result'] = true;
-                        $result['mess'] = "Public bài viết thành công";
-                    }else{
-                        $result['mess'] = "Public không thành công, vui lòng thử lại!!";
-                    }
-                }else{
-                    $result['mess'] = "Bài viết này đã public rồi!!!";
-                }
-
-            }else{
-                $result['mess'] = "Bài viết không tồn tại!!";
-            }
-
-
-
-        }else{
-            $result['mess'] ='Vui lòng đăng nhập để sử dụng chức năng này ';
-        }
-        return response($result)
-            ->withHeaders([
-                'Content-Type' => 'application/json'
-            ]);
 
     }
 

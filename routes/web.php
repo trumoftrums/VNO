@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'Frontend\HomeController@index');
+Route::get('/home', 'Frontend\HomeController@index');
 Route::post('/', 'Frontend\HomeController@index_post');
 Route::get('/user', 'Frontend\HomeController@users');
 Route::post('/register', 'Frontend\HomeController@register');
@@ -33,7 +34,7 @@ Route::get('/vip-salon/{id}/{name}', 'Frontend\ServiceController@vipSalonDetail'
 
 Route::get('/bai-dang/{id}/{name}', 'Frontend\HomeController@postDetail');
 Route::get('/dang-tin-free', 'Frontend\HomeController@freePost');
-Route::post('/dang-tin-free', 'Frontend\HomeController@save_bai_viet');
+Route::post('/dang-tin-free', 'Frontend\HomeController@freePost');
 Route::post('/upload-avatar', 'Frontend\HomeController@uploadAvatar');
 
 Route::post('/baiviet/save_bai_viet', 'Frontend\HomeController@save_bai_viet');
@@ -59,6 +60,7 @@ Route::group(['prefix' => 'admin'], function()
     Route::get('/news', 'Admin\NewsController@index');
     Route::post('/getnewsedit', 'Admin\NewsController@getnewsedit');
     Route::get('/getnews', 'Admin\NewsController@get_news');
+    Route::post('/delnews', 'Admin\NewsController@del_news');
     Route::post('/save_news', 'Admin\NewsController@save_news');
     Route::get('/baiviet/get_total_news', 'Admin\BaivietController@get_total_news');
 //    Route::get('/tool/dhtmlxform_image/{id}', function ($id) {
