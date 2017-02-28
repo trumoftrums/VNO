@@ -67,7 +67,7 @@
             <a href="#"><img src="./images/logo_brands/volkswagen.png"/></a>
         </ul>
     </div>
-    <div class="list-items">
+    <div class="list-items" id="list-items1">
         @foreach($listPost as $item)
         <div class="col-lg-4 col-md-6 col-sm-6 item">
             <div class="inner-item">

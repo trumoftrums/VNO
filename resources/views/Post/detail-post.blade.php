@@ -18,7 +18,7 @@
         }
 
         /* The Modal (background) */
-        .modal {
+        .detail-po .modal {
             display: none;
             position: fixed;
             z-index: 1;
@@ -32,7 +32,7 @@
         }
 
         /* Modal Content */
-        .modal-content {
+        .detail-po .modal-content {
             position: relative;
             background-color: #fefefe;
             margin: auto;
@@ -42,7 +42,7 @@
         }
 
         /* The Close Button */
-        .close {
+        .detail-po .close {
             color: #058c04;
             position: absolute;
             top: -30px;
@@ -52,20 +52,20 @@
             opacity: 1;
         }
 
-        .close:hover,
-        .close:focus {
+        .detail-po .close:hover,
+        .detail-po .close:focus {
             color: #999;
             text-decoration: none;
             cursor: pointer;
         }
 
-        .mySlides {
+        .detail-po .mySlides {
             display: none;
         }
 
         /* Next & previous buttons */
-        .prev,
-        .next {
+        .detail-po .prev,
+        .detail-po .next {
             cursor: pointer;
             position: absolute;
             top: 50%;
@@ -82,19 +82,19 @@
         }
 
         /* Position the "next button" to the right */
-        .next {
+        .detail-po .next {
             right: 0;
             border-radius: 3px 0 0 3px;
         }
 
         /* On hover, add a black background color with a little bit see-through */
-        .prev:hover,
-        .next:hover {
+        .detail-po .prev:hover,
+        .detail-po .next:hover {
             background-color: rgba(0, 0, 0, 0.8);
         }
 
         /* Number text (1/3 etc) */
-        .numbertext {
+        .detail-po .numbertext {
             color: #f2f2f2;
             font-size: 12px;
             padding: 8px 12px;
@@ -267,39 +267,42 @@
             </div>
         </div>
     </div>
-    <div id="myModal" class="modal" style="background-color: rgba(59, 66, 60, 0.73);">
+    <div class="detail-po">
+        <div id="myModal" class="modal" style="background-color: rgba(59, 66, 60, 0.73);">
 
-        <div class="modal-content" style="width:40%;">
-            <span class="close cursor" onclick="closeModal()">&times;</span>
-            <div class="mySlides">
-                <div class="numbertext">1 / 5</div>
-                <img src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo1)}}" style="width:100%">
+            <div class="modal-content" style="width:40%;">
+                <span class="close cursor" onclick="closeModal()">&times;</span>
+                <div class="mySlides">
+                    <div class="numbertext">1 / 5</div>
+                    <img src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo1)}}" style="width:100%">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">2 / 5</div>
+                    <img src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo2)}}" style="width:100%">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">3 / 5</div>
+                    <img src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo3)}}" style="width:100%">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">4 / 5</div>
+                    <img src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo4)}}" style="width:100%">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">5 / 5</div>
+                    <img src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo5)}}" style="width:100%">
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
             </div>
-
-            <div class="mySlides">
-                <div class="numbertext">2 / 5</div>
-                <img src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo2)}}" style="width:100%">
-            </div>
-
-            <div class="mySlides">
-                <div class="numbertext">3 / 5</div>
-                <img src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo3)}}" style="width:100%">
-            </div>
-
-            <div class="mySlides">
-                <div class="numbertext">4 / 5</div>
-                <img src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo4)}}" style="width:100%">
-            </div>
-
-            <div class="mySlides">
-                <div class="numbertext">5 / 5</div>
-                <img src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo5)}}" style="width:100%">
-            </div>
-
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
     </div>
+
     <script  type="text/javascript">
         function openModal() {
             document.getElementById('myModal').style.display = "block";
