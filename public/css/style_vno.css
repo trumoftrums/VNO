@@ -307,13 +307,14 @@
 .header .center-content-col .filter .form-filter{
     background: #0c834a;
     float: left;
-    width: 93.3%;
+    width: 100%;
     height: 40px;
     border-radius: 5px;
+    margin-bottom: 5px;
 }
 .header .center-content-col .filter .form-filter input{
     background: #0c834a;
-    width: 17vw;
+    width: 34%;
     float: left;
     border: none;
     height: 36px;
@@ -329,7 +330,7 @@
 }
 .header .center-content-col .filter .form-filter select{
     float: left;
-    width: 9.7vw;
+    width: 22%;
     background: #0c834a;
     border: none;
     color: #e9f1ec;
@@ -337,6 +338,12 @@
     height: 36px;
     border-right: 1px solid #9ecdb7;
     border-radius: 0px;
+}
+.header .center-content-col .filter .form-filter-2{
+    width: 84%;
+}
+.header .center-content-col .filter .form-filter-2 select{
+    width:25%;
 }
 .header .center-content-col .filter .form-filter select option{
     color:#030303;
@@ -348,11 +355,11 @@
     float: left;
 }
 .header .center-content-col .filter .bt-submit-filter{
-    background: url(../images/bt-search.png) 50%;
+    background: url(../images/bt-search.png);
     background-size: cover;
     padding: 10px 20px;
     border: none;
-    width: 6%;
+    width: 15%;
     height: 40px;
     float: right;
     border-radius: 7px;

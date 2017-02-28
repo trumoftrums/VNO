@@ -146,29 +146,28 @@
                 <form action="/" method="post" name="searchform" >
                     <div class="form-filter">
                         <input type="text" <?php if(isset($searchform['keyword'])){ echo ' value="'.$searchform['keyword'].'"';} ?> class="form-control" name="searchform[keyword]" placeholder="Từ khóa..."/>
-                        <select class="form-control inp-filter">
-                            <option>Hãng xe</option>
+                        <?php
+//                        var_dump($searchform);exit();
+                            if(!empty($list_thongso)){
+                        foreach($list_thongso as $item){
+                            $default_value = null;
+
+                            if(isset($searchform['thongso_'.$item['id']])){
+                                $default_value = $searchform['thongso_'.$item['id']];
+                            }
+                            echo \App\Helpers\Helper::search_field($item,$item["name"],$default_value);
+                        }
+                        }
+
+
+                        ?>
+                        <select class="form-control inp-filter" style="border-right:none" name="searchform[thongso_65]">
+                            <option value="">Giá tiền</option>
+                            <option value="<500000000" <?php if(isset($searchform['thongso_65']) && $searchform['thongso_65']=="<500000000"){ echo 'selected="true"';}?> ><500.000.000</option>
+                            <option value="<1000000000" <?php if(isset($searchform['thongso_65']) && $searchform['thongso_65']=="<1000000000"){ echo 'selected="true"';}?>><1.000.000.000</option>
+                            <option value=">1000000000" <?php if(isset($searchform['thongso_65']) && $searchform['thongso_65']==">1000000000"){ echo 'selected="true"';}?>>>1.000.000.000</option>
                         </select>
-                        <select class="form-control inp-filter">
-                            <option>Dòng xe</option>
-                        </select>
-                        <select class="form-control inp-filter">
-                            <option>Dáng xe</option>
-                        </select>
-                    </div>
-                    <div class="form-filter form-filter-2">
-                        <select class="form-control inp-filter inp-filter-2">
-                            <option>Tình trạng</option>
-                        </select>
-                        <select class="form-control inp-filter inp-filter-2">
-                            <option>Năm SX</option>
-                        </select>
-                        <select class="form-control inp-filter inp-filter-2">
-                            <option>Giá tiền</option>
-                        </select>
-                        <select class="form-control inp-filter inp-filter-2">
-                            <option>Tỉnh thành</option>
-                        </select>
+
                     </div>
                     <input class="bt-submit-filter" type="submit" value=" ">
                 </form>
