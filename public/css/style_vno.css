@@ -1260,10 +1260,10 @@ textarea:focus, input:focus{
     float: left;
     border: none;
     width: 100%;
+    text-align: center;
     margin-top: 10px;
     margin-left: 0px !important;
     padding-left: 10px;
-    border-bottom: 1px solid #0c834a;
 }
 .ul-cover-tabs-post li{
     display: inline;
@@ -1271,17 +1271,13 @@ textarea:focus, input:focus{
 }
 .ul-cover-tabs-post li a{
     border: 1px solid #0c834a;
-    padding: 5px 0px;
-    width: 23.7%;
+    padding: 5px 5%;
     margin-right: 1%;
-    border-bottom: none;
     font-size: 0.95vw;
     text-align: center;
     background: #fff;
     color: #2d2d2d;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    float: left;
+    border-radius: 4px;
 }
 .ul-cover-tabs-post li.active a{
     background: #0c834a;
@@ -1553,36 +1549,54 @@ textarea:focus, input:focus{
     list-style: none;
     width: 100%;
     float: left;
-    margin-top: 6px;
+    margin-top: 10px;
 }
-
+.cover-tab-free ul li p.p-title-area{
+    color: #0c834a;
+    font-size: 16px;
+    border-left: 7px solid #0c834a;
+    padding-left: 5px;
+    float: left;
+    width: 100%;
+    margin-top: 20px;
+    border-bottom: 1px dotted #0c834a;
+}
+.cover-tab-free ul li .item-cover-one{
+    float: left;
+    width: 33.3%;
+}
 .cover-tab-free ul li label{
     font-weight: normal;
-    width: 30%;
+    float: left;
+    margin-top: 6px;
+}
+.cover-tab-free ul li .item-cover-one .free-post-input{
+    width: 13vw;
+    height: 31px;
+    float: right;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(../images/icon-selectbox.png) 100% / 31px no-repeat !important;
+}
+.cover-tab-free ul li .item-cover-two{
+    width: 66.6%;
     float: left;
 }
-.cover-tab-free ul li .ip-price{
-    background: #0c834a;
-    color: #fff;
-    padding-left: 5px;
+.cover-tab-free ul li .free-post-inp-text{
+    float: right;
+    width: 13vw;
+    height: 31px;
 }
-.ip-descript{
-    float: left;
-    width: 98%;
-    padding: 5px;
-    height:147px;
-    margin-bottom: 10px;
+.cover-tab-free ul li .inp-tieu-thu{
+    width: 15vw;
 }
-.cover-tab-free ul li .ip-long{
-    width: 83.5% !important;
+.cover-tab-free ul li .inp-address{
+    width: 31vw;
 }
-.cover-tab-free ul li .free-post-input{
-    height: 30px;
-    width: 68%;
-    border: 1px solid #ccc;
-}
-.cover-tab-free ul li label.lb-address{
-    width: 14%;
+.cover-tab-free ul li .mar-right{
+    margin-left: 2vw;
+    font-weight: normal;
 }
 .cover-tab-free ul li .upload-image{
     position: absolute;
@@ -1617,10 +1631,8 @@ textarea:focus, input:focus{
     width: 100%;
 }
 .btn-next-free-post{
-    float: right;
     background: #0c834a;
     border: none;
-    margin-right: 20px;
     padding: 8px 25px;
     color: #fff;
     border-radius: 5px;
@@ -1634,7 +1646,8 @@ textarea:focus, input:focus{
     font-size: 16px;
 }
 .parent-img-upload{
-    padding-right: 5px !important;
+    width: 550px;
+    margin: 0px auto;
 }
 .inp-filter{
     -webkit-appearance: none;
