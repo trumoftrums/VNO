@@ -1608,7 +1608,7 @@ textarea:focus, input:focus{
 }
 .cover-tab-free ul li .img-upload-1{
     bottom: 3px;
-    left: 15px;
+    left: 1px;
 }
 .cover-tab-free ul li .img-upload-2{
     bottom: 3px;
@@ -1626,6 +1626,7 @@ textarea:focus, input:focus{
     float: left;
     width: 19.5%;
     padding: 2px;
+    position: relative;
 }
 .cover-tab-free ul li .cover-inp-upload img{
     width: 100%;
