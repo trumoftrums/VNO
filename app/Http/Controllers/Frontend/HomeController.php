@@ -181,11 +181,12 @@ class HomeController extends Controller {
     {
         $active_tab2 = Input::get('page', '');
         $user = Auth::user();
-        $listPost = Baiviet::where('userid', $user->id)->paginate(self::POST_PER_PAGE);;
+        $listPost = Baiviet::where('userid', $user->id)->where('status', 'PUBLIC')->paginate(self::POST_PER_PAGE);;
         foreach ($listPost as $item){
             $item->thongso = json_decode($item->thongso,true);
         }
-        $totalPost = Baiviet::where('userid', $user->id)->count();
+//        echo '<pre>';print_r($listPost);exit();
+        $totalPost = Baiviet::where('userid', $user->id)->where('status', 'PUBLIC')->count();
         return View('Users.index', [
             'user' => $user,
             'listPost' => $listPost,
@@ -312,41 +313,63 @@ class HomeController extends Controller {
 
     }
 
-    public function freePost()
+    public function freePost($id_slug=null)
     {
         if(!Auth::check()){
             return Redirect::to("admin/login");
         }
-        $res = Thongtinxe::join('md_nhom_thongso', 'md_nhom_thongso.parentid', '=', 'md_thongtinxe.id')
-            ->join('md_thongso', 'md_thongso.group', '=', 'md_nhom_thongso.id')
-            ->select('md_thongso.*','md_nhom_thongso.name as nameNhom', 'md_nhom_thongso.id as idNhom',
-                'md_thongtinxe.id as idTab', 'md_thongtinxe.name as nameTab','md_nhom_thongso.hidden')
-            ->where('md_thongtinxe.status',1)
-            ->where('md_nhom_thongso.status',1)
-            ->where('md_thongso.status',1)
-            ->get()->toArray();
+//        $res = Thongtinxe::join('md_nhom_thongso', 'md_nhom_thongso.parentid', '=', 'md_thongtinxe.id')
+//            ->join('md_thongso', 'md_thongso.group', '=', 'md_nhom_thongso.id')
+//            ->select('md_thongso.*','md_nhom_thongso.name as nameNhom', 'md_nhom_thongso.id as idNhom',
+//                'md_thongtinxe.id as idTab', 'md_thongtinxe.name as nameTab','md_nhom_thongso.hidden')
+//            ->where('md_thongtinxe.status',1)
+//            ->where('md_nhom_thongso.status',1)
+//            ->where('md_thongso.status',1)
+//            ->get()->toArray();
+//
+//        $info =  array(
+//            'title' =>'Admin DashBoard',
+//            'content' =>'This is admin dashboard page'
+//        );
+//        $thongtinxe = array();
+//        foreach ($res as $v){
+//            $thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['ls'][] = $v;
+//            if(!isset($thongtinxe[$v['idTab']]['nameTab'])){
+//                $thongtinxe[$v['idTab']]['nameTab'] = $v['nameTab'];
+//            }
+//            if(!isset($thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['nameNhom'])){
+//                $thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['nameNhom'] = $v['nameNhom'];
+//                $thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['hidden'] = $v['hidden'];
+//            }
+//        }
+//        var_dump($thongtinxe[2]);exit();
+        $result =array();
+        $user = Auth::user();
+        $bv = array();
+        if(!empty($id_slug)){
+            $arr_pid = explode("-",$id_slug);
+            $pid = $arr_pid[0];
+            $baiviet = Baiviet::where('status','<>','DELETED')->where('id','=',$pid)->get()->toArray();
+//          var_dump($baiviet);exit();
+            if(!empty($baiviet)){
+                $bv = $baiviet[0];
+                if($user->id == $bv['userid']){
+                    $bv['thongso'] = json_decode($bv['thongso'],true);
 
-        $info =  array(
-            'title' =>'Admin DashBoard',
-            'content' =>'This is admin dashboard page'
-        );
-        $thongtinxe = array();
-        foreach ($res as $v){
-            $thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['ls'][] = $v;
-            if(!isset($thongtinxe[$v['idTab']]['nameTab'])){
-                $thongtinxe[$v['idTab']]['nameTab'] = $v['nameTab'];
-            }
-            if(!isset($thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['nameNhom'])){
-                $thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['nameNhom'] = $v['nameNhom'];
-                $thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['hidden'] = $v['hidden'];
+                }else{
+                    $result['result'] =false;
+                    $result['mess'] = "Bạn không có quyền chỉnh sửa bài viết này!";
+                }
+            }else{
+                $result['result'] =false;
+                $result['mess'] = "Không tìm thấy bài viết!";
             }
         }
-//        var_dump($thongtinxe[2]);exit();
-        $user = Auth::user();
+//        var_dump($bv);exit();
 
         $thongso = $this->get_thongso_init();
         $formData =  Request::all();
-        $result =array();
+
         if(!empty($formData)){
             //var_dump($formData);exit();
             $hash = md5(json_encode($formData));
@@ -363,10 +386,11 @@ class HomeController extends Controller {
         }
         $datas = array(
             'user' => $user,
-            'info' => $info,
-            'thongtinxe' =>$thongtinxe,
+//            'info' => $info,
+//            'thongtinxe' =>$thongtinxe,
             'thongso'=>$thongso,
-            'result' =>$result
+            'result' =>$result,
+            'baiviet' =>$bv
         );
         return View('Post.free-post',$datas);
     }
@@ -469,6 +493,7 @@ class HomeController extends Controller {
 
             $tieude = $formData['thongso_20']." ".$formData['thongso_25']." ".$formData['thongso_22'];
             $tieude = trim($tieude);
+//            var_dump($tieude);exit();
             if(!empty($tieude) && !empty($mota)){
                 DB::beginTransaction();
                 $bv = new Baiviet;
@@ -488,6 +513,7 @@ class HomeController extends Controller {
                     $bv->{$k} = $v;
                 }
                 $r1 = true;
+//                var_dump($bvid);exit();
                 if(!empty($bvid)){
 //                    var_dump($bv->toArray());exit();
                     $bv->updated_by = Auth::id();
@@ -506,6 +532,13 @@ class HomeController extends Controller {
                     $r2 = true;
                     $needindexs = DB::table('md_thongso')->where('md_thongso.status', 1)->where('md_thongso.need_index', 1)->pluck('id')->toArray();
                     if (!empty($needindexs)) {
+
+                        if(!empty($bvid)){
+                            //update
+                            $rd = Baivietindex::where('baivietID',$bv->id)->delete();
+
+
+                        }
                         // index title post
                         $save_index = new Baivietindex;
                         $save_index->baivietID = $bv->id;
@@ -529,19 +562,7 @@ class HomeController extends Controller {
                                     $save_index->index_value = $this->convert_vi_to_en($v);
                                     $save_index->index_value = $this->clean($save_index->index_value);
                                 }
-                                $rd = true;
-                                if(!empty($bvid)){
-                                    //update
-                                    $rd = Baivietindex::where('baivietID',$bv->id)->where('index_key',$arrk[1])->delete();
-
-
-                                }
-
-                                if($rd){
-                                    $r2 = $save_index->save();
-                                }else{
-                                    $r2 = false;
-                                }
+                                $r2 = $save_index->save();
 
                                 if (!$r2) {
                                     DB::rollback();
@@ -647,4 +668,5 @@ class HomeController extends Controller {
         $len = strpos($string, $end, $ini) - $ini;
         return substr($string, $ini, $len);
     }
+
 }

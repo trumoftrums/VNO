@@ -91,7 +91,7 @@
                         <div class="hover-item">
                             <div class="cover-zoom">
                                 <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><img src="{{ URL::asset('images/icon-zoom.png')}}"/></a>
-                                <a class="detail" href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}">Xem Chi Tiết</a>
+                                <a rel="nofollow" class="detail" href="{{ URL::to('/dang-tin-free/'.$item->id.'-'.str_slug($item->tieu_de, '-')) }}">Sửa bài viết</a>
                             </div>
                         </div>
                         <div class="left-item">

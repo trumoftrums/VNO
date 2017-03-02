@@ -35,9 +35,13 @@ Route::get('/vip-salon/{id}/{name}', 'Frontend\ServiceController@vipSalonDetail'
 Route::get('/bai-dang/{id}/{name}', 'Frontend\HomeController@postDetail');
 Route::get('/dang-tin-free', 'Frontend\HomeController@freePost');
 Route::post('/dang-tin-free', 'Frontend\HomeController@freePost');
+Route::get('/dang-tin-free/{id_slug}', 'Frontend\HomeController@freePost');
+Route::post('/dang-tin-free/{id_slug}', 'Frontend\HomeController@freePost');
 Route::post('/upload-avatar', 'Frontend\HomeController@uploadAvatar');
 
 Route::post('/baiviet/save_bai_viet', 'Frontend\HomeController@save_bai_viet');
+//Route::get('/eidt-baiviet/{id}', 'Frontend\HomeController@edit_freePost');
+
 Route::post('/baiviet/uploadimg', 'Admin\BaivietController@uploadimg');
 //Route::get('/get_thongso_init', 'Frontend\HomeController@get_thongso_init');
 Route::group(['prefix' => 'admin'], function()
