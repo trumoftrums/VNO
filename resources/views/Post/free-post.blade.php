@@ -191,28 +191,28 @@
                                 </div>
                                 <div class="item-cover-two">
                                     <label class="mar-right">Mức tiệu thụ</label>
-                                    <input type="text" class="free-post-inp-text inp-tieu-thu">
-                                    <input type="text"  style="margin-right:1vw" class="free-post-inp-text inp-tieu-thu">
+                                    <input type="text" class="free-post-inp-text inp-tieu-thu" placeholder="Lit/KM trên phạm vi đô thị">
+                                    <input type="text"  style="margin-right:1vw" class="free-post-inp-text inp-tieu-thu" placeholder="Lit/KM trên phạm vi đường trường">
                                 </div>
                             </li>
                             <li>
                                 <div class="item-cover-one">
                                     <label>Số điện thoại</label>
-                                    <input type="text" class="free-post-inp-text">
+                                    <input type="text" class="free-post-inp-text" placeholder="Nhập số điện thoại">
                                 </div>
                                 <div class="item-cover-two">
                                     <label class="mar-right">Địa chỉ</label>
-                                    <input type="text" class="free-post-inp-text inp-address">
+                                    <input type="text" class="free-post-inp-text inp-address" placeholder="Nhập địa chỉ của bạn">
                                 </div>
                             </li>
                             <li>
                                 <div class="item-cover-one">
                                     <label>Giá tiền</label>
-                                    <input type="text" class="free-post-inp-text">
+                                    <input type="text" class="free-post-inp-text" placeholder="Nhập giá tiền">
                                 </div>
                                 <div class="item-cover-two">
                                     <label class="mar-right">Xe này có thể vay</label>
-                                    <input type="text" class="free-post-inp-text inp-address">
+                                    <input type="text" class="free-post-inp-text inp-address" placeholder="Nhập số tiền hỗ trợ">
                                 </div>
                             </li>
                             <li>
