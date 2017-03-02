@@ -11,7 +11,14 @@
     <script src="{{ URL::asset('js/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('js/jquery.simplyscroll.min.js') }}" type="text/javascript"></script>
+    <script src="{{ URL::asset('ckeditor/ckeditor.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('js/angular.min.js') }}"></script>
+    <script>
+        CKEDITOR.replace( 'textarea_id', {
+            fullPage: true,
+            allowedContent: true
+        });
+    </script>
 </head>
 <body ng-app="myApp" ng-controller="registerCtrl">
 <div class="container-fluid">
@@ -123,34 +130,52 @@
                     </div>
                 </div>
             </div>
+            <div class="scroll-ads">
+                <div class="item-ads">
+                    <a target="_blank" href="http://www.peugeotvietnam.vn/showroom/508/sedan/">
+                        <img class="img-ads" src="{{ URL::asset('images/slides/slides-left/peugeot-334x72.png')}}"/>
+                    </a>
+                </div>
+                <div class="item-ads">
+                    <a target="_blank" href="http://porsche-vietnam.vn/model/718-cayman-s/">
+                        <img class="img-ads" src="{{ URL::asset('images/slides/slides-left/porsche-334x72.png')}}"/>
+                    </a>
+                </div>
+                <div class="item-ads">
+                    <a target="_blank" href="http://www.ssangyong.com.vn/chairman_w/exterior.html">
+                        <img class="img-ads" src="{{ URL::asset('images/slides/slides-left/ssangyong-334x72.png')}}"/>
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="center-content-col">
             <div class="filter">
                 <form action="/" method="post" name="searchform" >
                     <div class="form-filter">
                         <input type="text" <?php if(isset($searchform['keyword'])){ echo ' value="'.$searchform['keyword'].'"';} ?> class="form-control" name="searchform[keyword]" placeholder="Từ khóa..."/>
-                        <?php
-//                        var_dump($searchform);exit();
-                            if(!empty($list_thongso)){
-                        foreach($list_thongso as $item){
-                            $default_value = null;
-
-                            if(isset($searchform['thongso_'.$item['id']])){
-                                $default_value = $searchform['thongso_'.$item['id']];
-                            }
-                            echo \App\Helpers\Helper::search_field($item,$item["name"],$default_value);
-                        }
-                        }
-
-
-                        ?>
-                        <select class="form-control inp-filter" style="border-right:none" name="searchform[thongso_65]">
-                            <option value="">Giá tiền</option>
-                            <option value="<500000000" <?php if(isset($searchform['thongso_65']) && $searchform['thongso_65']=="<500000000"){ echo 'selected="true"';}?> ><500.000.000</option>
-                            <option value="<1000000000" <?php if(isset($searchform['thongso_65']) && $searchform['thongso_65']=="<1000000000"){ echo 'selected="true"';}?>><1.000.000.000</option>
-                            <option value=">1000000000" <?php if(isset($searchform['thongso_65']) && $searchform['thongso_65']==">1000000000"){ echo 'selected="true"';}?>>>1.000.000.000</option>
+                        <select class="form-control inp-filter">
+                            <option>Hãng xe</option>
                         </select>
-
+                        <select class="form-control inp-filter">
+                            <option>Dòng xe</option>
+                        </select>
+                        <select class="form-control inp-filter">
+                            <option>Dáng xe</option>
+                        </select>
+                    </div>
+                    <div class="form-filter form-filter-2">
+                        <select class="form-control inp-filter inp-filter-2">
+                            <option>Tình trạng</option>
+                        </select>
+                        <select class="form-control inp-filter inp-filter-2">
+                            <option>Năm SX</option>
+                        </select>
+                        <select class="form-control inp-filter inp-filter-2">
+                            <option>Giá tiền</option>
+                        </select>
+                        <select class="form-control inp-filter inp-filter-2">
+                            <option>Tỉnh thành</option>
+                        </select>
                     </div>
                     <input class="bt-submit-filter" type="submit" value=" ">
                 </form>
@@ -196,6 +221,7 @@
             <div class="list-news">
                 <h3 class="title-list-news"><img src="{{ URL::asset('images/icon-news.png')}}" />TIN TỨC MỚI CẬP NHẬT</h3>
                 <ul id="scroller">
+                    @for($i=0;$i<2;$i++)
                     @foreach($listNewsHome as $val)
                     <li class="item-news">
                         <a href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}"><img src="{{ URL::asset($val->image)}}"/></a>
@@ -204,6 +230,7 @@
                         <a class="bt-detail-news" href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}">Chi tiết<small> >> </small></a>
                     </li>
                     @endforeach
+                    @endfor
                 </ul>
             </div>
         </div>
@@ -527,81 +554,69 @@
             }
         }
     });
-
-    (function($) {
-        $(function() { //on DOM ready
-            $("#scroller").simplyScroll({
-                customClass: 'vert',
-                orientation: 'vertical',
-                auto: true,
-                manualMode: 'loop',
-                frameRate: 20,
-                speed: 1
-            });
-
-            $('#filter-city-support').on('change', function() {
-                window.location = '/thong-tin-cuu-ho/'+this.value;
-            });
-            $('#filter-city-design').on('change', function() {
-                window.location = '/do-xe-uy-tin/'+this.value;
-            });
-            $('#filter-city-salon').on('change', function() {
-                window.location = '/vip-salon/'+this.value;
-            });
-            $("#scrollerSalon").simplyScroll({
-                customClass: 'hori',
-                orientation: 'horizontal',
-                auto: true,
-                manualMode: 'loop',
-                frameRate: 20,
-                speed: 1
-            });
-            $( ".inner-item" ).hover(function() {
-                $( this ).children(":first").fadeIn('fast');
-            }, function(){
-                $(this).children(":first").fadeOut('fast');
-            });
-            $("#userfile").change(function () {
-                $('#upload_file').submit();
-            });
-            $('#upload_file').submit(function () {
-                var formData = new FormData($(this)[0]);
-                $.ajax({
-                    url: '/upload-avatar',
-                    type: 'POST',
-                    enctype: 'multipart/form-data',
-                    data: formData,
-                    async: false,
-                    success: function (result) {
-                        if(result != 'NO_CHANGE'){
-                            $("#ava-img").attr('src', result);
-                            $("#ava-img-small").attr('src', result);
-                            $("#ava-img-dropdown").attr('src', result);
-                        }
-                    },
-                    cache: false,
-                    contentType: false,
-                    processData: false
-                });
-                return false;
-            });
-            if ($(".center-content-col").length){
-                var h = ($(".center-content-col").height());
-                var h_first_col = ($(".first-col").height());
-                var h_standard = h;
-                if(h_first_col > h){
-                    h_standard = h_first_col;
-                }
-                var h2 = ($(".list-services").height());
-                var h3 = ($(".avatar").height());
-                var h4 = ($(".title-list-news").height());
-
-                $(".vert").css({'height':(h_standard-h2-h3-h4-70)+'px'});
-                $(".list-news .simply-scroll-clip").css({'height':(h_standard-h2-h3-h4-50)+'px'});
-                $(".first-col ,.header , .last-col").css({'height':(h_standard+10)+'px'});
-            }
+    $(window).on("load", function() {
+        $("#scroller").simplyScroll({
+            customClass: 'vert',
+            orientation: 'vertical',
+            auto: true,
+            autoMode: 'loop',
+            manualMode: 'loop',
+            frameRate: 20,
+            speed: 1
         });
-    })(jQuery);
+        $('#filter-city-support').on('change', function() {
+            window.location = '/thong-tin-cuu-ho/'+this.value;
+        });
+        $('#filter-city-design').on('change', function() {
+            window.location = '/do-xe-uy-tin/'+this.value;
+        });
+        $('#filter-city-salon').on('change', function() {
+            window.location = '/vip-salon/'+this.value;
+        });
+        $( ".inner-item" ).hover(function() {
+            $( this ).children(":first").fadeIn('fast');
+        }, function(){
+            $(this).children(":first").fadeOut('fast');
+        });
+        $("#userfile").change(function () {
+            $('#upload_file').submit();
+        });
+        $('#upload_file').submit(function () {
+            var formData = new FormData($(this)[0]);
+            $.ajax({
+                url: '/upload-avatar',
+                type: 'POST',
+                enctype: 'multipart/form-data',
+                data: formData,
+                async: false,
+                success: function (result) {
+                    if(result != 'NO_CHANGE'){
+                        $("#ava-img").attr('src', result);
+                        $("#ava-img-small").attr('src', result);
+                        $("#ava-img-dropdown").attr('src', result);
+                    }
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+            return false;
+        });
+
+        var h = ($(".center-content-col").height());
+        var h_first_col = ($(".first-col").height());
+        var h_standard = h;
+        if (h_first_col > h) {
+            h_standard = h_first_col;
+        }
+        var h2 = ($(".list-services").height());
+        var h3 = ($(".avatar").height());
+        var h4 = ($(".title-list-news").height());
+
+        $(".vert").css({'height': (h_standard - h2 - h3 - h4 - 70) + 'px'});
+        $(".list-news .simply-scroll-clip").css({'height': (h_standard - h2 - h3 - h4 - 50) + 'px'});
+        $(".first-col ,.header , .last-col").css({'height': (h_standard + 10) + 'px'});
+    });
 </script>
 </body>
 </html>

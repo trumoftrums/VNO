@@ -4,7 +4,7 @@
         background: none !important;
     }
     .news-page .list-news-page{
-        height:555px !important;
+        /*height:555px !important;*/
     }
 </style>
 @section('content')
