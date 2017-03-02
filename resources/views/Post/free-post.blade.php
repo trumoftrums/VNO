@@ -67,12 +67,16 @@
                             </li>
                             <li>
                                 <div class="item-cover-one">
-                                    <label>Thương hiệu</label>
-                                    <select  type="select" class="free-post-input">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                    <label>Thương hiệu xe<?php if($thongso["thongso_20"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <select type="select" class="free-post-input <?php if($thongso["thongso_20"]['required']=="true"){echo 'fm_required';}?>" name ="thongso_20">
+                                        <option value="">Click chọn</option>
+                                        <?php
+                                        if(isset($thongso["thongso_20"]["arr_options"]) && !empty($thongso["thongso_20"]["arr_options"])){
+                                            foreach ($thongso["thongso_20"]["arr_options"] as $k=>$v){
+                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                            }
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="item-cover-one">
@@ -85,23 +89,31 @@
                                     </select>
                                 </div>
                                 <div class="item-cover-one">
-                                    <label class="mar-right">Dáng xe</label>
-                                    <select  type="select" class="free-post-input">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                    <label class="mar-right">Dáng xe<?php if($thongso["thongso_25"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <select  type="select" class="free-post-input <?php if($thongso["thongso_25"]['required']=="true"){echo 'fm_required';}?>" name="thongso_25">
+                                        <option value="">Click chọn</option>
+                                        <?php
+                                        if(isset($thongso["thongso_25"]["arr_options"]) && !empty($thongso["thongso_25"]["arr_options"])){
+                                            foreach ($thongso["thongso_25"]["arr_options"] as $k=>$v){
+                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                            }
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </li>
                             <li>
                                 <div class="item-cover-one">
-                                    <label>Tỉnh thành</label>
-                                    <select  type="select" class="free-post-input">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                    <label>Tỉnh thành<?php if($thongso["thongso_62"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <select  type="select" class="free-post-input <?php if($thongso["thongso_62"]['required']=="true"){echo 'fm_required';}?>" name="thongso_62">
+                                        <option value=""><i style="color: #d1d1d1;">Click chọn</i></option>
+                                        <?php
+                                        if(isset($thongso["thongso_62"]["arr_options"]) && !empty($thongso["thongso_62"]["arr_options"])){
+                                            foreach ($thongso["thongso_62"]["arr_options"] as $k=>$v){
+                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                            }
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="item-cover-one">
@@ -114,42 +126,43 @@
                                     </select>
                                 </div>
                                 <div class="item-cover-one">
-                                    <label class="mar-right">Tình trạng</label>
-                                    <select  type="select" class="free-post-input">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                    <label class="mar-right">Tình trạng<?php if($thongso["thongso_24"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <select  type="select" class="free-post-input <?php if($thongso["thongso_24"]['required']=="true"){echo 'fm_required';}?>" name="thongso_24">
+                                        <option value="">Click chọn</option>
+                                        <?php
+                                        if(isset($thongso["thongso_24"]["arr_options"]) && !empty($thongso["thongso_24"]["arr_options"])){
+                                            foreach ($thongso["thongso_24"]["arr_options"] as $k=>$v){
+                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                            }
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </li>
                             <li>
                                 <div class="item-cover-one">
-                                    <label>Năm SX</label>
-                                    <select  type="select" class="free-post-input">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                    <label>Năm SX<?php if($thongso["thongso_22"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <select  type="select" class="free-post-input <?php if($thongso["thongso_22"]['required']=="true"){echo 'fm_required';}?>" name="thongso_22">
+                                        <option value="">Click chọn</option>
+                                        <?php
+                                        if(isset($thongso["thongso_22"]["arr_options"]) && !empty($thongso["thongso_22"]["arr_options"])){
+                                            foreach ($thongso["thongso_22"]["arr_options"] as $k=>$v){
+                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                            }
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="item-cover-one">
-                                    <label class="mar-right">KM đã đi</label>
-                                    <select  type="select" class="free-post-input">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select>
+                                    <label  class="mar-right">KM đã đi<?php if($thongso["thongso_26"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <input type="text" class="free-post-input onlynumber <?php if($thongso["thongso_26"]['required']=="true"){echo 'fm_required';}?>" name="thongso_26">
+
                                 </div>
                                 <div class="item-cover-one">
-                                    <label class="mar-right">Màu sắc</label>
-                                    <select  type="select" class="free-post-input">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select>
+
+                                    <label  class="mar-right">Màu sắc<?php if($thongso["thongso_27"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <input type="text" class="free-post-input <?php if($thongso["thongso_27"]['required']=="true"){echo 'fm_required';}?>" name="thongso_27">
+
                                 </div>
                             </li>
                             <li>
@@ -157,12 +170,16 @@
                             </li>
                             <li>
                                 <div class="item-cover-one">
-                                    <label>Nhiên liệu</label>
-                                    <select  type="select" class="free-post-input">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                    <label>Nhiên liệu<?php if($thongso["thongso_32"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <select  type="select" class="free-post-input <?php if($thongso["thongso_32"]['required']=="true"){echo 'fm_required';}?>" name="thongso_32">
+                                        <option value="">Click chọn</option>
+                                        <?php
+                                        if(isset($thongso["thongso_32"]["arr_options"]) && !empty($thongso["thongso_32"]["arr_options"])){
+                                            foreach ($thongso["thongso_32"]["arr_options"] as $k=>$v){
+                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                            }
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="item-cover-one">
@@ -186,69 +203,88 @@
                             </li>
                             <li>
                                 <div class="item-cover-one">
-                                    <label>Số ghế - cửa</label>
-                                    <input type="text" class="free-post-inp-text">
+                                    <label>Số ghế - cửa<?php if($thongso["thongso_30"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <select  type="select" class="free-post-input <?php if($thongso["thongso_30"]['required']=="true"){echo 'fm_required';}?>" name="thongso_30">
+                                        <option value="">Click chọn</option>
+                                        <?php
+                                        if(isset($thongso["thongso_30"]["arr_options"]) && !empty($thongso["thongso_30"]["arr_options"])){
+                                            foreach ($thongso["thongso_30"]["arr_options"] as $k=>$v){
+                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                            }
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class="item-cover-two">
                                     <label class="mar-right">Mức tiệu thụ</label>
-                                    <input type="text" class="free-post-inp-text inp-tieu-thu" placeholder="Lit/KM trên phạm vi đô thị">
-                                    <input type="text"  style="margin-right:1vw" class="free-post-inp-text inp-tieu-thu" placeholder="Lit/KM trên phạm vi đường trường">
+                                    <input type="text" class="free-post-inp-text inp-tieu-thu" name="thongso_71" placeholder="Lit/KM trên phạm vi đô thị">
+                                    <input type="text" style="margin-right:1vw" class="free-post-inp-text inp-tieu-thu" name="thongso_72" placeholder="Lit/KM trên phạm vi đường trường">
+
+                                    {{--<input type="text" class="free-post-inp-text inp-tieu-thu" placeholder="Lit/KM trên phạm vi đô thị">--}}
+                                    {{--<input type="text"  style="margin-right:1vw" class="free-post-inp-text inp-tieu-thu" placeholder="Lit/KM trên phạm vi đường trường">--}}
                                 </div>
                             </li>
                             <li>
                                 <div class="item-cover-one">
-                                    <label>Số điện thoại</label>
-                                    <input type="text" class="free-post-inp-text" placeholder="Nhập số điện thoại">
+
+                                    <label>Số điện thoại<?php if($thongso["thongso_63"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <input maxlength="11" type="text" class="free-post-inp-text onlynumber  <?php if($thongso["thongso_63"]['required']=="true"){echo 'fm_required';}?>" name="thongso_63" placeholder="Nhập số điện thoại">
+
                                 </div>
                                 <div class="item-cover-two">
-                                    <label class="mar-right">Địa chỉ</label>
-                                    <input type="text" class="free-post-inp-text inp-address" placeholder="Nhập địa chỉ của bạn">
+
+                                    <label class="mar-right">Địa chỉ<?php if($thongso["thongso_68"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <input type="text" class="free-post-inp-text inp-address  <?php if($thongso["thongso_68"]['required']=="true"){echo 'fm_required';}?>" name="thongso_68" placeholder="Nhập địa chỉ của bạn">
+
                                 </div>
                             </li>
                             <li>
                                 <div class="item-cover-one">
-                                    <label>Giá tiền</label>
-                                    <input type="text" class="free-post-inp-text" placeholder="Nhập giá tiền">
+                                    <label>Giá tiền<?php if($thongso["thongso_65"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <input type="text" class="free-post-inp-text onlynumber <?php if($thongso["thongso_65"]['required']=="true"){echo 'fm_required';}?>" name="thongso_65" placeholder="Nhập giá tiền">
+
                                 </div>
                                 <div class="item-cover-two">
                                     <label class="mar-right">Xe này có thể vay</label>
-                                    <input type="text" class="free-post-inp-text inp-address" placeholder="Nhập số tiền hỗ trợ">
+                                    <input type="text" class="free-post-inp-text inp-address" name="thongso_73" placeholder="Nhập số tiền hỗ trợ">
                                 </div>
                             </li>
                             <li>
                                 <p class="p-title-area">MÔ TẢ XE CỦA BẠN</p>
                             </li>
                             <li>
-                                <textarea class="ckeditor" name="editor1" placeholder="Hãy nhập thông tin mô tả chi tiết"></textarea>
+                                <textarea type="textarea" class="ckeditor <?php if($thongso["thongso_67"]['required']=="true"){echo 'fm_required';}?>" rows="5" name="thongso_67" id="comment" maxlength="1200" placeholder="Hãy nhập thông tin mô tả chi tiết"></textarea>
                             </li>
                             <li>
                                 <div class="col-md-12" style="padding: 0px;">
                                     <div class="parent-img-upload">
                                         <div class="cover-inp-upload">
+
                                             <input  type="file" class="upload-image img-upload-1" id="photo1" name="file_photo1" size="20"/>
-                                            <img id="img_photo1" src="{{ URL::asset('./images/1.png')}}"/>
-                                            <input type="hidden" class="fm_required" name="photo1" value=""/>
+                                            <img id="img_photo1" src="<?php if(isset($baiviet['photo1']) && !empty($baiviet['photo1'])) echo '/uploads/baiviet/'.$baiviet['photo1'];else echo './images/1.png'; ?>"/>
+                                            <input type="hidden" class="fm_required" name="photo1" value="<?php if(isset($baiviet['photo1']) && !empty($baiviet['photo1'])) echo $baiviet['photo1'];?>"/>
                                         </div>
                                         <div class="cover-inp-upload">
                                             <input  type="file" class="upload-image img-upload-2" id="photo2" name="file_photo2" size="20"/>
-                                            <img id="img_photo2" src="{{ URL::asset('./images/2.png')}}"/>
-                                            <input type="hidden"  class="fm_required" name="photo2"  value=""/>
+                                            <img id="img_photo2" src="<?php if(isset($baiviet['photo2']) && !empty($baiviet['photo2'])) echo '/uploads/baiviet/'.$baiviet['photo2'];else echo './images/2.png'; ?>"/>
+                                            <input type="hidden"  class="fm_required" name="photo2"  value="<?php if(isset($baiviet['photo2']) && !empty($baiviet['photo2'])) echo $baiviet['photo2'];?>"/>
                                         </div>
                                         <div class="cover-inp-upload">
                                             <input type="file" class="upload-image img-upload-3" id="photo3" name="file_photo3" size="20"/>
-                                            <img id="img_photo3" src="{{ URL::asset('./images/3.png')}}"/>
-                                            <input type="hidden"  class="fm_required" name="photo3"  value=""/>
+                                            <img id="img_photo3" src="<?php if(isset($baiviet['photo3']) && !empty($baiviet['photo3'])) echo '/uploads/baiviet/'.$baiviet['photo3'];else echo './images/3.png'; ?>"/>
+                                            <input type="hidden"  class="fm_required" name="photo3"  value="<?php if(isset($baiviet['photo3']) && !empty($baiviet['photo3'])) echo $baiviet['photo3'];?>"/>
                                         </div>
                                         <div class="cover-inp-upload">
                                             <input type="file" class="upload-image img-upload-4" id="photo4" name="file_photo4" size="20"/>
-                                            <img id="img_photo4" src="{{ URL::asset('./images/4.png')}}"/>
-                                            <input type="hidden"  class="fm_required" name="photo4"  value=""/>
+                                            <img id="img_photo4" src="<?php if(isset($baiviet['photo4']) && !empty($baiviet['photo4'])) echo '/uploads/baiviet/'.$baiviet['photo4'];else echo './images/4.png'; ?>"/>
+                                            <input type="hidden"  class="fm_required" name="photo4"  value="<?php if(isset($baiviet['photo4']) && !empty($baiviet['photo4'])) echo $baiviet['photo4'];?>"/>
                                         </div>
                                         <div class="cover-inp-upload">
                                             <input type="file" class="upload-image img-upload-5" id="photo5" name="file_photo5" size="20"/>
-                                            <img id="img_photo5" src="{{ URL::asset('./images/5.png')}}"/>
-                                            <input type="hidden"  class="fm_required" name="photo5"  value=""/>
+                                            <img id="img_photo5" src="<?php if(isset($baiviet['photo5']) && !empty($baiviet['photo5'])) echo '/uploads/baiviet/'.$baiviet['photo5'];else echo './images/5.png'; ?>"/>
+                                            <input type="hidden"  class="fm_required" name="photo5"  value="<?php if(isset($baiviet['photo5']) && !empty($baiviet['photo5'])) echo $baiviet['photo5'];?>"/>
                                         </div>
+
                                     </div>
                                 </div>
                             </li>
