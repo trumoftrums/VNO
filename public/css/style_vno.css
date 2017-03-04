@@ -1551,15 +1551,150 @@ textarea:focus, input:focus{
     float: left;
     margin-top: 10px;
 }
-.cover-tab-free ul li p.p-title-area{
+.p-title-area{
     color: #0c834a;
-    font-size: 16px;
+    font-size: 15px;
     border-left: 7px solid #0c834a;
     padding-left: 5px;
     float: left;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
     border-bottom: 1px dotted #0c834a;
+}
+.common-info{
+    width: 100%;
+    text-align: center;
+ }
+.common-info .cover-div-first{
+    float: left;
+    width: 100%;
+    padding: 20px 0px;
+}
+.common-info .cover-div-first .div-one{
+    width: 36%;
+    float: left;
+}
+.common-info .cover-div-first .div-two{
+    width: 36%;
+    float: left;
+}
+.common-info .cover-div-first .div-three{
+    width: 28%;
+    float: left;
+}
+.common-info .cover-div-first label{
+    font-weight: normal;
+    float: left;
+    margin-top: 5px;
+}
+.common-info .cover-div-first .cover-radio{
+    float: right;
+}
+.div-post-normal{
+    float: left;
+    width: 100%;
+    padding: 15px 0px;
+    display: block;
+}
+.div-post-normal ul{
+    padding-left: 0px;
+}
+.div-post-normal ul li{
+    list-style: none;
+    width: 100%;
+    float: left;
+    line-height: 35px;
+}
+.div-post-normal ul li label{
+    float: left;
+    font-weight: normal;
+    width: 12.5%;
+}
+.div-post-normal ul li .inp-price{
+    height: 31px;
+    width: 12vw;
+}
+.div-post-normal ul li .code{
+    height: 31px;
+    width: 7vw;
+    float: left;
+    margin-right: 5px;
+    padding-left: 4px;
+}
+.div-post-normal ul li .img-cap{
+    height: 31px;
+    width: 4.7vw;
+    float: left;
+}
+.div-bottom{
+    text-align: center;
+}
+.div-bottom p{
+    color: #cb000a;
+    float: left;
+}
+.common-info .cover-div-first .calendar-inp{
+    height: 31px;
+    width: 12vw;
+    background: url(../images/icon-calendar.png) 100% / 31px no-repeat !important;
+    border: 1px solid #ccc;
+    padding-left: 4px;
+}
+.div-post-vip .div-item-vip-post{
+    width: 33.3%;
+    float: left;
+}
+.div-post-vip{
+    float: left;
+    width: 100%;
+    display: none;
+    padding: 15px 0px;
+}
+.div-post-vip ul{
+    padding-left: 0px;
+}
+.div-post-vip ul li{
+    float: left;
+    width: 100%;
+    list-style: none;
+    margin-bottom: 15px;
+}
+.div-post-vip .div-item-vip-post label{
+    font-weight: normal;
+    float: left;
+    width: 6vw;
+}
+.div-post-vip .div-item-vip-post .inp-normal{
+    height: 31px;
+    width: 13vw;
+}
+.div-post-vip .div-item-vip-post .code{
+    height: 31px;
+    width: 8vw;
+    float: left;
+    margin-right: 5px;
+    padding-left: 4px;
+}
+.div-post-vip .div-item-vip-post .img-cap{
+    height: 31px;
+    width: 4.7vw;
+    float: left;
+}
+.common-info .post-normal{
+    color: #0c834a;
+    font-weight: bold;
+}
+.common-info .post-vip1{
+    color: #004cab;
+    font-weight: bold;
+}
+.common-info .post-vip2{
+    color: #ff6600;
+    font-weight: bold;
+}
+.common-info .post-vip-pro{
+    color: #ff0000;
+    font-weight: bold;
 }
 .cover-tab-free ul li .item-cover-one{
     float: left;
@@ -1573,6 +1708,7 @@ textarea:focus, input:focus{
 .cover-tab-free ul li .item-cover-one .free-post-input{
     width: 13vw;
     height: 31px;
+    padding-left: 4px;
     float: right;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -1587,6 +1723,7 @@ textarea:focus, input:focus{
     float: right;
     width: 13vw;
     height: 31px;
+    padding-left: 4px;
 }
 .cover-tab-free ul li .inp-tieu-thu{
     width: 15vw;
@@ -1634,7 +1771,7 @@ textarea:focus, input:focus{
 .btn-next-free-post{
     background: #0c834a;
     border: none;
-    padding: 8px 25px;
+    padding: 10px 50px;
     color: #fff;
     border-radius: 5px;
 }
