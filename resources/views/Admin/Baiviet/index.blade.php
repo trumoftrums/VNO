@@ -35,7 +35,14 @@
     div.gridbox table.row20px tr  td img{
         max-height:60px !important;
     }
+    #recinfoArea {
+        position: absolute;
+        bottom:0px;
+        width:100%;
+    }
+
 </style>
+
 <link rel="stylesheet" type="text/css" href="../js/dhtmlx5/dhtmlx.css"/>
 <link rel="stylesheet" type="text/css" href="../js/dhtmlx5/fonts/font_roboto/roboto.css"/>
 <script src="../js/dhtmlx5/dhtmlx.js"></script>
@@ -171,6 +178,10 @@
             });
             mygrid = myLayout.cells("a").attachGrid();
             mygrid.setImagePath("../js/dhtmlx5/imgs/");
+//            mygrid.enablePaging(true,50,3,"recinfoArea");
+//            mygrid.setPagingSkin("toolbar","dhx_skyblue");
+            mygrid.enableBlockSelection();
+
             mygrid.init();
             mygrid.attachEvent("onXLE", function(grid_obj,count){
                 myLayout.cells("a").progressOff();
@@ -178,6 +189,10 @@
             mygrid.attachEvent("onXLS", function(grid_obj){
                 myLayout.cells("a").progressOn();
             });
+//            var h = mygrid.attachEvent("onPaging",function(){
+//                this.aToolBar.setAlign("right");
+//                this.detachEvent(h);
+//            });
             mygrid.setAwaitedRowHeight(25);
             mygrid.loadXML("getbaiviet");
 
@@ -605,6 +620,6 @@
 
         }
     </script>
-
+    <div id="recinfoArea"></div>
 @endsection
 
