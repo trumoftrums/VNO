@@ -277,21 +277,36 @@ class HomeController extends Controller {
             ->leftJoin('md_users', 'md_users.id', '=', 'op_baiviets.userid')
             ->select('op_baiviets.*', 'md_users.username')
             ->first();
-        $listPostRelated = Baiviet::where('status', 'PUBLIC')
-            ->OrderBy('op_baiviets.id','desc')
-            ->limit(5)
+        $detailPost->thongso = json_decode($detailPost->thongso,true);
+
+        $strFilter = $detailPost->thongso['thongso_20'];
+        $cond_str = "index_key_str = 'thongso_20' and index_value ='$strFilter' ";
+        $listPostRelatedType = Baivietindex::whereRaw($cond_str)->distinct('baivietID')
+            ->where('op_baiviets.status', 'PUBLIC')
+            ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
+            ->OrderBy('op_baiviets.id', 'desc')
+            ->limit(6)
             ->whereNotIn('id', [$detailPost->id])
             ->get();
-        foreach ($listPostRelated as $item){
+        foreach ($listPostRelatedType as &$item){
             $item->thongso = json_decode($item->thongso,true);
         }
-        $detailPost->thongso = json_decode($detailPost->thongso,true);
-        $list_thongso = Thongso::where('filter',1)->get()->toArray();
+        $strFilterPrice = $detailPost->thongso['thongso_65'];
+        $cond_str_price = "index_key_str = 'thongso_65' and index_value ='$strFilterPrice' ";
+        $listPostRelatedPrice = Baivietindex::whereRaw($cond_str_price)->distinct('baivietID')
+            ->where('op_baiviets.status', 'PUBLIC')
+            ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
+            ->OrderBy('op_baiviets.id', 'desc')
+            ->limit(6)
+            ->whereNotIn('id', [$detailPost->id])
+            ->get();
+        foreach ($listPostRelatedPrice as &$item){
+            $item->thongso = json_decode($item->thongso,true);
+        }
         return View('Post.detail-post', [
             'detailPost' => $detailPost,
-            'listPostRelated' => $listPostRelated,
-            'list_thongso'=>$list_thongso
-//            'list_thongso'=>$list_thongso
+            'listPostRelatedType' => $listPostRelatedType,
+            'listPostRelatedPrice' => $listPostRelatedPrice
         ]);
     }
 

@@ -139,137 +139,113 @@
             </div>
         </div>
         <div class="info-post">
-            <ul class="ul-cover-tabs-post">
-                <li class="active"><a data-toggle="tab" href="#tab1">THÔNG TIN CĂN BẢN</a></li>
-                <li><a data-toggle="tab" href="#tab2">THÔNG TIN AN TOÀN</a></li>
-                <li><a data-toggle="tab" href="#tab3">TÍNH TIỆN NGHI</a></li>
-                <li><a data-toggle="tab" href="#tab4">THÔNG TIN KỸ THUẬT</a></li>
-            </ul>
-            <div class="cover-tab-post tab-content">
-                <div id="tab1" class="tab-pane fade in active">
-                    <div class="info-01">
-                        <ul>
-                            <li><p>*Năm sản xuất: {{$detailPost->thongso['thongso_22']}}</p></li>
-                            <li><p>*Tình trạng: {{$detailPost->thongso['thongso_24']}}</p></li>
-                            <li><p>*KM đã đi: {{$detailPost->thongso['thongso_26']}} km</p></li>
-                        </ul>
-                        <ul>
-                            <li><p>*Hệ thống nhiên liệu: {{$detailPost->thongso['thongso_31']}}</p></li>
-                            <li><p>*Nhiên liệu: {{$detailPost->thongso['thongso_32']}}</p></li>
-                            <li><p>*Dáng xe: {{$detailPost->thongso['thongso_25']}}</p></li>
-                        </ul>
-                        <ul class="final-ul">
-                            <li><p>*Màu sắc: {{$detailPost->thongso['thongso_27']}}</p></li>
-                            <li><p>*Số ghế: {{$detailPost->thongso['thongso_30']}}</p></li>
-                            <li><p>*Tỉnh thành: {{$detailPost->thongso['thongso_62']}}</p></li>
-                        </ul>
-                    </div>
-                    @if($detailPost->thongso['thongso_67'] != '')
-                        <p class="mo-ta" id="style-4">{{$detailPost->thongso['thongso_67']}}</p>
-                    @endif
-                    <div class="price">
-                        <p class="p-price">{{$detailPost->thongso['thongso_65']}} VND</p>
-                        <p class="p-address">{{$detailPost->thongso['thongso_68']}}</p>
-                        <p class="p-phone">ĐT: <span>{{$detailPost->thongso['thongso_63']}}</span></p>
-                    </div>
-                </div>
-                <div id="tab2" class="tab-pane fade">
-                    <div>
-                        <p class="p-thuoc-tinh-post">túi khí an toàn</p>
-                        <label class="checkbox-inline">*Túi khí người lái<input disabled="disabled" @if($detailPost->thongso['thongso_1'] == 1) checked @endif type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Túi khí khách phía trước<input disabled="disabled" @if($detailPost->thongso['thongso_3'] == 1) checked @endif type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Túi khí khách phía sau<input disabled="disabled" @if($detailPost->thongso['thongso_2'] == 1) checked @endif type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Túi khí hai bên ghế<input disabled="disabled" @if($detailPost->thongso['thongso_4'] == 1) checked @endif type="checkbox" value=""></label>
-                    </div>
-                    <div>
-                        <p class="p-thuoc-tinh-post">phanh - điều khiển</p>
-                        <label class="checkbox-inline">*Chống bó cứng phanh(ABS)<input @if($detailPost->thongso['thongso_5'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Phân bổ lực phanh điện tử<input @if($detailPost->thongso['thongso_9'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Trợ lực phanh khẩn cấp(EBA)<input @if($detailPost->thongso['thongso_6'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Điều khiển hành trình<input @if($detailPost->thongso['thongso_7'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Tự động cân bằng điện tử(ESP)<input @if($detailPost->thongso['thongso_10'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Hỗ trợ cảnh báo lùi<input @if($detailPost->thongso['thongso_11'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Hệ thống kiểm soát trượt<input @if($detailPost->thongso['thongso_8'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Chốt cửa an toàn<input @if($detailPost->thongso['thongso_12'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                    </div>
-                    <div>
-                        <p class="p-thuoc-tinh-post">khóa chống trộm</p>
-                        <label class="checkbox-inline">*Khóa cửa tự động<input @if($detailPost->thongso['thongso_13'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Khóa cửa điều khiển từ xa<input @if($detailPost->thongso['thongso_15'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Khóa động cơ<input @if($detailPost->thongso['thongso_14'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Hệ thống báo trộm ngoại vi<input @if($detailPost->thongso['thongso_16'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                    </div>
-                    <div>
-                        <p class="p-thuoc-tinh-post">các thống số khác</p>
-                        <label class="checkbox-inline">*Đèn sương mù<input @if($detailPost->thongso['thongso_17'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Đèn báo thắt dây an toàn<input @if($detailPost->thongso['thongso_19'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Đèn phanh phụ thứ 3 lắp cao<input @if($detailPost->thongso['thongso_18'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                    </div>
-                </div>
-                <div id="tab3" class="tab-pane fade">
-                    <div>
-                        <label class="checkbox-inline">*Thiết bị định vị<input @if($detailPost->thongso['thongso_36'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Thiết bị giải trí<input @if($detailPost->thongso['thongso_38'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Kính chính diện<input @if($detailPost->thongso['thongso_37'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Điều hòa sau<input @if($detailPost->thongso['thongso_39'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Điều hòa trước<input @if($detailPost->thongso['thongso_45'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Hỗ trợ xe tự động<input @if($detailPost->thongso['thongso_46'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label><br>
-                        <label class="checkbox-inline">*Sấy kính sau<input @if($detailPost->thongso['thongso_40'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Kính màu<input @if($detailPost->thongso['thongso_41'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Cửa sổ nóc<input @if($detailPost->thongso['thongso_43'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Tay lái trợ lực<input @if($detailPost->thongso['thongso_44'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Quạt kính sau<input @if($detailPost->thongso['thongso_47'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                        <label class="checkbox-inline">*Màn hình LCD<input @if($detailPost->thongso['thongso_48'] == 1) checked @endif disabled="disabled" type="checkbox" value=""></label>
-                    </div>
-                    @if($detailPost->thongso['thongso_49'] != '')
-                        <p class="mo-ta" id="style-4">{{$detailPost->thongso['thongso_49']}}</p>
-                    @endif
-                </div>
-                <div id="tab4" class="tab-pane fade">
-                    <div>
-                        <p class="p-thuoc-tinh-post">kích thước/ Trọng lượng</p>
-                        <label class="checkbox-inline">*Chiều dài: {{$detailPost->thongso['thongso_50']}}m</label>
-                        <label class="checkbox-inline">*Chiều rộng: {{$detailPost->thongso['thongso_51']}}m</label>
-                        <label class="checkbox-inline">*Chiều cao: {{$detailPost->thongso['thongso_52']}}m</label>
-                        <label class="checkbox-inline">*Trọng lượng không tải: {{$detailPost->thongso['thongso_53']}}kg</label>
-                        <label class="checkbox-inline">*Dung tích nhiên liệu: {{$detailPost->thongso['thongso_54']}} lít</label>
-                    </div>
-                    <div>
-                        <p class="p-thuoc-tinh-post">động cơ</p>
-                        <label class="checkbox-inline">*Động cơ: {{$detailPost->thongso['thongso_66']}} mã lực</label>
-                        <label class="checkbox-inline">*Kiểu động cơ: {{$detailPost->thongso['thongso_55']}}</label>
-                        <label class="checkbox-inline">*Dung tích xilanh: {{$detailPost->thongso['thongso_56']}} cm3</label>
-                    </div>
-                    <div>
-                        <p class="p-thuoc-tinh-post">phanh giảm sóc-lốp</p>
-                        <label class="checkbox-inline">*Phanh: {{$detailPost->thongso['thongso_57']}}</label>
-                        <label class="checkbox-inline">*Giảm sóc: {{$detailPost->thongso['thongso_58']}}</label>
-                        <label class="checkbox-inline">*Lốp xe/ Vành mâm: {{$detailPost->thongso['thongso_59']}}</label>
-                    </div>
-                </div>
+            <div class="address-price-phone">
+                <p class="price">@if(isset($detailPost->thongso['thongso_65'])) {{$detailPost->thongso['thongso_65']}} @endif VND</p>
+                <p class="address">@if(isset($detailPost->thongso['thongso_68'])) {{$detailPost->thongso['thongso_68']}} @endif</p>
+                <p class="phone">ĐT: @if(isset($detailPost->thongso['thongso_63'])) {{$detailPost->thongso['thongso_63']}} @endif</p>
             </div>
-            <div class="related-post">
-                <p class="title-related-post"><img src="{{ URL::asset('images/icon-title-news.png')}}"/> có thể bạn cũng thích</p>
-                <div class="list-related-post">
-                    <ul id="scrollerRelatedPost">
-                        @foreach($listPostRelated as $item)
-                        <li class="item">
-                            <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><img src="{{ URL::asset('uploads/baiviet/'.$item->photo1)}}"></a>
-                            <div class="caption">
-                                <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><h3>{{$item->tieu_de}}</h3></a>
-                                <p>{{$item->thongso['thongso_65']}} VND</p>
-                                <p>{{$item->thongso['thongso_62']}}</p>
+            <div class="info-post-detail">
+                <div class="left">
+                    <p class="p-title-area">MÔ TẢ CƠ BẢN</p>
+                    <ul>
+                        <li>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/icon01.png')}}"/>Dáng xe: @if(isset($detailPost->thongso['thongso_25'])) {{$detailPost->thongso['thongso_25']}} @endif</span>
+                            </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/icon04.png')}}"/>Tỉnh thành: @if(isset($detailPost->thongso['thongso_62'])) {{$detailPost->thongso['thongso_62']}} @endif</span>
+                            </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/icon07.png')}}"/>Tình trạng: @if(isset($detailPost->thongso['thongso_24'])) {{$detailPost->thongso['thongso_24']}} @endif</span>
                             </div>
                         </li>
-                        @endforeach
+                        <li>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/icon02.png')}}"/>Năm SX: @if(isset($detailPost->thongso['thongso_22'])) {{$detailPost->thongso['thongso_22']}} @endif</span>
+                            </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/icon05.png')}}"/>Xuất xứ: @if(isset($detailPost->thongso['thongso_70'])) {{$detailPost->thongso['thongso_70']}} @endif</span>
+                            </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/icon08.png')}}"/>KM đã đi: @if(isset($detailPost->thongso['thongso_26'])) {{$detailPost->thongso['thongso_26']}} @endif km</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/icon03.png')}}"/>Hộp số: @if(isset($detailPost->thongso['thongso_34'])) {{$detailPost->thongso['thongso_34']}} @endif</span>
+                            </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/icon06.png')}}"/>Nhiên liệu: @if(isset($detailPost->thongso['thongso_32'])) {{$detailPost->thongso['thongso_32']}} @endif</span>
+                            </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/icon09.png')}}"/>Màu sắc: @if(isset($detailPost->thongso['thongso_27'])) {{$detailPost->thongso['thongso_27']}} @endif</span>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="p-info">* Mức tiêu thụ(đô thị): @if(isset($detailPost->thongso['thongso_72'])) {{$detailPost->thongso['thongso_72']}} @endif </p>
+                        </li>
+                        <li>
+                            <p class="p-info">* Mức tiêu thụ(đường trường): @if(isset($detailPost->thongso['thongso_71'])) {{$detailPost->thongso['thongso_71']}} @endif </p>
+                        </li>
+                        <li>
+                            <div>
+                                <p class="p-info">* Số ghế - cửa: @if(isset($detailPost->thongso['thongso_74'])) {{$detailPost->thongso['thongso_74']}} @endif </p>
+                            </div>
+                            <p class="p-info">* Dẫn động: @if(isset($detailPost->thongso['thongso_33'])) {{$detailPost->thongso['thongso_33']}} @endif </p>
+                        </li>
                     </ul>
                 </div>
+                <div class="right">
+                    <p class="p-title-area p-title-no-area">SỐ TIỀN CÓ THỂ VAY</p>
+                    <p class="price"><img src="{{ URL::asset('images/icon-detail-post/icon-price.png')}}"/>@if(isset($detailPost->thongso['thongso_73'])) {{$detailPost->thongso['thongso_73']}} @endif VND</p>
+                    <img class="img-bank" src="{{ URL::asset('images/icon-detail-post/img-bank.png')}}"/>
+                </div>
+            </div>
+            <div class="div-des">
+                <p class="p-title-area">NỘI DUNG MÔ TẢ</p>
+                @if(isset($detailPost->thongso['thongso_67'])) {{$detailPost->thongso['thongso_67']}} @endif
+                <p class="p-notes"><span>* Lưu ý:</span> Quý vị đang xem nội dung tin rao "{{$detailPost->tieu_de}}". Mọi thông tin liên quan tới tin rao này là do người đăng tin đăng tải và chịu trách nhiệm. Vietnamoto.net luôn cố gắng để có chất lượng thông tin tốt nhất, nhưng Banxehoi.com không chịu trách nhiệm về bất kỳ nội dung nào liên quan tới tin rao này. Nếu quý vị phát hiện có sai sót hay vấn đề gì xin hãy thông báo cho vietnamoto.net tại đây</p>
+            </div>
+            <div class="post-relate-type">
+                <p class="p-relate-post"><img src="{{ URL::asset('images/icon-detail-post/icon-car.png')}}"/>XE CÙNG THỂ LOẠI</p>
+                @foreach($listPostRelatedType as $item)
+                    <div class="item-relate-post">
+                        <a href="#"><img class="thumb" src="{{ URL::asset('images/item-car.png')}}"/></a>
+                        <div class="right-item">
+                            <a href="#"><span class="sp-title">@if(isset($item->tieu_de)) {{$item->tieu_de}} @endif</span></a>
+                            <span>@if(isset($item->thongso['thongso_65'])) {{$item->thongso['thongso_65']}} @endif VNĐ</span>
+                            <span>@if(isset($item->thongso['thongso_62'])) {{$item->thongso['thongso_62']}} @endif</span>
+                        </div>
+                    </div>
+                @endforeach
+                @if(count($listPostRelatedType) > 0)
+                    <div class="cover-view-more">
+                        <a class="view-more" href="#">Xem nhiều hơn>></a>
+                    </div>
+                @endif
+            </div>
+            <div class="post-relate-type">
+                <p class="p-relate-post"><img src="{{ URL::asset('images/icon-detail-post/icon-car.png')}}"/>XE CÙNG GIÁ</p>
+                @foreach($listPostRelatedPrice as $item)
+                    <div class="item-relate-post">
+                        <a href="#"><img class="thumb" src="{{ URL::asset('images/item-car.png')}}"/></a>
+                        <div class="right-item">
+                            <a href="#"><span class="sp-title">@if(isset($item->tieu_de)) {{$item->tieu_de}} @endif</span></a>
+                            <span>@if(isset($item->thongso['thongso_65'])) {{$item->thongso['thongso_65']}} @endif VNĐ</span>
+                            <span>@if(isset($item->thongso['thongso_62'])) {{$item->thongso['thongso_62']}} @endif</span>
+                        </div>
+                    </div>
+                @endforeach
+                @if(count($listPostRelatedPrice) > 0)
+                    <div class="cover-view-more">
+                        <a class="view-more" href="#">Xem nhiều hơn>></a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
     <div class="detail-po">
         <div id="myModal" class="modal" style="background-color: rgba(59, 66, 60, 0.73);">
-
             <div class="modal-content" style="width:40%;">
                 <span class="close cursor" onclick="closeModal()">&times;</span>
                 <div class="mySlides">
@@ -302,7 +278,6 @@
             </div>
         </div>
     </div>
-
     <script  type="text/javascript">
         function openModal() {
             document.getElementById('myModal').style.display = "block";
