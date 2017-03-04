@@ -295,66 +295,101 @@
                     </div>
                 </div>
                 <div id="tab2" class="tab-pane fade">
-                    <div>
-                        <p class="p-thuoc-tinh-post">túi khí an toàn</p>
-                        <input type='hidden' value='0' name='thongso_1'>
-                        <label class="checkbox-inline">*Túi khí người lái<input type="checkbox" name="thongso_1" value="1"></label>
-                        <input type='hidden' value='0' name='thongso_2'>
-                        <label class="checkbox-inline">*Túi khí khách phía trước<input type="checkbox" name="thongso_2" value="1"></label>
-                        <input type='hidden' value='0' name='thongso_3'>
-                        <label class="checkbox-inline">*Túi khí khách phía sau<input type="checkbox" name="thongso_3" value="1"></label>
-                        <input type='hidden' value='0' name='thongso_4'>
-                        <label class="checkbox-inline">*Túi khí hai bên ghế<input type="checkbox" name="thongso_4" value="1"></label>
+                    <p class="p-title-area">CHỌN LOẠI TIN ĐĂNG</p>
+                    <div class="common-info">
+                        <label class="radio-inline post-normal"><input type="radio" checked name="optradio" value="1">TIN THƯỜNG</label>
+                        <label class="radio-inline post-vip1"><input type="radio" name="optradio" value="2">TIN VIP 1</label>
+                        <label class="radio-inline post-vip2"><input type="radio" name="optradio" value="3">TIN VIP 2</label>
+                        <label class="radio-inline post-vip-pro"><input type="radio" name="optradio" value="4">TIN VIP PRO</label>
+                        <div class="cover-div-first">
+                            <div class="div-one">
+                                <label>Ngày băt đầu</label>
+                                <input type="text" id="datepicker1" class="calendar-inp">
+                            </div>
+                            <div class="div-two">
+                                <label>Ngày kết thúc</label>
+                                <input type="text" id="datepicker2" class="calendar-inp">
+                            </div>
+                            <div class="div-three">
+                                <label>Up tin tự động</label>
+                                <div class="cover-radio">
+                                    <label class="radio-inline post-normal"><input type="radio" checked name="optradio1">Có</label>
+                                    <label class="radio-inline post-normal"><input type="radio" name="optradio1">Không</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <p class="p-thuoc-tinh-post">phanh - điều khiển</p>
-                        <input type='hidden' value='0' name='thongso_5'>
-                        <label class="checkbox-inline">*Chống bó cứng phanh(ABS)<input type="checkbox" name="thongso_5" value="1"></label>
-                        <input type='hidden' value='0' name='thongso_9'>
-                        <label class="checkbox-inline">*Phân bổ lực phanh điện tử<input type="checkbox" name="thongso_9" value="1"></label>
-                        <input type='hidden' value='0' name='thongso_6'>
-                        <label class="checkbox-inline">*Trợ lực phanh khẩn cấp(EBA)<input type="checkbox" name="thongso_6" value="1"></label>
-                        <input type='hidden' value='0' name='thongso_7'>
-                        <label class="checkbox-inline">*Điều khiển hành trình<input type="checkbox" name="thongso_7" value="1"></label>
-                        <input type='hidden' value='0' name='thongso_10'>
-                        <label class="checkbox-inline">*Tự động cân bằng điện tử(ESP)<input type="checkbox" name="thongso_10" value="1"></label>
-                        <input type='hidden' value='0' name='thongso_11'>
-                        <label class="checkbox-inline">*Hỗ trợ cảnh báo lùi<input type="checkbox" name="thongso_11"  value="1"></label>
-                        <input type='hidden' value='0' name='thongso_8'>
-                        <label class="checkbox-inline">*Hệ thống kiểm soát trượt<input type="checkbox" name="thongso_8" value="1"></label>
-                        <input type='hidden' value='0' name='thongso_12'>
-                        <label class="checkbox-inline">*Chốt cửa an toàn<input type="checkbox" name="thongso_12" value="1></label>
+                    <p class="p-title-area">THÀNH TIỀN</p>
+                    <div class="div-post-normal">
+                        <ul>
+                            <li>
+                                <label>Tổng tiền</label>
+                                <input type="text" class="inp-price">
+                            </li>
+                            <li>
+                                <label>Mã xác nhận</label>
+                                <input type="text" class="code" placeholder="Nhập mã">
+                                <img class="img-cap" src="{{ URL::asset('images/img-capcha.png') }}"/>
+                            </li>
+                        </ul>
                     </div>
-                    <div>
-                        <p class="p-thuoc-tinh-post">khóa chống trộm</p>
-                        <input type='hidden' value='0' name='thongso_13'>
-                        <label class="checkbox-inline">*Khóa cửa tự động<input type="checkbox" name="thongso_13" value="1"></label>
-                        <input type='hidden' value='0' name='thongso_15'>
-                        <label class="checkbox-inline">*Khóa cửa điều khiển từ xa<input type="checkbox" name="thongso_15" value="1"></label>
-                        <input type='hidden' value='0' name='thongso_14'>
-                        <label class="checkbox-inline">*Khóa động cơ<input type="checkbox" name="thongso_14" value="1"></label>
-                        <input type='hidden' value='0' name='thongso_16'>
-                        <label class="checkbox-inline">*Hệ thống báo trộm ngoại vi<input type="checkbox" name="thongso_16" value="1"></label>
+                    <div class="div-post-vip">
+                        <ul>
+                            <li>
+                                <div class="div-item-vip-post">
+                                    <label>Thời gian</label>
+                                    <input type="text" class="inp-normal">
+                                </div>
+                                <div class="div-item-vip-post">
+                                    <label>Loại tin</label>
+                                    <input type="text" class="inp-normal">
+                                </div>
+                                <div class="div-item-vip-post">
+                                    <label>Phí đăng tin</label>
+                                    <input type="text" class="inp-normal">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="div-item-vip-post">
+                                    <label>Phí Up tin<br> tự động</label>
+                                    <input type="text" class="inp-normal">
+                                </div>
+                                <div class="div-item-vip-post">
+                                    <label>Tổng tiền</label>
+                                    <input type="text" class="inp-normal">
+                                </div>
+                                <div class="div-item-vip-post">
+                                    <label>Mã xác nhận</label>
+                                    <input type="text" class="code" placeholder="Nhập mã">
+                                    <img class="img-cap" src="{{ URL::asset('images/img-capcha.png') }}"/>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    <div>
-                        <p class="p-thuoc-tinh-post">các thống số khác</p>
-                        <input type='hidden' value='0' name='thongso_17'>
-                        <label class="checkbox-inline">*Đèn sương mù<input type="checkbox" name="thongso_17" value="1"></label>
-                        <input type='hidden' value='0' name='thongso_19'>
-                        <label class="checkbox-inline">*Đèn báo thắt dây an toàn<input type="checkbox" name="thongso_19" value="1"></label>
-                        <input type='hidden' value='0' name='thongso_18'>
-                        <label class="checkbox-inline">*Đèn phanh phụ thứ 3 lắp cao<input type="checkbox" name="thongso_18" value="1"></label>
-                    </div>
-                    <div>
-                        <input type="button" class="btn-next-free-post" id="btnNext_tab2" value="TIẾP TỤC >>"/>
+                    <div class="div-bottom">
+                        <p>* NHÂN DỊP RA MẮT HÌNH ẢNH MỚI VIETNAMOTO.NET MIỄN PHÍ 100% TIN ĐĂNG CỦA TẤT CẢ CÁC THỂ LOẠI ĐẾN HẾT NÀY 30/4/2017</p>
+                        <input type="button" class="btn-next-free-post" id="btnNext_tab1" value="ĐĂNG BÀI"/>
                     </div>
                 </div>
             </div>
         </div>
         </form>
     </div>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
     $( document ).ready(function() {
+        $("input:radio[name=optradio]").click(function () {
+            var value = $(this).val();
+            if (value == 1) {
+                $(".div-post-normal").fadeIn();
+                $(".div-post-vip").hide();
+            } else {
+                $(".div-post-normal").hide();
+                $(".div-post-vip").fadeIn();
+            }
+        });
+        $( "#datepicker1" ).datepicker();
+        $( "#datepicker2" ).datepicker();
         <?php
             if(isset($result) && !empty($result)){
                 echo 'dhtmlx.alert("'.$result['mess'].'")';
