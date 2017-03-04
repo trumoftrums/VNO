@@ -36,90 +36,91 @@
         </div>
     </div>
     <div class="paging">
-        <p>TẤT CẢ CÁC HÃNG XE <small> - Tổng số trang: 150 - 1/150 trang</small></p>
+        <p style="text-transform: uppercase;">{{$branch}} <small style="text-transform: lowercase;"> - Tổng số trang: 150 - 1/150 trang</small></p>
         <span class="click-menu-branch" data-toggle="dropdown">Chọn theo hãng xe <img class="icon-arrow-down" src="./images/icon-arrow-down.png"/></span>
         <ul class="dropdown-menu menu-branch">
             <div>
-                <a class="all-branch" href="#">TẤT CẢ</a>
+                <a class="all-branch" href="{{ URL::to('?branch=all') }}">TẤT CẢ</a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/acura.png"/></a>
+                <a href="{{ URL::to('?branch=Acura') }}"><img src="./images/logo_brands/acura.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/audi.png"/></a>
+                <a href="{{ URL::to('?branch=Audi') }}"><img src="./images/logo_brands/audi.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/BMW.png"/></a>
+                <a href="{{ URL::to('?branch=BMW') }}"><img src="./images/logo_brands/BMW.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/chevrolet.png"/></a>
+                <a href="{{ URL::to('?branch=Chevrolet') }}"><img src="./images/logo_brands/chevrolet.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/daewoo.png"/></a>
+                <a href="{{ URL::to('?branch=Daewoo') }}"><img src="./images/logo_brands/daewoo.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/daihatshu.png"/></a>
+                <a href="{{ URL::to('?branch=Daihatshu') }}"><img src="./images/logo_brands/daihatshu.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/fiat.png"/></a>
+                <a href="{{ URL::to('?branch=Fiat') }}"><img src="./images/logo_brands/fiat.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/ford.png"/></a>
+                <a href="{{ URL::to('?branch=FORD') }}"><img src="./images/logo_brands/ford.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/honda.png"/></a>
+                <a href="{{ URL::to('?branch=Honda') }}"><img src="./images/logo_brands/honda.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/hyundai.png"/></a>
+                <a href="{{ URL::to('?branch=Hyundai') }}"><img src="./images/logo_brands/hyundai.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/isuzu.png"/></a>
+                <a href="{{ URL::to('?branch=Isuzu') }}"><img src="./images/logo_brands/isuzu.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/kia-motors.png"/></a>
+                <a href="{{ URL::to('?branch=Kia') }}"><img src="./images/logo_brands/kia-motors.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/landrover.png"/></a>
+                <a href="{{ URL::to('?branch=Land Rover') }}"><img src="./images/logo_brands/landrover.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/lexus.png"/></a>
+                <a href="{{ URL::to('?branch=Lexus') }}"><img src="./images/logo_brands/lexus.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/mazda.png"/></a>
+                <a href="{{ URL::to('?branch=Mazda') }}"><img src="./images/logo_brands/mazda.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/mercedes-benz.png"/></a>
+                <a href="{{ URL::to('?branch=Mercedes-Benz') }}"><img src="./images/logo_brands/mercedes-benz.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/mitsubishi.png"/></a>
+                <a href="{{ URL::to('?branch=Mitsubishi') }}"><img src="./images/logo_brands/mitsubishi.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/nissan.png"/></a>
+                <a href="{{ URL::to('?branch=Nissan') }}"><img src="./images/logo_brands/nissan.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/peugote.png"/></a>
+                <a href="{{ URL::to('?branch=Peugeot') }}"><img src="./images/logo_brands/peugote.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/porsche.png"/></a>
+                <a href="{{ URL::to('?branch=Porsche') }}"><img src="./images/logo_brands/porsche.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/renault.png"/></a>
+                <a href="{{ URL::to('?branch=Renault') }}"><img src="./images/logo_brands/renault.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/ssangyong.png"/></a>
+                <a href="{{ URL::to('?branch=SsangYong') }}"><img src="./images/logo_brands/ssangyong.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/suzuki.png"/></a>
+                <a href="{{ URL::to('?branch=Suzuki') }}"><img src="./images/logo_brands/suzuki.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/toyota.png"/></a>
+                <a href="{{ URL::to('?branch=Toyota') }}"><img src="./images/logo_brands/toyota.png"/></a>
             </div>
             <div>
-                <a href="#"><img src="./images/logo_brands/volkswagen.png"/></a>
+                <a href="{{ URL::to('?branch=Volkswagen') }}"><img src="./images/logo_brands/volkswagen.png"/></a>
             </div>
         </ul>
     </div>
     <div class="list-items" id="list-items1">
+        @if(count($listPost)>0)
         @foreach($listPost as $item)
         <div class="col-lg-4 col-md-6 col-sm-6 item">
             <div class="inner-item">
@@ -144,6 +145,9 @@
             </div>
         </div>
         @endforeach
+        @else
+            <p>Chưa có dữ liệu. Vui lòng thử lại sau.</p>
+        @endif
         <div class="paging-div">
         <?php if(!empty($listPost)) echo $listPost->links() ?>
         </div>

@@ -31,24 +31,28 @@ class HomeController extends Controller {
      */
     public function index()
     {
-        $listPost = Baiviet::where('status', 'PUBLIC')
-            ->OrderBy('id','desc')
-            ->paginate(18);
+        $branch = Input::get('branch');
+        if ($branch != '' && $branch != 'all') {
+            $cond_str = "index_key_str = 'thongso_20' and index_value ='$branch' ";
+            $listPost = Baivietindex::whereRaw($cond_str)
+                ->distinct('baivietID')
+                ->where('op_baiviets.status', 'PUBLIC')
+                ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
+                ->OrderBy('op_baiviets.id', 'desc')
+                ->paginate(18);
+        } else {
+            $branch = 'TẤT CẢ CÁC HÃNG XE';
+            $listPost = Baiviet::where('status', 'PUBLIC')
+                ->OrderBy('id', 'desc')
+                ->paginate(18);
+        }
         foreach ($listPost as $item){
             $item->thongso = json_decode($item->thongso,true);
         }
-        $listVipSalon = VipSalon::where('status', VipSalon::STATUS_ACTIVE)
-            ->limit(10)
-            ->get();
-//        $listPost =$listPost->toArray();
-//        var_dump($listPost);exit();
-        //get list filter fields
-        $list_thongso = Thongso::where('filter',1)->get()->toArray();
 
         return View('Home.index', [
             'listPost' => $listPost,
-            'listVipSalon' => $listVipSalon,
-//            'list_thongso'=>$list_thongso
+            'branch' => $branch
         ]);
     }
     public function index_post()
@@ -155,8 +159,10 @@ class HomeController extends Controller {
         return View('Home.index', $result);
     }
 
-    public function users(){
-        return View('Users.index', []);
+    public function filterBranchCar(){
+        $result['listPost'] = [];
+
+        return View('Home.index', $result);
     }
 
     public function register()

@@ -1708,11 +1708,10 @@ textarea:focus, input:focus{
 .post-relate-type .view-more{
     float: right;
     margin: 10px 2% 20px 0px;
-    background: #676767;
-    color: #fff;
+    color: #000;
     padding: 2px 7px 0px 7px;
     border-radius: 10px;
-    font-size: 12px;
+    font-size: 13px;
     text-decoration: none;
 }
 .post-relate-type .cover-view-more{
@@ -1723,7 +1722,7 @@ textarea:focus, input:focus{
     border: none;
 }
 .post-relate-type .view-more:hover{
-    opacity: 0.8;
+    color:#0c834a;
 }
 .post-relate-type .item-relate-post{
     float: left;
