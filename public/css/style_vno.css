@@ -1589,6 +1589,7 @@ textarea:focus, input:focus{
 }
 .common-info .cover-div-first .cover-radio{
     float: right;
+    margin-right: 1vw;
 }
 .div-post-normal{
     float: left;
