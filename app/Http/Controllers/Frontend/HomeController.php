@@ -46,13 +46,19 @@ class HomeController extends Controller {
                 ->OrderBy('id', 'desc')
                 ->paginate(18);
         }
+        $res = $listPost->toArray();
+        $totalPage = $res['last_page'];
+        $currentPage = $res['current_page'];
         foreach ($listPost as $item){
             $item->thongso = json_decode($item->thongso,true);
         }
 
         return View('Home.index', [
             'listPost' => $listPost,
-            'branch' => $branch
+            'branch' => $branch,
+            'totalPage' => $totalPage,
+            'currentPage' => $currentPage
+
         ]);
     }
     public function index_post()

@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="paging">
-        <p style="text-transform: uppercase;">{{$branch}} <small style="text-transform: lowercase;"> - Tổng số trang: 150 - 1/150 trang</small></p>
+        <p style="text-transform: uppercase;">{{$branch}} <small style="text-transform: lowercase;"> - Tổng số trang: {{$totalPage}} - {{$currentPage}}/{{$totalPage}} trang</small></p>
         <span class="click-menu-branch" data-toggle="dropdown">Chọn theo hãng xe <img class="icon-arrow-down" src="./images/icon-arrow-down.png"/></span>
         <ul class="dropdown-menu menu-branch">
             <div>
