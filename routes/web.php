@@ -67,6 +67,13 @@ Route::group(['prefix' => 'admin'], function()
     Route::post('/delnews', 'Admin\NewsController@del_news');
     Route::post('/save_news', 'Admin\NewsController@save_news');
     Route::get('/baiviet/get_total_news', 'Admin\BaivietController@get_total_news');
+
+
+    Route::get('/users', 'Admin\UsersController@index');
+    Route::get('/getusers', 'Admin\UsersController@get_news');
+    Route::post('/getuserinfo', 'Admin\UsersController@get_user_info');
+
+
 //    Route::get('/tool/dhtmlxform_image/{id}', function ($id) {
 //
 //    })->where('id', '[0-9]+');

@@ -66,6 +66,7 @@ class BaivietController extends Controller {
     public function get_bai_viet()
     {
         $content = '<?xml version="1.0" encoding="iso-8859-1" ?>';
+//        $content .=  '<rows total_count="'.$total_rec.'" pos="'.$posStart.'">';
         $content .=  '<rows>';
         $content .=  '<head>';
         $content .='<column style="font-weight: bold" type="ro" width="50" sort="int">No</column>';
