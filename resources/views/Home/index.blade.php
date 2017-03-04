@@ -39,32 +39,84 @@
         <p>TẤT CẢ CÁC HÃNG XE <small> - Tổng số trang: 150 - 1/150 trang</small></p>
         <span class="click-menu-branch" data-toggle="dropdown">Chọn theo hãng xe <img class="icon-arrow-down" src="./images/icon-arrow-down.png"/></span>
         <ul class="dropdown-menu menu-branch">
-            <a class="all-branch" href="#">TẤT CẢ</a>
-            <a href="#"><img src="./images/logo_brands/acura.png"/></a>
-            <a href="#"><img src="./images/logo_brands/audi.png"/></a>
-            <a href="#"><img src="./images/logo_brands/BMW.png"/></a>
-            <a href="#"><img src="./images/logo_brands/chevrolet.png"/></a>
-            <a href="#"><img src="./images/logo_brands/daewoo.png"/></a>
-            <a href="#"><img src="./images/logo_brands/daihatshu.png"/></a>
-            <a href="#"><img src="./images/logo_brands/fiat.png"/></a>
-            <a href="#"><img src="./images/logo_brands/ford.png"/></a>
-            <a href="#"><img src="./images/logo_brands/honda.png"/></a>
-            <a href="#"><img src="./images/logo_brands/hyundai.png"/></a>
-            <a href="#"><img src="./images/logo_brands/isuzu.png"/></a>
-            <a href="#"><img src="./images/logo_brands/kia-motors.png"/></a>
-            <a href="#"><img src="./images/logo_brands/landrover.png"/></a>
-            <a href="#"><img src="./images/logo_brands/lexus.png"/></a>
-            <a href="#"><img src="./images/logo_brands/mazda.png"/></a>
-            <a href="#"><img src="./images/logo_brands/mercedes-benz.png"/></a>
-            <a href="#"><img src="./images/logo_brands/mitsubishi.png"/></a>
-            <a href="#"><img src="./images/logo_brands/nissan.png"/></a>
-            <a href="#"><img src="./images/logo_brands/peugote.png"/></a>
-            <a href="#"><img src="./images/logo_brands/porsche.png"/></a>
-            <a href="#"><img src="./images/logo_brands/renault.png"/></a>
-            <a href="#"><img src="./images/logo_brands/ssangyong.png"/></a>
-            <a href="#"><img src="./images/logo_brands/suzuki.png"/></a>
-            <a href="#"><img src="./images/logo_brands/toyota.png"/></a>
-            <a href="#"><img src="./images/logo_brands/volkswagen.png"/></a>
+            <div>
+                <a class="all-branch" href="#">TẤT CẢ</a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/acura.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/audi.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/BMW.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/chevrolet.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/daewoo.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/daihatshu.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/fiat.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/ford.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/honda.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/hyundai.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/isuzu.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/kia-motors.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/landrover.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/lexus.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/mazda.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/mercedes-benz.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/mitsubishi.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/nissan.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/peugote.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/porsche.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/renault.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/ssangyong.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/suzuki.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/toyota.png"/></a>
+            </div>
+            <div>
+                <a href="#"><img src="./images/logo_brands/volkswagen.png"/></a>
+            </div>
         </ul>
     </div>
     <div class="list-items" id="list-items1">
@@ -96,17 +148,4 @@
         <?php if(!empty($listPost)) echo $listPost->links() ?>
         </div>
     </div>
-    {{--<div class="list-salon">
-        <ul id="scrollerSalon">
-            @foreach($listVipSalon as $salon)
-            <li class="item">
-                <a href="#"><img src="{{ URL::asset($salon->thumb)}}"></a>
-                <div class="caption">
-                    <a href="#"><h3>{{$salon->title}}</h3></a>
-                    <p>{{$salon->address}}</p>
-                </div>
-            </li>
-            @endforeach
-        </ul>
-    </div>--}}
 @stop

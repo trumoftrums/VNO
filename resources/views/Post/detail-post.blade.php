@@ -210,9 +210,9 @@
                 <p class="p-relate-post"><img src="{{ URL::asset('images/icon-detail-post/icon-car.png')}}"/>XE CÙNG THỂ LOẠI</p>
                 @foreach($listPostRelatedType as $item)
                     <div class="item-relate-post">
-                        <a href="#"><img class="thumb" src="{{ URL::asset('images/item-car.png')}}"/></a>
+                        <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><img class="thumb" src="{{ URL::asset('/uploads/baiviet/'.$item->photo1)}}"/></a>
                         <div class="right-item">
-                            <a href="#"><span class="sp-title">@if(isset($item->tieu_de)) {{$item->tieu_de}} @endif</span></a>
+                            <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><span class="sp-title">@if(isset($item->tieu_de)) {{$item->tieu_de}} @endif</span></a>
                             <span>@if(isset($item->thongso['thongso_65'])) {{$item->thongso['thongso_65']}} @endif VNĐ</span>
                             <span>@if(isset($item->thongso['thongso_62'])) {{$item->thongso['thongso_62']}} @endif</span>
                         </div>
@@ -228,9 +228,9 @@
                 <p class="p-relate-post"><img src="{{ URL::asset('images/icon-detail-post/icon-car.png')}}"/>XE CÙNG GIÁ</p>
                 @foreach($listPostRelatedPrice as $item)
                     <div class="item-relate-post">
-                        <a href="#"><img class="thumb" src="{{ URL::asset('images/item-car.png')}}"/></a>
+                        <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><img class="thumb" src="{{ URL::asset('/uploads/baiviet/'.$item->photo1)}}"/></a>
                         <div class="right-item">
-                            <a href="#"><span class="sp-title">@if(isset($item->tieu_de)) {{$item->tieu_de}} @endif</span></a>
+                            <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><span class="sp-title">@if(isset($item->tieu_de)) {{$item->tieu_de}} @endif</span></a>
                             <span>@if(isset($item->thongso['thongso_65'])) {{$item->thongso['thongso_65']}} @endif VNĐ</span>
                             <span>@if(isset($item->thongso['thongso_62'])) {{$item->thongso['thongso_62']}} @endif</span>
                         </div>

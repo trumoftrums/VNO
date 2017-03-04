@@ -282,7 +282,7 @@
     margin-bottom: 5px;
 }
 .header .center-content-col .filter{
-    padding: 5px 0px;
+    padding: 5px 0px 0px 0px;
     float: left;
     width: 100%;
 }
@@ -318,6 +318,7 @@
     float: left;
     border: none;
     height: 36px;
+    padding-left: 5px !important;
     color: #fff;
     margin: 2px 0px;
     border-right: 1px solid #9ecdb7;
@@ -359,7 +360,7 @@
     background-size: cover;
     padding: 10px 20px;
     border: none;
-    width: 15%;
+    width: 15.3%;
     height: 40px;
     float: right;
     border-radius: 7px;
@@ -385,14 +386,20 @@
     text-align: center;
     left: 0px;
 }
+.menu-branch div{
+    float: left;
+    height: 50px;
+}
 .header .center-content-col .paging .menu-branch .all-branch{
     color: #fff;
     font-weight: 600;
+    margin-top: 10px;
+    padding-bottom: 0px;
 }
 .header .center-content-col .paging .menu-branch a{
-    margin: 5px;
+    float: left;
+    margin: 15px 20px;
     padding-bottom: 4px;
-    line-height: 30px;
 }
 .header .center-content-col .paging .menu-branch a:hover{
     border-bottom: 2px solid #fff;
@@ -409,8 +416,8 @@
 .header .center-content-col .paging span{
     float: right;
     background: url(../images/bg-chose-car.png);
-    padding: 12px 10px 10px 10px;
-    font-size: 16px;
+    padding: 12px 10px 12px 10px;
+    font-size: 14px;
     border-left: 2px solid #999;
 }
 .header .center-content-col .paging span:hover{
@@ -477,7 +484,6 @@
     padding: 0px 6px;
 }
 .header .center-content-col .list-items .item .right-item h4{
-    text-align: center;
     font-size: 13px;
     color: #0c834a;
     border-bottom: 1px solid #0c834a;
@@ -487,6 +493,7 @@
     margin-bottom: 5px;
     overflow: hidden;
     white-space: nowrap;
+    font-weight: bold;
 }
 .header .center-content-col .list-items .item .right-item p{
     margin: 0px;
@@ -497,7 +504,6 @@
     color:#0c834a;
 }
 .header .center-content-col .list-items .item .right-item .phone-address-item{
-    font-weight:600;
     color:#0c834a;
 }
 .header .last-col{
