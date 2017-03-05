@@ -390,10 +390,11 @@ class HomeController extends Controller {
         $user = Auth::user();
         $bv = array();
         if(!empty($id_slug)){
+
             $arr_pid = explode("-",$id_slug);
             $pid = $arr_pid[0];
             $baiviet = Baiviet::where('status','<>','DELETED')->where('id','=',$pid)->get()->toArray();
-//          var_dump($baiviet);exit();
+            var_dump($baiviet);exit();
             if(!empty($baiviet)){
                 $bv = $baiviet[0];
                 if($user->id == $bv['userid']){
@@ -427,6 +428,11 @@ class HomeController extends Controller {
                 if (!$validator->fails())
                 {
 //                    var_dump($formData);exit();
+                    $formData['loai_tin'] = $formData['optradio'];
+                    $formData['auto_up'] = $formData['optradio1'];
+                    $formData['hang_xe'] = $formData['thongso_20'];
+                    $formData['dong_xe'] = $formData['thongso_75'];
+
                     $getHangXe = Hangxe::where("id",$formData['thongso_20'])->get()->toArray();
                     if(!empty($getHangXe)){
                         $formData['thongso_20'] = $getHangXe[0]['hang_xe'];
@@ -435,13 +441,14 @@ class HomeController extends Controller {
                     $getHangXe = Dongxe::where("id",$formData['thongso_75'])->get()->toArray();
                     if(!empty($getHangXe)){
                         $formData['thongso_75'] = $getHangXe[0]['dong_xe'];
+
                     }
                     $arr_fr =explode("/",$formData['actived_from']);
                     $formData['actived_from'] = $arr_fr[2]."-".$arr_fr[1]."-".$arr_fr[0]." 00:00:00";
 
                     $arr_to =explode("/",$formData['actived_to']);
                     $formData['actived_to'] = $arr_to[2]."-".$arr_to[1]."-".$arr_to[0]." 23:59:59";
-
+                    $formData['thongso_67'] = str_replace("\r\n","<br>",$formData['thongso_67']);
 
 //                    var_dump($formData);exit();
                     $hash = md5(json_encode($formData));
@@ -583,7 +590,13 @@ class HomeController extends Controller {
                 }
 
                 $bv->tieu_de = $tieude;
-                $bv->mo_ta = $mota;
+                $bv->mo_ta = str_replace("\r\n","<br>",$mota);
+                $bv->loai_tin = $formData['optradio'];
+                $bv->hang_xe = $formData['hang_xe'];
+                $bv->dong_xe = $formData['dong_xe'];
+                $bv->auto_up = $formData['auto_up'];
+                $bv->actived_from = $formData['actived_from'];
+                $bv->actived_to = $formData['actived_to'];
 
                 $bv->thongso = json_encode($thongso);
                 foreach ($photo as $k =>$v){

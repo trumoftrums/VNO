@@ -457,7 +457,7 @@
 //            console.log(index+":"+name+":"+type+":"+vl);
 
             if(type=="textarea"){
-                vl = CKEDITOR.instances['comment'].getData();
+//                vl = CKEDITOR.instances['comment'].getData();
             }
 
             if(vl == null ||vl=="undefined" || vl==""){

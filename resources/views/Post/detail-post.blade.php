@@ -204,7 +204,7 @@
             <div class="div-des">
                 <p class="p-title-area">NỘI DUNG MÔ TẢ</p>
                 <div class="cover-descript">
-                    @if(isset($detailPost->thongso['thongso_67'])) {{$detailPost->thongso['thongso_67']}} @endif
+                    <?php if(isset($detailPost->thongso['thongso_67'])) echo $detailPost->thongso['thongso_67'] ?>
                 </div>
                 <p class="p-notes"><span>* Lưu ý:</span> Quý vị đang xem nội dung tin rao "{{$detailPost->tieu_de}}". Mọi thông tin liên quan tới tin rao này là do người đăng tin đăng tải và chịu trách nhiệm. Vietnamoto.net luôn cố gắng để có chất lượng thông tin tốt nhất, nhưng Banxehoi.com không chịu trách nhiệm về bất kỳ nội dung nào liên quan tới tin rao này. Nếu quý vị phát hiện có sai sót hay vấn đề gì xin hãy thông báo cho vietnamoto.net tại đây</p>
             </div>
