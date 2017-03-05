@@ -12,14 +12,7 @@
     <script src="{{ URL::asset('js/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('js/jquery.simplyscroll.min.js') }}" type="text/javascript"></script>
-    <script src="{{ URL::asset('ckeditor/ckeditor.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('js/angular.min.js') }}"></script>
-    {{--<script>
-        CKEDITOR.replace( 'textarea_id', {
-            fullPage: true,
-            allowedContent: true
-        });
-    </script>--}}
 </head>
 <body ng-app="myApp" ng-controller="registerCtrl">
 <div class="container-fluid">
