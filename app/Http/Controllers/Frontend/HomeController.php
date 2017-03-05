@@ -413,13 +413,25 @@ class HomeController extends Controller {
                 $result['mess'] = "Không tìm thấy bài viết!";
             }
         }
-//        var_dump($bv);exit();
+
 
         $thongso = $this->get_thongso_init();
         $formData =  Request::all();
 
-        if(!empty($formData)){
-            //var_dump($formData);exit();
+        if(Request::getMethod() == 'POST' && !empty($formData)){
+
+                var_dump($formData);exit();
+                $rules = ['captcha' => 'required|captcha'];
+                $validator = Validator::make($formData, $rules);
+                if ($validator->fails())
+                {
+
+                }
+                else
+                {
+
+                }
+
             $hash = md5(json_encode($formData));
             $ck = Submittoken::where("token",$hash)->count();
             if($ck==0){
