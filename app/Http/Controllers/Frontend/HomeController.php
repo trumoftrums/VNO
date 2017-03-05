@@ -35,24 +35,49 @@ class HomeController extends Controller {
      */
     public function index()
     {
-        $listPost = Baiviet::where('status', 'PUBLIC')
-            ->OrderBy('id','desc')
-            ->paginate(18);
+        $branch = Input::get('branch');
+        $price = Input::get('price');
+        if($price != ''){
+            $cond_str_price = "index_key_str = 'thongso_65' and index_value ='$price' ";
+            $listPost = Baivietindex::whereRaw($cond_str_price)
+                ->distinct('baivietID')
+                ->where('op_baiviets.status', 'PUBLIC')
+                ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
+                ->OrderBy('op_baiviets.id', 'desc')
+                ->paginate(18);
+        }else{
+            if ($branch != '' && $branch != 'all') {
+                $cond_str = "index_key_str = 'thongso_20' and index_value ='$branch'";
+                $listPost = Baivietindex::whereRaw($cond_str)
+                    ->distinct('baivietID')
+                    ->where('op_baiviets.status', 'PUBLIC')
+                    ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
+                    ->OrderBy('op_baiviets.id', 'desc')
+                    ->paginate(18)
+                    ->setPath('?branch=' . $branch);
+            } else {
+                $branch = 'TẤT CẢ CÁC HÃNG XE';
+                $listPost = Baiviet::where('status', 'PUBLIC')
+                    ->OrderBy('id', 'desc')
+                    ->paginate(18);
+            }
+        }
+        $res = $listPost->toArray();
+        $totalPage = $res['last_page'];
+        $currentPage = $res['current_page'];
+        if($totalPage == 0){
+            $currentPage = 0;
+        }
         foreach ($listPost as $item){
             $item->thongso = json_decode($item->thongso,true);
         }
-        $listVipSalon = VipSalon::where('status', VipSalon::STATUS_ACTIVE)
-            ->limit(10)
-            ->get();
-//        $listPost =$listPost->toArray();
-//        var_dump($listPost);exit();
-        //get list filter fields
-        $list_thongso = Thongso::where('filter',1)->get()->toArray();
 
         return View('Home.index', [
             'listPost' => $listPost,
-            'listVipSalon' => $listVipSalon,
-//            'list_thongso'=>$list_thongso
+            'branch' => $branch,
+            'totalPage' => $totalPage,
+            'currentPage' => $currentPage
+
         ]);
     }
     public function index_post()
@@ -159,8 +184,10 @@ class HomeController extends Controller {
         return View('Home.index', $result);
     }
 
-    public function users(){
-        return View('Users.index', []);
+    public function filterBranchCar(){
+        $result['listPost'] = [];
+
+        return View('Home.index', $result);
     }
 
     public function register()
@@ -281,21 +308,38 @@ class HomeController extends Controller {
             ->leftJoin('md_users', 'md_users.id', '=', 'op_baiviets.userid')
             ->select('op_baiviets.*', 'md_users.username')
             ->first();
-        $listPostRelated = Baiviet::where('status', 'PUBLIC')
-            ->OrderBy('op_baiviets.id','desc')
-            ->limit(5)
+        $detailPost->thongso = json_decode($detailPost->thongso,true);
+
+        $strFilter = $detailPost->thongso['thongso_20'];
+        $cond_str = "index_key_str = 'thongso_20' and index_value ='$strFilter' ";
+        $listPostRelatedType = Baivietindex::whereRaw($cond_str)->distinct('baivietID')
+            ->where('op_baiviets.status', 'PUBLIC')
+            ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
+            ->OrderBy('op_baiviets.id', 'desc')
+            ->limit(6)
             ->whereNotIn('id', [$detailPost->id])
             ->get();
-        foreach ($listPostRelated as $item){
+        foreach ($listPostRelatedType as &$item){
             $item->thongso = json_decode($item->thongso,true);
         }
-        $detailPost->thongso = json_decode($detailPost->thongso,true);
-        $list_thongso = Thongso::where('filter',1)->get()->toArray();
+        $strFilterPrice = $detailPost->thongso['thongso_65'];
+        $cond_str_price = "index_key_str = 'thongso_65' and index_value ='$strFilterPrice' ";
+        $listPostRelatedPrice = Baivietindex::whereRaw($cond_str_price)->distinct('baivietID')
+            ->where('op_baiviets.status', 'PUBLIC')
+            ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
+            ->OrderBy('op_baiviets.id', 'desc')
+            ->limit(6)
+            ->whereNotIn('id', [$detailPost->id])
+            ->get();
+        foreach ($listPostRelatedPrice as &$item){
+            $item->thongso = json_decode($item->thongso,true);
+        }
         return View('Post.detail-post', [
             'detailPost' => $detailPost,
-            'listPostRelated' => $listPostRelated,
-            'list_thongso'=>$list_thongso
-//            'list_thongso'=>$list_thongso
+            'listPostRelatedType' => $listPostRelatedType,
+            'listPostRelatedPrice' => $listPostRelatedPrice,
+            'strFilter' => $strFilter,
+            'price' => $strFilterPrice
         ]);
     }
 

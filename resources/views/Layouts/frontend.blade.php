@@ -35,10 +35,10 @@
                             <ul class="dropdown-menu">
                                 <span class="close-menu"> <img src="{{ URL::asset('images/icon-close-menu.png') }}"/> </span>
                                 <li><a href="{{ URL::to('') }}">Trang Chủ</a></li>
-                                <li><a href="{{ URL::to('vip-salon/all') }}">Showroom/ Salon Oto</a></li>
-                                <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Địa Chỉ Sửa Xe/ Độ Xe</a></li>
-                                <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Cứu hộ trên toàn quốc</a></li>
-                                <li><a href="#">Góc giao lưu/ Chia sẻ</a></li>
+                                <li><a href="{{ URL::to('vip-salon/all') }}">Showroom toàn quốc</a></li>
+                                <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Sửa xe toàn quốc</a></li>
+                                <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Cứu hộ toàn quốc</a></li>
+                                <li><a href="{{ URL::to('bai-giu-xe/all') }}">Bãi giữ xe toàn quốc</a></li>
                                 <li><a href="{{ URL::to('/tin-tuc') }}">Tin tức về xe</a></li>
                                 <li><a href="#">Quy định & Hướng dẫn</a></li>
                                 <li><a class="last" href="#">Liên hệ</a></li>
@@ -134,17 +134,22 @@
             <div class="scroll-ads">
                 <div class="item-ads">
                     <a target="_blank" href="http://www.peugeotvietnam.vn/showroom/508/sedan/">
-                        <img class="img-ads" src="{{ URL::asset('images/slides/slides-left/peugeot-334x72.png')}}"/>
+                        <img class="img-ads" src="{{ URL::asset('images/slides/slides-left/peugeot-474x80.png')}}"/>
                     </a>
                 </div>
                 <div class="item-ads">
                     <a target="_blank" href="http://porsche-vietnam.vn/model/718-cayman-s/">
-                        <img class="img-ads" src="{{ URL::asset('images/slides/slides-left/porsche-334x72.png')}}"/>
+                        <img class="img-ads" src="{{ URL::asset('images/slides/slides-left/porsche-474x80.png')}}"/>
                     </a>
                 </div>
                 <div class="item-ads">
                     <a target="_blank" href="http://www.ssangyong.com.vn/chairman_w/exterior.html">
-                        <img class="img-ads" src="{{ URL::asset('images/slides/slides-left/ssangyong-334x72.png')}}"/>
+                        <img class="img-ads" src="{{ URL::asset('images/slides/slides-left/ssangyong-474x80.png')}}"/>
+                    </a>
+                </div>
+                <div class="item-ads">
+                    <a target="_blank" href="https://www.lexus.com.vn/vn/models/rc.html">
+                        <img class="img-ads" src="{{ URL::asset('images/slides/slides-left/lexus-474x80.png')}}"/>
                     </a>
                 </div>
             </div>
@@ -197,25 +202,25 @@
                 <div class="item-service">
                     <a href="{{ URL::to('vip-salon/all') }}">
                         <img class="icon-service" src="{{ URL::asset('images/icon-ser01.png')}}"/>
-                        <p>SHOWROOM/<br> SALON OTO <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                        <p>SHOWROOM<br> TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                     </a>
                 </div>
                 <div class="item-service">
                     <a href="{{ URL::to('do-xe-uy-tin/all') }}">
                         <img class="icon-service" src="{{ URL::asset('images/icon-ser02.png')}}"/>
-                        <p>ĐỊA CHỈ ĐỘ XE/<br> SỬA XE <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                        <p>SỬA XE<br> TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                     </a>
                 </div>
                 <div class="item-service">
                     <a href="{{ URL::to('thong-tin-cuu-ho/all') }}">
                         <img class="icon-service" src="{{ URL::asset('images/icon-ser03.png')}}"/>
-                        <p>CỨU HỘ TRÊN<br> TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                        <p>CỨU HỘ<br> TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                     </a>
                 </div>
                 <div class="item-service">
-                    <a href="{{ URL::to('') }}">
-                        <img class="icon-service" src="{{ URL::asset('images/icon-ser04.png')}}"/>
-                        <p>GÓC GIAO LƯU/<br> CHIA SẺ <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                    <a href="{{ URL::to('bai-giu-xe/all') }}">
+                        <img class="icon-service" src="{{ URL::asset('images/icon-ser05.png')}}"/>
+                        <p>BÃI GIỮ XE<br> TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                     </a>
                 </div>
             </div>
@@ -245,11 +250,11 @@
             <div class="menu-bottom">
                 <ul>
                     <li><a class="a-one-line" href="{{ URL::to('') }}">Trang chủ</a> </li>
-                    <li><a href="{{ URL::to('vip-salon/all') }}">Showroom<br>Salon Oto</a> </li>
-                    <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Địa chỉ sửa xe<br>độ xe</a> </li>
-                    <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Cứu hộ trên<br> toàn quốc</a> </li>
-                    <li><a href="#">Góc giao lưu<br>Chia sẻ</a> </li>
-                    <li><a class="a-one-line" href="{{ URL::to('tin-tuc') }}">Tin tức về xe</a> </li>
+                    <li><a href="{{ URL::to('vip-salon/all') }}">Showroom<br>toàn quốc</a> </li>
+                    <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Sửa xe<br>toàn quốc</a> </li>
+                    <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Cứu hộ<br>toàn quốc</a> </li>
+                    <li><a href="{{ URL::to('bai-giu-xe/all') }}">Bãi giữ xe<br>toàn quốc</a> </li>
+                    <li><a href="{{ URL::to('tin-tuc') }}">Tin tức<br>về xe</a> </li>
                     <li><a href="#">Quy định &<br>Hướng dẫn</a> </li>
                 </ul>
             </div>
@@ -279,7 +284,7 @@
                         <ul>
                             <li>
                                 <span>Số điện thoại:</span>
-                                <input ng-model="formData.phone" class="inp form-control" name="phone" required type="number"/>
+                                <input ng-model="formData.phone" class="inp form-control number-only" name="phone" required type="text"/>
                                 <p ng-show="regForm.phone.$invalid && regForm.$submitted" class="error-valid">Bạn chưa nhập số điện thoại.</p>
                             </li>
                             <li>
@@ -336,13 +341,13 @@
                     <ul>
                         <li>
                             <span>Số điện thoại:</span>
-                            <input ng-model="formDataLog.phone" ng-model="phone" class="inp form-control" type="number" name="phone" required/>
+                            <input ng-model="formDataLog.phone" ng-model="phone" class="inp form-control number-only" type="text" name="phone" required/>
                             <p ng-show="logForm.phone.$invalid && logForm.$submitted" class="error-valid">Bạn chưa nhập số điện thoại.</p>
                             <p ng-show="notexistphone" class="error-valid">Số điện thoại này chưa được đăng ký</p>
                         </li>
                         <li>
                             <span>Mật khẩu:</span>
-                            <input ng-model="formDataLog.password" type="password" class="inp form-control" name="pass" required/>
+                            <input id="phone-reg" ng-model="formDataLog.password" type="password" class="inp form-control" name="pass" required/>
                             <p ng-show="logForm.pass.$invalid && logForm.$submitted" class="error-valid">Bạn chưa nhập mật khẩu.</p>
                             <p ng-show="wrongpass" class="error-valid">Mật khẩu chưa đúng</p>
                         </li>
@@ -555,6 +560,21 @@
             }
         }
     });
+    $(".number-only").keydown(function(e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
     $(window).on("load", function() {
         $("#scroller").simplyScroll({
             customClass: 'vert',
@@ -573,6 +593,9 @@
         });
         $('#filter-city-salon').on('change', function() {
             window.location = '/vip-salon/'+this.value;
+        });
+        $('#filter-city-bai-xe').on('change', function() {
+            window.location = '/bai-giu-xe/'+this.value;
         });
         $( ".inner-item" ).hover(function() {
             $( this ).children(":first").fadeIn('fast');
