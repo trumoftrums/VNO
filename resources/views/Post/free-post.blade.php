@@ -58,8 +58,8 @@
 
         <div class="info-post">
             <ul class="ul-cover-tabs-post">
-                <li class="active"><a data-toggle="tab" href="#tab1">THÔNG TIN CƠ BẢN</a></li>
-                <li><a data-toggle="tab" href="#tab2">LOẠI TIN ĐĂNG</a></li>
+                <li id="title_tab1" class="active"><a data-toggle="tab" href="#tab1">THÔNG TIN CƠ BẢN</a></li>
+                <li id="title_tab2" ><a data-toggle="tab" href="#tab2">LOẠI TIN ĐĂNG</a></li>
             </ul>
             <div class="cover-tab-post tab-content">
                 <div id="tab1" class="tab-pane fade in active" style="float: left;position:relative;width: 100%">
@@ -309,11 +309,11 @@
                         <div class="cover-div-first">
                             <div class="div-one">
                                 <label>Ngày băt đầu</label>
-                                <input type="text" id="datepicker1" class="calendar-inp" value="<?php echo date("d/m/Y");?>">
+                                <input type="text" id="datepicker1" name="actived_from" class="calendar-inp" value="<?php echo date("d/m/Y");?>">
                             </div>
                             <div class="div-two">
                                 <label>Ngày kết thúc</label>
-                                <input type="text" id="datepicker2" class="calendar-inp" value="<?php echo date("d/m/Y",strtotime("+30 days"));?>">
+                                <input type="text" id="datepicker2" name="actived_to" class="calendar-inp" value="<?php echo date("d/m/Y",strtotime("+30 days"));?>">
                             </div>
                             <div class="div-three">
                                 <label>Up tin tự động</label>
@@ -333,7 +333,7 @@
                             </li>
                             <li>
                                 <label>Mã xác nhận</label>
-                                <input type="text" class="code" placeholder="Nhập mã">
+                                <input type="text" class="code" placeholder="Nhập mã" value="" name="nm_captcha" id="nm_captcha">
                                 <img class="img-cap" src="{{$src_captcha}}"/>
                             </li>
                         </ul>
@@ -365,7 +365,7 @@
                                 </div>
                                 <div class="div-item-vip-post">
                                     <label>Mã xác nhận</label>
-                                    <input type="text" class="code" placeholder="Nhập mã"   value="" id="vip_captcha">
+                                    <input type="text" class="code" placeholder="Nhập mã" name="vip_captcha"  value="" id="vip_captcha">
                                     <img title="Click để đổi hình khác" class="img-cap" src="{{$src_captcha}}"/>
 
                                 </div>
@@ -374,7 +374,7 @@
                     </div>
                     <div class="div-bottom">
                         <p>* NHÂN DỊP RA MẮT HÌNH ẢNH MỚI VIETNAMOTO.NET MIỄN PHÍ 100% TIN ĐĂNG CỦA TẤT CẢ CÁC THỂ LOẠI ĐẾN HẾT NÀY 30/4/2017</p>
-                        <input type="button" class="btn-next-free-post" id="btnNext_tab1" value="ĐĂNG BÀI"/>
+                        <input type="submit" class="btn-next-free-post" id="btnSubmit" value="ĐĂNG BÀI"/>
                     </div>
                 </div>
             </div>
@@ -384,6 +384,25 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
     $( document ).ready(function() {
+
+        $( ".btn-next-free-post" ).click(function() {
+            var id = $(this).attr("id");
+            if(id.startsWith("btnNext_")){
+                var arr = id.split("_");
+                var  current_tab = arr[1];
+                var tabidx = current_tab.substr(current_tab.length-1,current_tab.length);
+                var next_tab = current_tab.substr(0,current_tab.length-1)+parseInt(parseInt(tabidx)+1);
+//            dhtmlx.alert(tabidx+":"+next_tab);
+                var current_tab_tt = "title_"+current_tab;
+                var next_tab_tt = "title_"+next_tab;
+                $("#"+current_tab_tt).removeAttr("class");
+                $("#"+next_tab_tt).attr("class","active");
+
+                $("#"+current_tab).attr("class","tab-pane");
+                $("#"+next_tab).attr("class","tab-pane in active");
+            }
+
+        });
         $(".img-cap").click(function () {
             $.ajax({
                 url: '/changecaptcha',
@@ -435,21 +454,44 @@
 
             var vl =$(this).val();
             //var vl = $("*[name='"+name+"']").val();
-            console.log(index+":"+name+":"+type+":"+vl);
+//            console.log(index+":"+name+":"+type+":"+vl);
+
+            if(type=="textarea"){
+                vl = CKEDITOR.instances['comment'].getData();
+            }
+
             if(vl == null ||vl=="undefined" || vl==""){
-//                console.log("empty:"+$(this).attr("name"));
+                console.log("empty:"+$(this).attr("name"));
                 if(name.startsWith("photo")){
                     photo = true;
                 }
                 cando = false;
             }
+
+
         });
+        var capc = null;
+        var loaiTin = $('input:radio[name=optradio]:checked', '#fmbaiviet').val();
+        if(loaiTin=="NORMAL"){
+            capc = $("#nm_captcha").val();
+        }else{
+            capc = $("#vip_captcha").val();
+        }
+        if(capc == null ||capc=="undefined" || capc==""){
+            cando = false;
+
+        }
         if(!cando){
             event.preventDefault();
             if(photo){
                 dhtmlx.alert("<strong>Vui lòng upload đủ 5 hình ảnh</strong>");
             }else{
-                dhtmlx.alert("<strong>Vui lòng điền đầy đủ thông tin bắt buộc</strong>");
+                if(capc == null ||capc=="undefined" || capc==""){
+                    dhtmlx.alert("<strong>Vui lòng điền mã xác nhận</strong>");
+                }else{
+                    dhtmlx.alert("<strong>Vui lòng điền đầy đủ thông tin bắt buộc</strong>");
+                }
+
             }
 
         }
