@@ -40,8 +40,7 @@
                                 <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Cứu hộ toàn quốc</a></li>
                                 <li><a href="{{ URL::to('bai-giu-xe/all') }}">Bãi giữ xe toàn quốc</a></li>
                                 <li><a href="{{ URL::to('/tin-tuc') }}">Tin tức về xe</a></li>
-                                <li><a href="#">Quy định & Hướng dẫn</a></li>
-                                <li><a class="last" href="#">Liên hệ</a></li>
+                                <li><a href="{{ URL::to('dich-vu-huong-dan') }}">Dịch vụ & Hướng dẫn</a></li>
                             </ul>
                         </div>
                     </div>
@@ -255,7 +254,7 @@
                     <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Cứu hộ<br>toàn quốc</a> </li>
                     <li><a href="{{ URL::to('bai-giu-xe/all') }}">Bãi giữ xe<br>toàn quốc</a> </li>
                     <li><a href="{{ URL::to('tin-tuc') }}">Tin tức<br>về xe</a> </li>
-                    <li><a href="#">Quy định &<br>Hướng dẫn</a> </li>
+                    <li><a href="{{ URL::to('dich-vu-huong-dan') }}">Dịch vụ &<br>Hướng dẫn</a> </li>
                 </ul>
             </div>
             <div class="social-bottom">

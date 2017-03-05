@@ -124,4 +124,8 @@ class ServiceController extends Controller {
         ]);
     }
 
+    public function serviceGuide(){
+        return View('Service.guide', []);
+    }
+
 }
