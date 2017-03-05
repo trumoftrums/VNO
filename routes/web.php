@@ -33,6 +33,7 @@ Route::get('/do-xe-uy-tin/{id}/{name}', 'Frontend\ServiceController@designCarDet
 Route::get('/vip-salon/{city}', 'Frontend\ServiceController@vipSalon');
 Route::get('/vip-salon/{id}/{name}', 'Frontend\ServiceController@vipSalonDetail');
 
+Route::get('/dich-vu-huong-dan', 'Frontend\ServiceController@serviceGuide');
 Route::get('/bai-dang/{id}/{name}', 'Frontend\HomeController@postDetail');
 Route::get('/dang-tin-free', 'Frontend\HomeController@freePost');
 Route::post('/dang-tin-free', 'Frontend\HomeController@freePost');

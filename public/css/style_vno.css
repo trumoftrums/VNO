@@ -1996,7 +1996,41 @@ textarea:focus, input:focus{
 .scroll-ads .item-ads a:hover{
     opacity: 0.8;
 }
-
+.cover-ul-guide{
+    float: left;
+    width: 100%;
+    margin-bottom: 25px;
+}
+.ul-guide-tab{
+    width: 500px;
+    margin: 0px auto;
+}
+.ul-guide-tab li{
+    display: inline;
+    padding: 15px;
+    float: left;
+    text-align: center;
+}
+.ul-guide-tab li a{
+    color: #000;
+    float: left;
+    line-height: 17px;
+}
+.ul-guide-tab li.active a, .ul-guide-tab li a:hover{
+    text-decoration: none;
+    color: #0c834a;
+    border-bottom: 2px dotted #0c834a;
+}
+.ul-guide-tab .point-green{
+    margin-top: 30px;
+    float: left;
+}
+.cover-guide-tab {
+    float: left;
+}
+.cover-guide-tab div img{
+    width: 100%;
+}
 @media (max-width: 1199px) {
     .social-bottom{
         display: none !important;

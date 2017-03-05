@@ -180,12 +180,6 @@ class HomeController extends Controller {
         return View('Home.index', $result);
     }
 
-    public function filterBranchCar(){
-        $result['listPost'] = [];
-
-        return View('Home.index', $result);
-    }
-
     public function register()
     {
         $param = Input::all();
