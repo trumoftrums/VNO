@@ -1955,6 +1955,7 @@ textarea:focus, input:focus{
 }
 .cover-tab-free ul li .cover-inp-upload img{
     width: 100%;
+    min-height: 146px;
 }
 .btn-next-free-post{
     background: #0c834a;
