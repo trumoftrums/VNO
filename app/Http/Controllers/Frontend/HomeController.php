@@ -20,6 +20,7 @@ use Request;
 use DB;
 use Illuminate\Support\Facades\Redirect;
 use Mews\Captcha\Facades\Captcha;
+use Validator;
 class HomeController extends Controller {
 
     const POST_PER_PAGE = 9;
@@ -414,29 +415,47 @@ class HomeController extends Controller {
 
         if(Request::getMethod() == 'POST' && !empty($formData)){
 
-                var_dump($formData);exit();
-                $rules = ['captcha' => 'required|captcha'];
+//                var_dump($formData);exit();
+                $rules =[];
+                if($formData['optradio']=="NORMAL"){
+                    $rules = ['nm_captcha' => 'required|captcha'];
+                }else{
+                    $rules = ['vip_captcha' => 'required|captcha'];
+                }
                 $validator = Validator::make($formData, $rules);
-                if ($validator->fails())
+
+                if (!$validator->fails())
                 {
+//                    var_dump($formData);exit();
+                    $getHangXe = Hangxe::where("id",$formData['thongso_20'])->get()->toArray();
+                    if(!empty($getHangXe)){
+                        $formData['thongso_20'] = $getHangXe[0]['hang_xe'];
+                    }
+
+                    $getHangXe = Dongxe::where("id",$formData['thongso_75'])->get()->toArray();
+                    if(!empty($getHangXe)){
+                        $formData['thongso_75'] = $getHangXe[0]['dong_xe'];
+                    }
+                    $arr_fr =explode("/",$formData['actived_from']);
+                    $formData['actived_from'] = $arr_fr[2]."-".$arr_fr[1]."-".$arr_fr[0]." 00:00:00";
+
+                    $arr_to =explode("/",$formData['actived_to']);
+                    $formData['actived_to'] = $arr_to[2]."-".$arr_to[1]."-".$arr_to[0]." 23:59:59";
+
+
+//                    var_dump($formData);exit();
+                    $hash = md5(json_encode($formData));
+                    $ck = Submittoken::where("token",$hash)->count();
+                    if($ck==0){
+                        $result = $this->save_bai_viet($formData);
+                        $tk = new Submittoken;
+                        $tk->token = $hash;
+                        $tk->userid = $user->id;
+                        $tk->save();
+                    }
+                    $_POST = array();
 
                 }
-                else
-                {
-
-                }
-
-            $hash = md5(json_encode($formData));
-            $ck = Submittoken::where("token",$hash)->count();
-            if($ck==0){
-                $result = $this->save_bai_viet($formData);
-                $tk = new Submittoken;
-                $tk->token = $hash;
-                $tk->userid = $user->id;
-                $tk->save();
-            }
-            $_POST = array();
-
         }
         $listHangXe =  Hangxe::where('status',1)->get()->toArray();
         $hangxes = array();
@@ -519,14 +538,7 @@ class HomeController extends Controller {
             'result'=>false,
             'mess' =>''
         );
-
-
-
         if (Auth::check()) {
-            // The user is logged in...
-
-
-//            var_dump($formData);exit();
             $tieude = "";
             $bvid = null;
             $mota = "";
@@ -556,7 +568,7 @@ class HomeController extends Controller {
 
             }
 
-            $tieude = $formData['thongso_20']." ".$formData['thongso_25']." ".$formData['thongso_22'];
+            $tieude = $formData['thongso_20']." ".$formData['thongso_75']." ".$formData['thongso_22'];
             $tieude = trim($tieude);
 //            var_dump($tieude);exit();
             if(!empty($tieude) && !empty($mota)){

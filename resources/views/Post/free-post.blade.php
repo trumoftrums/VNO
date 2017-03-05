@@ -309,11 +309,11 @@
                         <div class="cover-div-first">
                             <div class="div-one">
                                 <label>Ngày băt đầu</label>
-                                <input type="text" id="datepicker1" class="calendar-inp" value="<?php echo date("d/m/Y");?>">
+                                <input type="text" id="datepicker1" name="actived_from" class="calendar-inp" value="<?php echo date("d/m/Y");?>">
                             </div>
                             <div class="div-two">
                                 <label>Ngày kết thúc</label>
-                                <input type="text" id="datepicker2" class="calendar-inp" value="<?php echo date("d/m/Y",strtotime("+30 days"));?>">
+                                <input type="text" id="datepicker2" name="actived_to" class="calendar-inp" value="<?php echo date("d/m/Y",strtotime("+30 days"));?>">
                             </div>
                             <div class="div-three">
                                 <label>Up tin tự động</label>
@@ -333,7 +333,7 @@
                             </li>
                             <li>
                                 <label>Mã xác nhận</label>
-                                <input type="text" class="code" placeholder="Nhập mã" value="" name="captcha" id="nm_captcha">
+                                <input type="text" class="code" placeholder="Nhập mã" value="" name="nm_captcha" id="nm_captcha">
                                 <img class="img-cap" src="{{$src_captcha}}"/>
                             </li>
                         </ul>
@@ -365,7 +365,7 @@
                                 </div>
                                 <div class="div-item-vip-post">
                                     <label>Mã xác nhận</label>
-                                    <input type="text" class="code" placeholder="Nhập mã" name="captcha"  value="" id="vip_captcha">
+                                    <input type="text" class="code" placeholder="Nhập mã" name="vip_captcha"  value="" id="vip_captcha">
                                     <img title="Click để đổi hình khác" class="img-cap" src="{{$src_captcha}}"/>
 
                                 </div>
@@ -470,8 +470,15 @@
 
 
         });
+        var capc = null;
         var loaiTin = $('input:radio[name=optradio]:checked', '#fmbaiviet').val();
         if(loaiTin=="NORMAL"){
+            capc = $("#nm_captcha").val();
+        }else{
+            capc = $("#vip_captcha").val();
+        }
+        if(capc == null ||capc=="undefined" || capc==""){
+            cando = false;
 
         }
         if(!cando){
@@ -479,7 +486,12 @@
             if(photo){
                 dhtmlx.alert("<strong>Vui lòng upload đủ 5 hình ảnh</strong>");
             }else{
-                dhtmlx.alert("<strong>Vui lòng điền đầy đủ thông tin bắt buộc</strong>");
+                if(capc == null ||capc=="undefined" || capc==""){
+                    dhtmlx.alert("<strong>Vui lòng điền mã xác nhận</strong>");
+                }else{
+                    dhtmlx.alert("<strong>Vui lòng điền đầy đủ thông tin bắt buộc</strong>");
+                }
+
             }
 
         }
