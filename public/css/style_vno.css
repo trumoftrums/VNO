@@ -356,7 +356,7 @@
     float: left;
 }
 .header .center-content-col .filter .bt-submit-filter{
-    background: url(../images/bt-search.png);
+    background: url(../images/bt-search.png) 50%;
     background-size: cover;
     padding: 10px 20px;
     border: none;
@@ -389,6 +389,7 @@
 .menu-branch div{
     float: left;
     height: 50px;
+    width: 130px;
 }
 .header .center-content-col .paging .menu-branch .all-branch{
     color: #fff;
@@ -664,7 +665,7 @@
 .footer .info span{
     width: 100%;
     float: left;
-    font-size: 0.8vw;
+    font-size: 12px;
 }
 .footer .menu-bottom{
     float: left;
@@ -679,10 +680,10 @@
     float: left;
 }
 .footer .menu-bottom ul li a{
-    padding: 12px 6px 0px 6px;
+    padding: 12px 15px 0px 15px;
     float: left;
     color: #2d2d2d;
-    font-size: 0.9vw;
+    font-size: 13px;
     height: 67px;
     text-align: center;
 }
@@ -698,7 +699,7 @@
     float: right;
     padding-top: 17px;
     margin-right: 3vw;
-    font-size: 0.9vw;
+    font-size: 13px;
 }
 .social-bottom a{
     float: left;
@@ -1170,6 +1171,7 @@ textarea:focus, input:focus{
 .list-news-page .detail-news{
     padding: 5px;
 }
+
 .list-news-page .detail-news .thumb-item-news{
     width: 100%;
     margin-bottom: 20px;
@@ -1208,6 +1210,7 @@ textarea:focus, input:focus{
 .related-news .cover-related-item-news{
     float: left;
     padding-left: 10px;
+    width: 80%;
 }
 .related-news .cover-related-item-news .title:hover{
     color: #999;
@@ -1487,7 +1490,7 @@ textarea:focus, input:focus{
     margin-top: 15px;
     margin-right: 5px;
     font-style: italic;
-    font-size:1vw;
+    font-size:13px;
 }
 .alert-update-success{
     float: left;
@@ -1506,13 +1509,13 @@ textarea:focus, input:focus{
 }
 .item-support-page img{
     float: left;
-    width: 25%;
+    width: 30%;
     height: 103px;
 }
 .item-support-page .cover-info-support{
     float: left;
     margin-left: 5px;
-    width: 72%;
+    width: 65%;
 }
 .item-support-page .cover-info-support h4{
     float: left;
@@ -1645,8 +1648,11 @@ textarea:focus, input:focus{
     float: left;
     width: 60%;
 }
+.div-des .cover-descript{
+    padding-left: 6px;
+}
 .info-post-detail .left ul{
-    padding-left: 0px;
+    padding-left: 6px;
 }
 .info-post-detail .left ul li{
     list-style: none;
@@ -1665,7 +1671,8 @@ textarea:focus, input:focus{
 .info-post-detail .left ul li span img{
     max-width: 20px;
     margin-right: 6px;
-    height: 20px;
+    float: left;
+    margin-top: 3px;
 }
 .info-post-detail .right{
     width: 40%;
@@ -1972,7 +1979,7 @@ textarea:focus, input:focus{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;       /* remove default arrow */
-    background: url(../images/icon-arrow-filter.png) 99% / 9px no-repeat !important;
+    background: url(../images/icon-arrow-filter.png) 98% / 9px no-repeat !important;
     padding-left: 5px !important;
 }
 .scroll-ads{
@@ -1988,4 +1995,57 @@ textarea:focus, input:focus{
 }
 .scroll-ads .item-ads a:hover{
     opacity: 0.8;
+}
+
+@media (max-width: 1199px) {
+    .social-bottom{
+        display: none !important;
+    }
+    .footer .menu-bottom ul li a {
+        padding: 12px 12px 0px 12px;
+    }
+    .address-price-phone .address{
+        width: 50%;
+    }
+    .address-price-phone .price{
+        width: 28%;
+    }
+    .header .center-content-col .list-items .item .left-item .price{
+        font-size: 13px;
+    }
+    .info-post-detail .left{
+        width:100%;
+    }
+    .p-title-no-area{
+        border-left: 7px solid #0c834a;
+        border-bottom: 1px dotted #0c834a;
+    }
+    .info-post-detail .right{
+        width:50%;
+    }
+    .header .center-content-col{
+        width: 57%;
+    }
+    .header .last-col{
+        width: 20%;
+    }
+    .menu-log-reg .log-reg .login-signup{
+        margin: 12px 1px 0px 0px;
+        font-size:12px;
+    }
+    .menu-log-reg .log-reg .login-signup img{
+        display: none;
+    }
+    .logo .social{
+        left: -30px;
+    }
+    .info-post-detail .right .img-bank{
+        margin-left: 6px;
+    }
+    .info-post-detail .right .price{
+        margin-left: 6px;
+    }
+    .list-news-page .detail-news img{
+        width: 100% !important;
+    }
 }

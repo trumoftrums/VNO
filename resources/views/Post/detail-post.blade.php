@@ -150,35 +150,35 @@
                     <ul>
                         <li>
                             <div>
-                                <span><img src="{{ URL::asset('images/icon-detail-post/icon01.png')}}"/>Dáng xe: @if(isset($detailPost->thongso['thongso_25'])) {{$detailPost->thongso['thongso_25']}} @endif</span>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/car.png')}}"/>Dáng xe: @if(isset($detailPost->thongso['thongso_25'])) {{$detailPost->thongso['thongso_25']}} @endif</span>
                             </div>
                             <div>
-                                <span><img src="{{ URL::asset('images/icon-detail-post/icon04.png')}}"/>Tỉnh thành: @if(isset($detailPost->thongso['thongso_62'])) {{$detailPost->thongso['thongso_62']}} @endif</span>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/city.png')}}"/>Tỉnh thành: @if(isset($detailPost->thongso['thongso_62'])) {{$detailPost->thongso['thongso_62']}} @endif</span>
                             </div>
                             <div>
-                                <span><img src="{{ URL::asset('images/icon-detail-post/icon07.png')}}"/>Tình trạng: @if(isset($detailPost->thongso['thongso_24'])) {{$detailPost->thongso['thongso_24']}} @endif</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <span><img src="{{ URL::asset('images/icon-detail-post/icon02.png')}}"/>Năm SX: @if(isset($detailPost->thongso['thongso_22'])) {{$detailPost->thongso['thongso_22']}} @endif</span>
-                            </div>
-                            <div>
-                                <span><img src="{{ URL::asset('images/icon-detail-post/icon05.png')}}"/>Xuất xứ: @if(isset($detailPost->thongso['thongso_70'])) {{$detailPost->thongso['thongso_70']}} @endif</span>
-                            </div>
-                            <div>
-                                <span><img src="{{ URL::asset('images/icon-detail-post/icon08.png')}}"/>KM đã đi: @if(isset($detailPost->thongso['thongso_26'])) {{$detailPost->thongso['thongso_26']}} @endif km</span>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/info.png')}}"/>Tình trạng: @if(isset($detailPost->thongso['thongso_24'])) {{$detailPost->thongso['thongso_24']}} @endif</span>
                             </div>
                         </li>
                         <li>
                             <div>
-                                <span><img src="{{ URL::asset('images/icon-detail-post/icon03.png')}}"/>Hộp số: @if(isset($detailPost->thongso['thongso_34'])) {{$detailPost->thongso['thongso_34']}} @endif</span>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/calendar.png')}}"/>Năm SX: @if(isset($detailPost->thongso['thongso_22'])) {{$detailPost->thongso['thongso_22']}} @endif</span>
                             </div>
                             <div>
-                                <span><img src="{{ URL::asset('images/icon-detail-post/icon06.png')}}"/>Nhiên liệu: @if(isset($detailPost->thongso['thongso_32'])) {{$detailPost->thongso['thongso_32']}} @endif</span>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/location.png')}}"/>Xuất xứ: @if(isset($detailPost->thongso['thongso_70'])) {{$detailPost->thongso['thongso_70']}} @endif</span>
                             </div>
                             <div>
-                                <span><img src="{{ URL::asset('images/icon-detail-post/icon09.png')}}"/>Màu sắc: @if(isset($detailPost->thongso['thongso_27'])) {{$detailPost->thongso['thongso_27']}} @endif</span>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/km.png')}}"/>KM đã đi: @if(isset($detailPost->thongso['thongso_26'])) {{$detailPost->thongso['thongso_26']}} @endif km</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/gearbox.png')}}"/>Hộp số: @if(isset($detailPost->thongso['thongso_34'])) {{$detailPost->thongso['thongso_34']}} @endif</span>
+                            </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/oils.png')}}"/>Nhiên liệu: @if(isset($detailPost->thongso['thongso_32'])) {{$detailPost->thongso['thongso_32']}} @endif</span>
+                            </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/color.png')}}"/>Màu sắc: @if(isset($detailPost->thongso['thongso_27'])) {{$detailPost->thongso['thongso_27']}} @endif</span>
                             </div>
                         </li>
                         <li>
@@ -203,7 +203,9 @@
             </div>
             <div class="div-des">
                 <p class="p-title-area">NỘI DUNG MÔ TẢ</p>
-                @if(isset($detailPost->thongso['thongso_67'])) {{$detailPost->thongso['thongso_67']}} @endif
+                <div class="cover-descript">
+                    @if(isset($detailPost->thongso['thongso_67'])) {{$detailPost->thongso['thongso_67']}} @endif
+                </div>
                 <p class="p-notes"><span>* Lưu ý:</span> Quý vị đang xem nội dung tin rao "{{$detailPost->tieu_de}}". Mọi thông tin liên quan tới tin rao này là do người đăng tin đăng tải và chịu trách nhiệm. Vietnamoto.net luôn cố gắng để có chất lượng thông tin tốt nhất, nhưng Banxehoi.com không chịu trách nhiệm về bất kỳ nội dung nào liên quan tới tin rao này. Nếu quý vị phát hiện có sai sót hay vấn đề gì xin hãy thông báo cho vietnamoto.net tại đây</p>
             </div>
             <div class="post-relate-type">
@@ -220,7 +222,7 @@
                 @endforeach
                 @if(count($listPostRelatedType) > 0)
                     <div class="cover-view-more">
-                        <a class="view-more" href="#">Xem nhiều hơn>></a>
+                        <a class="view-more" href="{{ URL::to('?branch='.$strFilter) }}">Xem nhiều hơn>></a>
                     </div>
                 @endif
             </div>
@@ -238,7 +240,7 @@
                 @endforeach
                 @if(count($listPostRelatedPrice) > 0)
                     <div class="cover-view-more">
-                        <a class="view-more" href="#">Xem nhiều hơn>></a>
+                        <a class="view-more" href="{{ URL::to('?price='.$price) }}">Xem nhiều hơn>></a>
                     </div>
                 @endif
             </div>

@@ -17,7 +17,7 @@
             <p>{{$user->username}}</p>
         </div>
         <img class="img-banner-profile"
-             @if($user->avatar != null)
+             @if($user->image_profile != null)
              src="{{ URL::asset($user->image_profile)}}"
              @else
              src="{{ URL::asset('images/img-profile-user.png')}}"
@@ -37,7 +37,7 @@
                     <ul>
                         <li><span>Nickname: </span><input ng-model="formDataInfo.username" class="text-inp" type="text" name="nickname"/></li>
                         <li><span>Email của bạn: </span><input ng-model="formDataInfo.email" class="text-inp" name="email"/></li>
-                        <li><span>Số điện thoại: </span><input type="number" ng-model="formDataInfo.phone" class="text-inp" name="phone"/></li>
+                        <li><span>Số điện thoại: </span><input style="opacity: 0.5;" type="text" ng-model="formDataInfo.phone" class="text-inp number-only" name="phone" readonly/></li>
                         <li><span>Địa chỉ: </span><input ng-model="formDataInfo.address" class="text-inp" name="address"/></li>
                         <li><span>Lĩnh vực kinh doanh: </span><input ng-model="formDataInfo.major" class="text-inp" name="career"/></li>
                         <li><span>Sở thích: </span><input class="text-inp" ng-model="formDataInfo.hobby" name="hobby"/>
@@ -55,7 +55,7 @@
                 <form  name="changePasswordForm" ng-submit="clickChangePassword()" novalidate>
                     <ul>
                         <li><span>*Số điện thoại: </span>
-                            <input ng-model="formDataChangePass.phone" required type="number" class="text-inp" name="phone"/>
+                            <input ng-model="formDataChangePass.phone" required type="text" class="text-inp number-only" name="phone"/>
                             <p ng-show="changePasswordForm.phone.$invalid && changePasswordForm.$submitted" class="error-valid">Bạn chưa nhập số điện thoại.</p>
                         </li>
                         <li><span>*Mật khẩu cũ: </span>

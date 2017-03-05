@@ -10,7 +10,7 @@
 @section('content')
     <div class="news-page">
         <div class="header-news">
-            <img class="img-header-news-page" src="{{ URL::asset('images/icon-design-car.png')}}"/>
+            <img class="img-header-news-page" src="{{ URL::asset('images/icon-dia-chi-do-xe.png')}}"/>
             <img class="line-header" src="{{ URL::asset('images/line-news-page.png')}}"/>
         </div>
         <div class="list-news-page" id="style-4">

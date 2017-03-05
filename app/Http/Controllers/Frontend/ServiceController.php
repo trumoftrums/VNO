@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Frontend;
 
+use App\BaiXe;
 use App\DesignCar;
 use App\Http\Controllers\Controller;
 use App\Models\Baiviet;
@@ -20,6 +21,26 @@ class ServiceController extends Controller {
     public function index()
     {
 
+    }
+
+    public function baiGiuXe($city)
+    {
+        $listBaiGiuXe = BaiXe::where('status', BaiXe::STATUS_ACTIVE)
+            ->OrderBy('id', 'desc')
+            ->paginate(16);
+        if ($city) {
+            if($city != 'all'){
+                $listBaiGiuXe = BaiXe::where('status', BaiXe::STATUS_ACTIVE)
+                    ->OrderBy('id', 'desc')
+                    ->where('city', $city)
+                    ->paginate(16);
+            }
+        }
+
+        return View('Service.list-bai-xe', [
+            'listBaiGiuXe' => $listBaiGiuXe,
+            'city' => $city
+        ]);
     }
 
     public function supportCar($city)

@@ -32,23 +32,38 @@ class HomeController extends Controller {
     public function index()
     {
         $branch = Input::get('branch');
-        if ($branch != '' && $branch != 'all') {
-            $cond_str = "index_key_str = 'thongso_20' and index_value ='$branch' ";
-            $listPost = Baivietindex::whereRaw($cond_str)
+        $price = Input::get('price');
+        if($price != ''){
+            $cond_str_price = "index_key_str = 'thongso_65' and index_value ='$price' ";
+            $listPost = Baivietindex::whereRaw($cond_str_price)
                 ->distinct('baivietID')
                 ->where('op_baiviets.status', 'PUBLIC')
                 ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
                 ->OrderBy('op_baiviets.id', 'desc')
                 ->paginate(18);
-        } else {
-            $branch = 'TẤT CẢ CÁC HÃNG XE';
-            $listPost = Baiviet::where('status', 'PUBLIC')
-                ->OrderBy('id', 'desc')
-                ->paginate(18);
+        }else{
+            if ($branch != '' && $branch != 'all') {
+                $cond_str = "index_key_str = 'thongso_20' and index_value ='$branch'";
+                $listPost = Baivietindex::whereRaw($cond_str)
+                    ->distinct('baivietID')
+                    ->where('op_baiviets.status', 'PUBLIC')
+                    ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
+                    ->OrderBy('op_baiviets.id', 'desc')
+                    ->paginate(18)
+                    ->setPath('?branch=' . $branch);
+            } else {
+                $branch = 'TẤT CẢ CÁC HÃNG XE';
+                $listPost = Baiviet::where('status', 'PUBLIC')
+                    ->OrderBy('id', 'desc')
+                    ->paginate(18);
+            }
         }
         $res = $listPost->toArray();
         $totalPage = $res['last_page'];
         $currentPage = $res['current_page'];
+        if($totalPage == 0){
+            $currentPage = 0;
+        }
         foreach ($listPost as $item){
             $item->thongso = json_decode($item->thongso,true);
         }
@@ -318,7 +333,9 @@ class HomeController extends Controller {
         return View('Post.detail-post', [
             'detailPost' => $detailPost,
             'listPostRelatedType' => $listPostRelatedType,
-            'listPostRelatedPrice' => $listPostRelatedPrice
+            'listPostRelatedPrice' => $listPostRelatedPrice,
+            'strFilter' => $strFilter,
+            'price' => $strFilterPrice
         ]);
     }
 

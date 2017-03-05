@@ -25,6 +25,7 @@ Route::get('/tin-tuc', 'Frontend\HomeController@news');
 Route::get('/tin-tuc/{id}/{name}', 'Frontend\HomeController@newsDetail');
 
 Route::get('/thong-tin-cuu-ho/{city}', 'Frontend\ServiceController@supportCar');
+Route::get('/bai-giu-xe/{city}', 'Frontend\ServiceController@baiGiuXe');
 
 Route::get('/do-xe-uy-tin/{city}', 'Frontend\ServiceController@designCar');
 Route::get('/do-xe-uy-tin/{id}/{name}', 'Frontend\ServiceController@designCarDetail');
