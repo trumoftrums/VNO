@@ -3,9 +3,12 @@
 use App\Http\Controllers\Controller;
 use App\Models\Baiviet;
 use App\Models\Baivietindex;
+use App\Models\Loaibaiviet;
 use App\Models\Thongso;
 use App\Models\Thongtinxe;
 use App\Models\Users;
+use App\Models\Hangxe;
+use App\Models\Dongxe;
 use  App\Models\Submittoken;
 use App\Models\UsersFactory;
 use App\News;
@@ -16,6 +19,7 @@ use Illuminate\Support\Facades\Input;
 use Request;
 use DB;
 use Illuminate\Support\Facades\Redirect;
+use Mews\Captcha\Facades\Captcha;
 class HomeController extends Controller {
 
     const POST_PER_PAGE = 9;
@@ -384,13 +388,24 @@ class HomeController extends Controller {
             $_POST = array();
 
         }
+        $listHangXe =  Hangxe::where('status',1)->get()->toArray();
+        $hangxes = array();
+        if(!empty($listHangXe)){
+            foreach ($listHangXe as $hx){
+                $hangxes[$hx['id']]=$hx['hang_xe'];
+            }
+        }
+
+
+//        var_dump($loaiBaiViet);exit();
         $datas = array(
             'user' => $user,
 //            'info' => $info,
 //            'thongtinxe' =>$thongtinxe,
             'thongso'=>$thongso,
             'result' =>$result,
-            'baiviet' =>$bv
+            'baiviet' =>$bv,
+            'hangxes' =>$hangxes,
         );
         return View('Post.free-post',$datas);
     }
@@ -617,7 +632,7 @@ class HomeController extends Controller {
     }
     private function get_thongso_init(){
         $list_thongso = Thongso::where('status',1)->get()->toArray();
-        //var_dump($list_thongso);exit();
+
         $dt =array();
         foreach ($list_thongso as $v){
             $v['arr_options'] =  array();
@@ -626,6 +641,7 @@ class HomeController extends Controller {
             }
             $dt["thongso_".$v['id']] = $v;
         }
+//        var_dump($dt);exit();
         return $dt;
     }
     private  function convert_option_to_array($options){
@@ -667,6 +683,66 @@ class HomeController extends Controller {
         $ini += strlen($start);
         $len = strpos($string, $end, $ini) - $ini;
         return substr($string, $ini, $len);
+    }
+    public function getLoaiBaiViet(){
+        $result =array(
+            'result' =>false,
+            'mess' =>'',
+            'data'=>array()
+        );
+        $formData =  Request::all();
+        if(isset($formData['id']) && !empty($formData['id'])){
+            $id = $formData['id'];
+            $listLoaiTin =Loaibaiviet::where("status",1)->where("ma_loai_tin",$id)->get()->toArray();
+            if(!empty($listLoaiTin)){
+
+                $result['data'] = $listLoaiTin[0];
+            }
+            $result['result'] = true;
+        }else{
+            $result['mess'] = "Vui lòng chọn loại tin cần đăng";
+        }
+
+        return response($result)
+            ->withHeaders([
+                'Content-Type' => 'application/json'
+            ]);
+    }
+    public function getdongxe(){
+        $result =array(
+            'result' =>false,
+            'mess' =>'',
+            'data'=>array()
+        );
+        $formData =  Request::all();
+//        var_dump($formData);exit();
+        if(isset($formData['id']) && !empty($formData['id'])){
+            $id = $formData['id'];
+            $listDongXe =  Dongxe::where('status',1)->where('hang_xe',$id)->get()->toArray();
+            $dongxes = array();
+            if(!empty($listDongXe)){
+                foreach ($listDongXe as $hx){
+                    $dongxes[$hx['id']]=$hx['dong_xe'];
+                }
+            }
+            if(!empty($dongxes)){
+                $result['result'] = true;
+                $result['data'] = $dongxes;
+            }else{
+                $result['mess'] = 'Không tìm thấy dòng xe';
+            }
+
+        }else{
+            $result['mess'] = 'Không tìm thấy hãng xe';
+        }
+        return response($result)
+            ->withHeaders([
+                'Content-Type' => 'application/json'
+            ]);
+
+    }
+    public function changecaptcha(){
+        return Captcha::src();
     }
 
 }

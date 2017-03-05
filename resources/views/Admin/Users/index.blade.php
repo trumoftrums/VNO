@@ -105,8 +105,9 @@
             });
             mygrid.attachEvent("onRowSelect", function(id,ind){
                 // your code here
-                if(can_change_selected){
+                if(can_change_selected && current_row_id != id){
 //                    dhtmlx.alert(id+":"+ind);
+                    current_row_id = id;
                     myLayout.cells("b").progressOn();
                     $.ajax({
                         url: '/admin/getuserinfo',
@@ -146,6 +147,7 @@
 
         }
         var can_change_selected = true;
+        var current_row_id =0;
         var baiviet_form_tabbar;
         function add_baiviet(user) {
 
@@ -155,13 +157,13 @@
             var cfgform1 = [
                 {type: "settings", position: "label-left"},
                 {type: "block", offsetLeft: 10, inputWidth: 490, list: [
-                    {type: "image", id:"photo", required:true,name: "photo",labelWidth: 70, label: "Avatar",inputWidth: 150, inputHeight: 150, imageHeight: 150, url: "./tool/dhtmlxform_image", value:user.avatar},
-                    {type: "input", name: "username",required:true, label: "Username", labelWidth: 70, inputWidth: 150, value:user.username},
-                    {type: "input", name: "phone", required:true,label: "Phone", labelWidth: 70, inputWidth: 150, value:user.phone},
-                    {type: "input", id:"email",name: "email", label: "Email", labelWidth: 70, inputWidth: 350, value: user.email},
-                    {type: "input", id:"address",name: "address", label: "Address", labelWidth: 70, inputWidth: 350, value: user.address},
+                    {type: "image", id:"photo", required:true,name: "photo",labelWidth: 80, label: "Avatar",inputWidth: 150, inputHeight: 150, imageHeight: 150, url: "./tool/dhtmlxform_photo_user", value:user.avatar},
+                    {type: "input", name: "username",required:true, label: "Username", labelWidth: 80, inputWidth: 150, value:user.username},
+                    {type: "input", name: "phone", required:true,label: "Phone", labelWidth: 80, inputWidth: 150, value:user.phone},
+                    {type: "input", id:"email",name: "email", label: "Email", labelWidth: 80, inputWidth: 350, value: user.email},
+                    {type: "input", id:"address",name: "address", label: "Address", labelWidth: 80, inputWidth: 350, value: user.address},
 
-                    {type: "combo",labelWidth: 70,  label: "Group", name: "Group",inputWidth: 100,  options:[
+                    {type: "combo",labelWidth: 80,  label: "Group", name: "group",inputWidth: 100,  options:[
 
                         <?php
                             if(!empty($groups)){
@@ -175,16 +177,29 @@
                             }
                         ?>
                     ]},
-                    {type:"checkbox",labelWidth: 70,  name:"status", value:"Actived", label:"Status"}
+                    {type:"checkbox",labelWidth: 80,  name:"status", value:"Actived", label:"Actived"}
                 ]},
 
                 {type: "block", offsetLeft: 10, inputWidth: 490, list: [
-                    {type: "button", offsetLeft: 70, value: "Save", name: "btnSave"},
+                    {type: "button", offsetLeft: 80, value: "Save", name: "btnSave"},
                     {type: "newcolumn"},
-                    {type: "button", offsetLeft: 70, value: "Cancel", name: "btnCancel"}
+                    {type: "button", offsetLeft: 80, value: "Cancel", name: "btnCancel"}
                 ]}
             ];
             wform.loadStruct(cfgform1);
+            wform.disableItem('phone');
+//            var dhxCombo = wform.getCombo("group");
+//            console.log(user);
+//            myForm.setItemValue(name, value);
+            if(user != null && user !="undefined" && user != ''){
+//                dhtmlx.alert("ok");
+                wform.setItemValue('group',user.group);
+//                wform.setItemValue('group',user.group);
+                wform.checkItem('status');
+            }else{
+                wform.setItemValue('group',2);
+
+            }
 
 
             wform.attachEvent("onImageUploadSuccess", function(name, value, extra){
