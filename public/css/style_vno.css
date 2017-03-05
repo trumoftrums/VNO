@@ -2082,4 +2082,22 @@ textarea:focus, input:focus{
     .list-news-page .detail-news img{
         width: 100% !important;
     }
+    .cover-tab-free ul li .item-cover-one .free-post-input{
+        width: 10vw;
+    }
+    .cover-tab-free ul li .free-post-inp-text{
+        width: 10vw;
+    }
+    .cover-tab-free ul li .inp-tieu-thu {
+        width: 13vw;
+    }
+    .cover-tab-free ul li .inp-address {
+        width: 24vw;
+    }
+    .common-info .cover-div-first .div-one , .common-info .cover-div-first .div-two, .common-info .cover-div-first .div-three {
+        width: 50%;
+    }
+    .div-post-normal ul li label {
+        width: 16%;
+    }
 }

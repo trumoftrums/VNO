@@ -70,7 +70,7 @@
                             </li>
                             <li>
                                 <div class="item-cover-one">
-                                    <label>Thương hiệu xe<span style="color:red;">*</span></label>
+                                    <label>Hãng xe<span style="color:red;">*</span></label>
                                     <select type="select" class="free-post-input fm_required" name ="thongso_20">
                                         <option value="">Click chọn</option>
                                         <?php
