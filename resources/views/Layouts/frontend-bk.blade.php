@@ -155,7 +155,7 @@
                             if(isset($searchform['thongso_'.$item['id']])){
                                 $default_value = $searchform['thongso_'.$item['id']];
                             }
-                            echo \App\Helpers\Helper::search_field($item,$item["name"],$default_value);
+                            echo \App\Helpers\Helper::search_field($item,null,$default_value);
                         }
                         }
 

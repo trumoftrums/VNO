@@ -151,29 +151,48 @@
                 <form action="/" method="post" name="searchform" >
                     <div class="form-filter">
                         <input type="text" <?php if(isset($searchform['keyword'])){ echo ' value="'.$searchform['keyword'].'"';} ?> class="form-control" name="searchform[keyword]" placeholder="Từ khóa..."/>
-                        <select class="form-control inp-filter">
-                            <option>Hãng xe</option>
+                        <select class="form-control inp-filter" name="searchform[thongso_20]">
+                            <option value="">Hãng Xe</option>
+                            <?php
+                            if(!empty($hangxes)){
+                                foreach ($hangxes as $k=>$v){
+                                    echo '<option value="'.$k.'">'.$v.'</option>';
+                                }
+                            }
+                            ?>
                         </select>
                         <select class="form-control inp-filter">
                             <option>Dòng xe</option>
+
                         </select>
-                        <select class="form-control inp-filter">
-                            <option>Dáng xe</option>
-                        </select>
+                        {{--<select class="form-control inp-filter" name="searchform[thongso_25]">--}}
+                            {{--<option>Dáng xe</option>--}}
+                            <?php
+                            if(!empty($list_thongso) && !empty($list_thongso['thongso_25'])){
+                                echo \App\Helpers\Helper::search_field($list_thongso['thongso_25'],"Dáng xe",null);
+                            }
+                            ?>
+                        {{--</select>--}}
                     </div>
                     <div class="form-filter form-filter-2">
-                        <select class="form-control inp-filter inp-filter-2">
-                            <option>Tình trạng</option>
-                        </select>
-                        <select class="form-control inp-filter inp-filter-2">
-                            <option>Năm SX</option>
-                        </select>
+                        <?php
+                        if(!empty($list_thongso) && !empty($list_thongso['thongso_24'])){
+                            echo \App\Helpers\Helper::search_field($list_thongso['thongso_24'],"Tình trạng",null);
+                        }
+                        ?>
+                        <?php
+                        if(!empty($list_thongso) && !empty($list_thongso['thongso_22'])){
+                            echo \App\Helpers\Helper::search_field($list_thongso['thongso_22'],"Năm SX",null);
+                        }
+                        ?>
                         <select class="form-control inp-filter inp-filter-2">
                             <option>Giá tiền</option>
                         </select>
-                        <select class="form-control inp-filter inp-filter-2">
-                            <option>Tỉnh thành</option>
-                        </select>
+                            <?php
+                            if(!empty($list_thongso) && !empty($list_thongso['thongso_62'])){
+                                echo \App\Helpers\Helper::search_field($list_thongso['thongso_62'],"Tỉnh thành",null);
+                            }
+                            ?>
                     </div>
                     <input class="bt-submit-filter" type="submit" value=" ">
                 </form>

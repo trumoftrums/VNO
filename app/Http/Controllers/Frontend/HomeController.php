@@ -394,7 +394,7 @@ class HomeController extends Controller {
             $arr_pid = explode("-",$id_slug);
             $pid = $arr_pid[0];
             $baiviet = Baiviet::where('status','<>','DELETED')->where('id','=',$pid)->get()->toArray();
-            var_dump($baiviet);exit();
+//            var_dump($baiviet);exit();
             if(!empty($baiviet)){
                 $bv = $baiviet[0];
                 if($user->id == $bv['userid']){
