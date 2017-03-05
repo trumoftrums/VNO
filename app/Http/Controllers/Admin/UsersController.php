@@ -61,6 +61,7 @@ class UsersController extends Controller {
         $arr_final = Users::join('md_groups', 'md_groups.id', '=', 'md_users.group')
             ->where('phone','<>','')->select("md_users.*","md_groups.name as group_name")->get()->toArray();
 //        var_dump($arr_final);exit();
+
         $no =1;
         foreach ($arr_final as $v){
 //            var_dump($v);
@@ -98,10 +99,10 @@ class UsersController extends Controller {
             $bvid = $formData['id'];
             $users = Users::where('phone','<>','')->where('id',$bvid)->limit(1)->get()->toArray();
             if(!empty($users)){
+                $arr_avatar = explode("/",$users[0]['avatar']);
+                $users[0]['avatar'] = $arr_avatar[count($arr_avatar)-1];
                 $result['result'] = true;
-
-
-                $result["data"] = $users[0];
+                $result['data'] = $users[0];
 
             }else{
                 $result['mess'] = "Không tìm thấy user";

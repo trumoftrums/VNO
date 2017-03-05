@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Baiviet;
+use App\Models\Hangxe;
 use App\News;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
@@ -31,11 +32,15 @@ class AppServiceProvider extends ServiceProvider
             }
             $list_thongso = Thongso::where('filter',1)->get()->toArray();
 
+
+
+//            var_dump($hangxes);exit();
             $view->with([
                 'listNewsHome' => $listNewsHome,
                 'user' => $user,
                 'totalPost' => $totalPost,
-                'list_thongso'=>$list_thongso
+                'list_thongso'=>$list_thongso,
+//                'hangxes' =>$hangxes
             ]);
         });
         view()->composer('Layouts.backend', function ($view)

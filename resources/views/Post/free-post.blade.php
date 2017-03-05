@@ -33,6 +33,9 @@
     #tab4 .dhxform_obj_material div.dhxform_item_label_left{
         padding-top: 6px;
     }
+    .img-cap{
+        cursor: pointer;
+    }
 </style>
 @section('content')
     <div class="detail-post">
@@ -67,12 +70,13 @@
                             </li>
                             <li>
                                 <div class="item-cover-one">
-                                    <label>Thương hiệu xe<?php if($thongso["thongso_20"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
-                                    <select type="select" class="free-post-input <?php if($thongso["thongso_20"]['required']=="true"){echo 'fm_required';}?>" name ="thongso_20">
+                                    <label>Thương hiệu xe<span style="color:red;">*</span></label>
+                                    <select type="select" class="free-post-input fm_required" name ="thongso_20">
                                         <option value="">Click chọn</option>
                                         <?php
-                                        if(isset($thongso["thongso_20"]["arr_options"]) && !empty($thongso["thongso_20"]["arr_options"])){
-                                            foreach ($thongso["thongso_20"]["arr_options"] as $k=>$v){
+//                                            var_dump($hangxes);exit();
+                                        if(isset($hangxes) && !empty($hangxes)){
+                                            foreach ($hangxes as $k=>$v){
                                                 echo '<option value="'.$k.'">'.$v.'</option>';
                                             }
                                         }
@@ -80,12 +84,9 @@
                                     </select>
                                 </div>
                                 <div class="item-cover-one">
-                                    <label class="mar-right">Dòng xe</label>
-                                    <select  type="select" class="free-post-input">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                    <label class="mar-right ">Dòng xe<span style="color:red;">*</span></label>
+                                    <select  type="select" class="free-post-input fm_required" name="thongso_75">
+                                        <option value="">Click chọn</option>
                                     </select>
                                 </div>
                                 <div class="item-cover-one">
@@ -117,12 +118,16 @@
                                     </select>
                                 </div>
                                 <div class="item-cover-one">
-                                    <label class="mar-right">Xuất xứ</label>
-                                    <select  type="select" class="free-post-input">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                    <label class="mar-right">Xuất xứ<?php if($thongso["thongso_70"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <select  type="select" class="free-post-input <?php if($thongso["thongso_70"]['required']=="true"){echo 'fm_required';}?>" name="thongso_70">
+                                        <option value="">Click chọn</option>
+                                        <?php
+                                        if(isset($thongso["thongso_70"]["arr_options"]) && !empty($thongso["thongso_70"]["arr_options"])){
+                                            foreach ($thongso["thongso_70"]["arr_options"] as $k=>$v){
+                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                            }
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="item-cover-one">
@@ -155,13 +160,13 @@
                                 </div>
                                 <div class="item-cover-one">
                                     <label  class="mar-right">KM đã đi<?php if($thongso["thongso_26"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
-                                    <input type="text" class="free-post-input onlynumber <?php if($thongso["thongso_26"]['required']=="true"){echo 'fm_required';}?>" name="thongso_26">
+                                    <input type="text" class="free-post-inp-text onlynumber <?php if($thongso["thongso_26"]['required']=="true"){echo 'fm_required';}?>" placeholder="Nhập số KM đã đi" name="thongso_26">
 
                                 </div>
                                 <div class="item-cover-one">
 
                                     <label  class="mar-right">Màu sắc<?php if($thongso["thongso_27"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
-                                    <input type="text" class="free-post-input <?php if($thongso["thongso_27"]['required']=="true"){echo 'fm_required';}?>" name="thongso_27">
+                                    <input type="text" class="free-post-inp-text <?php if($thongso["thongso_27"]['required']=="true"){echo 'fm_required';}?>" placeholder="Nhập màu xe" name="thongso_27">
 
                                 </div>
                             </li>
@@ -183,37 +188,36 @@
                                     </select>
                                 </div>
                                 <div class="item-cover-one">
-                                    <label class="mar-right">Hộp số</label>
-                                    <select  type="select" class="free-post-input">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select>
-                                </div>
-                                <div class="item-cover-one">
-                                    <label class="mar-right">Dẫn động</label>
-                                    <select  type="select" class="free-post-input">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item-cover-one">
-                                    <label>Số ghế - cửa<?php if($thongso["thongso_30"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
-                                    <select  type="select" class="free-post-input <?php if($thongso["thongso_30"]['required']=="true"){echo 'fm_required';}?>" name="thongso_30">
+                                    <label class="mar-right">Hộp số<?php if($thongso["thongso_34"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <select  type="select" class="free-post-input <?php if($thongso["thongso_34"]['required']=="true"){echo 'fm_required';}?>" name="thongso_34">
                                         <option value="">Click chọn</option>
                                         <?php
-                                        if(isset($thongso["thongso_30"]["arr_options"]) && !empty($thongso["thongso_30"]["arr_options"])){
-                                            foreach ($thongso["thongso_30"]["arr_options"] as $k=>$v){
+                                        if(isset($thongso["thongso_34"]["arr_options"]) && !empty($thongso["thongso_34"]["arr_options"])){
+                                            foreach ($thongso["thongso_34"]["arr_options"] as $k=>$v){
                                                 echo '<option value="'.$k.'">'.$v.'</option>';
                                             }
                                         }
                                         ?>
                                     </select>
+                                </div>
+                                <div class="item-cover-one">
+                                    <label class="mar-right">Dẫn động<?php if($thongso["thongso_33"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <select  type="select" class="free-post-input <?php if($thongso["thongso_33"]['required']=="true"){echo 'fm_required';}?>" name="thongso_33">
+                                        <option value="">Click chọn</option>
+                                        <?php
+                                        if(isset($thongso["thongso_33"]["arr_options"]) && !empty($thongso["thongso_33"]["arr_options"])){
+                                            foreach ($thongso["thongso_33"]["arr_options"] as $k=>$v){
+                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-cover-one">
+                                    <label>Số ghế - cửa<?php if($thongso["thongso_74"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <input type="text" class="free-post-inp-text <?php if($thongso["thongso_74"]['required']=="true"){echo 'fm_required';}?>" name="thongso_74" placeholder="Nhập số ghế - cửa">
                                 </div>
                                 <div class="item-cover-two">
                                     <label class="mar-right">Mức tiệu thụ</label>
@@ -294,27 +298,28 @@
                         </ul>
                     </div>
                 </div>
+                <?php $src_captcha = Captcha::src();?>
                 <div id="tab2" class="tab-pane fade">
                     <p class="p-title-area">CHỌN LOẠI TIN ĐĂNG</p>
                     <div class="common-info">
-                        <label class="radio-inline post-normal"><input type="radio" checked name="optradio" value="1">TIN THƯỜNG</label>
-                        <label class="radio-inline post-vip1"><input type="radio" name="optradio" value="2">TIN VIP 1</label>
-                        <label class="radio-inline post-vip2"><input type="radio" name="optradio" value="3">TIN VIP 2</label>
-                        <label class="radio-inline post-vip-pro"><input type="radio" name="optradio" value="4">TIN VIP PRO</label>
+                        <label class="radio-inline post-normal"><input type="radio" checked name="optradio" value="NORMAL">TIN THƯỜNG</label>
+                        <label class="radio-inline post-vip1"><input type="radio" name="optradio" value="VIP001">TIN VIP 1</label>
+                        <label class="radio-inline post-vip2"><input type="radio" name="optradio" value="VIP002">TIN VIP 2</label>
+                        <label class="radio-inline post-vip-pro"><input type="radio" name="optradio" value="VIPPRO">TIN VIP PRO</label>
                         <div class="cover-div-first">
                             <div class="div-one">
                                 <label>Ngày băt đầu</label>
-                                <input type="text" id="datepicker1" class="calendar-inp">
+                                <input type="text" id="datepicker1" class="calendar-inp" value="<?php echo date("d/m/Y");?>">
                             </div>
                             <div class="div-two">
                                 <label>Ngày kết thúc</label>
-                                <input type="text" id="datepicker2" class="calendar-inp">
+                                <input type="text" id="datepicker2" class="calendar-inp" value="<?php echo date("d/m/Y",strtotime("+30 days"));?>">
                             </div>
                             <div class="div-three">
                                 <label>Up tin tự động</label>
                                 <div class="cover-radio">
-                                    <label class="radio-inline post-normal"><input type="radio" checked name="optradio1">Có</label>
-                                    <label class="radio-inline post-normal"><input type="radio" name="optradio1">Không</label>
+                                    <label class="radio-inline post-normal"><input type="radio" value="1" checked name="optradio1">Có</label>
+                                    <label class="radio-inline post-normal"><input type="radio" value="0" name="optradio1">Không</label>
                                 </div>
                             </div>
                         </div>
@@ -324,12 +329,12 @@
                         <ul>
                             <li>
                                 <label>Tổng tiền</label>
-                                <input type="text" class="inp-price">
+                                <input type="text" class="inp-price" value="Miễn phí" disabled="disabled">
                             </li>
                             <li>
                                 <label>Mã xác nhận</label>
                                 <input type="text" class="code" placeholder="Nhập mã">
-                                <img class="img-cap" src="{{ URL::asset('images/img-capcha.png') }}"/>
+                                <img class="img-cap" src="{{$src_captcha}}"/>
                             </li>
                         </ul>
                     </div>
@@ -338,30 +343,31 @@
                             <li>
                                 <div class="div-item-vip-post">
                                     <label>Thời gian</label>
-                                    <input type="text" class="inp-normal">
+                                    <input type="text" class="inp-normal" value="30 ngày" id="vip_so_ngay"  disabled="disabled">
                                 </div>
                                 <div class="div-item-vip-post">
                                     <label>Loại tin</label>
-                                    <input type="text" class="inp-normal">
+                                    <input type="text" class="inp-normal" value="" id="vip_loai_tin"  disabled="disabled">
                                 </div>
                                 <div class="div-item-vip-post">
                                     <label>Phí đăng tin</label>
-                                    <input type="text" class="inp-normal">
+                                    <input type="text" class="inp-normal" value="" id="vip_phi_dang_tin"  disabled="disabled">
                                 </div>
                             </li>
                             <li>
                                 <div class="div-item-vip-post">
                                     <label>Phí Up tin<br> tự động</label>
-                                    <input type="text" class="inp-normal">
+                                    <input type="text" class="inp-normal" value="" id="vip_auto_up" disabled="disabled">
                                 </div>
                                 <div class="div-item-vip-post">
                                     <label>Tổng tiền</label>
-                                    <input type="text" class="inp-normal">
+                                    <input type="text" class="inp-normal"  value="" id="vip_total_price" disabled="disabled">
                                 </div>
                                 <div class="div-item-vip-post">
                                     <label>Mã xác nhận</label>
-                                    <input type="text" class="code" placeholder="Nhập mã">
-                                    <img class="img-cap" src="{{ URL::asset('images/img-capcha.png') }}"/>
+                                    <input type="text" class="code" placeholder="Nhập mã"   value="" id="vip_captcha">
+                                    <img title="Click để đổi hình khác" class="img-cap" src="{{$src_captcha}}"/>
+
                                 </div>
                             </li>
                         </ul>
@@ -378,18 +384,40 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
     $( document ).ready(function() {
+        $(".img-cap").click(function () {
+            $.ajax({
+                url: '/changecaptcha',
+                type: 'POST',
+                dataType: "html",
+                cache: false,
+                enctype: 'multipart/form-data',
+                data : {},
+                success : function(data) {
+                    $(".img-cap").attr("src",data);
+                }
+            });
+        });
+
+
         $("input:radio[name=optradio]").click(function () {
             var value = $(this).val();
-            if (value == 1) {
+            if (value == "NORMAL") {
                 $(".div-post-normal").fadeIn();
                 $(".div-post-vip").hide();
             } else {
+                generate_loaibv(value);
+
                 $(".div-post-normal").hide();
                 $(".div-post-vip").fadeIn();
+
             }
+
+
+
+
         });
-        $( "#datepicker1" ).datepicker();
-        $( "#datepicker2" ).datepicker();
+        $( "#datepicker1" ).datepicker({ dateFormat: 'dd/mm/yy' });
+        $( "#datepicker2" ).datepicker({ dateFormat: 'dd/mm/yy' });
         <?php
             if(isset($result) && !empty($result)){
                 echo 'dhtmlx.alert("'.$result['mess'].'")';
@@ -397,6 +425,7 @@
         ?>
 
     });
+
     $("#fmbaiviet").submit(function( event ) {
         var cando = true;
         var photo = false;
@@ -445,7 +474,42 @@
         upload_img($(this).attr("id"));
 
     });
+    $("select[name='thongso_20']").change(function() {
+        var vl = $("select[name='thongso_20']").val();
+//        dhtmlx.alert(vl);
+        if(vl!=''){
+            $.ajax({
+                url: '/getdongxe',
+                type: 'POST',
+                dataType: "json",
+                cache: false,
+                enctype: 'multipart/form-data',
+                data : {id:vl},
+                success : function(data) {
+                    if(data.result){
+//                        console.log(data.data);
+                            generate_dongxe('thongso_75',data.data);
 
+                    }else{
+                        dhtmlx.alert(data.mess);
+                    }
+                }
+            });
+        }else{
+            dhtmlx.alert("Vui lòng chọn thương hiệu xe trước!");
+        }
+
+    });
+    function generate_dongxe(selectName,data){
+        var sl = $("select[name='"+selectName+"']");
+        //var obj = jQuery.parseJSON(data);
+        sl.html('<option value="">Click chọn</option>');
+        $.each(data, function(key,value) {
+//            console.log(key+":"+value);
+
+            sl.append('<option value="'+key+'">'+value+'</option>');
+        });
+    }
     function upload_img(fileID){
         var formData = new FormData();
         formData.append('file', $("#"+fileID)[0].files[0]);
@@ -466,6 +530,86 @@
             }
         });
     }
+    function generate_loaibv(typeID){
+        $.ajax({
+            url: '/getloaibaiviet',
+            type: 'POST',
+            dataType: "json",
+            cache: false,
+            enctype: 'multipart/form-data',
+            data : {id:typeID},
+            success : function(data) {
+                if(data.result){
+                    dt = data.data;
+                    calculate_prices();
+                }else{
+                    dhtmlx.alert(data.mess);
+                }
+            }
+        });
+    }
+    var dt;
+    function calculate_prices(){
+
+        if(dt != null){
+            $("#vip_loai_tin").val(dt.ten_loai_tin);
+
+            var from = $("#datepicker1").val().split("/");
+            var to = $("#datepicker2").val().split("/");
+
+            var date1 = new Date(from[2], from[1] - 1, from[0]);
+            var date2 = new Date(to[2], to[1] - 1, to[0]);
+            var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            $("#vip_so_ngay").val(diffDays+" ngày");
+            var months =0;
+            var days = 0;
+            var weeks = 0;
+            if(diffDays>0){
+                months = parseInt(diffDays/30);
+                weeks = parseInt((diffDays - 30*months)/7);
+                days = diffDays - 30*months - 7*weeks;
+                var vip_phidt =0;
+                var vip_price_unit = dt.price_unit;
+                if(months>0) vip_phidt +=dt.price_month*months;
+                if(weeks>0) vip_phidt +=dt.price_week*weeks;
+                if(days>0) vip_phidt +=dt.price_day*days;
+                var vip_total = vip_phidt;
+                $("#vip_phi_dang_tin").val(vip_phidt +"  "+vip_price_unit);
+
+
+                var autoUp = $('input:radio[name=optradio1]:checked', '#fmbaiviet').val();
+                var numUp = 0;
+                if(autoUp==1){
+                    numUp = Math.round(diffDays/7);
+                    vip_total += dt.price_day*numUp ;
+                }
+                if(numUp>0){
+                    $("#vip_auto_up").val(dt.price_day+"/lần x "+numUp+"lần");
+                }else{
+                    $("#vip_auto_up").val("None");
+                }
+
+                $("#vip_total_price").val(vip_total+"  "+vip_price_unit);
+            }else{
+                dhtmlx.alert("Bạn phải đăng tin ít nhất 1 ngày");
+            }
+
+
+
+        }else{
+            generate_loaibv($('input:radio[name=optradio]:checked', '#fmbaiviet').val());
+        }
+//        dhtmlx.alert(months+":"+days);
+    }
+    $("input:radio[name=optradio1]").click(function () {
+        calculate_prices();
+
+    });
+    $(".calendar-inp").change(function() {
+        calculate_prices();
+
+    });
 
 </script>
 @stop

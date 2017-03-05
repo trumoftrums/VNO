@@ -42,6 +42,9 @@ Route::post('/dang-tin-free/{id_slug}', 'Frontend\HomeController@freePost');
 Route::post('/upload-avatar', 'Frontend\HomeController@uploadAvatar');
 
 Route::post('/baiviet/save_bai_viet', 'Frontend\HomeController@save_bai_viet');
+Route::post('/getdongxe', 'Frontend\HomeController@getdongxe');
+Route::post('/getloaibaiviet', 'Frontend\HomeController@getLoaiBaiViet');
+Route::post('/changecaptcha', 'Frontend\HomeController@changecaptcha');
 //Route::get('/eidt-baiviet/{id}', 'Frontend\HomeController@edit_freePost');
 
 Route::post('/baiviet/uploadimg', 'Admin\BaivietController@uploadimg');
@@ -74,6 +77,9 @@ Route::group(['prefix' => 'admin'], function()
     Route::get('/users', 'Admin\UsersController@index');
     Route::get('/getusers', 'Admin\UsersController@get_news');
     Route::post('/getuserinfo', 'Admin\UsersController@get_user_info');
+    Route::post('/tool/dhtmlxform_photo_user', 'Admin\ToolController@dhtmlxform_photo_user');
+    Route::get('/tool/dhtmlxform_photo_user', 'Admin\ToolController@dhtmlxform_photo_user');
+
 
 
 //    Route::get('/tool/dhtmlxform_image/{id}', function ($id) {
