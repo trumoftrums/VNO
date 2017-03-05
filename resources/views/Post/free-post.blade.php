@@ -257,7 +257,7 @@
                                 <p class="p-title-area">MÔ TẢ XE CỦA BẠN</p>
                             </li>
                             <li>
-                                <textarea type="textarea" class="ckeditor <?php if($thongso["thongso_67"]['required']=="true"){echo 'fm_required';}?>" rows="5" name="thongso_67" id="comment" maxlength="1200" placeholder="Hãy nhập thông tin mô tả chi tiết"></textarea>
+                                <textarea style="width: 100%;height: 150px;border: 1px solid #ccc;padding: 5px;" type="textarea" class=" <?php if($thongso["thongso_67"]['required']=="true"){echo 'fm_required';}?>" rows="5" name="thongso_67" id="comment" maxlength="1200" placeholder="Hãy nhập thông tin mô tả chi tiết"></textarea>
                             </li>
                             <li>
                                 <div class="col-md-12" style="padding: 0px;">
@@ -356,7 +356,7 @@
                             </li>
                             <li>
                                 <div class="div-item-vip-post">
-                                    <label>Phí Up tin<br> tự động</label>
+                                    <label>Up tin<br> tự động</label>
                                     <input type="text" class="inp-normal" value="" id="vip_auto_up" disabled="disabled">
                                 </div>
                                 <div class="div-item-vip-post">

@@ -1280,7 +1280,7 @@ textarea:focus, input:focus{
 }
 .ul-cover-tabs-post li a{
     border: 1px solid #0c834a;
-    padding: 5px 5%;
+    padding: 10px 5%;
     margin-right: 1%;
     font-size: 0.95vw;
     text-align: center;
@@ -2084,6 +2084,7 @@ textarea:focus, input:focus{
     }
     .cover-tab-free ul li .item-cover-one .free-post-input{
         width: 10vw;
+        background: url(../images/icon-selectbox-small.png) 100% / 11px no-repeat !important;
     }
     .cover-tab-free ul li .free-post-inp-text{
         width: 10vw;
@@ -2099,5 +2100,24 @@ textarea:focus, input:focus{
     }
     .div-post-normal ul li label {
         width: 16%;
+    }
+    .div-post-normal ul li .inp-price {
+        width: 15vw;
+    }
+    .div-post-normal ul li .code {
+        width: 8vw;
+    }
+    .div-post-normal ul li .img-cap {
+        width: 6.5vw;
+    }
+    .div-post-vip .div-item-vip-post .inp-normal {
+        width: 11vw;
+    }
+    .div-post-vip .div-item-vip-post .img-cap {
+        margin-top: 2px;
+        width: 11vw;
+    }
+    .div-post-vip .div-item-vip-post .code {
+        width: 11vw;
     }
 }
