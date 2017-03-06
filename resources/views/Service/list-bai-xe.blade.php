@@ -17,9 +17,9 @@
             <form class="form-filter-support-car">
                 <select class="select-city" name="filter_city" id="filter-city-bai-xe">
                     <option value="all">ALL - Chọn theo tỉnh thành</option>
-                    <option value="ho-chi-minh" @if($city == 'ho-chi-minh') selected @endif>Hồ Chí Minh</option>
-                    <option value="ha-noi" @if($city == 'ha-noi') selected @endif>Hà Nội</option>
-                    <option value="da-nang" @if($city == 'da-nang') selected @endif>Đà Nẵng</option>
+                    @foreach($listCity as $city)
+                        <option value="{{str_slug($city->city_name, '-')}}" @if($citySelected == (str_slug($city->city_name, '-'))) selected @endif>{{$city->city_name}}</option>
+                    @endforeach
                 </select>
             </form>
             <div class="inner-list-news-page" >

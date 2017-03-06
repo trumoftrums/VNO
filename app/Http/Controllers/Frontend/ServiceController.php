@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Frontend;
 
 use App\BaiXe;
+use App\City;
 use App\DesignCar;
 use App\Http\Controllers\Controller;
 use App\Models\Baiviet;
@@ -36,10 +37,12 @@ class ServiceController extends Controller {
                     ->paginate(16);
             }
         }
+        $listCity = City::getCity();
 
         return View('Service.list-bai-xe', [
             'listBaiGiuXe' => $listBaiGiuXe,
-            'city' => $city
+            'citySelected' => $city,
+            'listCity' => $listCity
         ]);
     }
 
@@ -56,10 +59,12 @@ class ServiceController extends Controller {
                     ->paginate(16);
             }
         }
+        $listCity = City::getCity();
 
         return View('Service.list-support-car', [
             'listSupportCar' => $listSupportCar,
-            'city' => $city
+            'citySelected' => $city,
+            'listCity' => $listCity
         ]);
     }
 
@@ -76,9 +81,12 @@ class ServiceController extends Controller {
                     ->paginate(16);
             }
         }
+        $listCity = City::getCity();
+
         return View('Service.list-design-car', [
             'listDesignCar' => $listDesignCar,
-            'city' => $city
+            'citySelected' => $city,
+            'listCity' => $listCity
         ]);
     }
 
@@ -103,9 +111,12 @@ class ServiceController extends Controller {
                     ->paginate(16);
             }
         }
+        $listCity = City::getCity();
+
         return View('Service.list-salon-car', [
             'listVipSalon' => $listVipSalon,
-            'city' => $city
+            'citySelected' => $city,
+            'listCity' => $listCity
         ]);
     }
 
