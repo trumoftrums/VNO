@@ -77,7 +77,11 @@
 //                                            var_dump($hangxes);exit();
                                         if(isset($hangxes) && !empty($hangxes)){
                                             foreach ($hangxes as $k=>$v){
-                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                                $selected = "";
+                                                if(isset($baiviet['hang_xe']) && $k == $baiviet['hang_xe']) {
+                                                    $selected =' selected="selected" ';
+                                                }
+                                                echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
                                             }
                                         }
                                         ?>
@@ -96,7 +100,11 @@
                                         <?php
                                         if(isset($thongso["thongso_25"]["arr_options"]) && !empty($thongso["thongso_25"]["arr_options"])){
                                             foreach ($thongso["thongso_25"]["arr_options"] as $k=>$v){
-                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                                $selected = "";
+                                                if(isset($baiviet['thongso']['thongso_25']) && $k == $baiviet['thongso']['thongso_25']) {
+                                                    $selected =' selected="selected" ';
+                                                }
+                                                echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
                                             }
                                         }
                                         ?>
@@ -111,7 +119,11 @@
                                         <?php
                                         if(isset($thongso["thongso_62"]["arr_options"]) && !empty($thongso["thongso_62"]["arr_options"])){
                                             foreach ($thongso["thongso_62"]["arr_options"] as $k=>$v){
-                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                                $selected = "";
+                                                if(isset($baiviet['thongso']['thongso_62']) && $k == $baiviet['thongso']['thongso_62']) {
+                                                    $selected =' selected="selected" ';
+                                                }
+                                                echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
                                             }
                                         }
                                         ?>
@@ -124,7 +136,11 @@
                                         <?php
                                         if(isset($thongso["thongso_70"]["arr_options"]) && !empty($thongso["thongso_70"]["arr_options"])){
                                             foreach ($thongso["thongso_70"]["arr_options"] as $k=>$v){
-                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                                $selected = "";
+                                                if(isset($baiviet['thongso']['thongso_70']) && $k == $baiviet['thongso']['thongso_70']) {
+                                                    $selected =' selected="selected" ';
+                                                }
+                                                echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
                                             }
                                         }
                                         ?>
@@ -137,7 +153,11 @@
                                         <?php
                                         if(isset($thongso["thongso_24"]["arr_options"]) && !empty($thongso["thongso_24"]["arr_options"])){
                                             foreach ($thongso["thongso_24"]["arr_options"] as $k=>$v){
-                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                                $selected = "";
+                                                if(isset($baiviet['thongso']['thongso_24']) && $k == $baiviet['thongso']['thongso_24']) {
+                                                    $selected =' selected="selected" ';
+                                                }
+                                                echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
                                             }
                                         }
                                         ?>
@@ -152,7 +172,11 @@
                                         <?php
                                         if(isset($thongso["thongso_22"]["arr_options"]) && !empty($thongso["thongso_22"]["arr_options"])){
                                             foreach ($thongso["thongso_22"]["arr_options"] as $k=>$v){
-                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                                $selected = "";
+                                                if(isset($baiviet['thongso']['thongso_22']) && $k == $baiviet['thongso']['thongso_22']) {
+                                                    $selected =' selected="selected" ';
+                                                }
+                                                echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
                                             }
                                         }
                                         ?>
@@ -160,13 +184,13 @@
                                 </div>
                                 <div class="item-cover-one">
                                     <label  class="mar-right">KM đã đi<?php if($thongso["thongso_26"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
-                                    <input type="text" class="free-post-inp-text onlynumber <?php if($thongso["thongso_26"]['required']=="true"){echo 'fm_required';}?>" placeholder="Nhập số KM đã đi" name="thongso_26">
+                                    <input type="text" class="free-post-inp-text onlynumber <?php if($thongso["thongso_26"]['required']=="true"){echo 'fm_required';}?>" placeholder="Nhập số KM đã đi" name="thongso_26" value="<?php if(isset($baiviet['thongso']['thongso_26'])) echo $baiviet['thongso']['thongso_26']; ?>">
 
                                 </div>
                                 <div class="item-cover-one">
 
                                     <label  class="mar-right">Màu sắc<?php if($thongso["thongso_27"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
-                                    <input type="text" class="free-post-inp-text <?php if($thongso["thongso_27"]['required']=="true"){echo 'fm_required';}?>" placeholder="Nhập màu xe" name="thongso_27">
+                                    <input type="text" class="free-post-inp-text <?php if($thongso["thongso_27"]['required']=="true"){echo 'fm_required';}?>" placeholder="Nhập màu xe" name="thongso_27" value="<?php if(isset($baiviet['thongso']['thongso_27'])) echo $baiviet['thongso']['thongso_27']; ?>">
 
                                 </div>
                             </li>
@@ -181,7 +205,11 @@
                                         <?php
                                         if(isset($thongso["thongso_32"]["arr_options"]) && !empty($thongso["thongso_32"]["arr_options"])){
                                             foreach ($thongso["thongso_32"]["arr_options"] as $k=>$v){
-                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                                $selected = "";
+                                                if(isset($baiviet['thongso']['thongso_32']) && $k == $baiviet['thongso']['thongso_32']) {
+                                                    $selected =' selected="selected" ';
+                                                }
+                                                echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
                                             }
                                         }
                                         ?>
@@ -194,7 +222,11 @@
                                         <?php
                                         if(isset($thongso["thongso_34"]["arr_options"]) && !empty($thongso["thongso_34"]["arr_options"])){
                                             foreach ($thongso["thongso_34"]["arr_options"] as $k=>$v){
-                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                                $selected = "";
+                                                if(isset($baiviet['thongso']['thongso_34']) && $k == $baiviet['thongso']['thongso_34']) {
+                                                    $selected =' selected="selected" ';
+                                                }
+                                                echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
                                             }
                                         }
                                         ?>
@@ -207,7 +239,11 @@
                                         <?php
                                         if(isset($thongso["thongso_33"]["arr_options"]) && !empty($thongso["thongso_33"]["arr_options"])){
                                             foreach ($thongso["thongso_33"]["arr_options"] as $k=>$v){
-                                                echo '<option value="'.$k.'">'.$v.'</option>';
+                                                $selected = "";
+                                                if(isset($baiviet['thongso']['thongso_33']) && $k == $baiviet['thongso']['thongso_33']) {
+                                                    $selected =' selected="selected" ';
+                                                }
+                                                echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
                                             }
                                         }
                                         ?>
@@ -217,12 +253,12 @@
                             <li>
                                 <div class="item-cover-one">
                                     <label>Số ghế - cửa<?php if($thongso["thongso_74"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
-                                    <input type="text" class="free-post-inp-text <?php if($thongso["thongso_74"]['required']=="true"){echo 'fm_required';}?>" name="thongso_74" placeholder="Nhập số ghế - cửa">
+                                    <input type="text" class="free-post-inp-text <?php if($thongso["thongso_74"]['required']=="true"){echo 'fm_required';}?>" name="thongso_74" placeholder="Nhập số ghế - cửa" value="<?php if(isset($baiviet['thongso']['thongso_74'])) echo $baiviet['thongso']['thongso_74']; ?>">
                                 </div>
                                 <div class="item-cover-two">
                                     <label class="mar-right">Mức tiệu thụ</label>
-                                    <input type="text" class="free-post-inp-text inp-tieu-thu" name="thongso_71" placeholder="Lit/KM trên phạm vi đô thị">
-                                    <input type="text" style="margin-right:1vw" class="free-post-inp-text inp-tieu-thu" name="thongso_72" placeholder="Lit/KM trên phạm vi đường trường">
+                                    <input type="text" class="free-post-inp-text inp-tieu-thu" name="thongso_71" placeholder="Lit/KM trên phạm vi đô thị" value="<?php if(isset($baiviet['thongso']['thongso_71'])) echo $baiviet['thongso']['thongso_71']; ?>">
+                                    <input type="text" style="margin-right:1vw" class="free-post-inp-text inp-tieu-thu" name="thongso_72" placeholder="Lit/KM trên phạm vi đường trường" value="<?php if(isset($baiviet['thongso']['thongso_72'])) echo $baiviet['thongso']['thongso_72']; ?>">
 
                                     {{--<input type="text" class="free-post-inp-text inp-tieu-thu" placeholder="Lit/KM trên phạm vi đô thị">--}}
                                     {{--<input type="text"  style="margin-right:1vw" class="free-post-inp-text inp-tieu-thu" placeholder="Lit/KM trên phạm vi đường trường">--}}
@@ -232,32 +268,32 @@
                                 <div class="item-cover-one">
 
                                     <label>Số điện thoại<?php if($thongso["thongso_63"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
-                                    <input maxlength="11" type="text" class="free-post-inp-text onlynumber  <?php if($thongso["thongso_63"]['required']=="true"){echo 'fm_required';}?>" name="thongso_63" placeholder="Nhập số điện thoại">
+                                    <input maxlength="11" type="text" class="free-post-inp-text onlynumber  <?php if($thongso["thongso_63"]['required']=="true"){echo 'fm_required';}?>" name="thongso_63" placeholder="Nhập số điện thoại" value="<?php if(isset($baiviet['thongso']['thongso_63'])) echo $baiviet['thongso']['thongso_63']; ?>">
 
                                 </div>
                                 <div class="item-cover-two">
 
                                     <label class="mar-right">Địa chỉ<?php if($thongso["thongso_68"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
-                                    <input type="text" class="free-post-inp-text inp-address  <?php if($thongso["thongso_68"]['required']=="true"){echo 'fm_required';}?>" name="thongso_68" placeholder="Nhập địa chỉ của bạn">
+                                    <input type="text" class="free-post-inp-text inp-address  <?php if($thongso["thongso_68"]['required']=="true"){echo 'fm_required';}?>" name="thongso_68" placeholder="Nhập địa chỉ của bạn" value="<?php if(isset($baiviet['thongso']['thongso_68'])) echo $baiviet['thongso']['thongso_68']; ?>">
 
                                 </div>
                             </li>
                             <li>
                                 <div class="item-cover-one">
                                     <label>Giá tiền<?php if($thongso["thongso_65"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
-                                    <input type="text" class="free-post-inp-text onlynumber <?php if($thongso["thongso_65"]['required']=="true"){echo 'fm_required';}?>" name="thongso_65" placeholder="Nhập giá tiền">
+                                    <input type="text" class="free-post-inp-text onlynumber <?php if($thongso["thongso_65"]['required']=="true"){echo 'fm_required';}?>" name="thongso_65" placeholder="Nhập giá tiền" value="<?php if(isset($baiviet['thongso']['thongso_65'])) echo $baiviet['thongso']['thongso_65']; ?>">
 
                                 </div>
                                 <div class="item-cover-two">
                                     <label class="mar-right">Xe này có thể vay</label>
-                                    <input type="text" class="free-post-inp-text inp-address" name="thongso_73" placeholder="Nhập số tiền hỗ trợ">
+                                    <input type="text" class="free-post-inp-text inp-address" name="thongso_73" value="<?php if(isset($baiviet['thongso']['thongso_73'])) echo $baiviet['thongso']['thongso_73']; ?>" placeholder="Nhập số tiền hỗ trợ">
                                 </div>
                             </li>
                             <li>
                                 <p class="p-title-area">MÔ TẢ XE CỦA BẠN</p>
                             </li>
                             <li>
-                                <textarea style="width: 100%;height: 150px;border: 1px solid #ccc;padding: 5px;" type="textarea" class=" <?php if($thongso["thongso_67"]['required']=="true"){echo 'fm_required';}?>" rows="5" name="thongso_67" id="comment" maxlength="1200" placeholder="Hãy nhập thông tin mô tả chi tiết"></textarea>
+                                <textarea style="width: 100%;height: 150px;border: 1px solid #ccc;padding: 5px;" type="textarea" class=" <?php if($thongso["thongso_67"]['required']=="true"){echo 'fm_required';}?>" rows="5" name="thongso_67" id="comment" maxlength="1200" placeholder="Hãy nhập thông tin mô tả chi tiết"><?php if(isset($baiviet['thongso']['thongso_67'])) echo $baiviet['thongso']['thongso_67']; ?></textarea>
                             </li>
                             <li>
                                 <div class="col-md-12" style="padding: 0px;">
@@ -384,6 +420,12 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
     $( document ).ready(function() {
+        <?php
+            if(isset($baiviet['hang_xe'])){
+                echo 'getDongXe('.$baiviet['hang_xe'].')';
+            }
+
+        ?>
 
         $( ".btn-next-free-post" ).click(function() {
             var id = $(this).attr("id");
@@ -457,7 +499,7 @@
 //            console.log(index+":"+name+":"+type+":"+vl);
 
             if(type=="textarea"){
-                vl = CKEDITOR.instances['comment'].getData();
+//                vl = CKEDITOR.instances['comment'].getData();
             }
 
             if(vl == null ||vl=="undefined" || vl==""){
@@ -520,36 +562,51 @@
         var vl = $("select[name='thongso_20']").val();
 //        dhtmlx.alert(vl);
         if(vl!=''){
-            $.ajax({
-                url: '/getdongxe',
-                type: 'POST',
-                dataType: "json",
-                cache: false,
-                enctype: 'multipart/form-data',
-                data : {id:vl},
-                success : function(data) {
-                    if(data.result){
-//                        console.log(data.data);
-                            generate_dongxe('thongso_75',data.data);
-
-                    }else{
-                        dhtmlx.alert(data.mess);
-                    }
-                }
-            });
+            getDongXe(vl);
         }else{
             dhtmlx.alert("Vui lòng chọn thương hiệu xe trước!");
         }
 
     });
+    function getDongXe(vl){
+        $.ajax({
+            url: '/getdongxe',
+            type: 'POST',
+            dataType: "json",
+            cache: false,
+            enctype: 'multipart/form-data',
+            data : {id:vl},
+            success : function(data) {
+                if(data.result){
+//                        console.log(data.data);
+                    generate_dongxe('thongso_75',data.data);
+
+                }else{
+                    dhtmlx.alert(data.mess);
+                }
+            }
+        });
+    }
     function generate_dongxe(selectName,data){
         var sl = $("select[name='"+selectName+"']");
         //var obj = jQuery.parseJSON(data);
         sl.html('<option value="">Click chọn</option>');
+        var dx = 0;
+        <?php
+            if(isset($baiviet['dong_xe'])){
+                echo 'dx = '.$baiviet['dong_xe'].';';
+            }
+
+        ?>
         $.each(data, function(key,value) {
 //            console.log(key+":"+value);
 
-            sl.append('<option value="'+key+'">'+value+'</option>');
+            if(key==dx){
+                sl.append('<option  selected="selected" value="'+key+'">'+value+'</option>');
+            }else{
+                sl.append('<option value="'+key+'">'+value+'</option>');
+            }
+
         });
     }
     function upload_img(fileID){

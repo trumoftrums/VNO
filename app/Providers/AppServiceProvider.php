@@ -31,16 +31,27 @@ class AppServiceProvider extends ServiceProvider
                 $totalPost = Baiviet::where('userid', $user->id)->count();
             }
             $list_thongso = Thongso::where('filter',1)->get()->toArray();
+            $arr_listts = array();
+            foreach($list_thongso as $v){
+                $arr_listts["thongso_".$v['id']] = $v;
+            }
+//            var_dump($arr_listts);exit();
 
-
+            $listHangXe =  Hangxe::where('status',1)->get()->toArray();
+            $hangxes = array();
+            if(!empty($listHangXe)){
+                foreach ($listHangXe as $hx){
+                    $hangxes[$hx['id']]=$hx['hang_xe'];
+                }
+            }
 
 //            var_dump($hangxes);exit();
             $view->with([
                 'listNewsHome' => $listNewsHome,
                 'user' => $user,
                 'totalPost' => $totalPost,
-                'list_thongso'=>$list_thongso,
-//                'hangxes' =>$hangxes
+                'list_thongso'=>$arr_listts,
+                'hangxes' =>$hangxes
             ]);
         });
         view()->composer('Layouts.backend', function ($view)
