@@ -252,16 +252,16 @@
                             </li>
                             <li>
                                 <div class="item-cover-one">
-                                    <label>Số ghế<?php if($thongso["thongso_74"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
-                                    <input type="text" class="free-post-inp-text <?php if($thongso["thongso_74"]['required']=="true"){echo 'fm_required';}?>" name="thongso_74" placeholder="Nhập số ghế" value="<?php if(isset($baiviet['thongso']['thongso_74'])) echo $baiviet['thongso']['thongso_74']; ?>">
+                                    <label>Số ghế<?php if($thongso["thongso_30"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <input type="text" class="free-post-inp-text <?php if($thongso["thongso_30"]['required']=="true"){echo 'fm_required';}?>" name="thongso_30" placeholder="Nhập số ghế" value="<?php if(isset($baiviet['thongso']['thongso_30'])) echo $baiviet['thongso']['thongso_30']; ?>">
                                 </div>
                                 <div class="item-cover-one">
-                                    <label class="mar-right">Số cửa<?php if($thongso["thongso_74"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
-                                    <input type="text" class="free-post-inp-text <?php if($thongso["thongso_74"]['required']=="true"){echo 'fm_required';}?>" name="thongso_74" placeholder="Nhập số cửa" value="<?php if(isset($baiviet['thongso']['thongso_74'])) echo $baiviet['thongso']['thongso_74']; ?>">
+                                    <label class="mar-right">Số cửa<?php if($thongso["thongso_29"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <input type="text" class="free-post-inp-text <?php if($thongso["thongso_29"]['required']=="true"){echo 'fm_required';}?>" name="thongso_29" placeholder="Nhập số cửa" value="<?php if(isset($baiviet['thongso']['thongso_29'])) echo $baiviet['thongso']['thongso_29']; ?>">
                                 </div>
                                 <div class="item-cover-one">
                                     <label class="mar-right">Tiêu thụ</label>
-                                    <input type="text" class="free-post-inp-text" name="thongso_71" placeholder="Lit/100 KM" value="<?php if(isset($baiviet['thongso']['thongso_71'])) echo $baiviet['thongso']['thongso_71']; ?>">
+                                    <input type="text" class="free-post-inp-text" name="thongso_35" placeholder="Lit/100 KM" value="<?php if(isset($baiviet['thongso']['thongso_35'])) echo $baiviet['thongso']['thongso_35']; ?>">
                                 </div>
                             </li>
                             <li>
