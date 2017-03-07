@@ -2138,8 +2138,10 @@ textarea:focus, input:focus{
     }
     .info-post-detail .right .price {
         width: 50%;
-        padding: 6% 0px;
+        padding: 10% 0px 0px 0px;
         margin-left: 0px;
+        text-align: center;
+        position: relative;
     }
     .info-post-detail .right .img-bank {
         float: right;
@@ -2150,5 +2152,11 @@ textarea:focus, input:focus{
         background: #eaeaea;
         float: left;
         width: 98%;
+    }
+    .info-post-detail .right .price img {
+        width: 35px;
+        position: absolute;
+        top: 25%;
+        left: 43%;
     }
 }
