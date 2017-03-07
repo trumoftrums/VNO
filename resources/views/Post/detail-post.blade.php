@@ -182,23 +182,27 @@
                             </div>
                         </li>
                         <li>
-                            <p class="p-info">* Mức tiêu thụ(đô thị): @if(isset($detailPost->thongso['thongso_72'])) {{$detailPost->thongso['thongso_72']}} @endif </p>
-                        </li>
-                        <li>
-                            <p class="p-info">* Mức tiêu thụ(đường trường): @if(isset($detailPost->thongso['thongso_71'])) {{$detailPost->thongso['thongso_71']}} @endif </p>
-                        </li>
-                        <li>
                             <div>
-                                <p class="p-info">* Số ghế - cửa: @if(isset($detailPost->thongso['thongso_74'])) {{$detailPost->thongso['thongso_74']}} @endif </p>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/tieu-thu.png')}}"/>Tiêu thụ: @if(isset($detailPost->thongso['thongso_35'])) {{$detailPost->thongso['thongso_35']}} @endif</span>
                             </div>
-                            <p class="p-info">* Dẫn động: @if(isset($detailPost->thongso['thongso_33'])) {{$detailPost->thongso['thongso_33']}} @endif </p>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/so-ghe.png')}}"/>Số ghế: @if(isset($detailPost->thongso['thongso_30'])) {{$detailPost->thongso['thongso_30']}} @endif</span>
+                            </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/so-cua.png')}}"/>Số cửa: @if(isset($detailPost->thongso['thongso_29'])) {{$detailPost->thongso['thongso_29']}} @endif</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span><img src="{{ URL::asset('images/icon-detail-post/dan-dong.png')}}"/>Dẫn động: @if(isset($detailPost->thongso['thongso_33'])) {{$detailPost->thongso['thongso_33']}} @endif</span>
                         </li>
                     </ul>
                 </div>
                 <div class="right">
-                    <p class="p-title-area p-title-no-area">SỐ TIỀN CÓ THỂ VAY</p>
-                    <p class="price"><img src="{{ URL::asset('images/icon-detail-post/icon-price.png')}}"/>@if(isset($detailPost->thongso['thongso_73'])) {{$detailPost->thongso['thongso_73']}} @endif VND</p>
-                    <img class="img-bank" src="{{ URL::asset('images/icon-detail-post/img-bank.png')}}"/>
+                    <p class="p-title-area">SỐ TIỀN CÓ THỂ VAY</p>
+                    <div class="cover-price-bank">
+                        <p class="price"><img src="{{ URL::asset('images/icon-detail-post/icon-price.png')}}"/>@if(isset($detailPost->thongso['thongso_73'])) {{$detailPost->thongso['thongso_73']}} @endif VND</p>
+                        <img class="img-bank" src="{{ URL::asset('images/icon-detail-post/img-bank.png')}}"/>
+                    </div>
                 </div>
             </div>
             <div class="div-des">

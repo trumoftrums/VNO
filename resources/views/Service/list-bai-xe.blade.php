@@ -23,6 +23,7 @@
                 </select>
             </form>
             <div class="inner-list-news-page" >
+                @if(count($listBaiGiuXe)>0)
                 @foreach($listBaiGiuXe as $baixe)
                     <div class="item-support-page">
                         <img src="{{ URL::asset($baixe->thumb)}}"/>
@@ -33,6 +34,9 @@
                         </div>
                     </div>
                 @endforeach
+                    @else
+                        <p style="text-align: center;">Thông tin đang được cập nhật. Vui lòng quay lại sau.</p>
+                    @endif
                 <div class="paging-div">
                     {{ $listBaiGiuXe->links() }}
                 </div>

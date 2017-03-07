@@ -1675,8 +1675,9 @@ textarea:focus, input:focus{
     margin-top: 3px;
 }
 .info-post-detail .right{
-    width: 40%;
+    width: 39%;
     float: left;
+    margin-left: 1%;
 }
 .div-des{
     float: left;
@@ -1773,12 +1774,13 @@ textarea:focus, input:focus{
     background: #eaeaea;
     text-align: center;
     color: #0c834a;
-    padding: 8px 0px;
-    font-size: 24px;
+    padding: 6px 0px;
+    font-size: 22px;
 }
 .info-post-detail .right .price img{
     margin-right: 6px;
-    width: 30px;
+    width: 25px;
+    margin-top: -3px;
 }
 .info-post-detail .right .img-bank{
     float: left;
@@ -1917,7 +1919,7 @@ textarea:focus, input:focus{
     width: 15vw;
 }
 .cover-tab-free ul li .inp-address{
-    width: 31vw;
+    width: 30vw;
 }
 .cover-tab-free ul li .mar-right{
     margin-left: 2vw;
@@ -1975,6 +1977,10 @@ textarea:focus, input:focus{
 .parent-img-upload{
     width: 550px;
     margin: 0px auto;
+}
+.right .cover-price-bank{
+    float: left;
+    width: 100%;
 }
 .inp-filter{
     -webkit-appearance: none;
@@ -2120,5 +2126,29 @@ textarea:focus, input:focus{
     }
     .div-post-vip .div-item-vip-post .code {
         width: 11vw;
+    }
+    .item-support-page{
+        width: 98%;
+    }
+    .info-post-detail .right {
+        width: 100%;
+    }
+    .p-title-area {
+        width: 100%;
+    }
+    .info-post-detail .right .price {
+        width: 50%;
+        padding: 6% 0px;
+        margin-left: 0px;
+    }
+    .info-post-detail .right .img-bank {
+        float: right;
+        width: 50%;
+        margin-left: 0px !important;
+    }
+    .right .cover-price-bank{
+        background: #eaeaea;
+        float: left;
+        width: 98%;
     }
 }

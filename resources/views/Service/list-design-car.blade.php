@@ -23,6 +23,7 @@
                 </select>
             </form>
             <div class="inner-list-news-page" >
+                @if(count($listDesignCar)>0)
                 @foreach($listDesignCar as $designCar)
                     <div class="item-support-page">
                         <a href="{{ URL::to('do-xe-uy-tin/'.$designCar->id.'/'.str_slug($designCar->title, '-')) }}"><img src="{{ URL::asset($designCar->thumb)}}"/></a>
@@ -33,6 +34,9 @@
                         </div>
                     </div>
                 @endforeach
+                    @else
+                        <p style="text-align: center;">Thông tin đang được cập nhật. Vui lòng quay lại sau.</p>
+                    @endif
                 <div class="paging-div">
                     {{ $listDesignCar->links() }}
                 </div>

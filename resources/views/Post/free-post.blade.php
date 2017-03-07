@@ -252,16 +252,16 @@
                             </li>
                             <li>
                                 <div class="item-cover-one">
-                                    <label>Số ghế - cửa<?php if($thongso["thongso_74"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
-                                    <input type="text" class="free-post-inp-text <?php if($thongso["thongso_74"]['required']=="true"){echo 'fm_required';}?>" name="thongso_74" placeholder="Nhập số ghế - cửa" value="<?php if(isset($baiviet['thongso']['thongso_74'])) echo $baiviet['thongso']['thongso_74']; ?>">
+                                    <label>Số ghế<?php if($thongso["thongso_74"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <input type="text" class="free-post-inp-text <?php if($thongso["thongso_74"]['required']=="true"){echo 'fm_required';}?>" name="thongso_74" placeholder="Nhập số ghế" value="<?php if(isset($baiviet['thongso']['thongso_74'])) echo $baiviet['thongso']['thongso_74']; ?>">
                                 </div>
-                                <div class="item-cover-two">
-                                    <label class="mar-right">Mức tiệu thụ</label>
-                                    <input type="text" class="free-post-inp-text inp-tieu-thu" name="thongso_71" placeholder="Lit/KM trên phạm vi đô thị" value="<?php if(isset($baiviet['thongso']['thongso_71'])) echo $baiviet['thongso']['thongso_71']; ?>">
-                                    <input type="text" style="margin-right:1vw" class="free-post-inp-text inp-tieu-thu" name="thongso_72" placeholder="Lit/KM trên phạm vi đường trường" value="<?php if(isset($baiviet['thongso']['thongso_72'])) echo $baiviet['thongso']['thongso_72']; ?>">
-
-                                    {{--<input type="text" class="free-post-inp-text inp-tieu-thu" placeholder="Lit/KM trên phạm vi đô thị">--}}
-                                    {{--<input type="text"  style="margin-right:1vw" class="free-post-inp-text inp-tieu-thu" placeholder="Lit/KM trên phạm vi đường trường">--}}
+                                <div class="item-cover-one">
+                                    <label class="mar-right">Số cửa<?php if($thongso["thongso_74"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
+                                    <input type="text" class="free-post-inp-text <?php if($thongso["thongso_74"]['required']=="true"){echo 'fm_required';}?>" name="thongso_74" placeholder="Nhập số cửa" value="<?php if(isset($baiviet['thongso']['thongso_74'])) echo $baiviet['thongso']['thongso_74']; ?>">
+                                </div>
+                                <div class="item-cover-one">
+                                    <label class="mar-right">Tiêu thụ</label>
+                                    <input type="text" class="free-post-inp-text" name="thongso_71" placeholder="Lit/100 KM" value="<?php if(isset($baiviet['thongso']['thongso_71'])) echo $baiviet['thongso']['thongso_71']; ?>">
                                 </div>
                             </li>
                             <li>

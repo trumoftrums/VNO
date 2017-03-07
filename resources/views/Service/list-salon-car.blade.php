@@ -23,6 +23,7 @@
                 </select>
             </form>
             <div class="inner-list-news-page" >
+                @if(count($listVipSalon)>0)
                 @foreach($listVipSalon as $salon)
                     <div class="item-support-page">
                         <a href="{{ URL::to('vip-salon/'.$salon->id.'/'.str_slug($salon->title, '-')) }}"><img src="{{ URL::asset($salon->thumb)}}"/></a>
@@ -33,6 +34,9 @@
                         </div>
                     </div>
                 @endforeach
+                    @else
+                        <p style="text-align: center;">Thông tin đang được cập nhật. Vui lòng quay lại sau.</p>
+                    @endif
                 <div class="paging-div">
                     {{ $listVipSalon->links() }}
                 </div>
