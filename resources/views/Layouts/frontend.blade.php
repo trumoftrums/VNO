@@ -749,7 +749,7 @@
         var ac = $('#searchform').attr("action");
         if(ac.length <9){
             e.preventDefault();
-            var urlPath = "?search=1";
+            var urlPath = "/?search=1";
             var formDT = $('#searchform').serializeArray();
             var l = formDT.length;
             for (var i = 0; i < l; i++) {
