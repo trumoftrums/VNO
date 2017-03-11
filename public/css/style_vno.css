@@ -431,6 +431,7 @@
     margin-right: -5px;
     margin-top: 8px;
     float: left;
+    width: 100%;
 }
 .header .center-content-col .list-items .item{
     padding-right: 5px;
@@ -453,7 +454,7 @@
      margin: 0px auto;
  }
 .header .center-content-col .list-items .item .hover-item img{
-    margin-top: 1.5vw;
+    margin-top: 1.8vw;
 }
 .header .center-content-col .list-items .item .hover-item a.detail{
     color: #fff;
@@ -1588,7 +1589,7 @@ textarea:focus, input:focus{
     margin-top: 10px;
     border-bottom: 1px dotted #0c834a;
 }
-.info-post-detail ul li div span b{
+.info-post-detail ul li span b{
     font-size: 13px;
 }
 .common-info{
@@ -1672,6 +1673,8 @@ textarea:focus, input:focus{
 }
 .div-des .cover-descript{
     padding-left: 6px;
+    font-size: 15px;
+    line-height: 24px;
 }
 .info-post-detail .left ul{
     padding-left: 6px;

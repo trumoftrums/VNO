@@ -174,7 +174,15 @@
                                 <span><img src="{{ URL::asset('images/icon-detail-post/city.png')}}"/><b>Tỉnh thành:</b> @if(isset($detailPost->thongso['thongso_62'])) {{$detailPost->thongso['thongso_62']}} @endif</span>
                             </div>
                             <div>
-                                <span><img src="{{ URL::asset('images/icon-detail-post/info.png')}}"/><b>Tình trạng:</b> @if(isset($detailPost->thongso['thongso_24'])) {{$detailPost->thongso['thongso_24']}} @endif</span>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/info.png')}}"/><b>Tình trạng:</b>
+                                    @if(isset($detailPost->thongso['thongso_24']))
+                                        @if($detailPost->thongso['thongso_24'] == 'Đã sử dụng')
+                                            Đ.sử dụng
+                                        @else
+                                            {{$detailPost->thongso['thongso_24']}}
+                                        @endif
+                                    @endif
+                                </span>
                             </div>
                         </li>
                         <li>
