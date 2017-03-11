@@ -62,7 +62,7 @@ class HomeController extends Controller {
                     ->where('op_baiviets.status', 'PUBLIC')
                     ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
                     ->OrderBy('op_baiviets.id', 'desc')
-                    ->paginate(POST_PER_PAGE);
+                    ->paginate(self::POST_PER_PAGE);
             }else{
                 if ($branch != '' && $branch != 'all') {
                     $cond_str = "index_key_str = 'thongso_20' and index_value ='$branch'";
