@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\City;
 use App\Models\Baiviet;
 use App\Models\Hangxe;
 use App\News;
@@ -44,6 +45,8 @@ class AppServiceProvider extends ServiceProvider
                     $hangxes[$hx['id']]=$hx['hang_xe'];
                 }
             }
+            //list city
+            $listCity =  City::getCity()->toArray();
 
 //            var_dump($hangxes);exit();
             $view->with([
@@ -51,7 +54,8 @@ class AppServiceProvider extends ServiceProvider
                 'user' => $user,
                 'totalPost' => $totalPost,
                 'list_thongso'=>$arr_listts,
-                'hangxes' =>$hangxes
+                'hangxes' =>$hangxes,
+                'listCity'=>$listCity
             ]);
         });
         view()->composer('Layouts.backend', function ($view)

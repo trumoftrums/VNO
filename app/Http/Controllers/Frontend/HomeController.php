@@ -13,6 +13,7 @@ use  App\Models\Submittoken;
 use App\Models\UsersFactory;
 use App\News;
 use App\VipSalon;
+use App\City;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
@@ -62,7 +63,7 @@ class HomeController extends Controller {
                     ->where('op_baiviets.status', 'PUBLIC')
                     ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
                     ->OrderBy('op_baiviets.id', 'desc')
-                    ->paginate(POST_PER_PAGE);
+                    ->paginate(self::POST_PER_PAGE);
             }else{
                 if ($branch != '' && $branch != 'all') {
                     $cond_str = "index_key_str = 'thongso_20' and index_value ='$branch'";
@@ -609,15 +610,15 @@ class HomeController extends Controller {
         }
 
 
-//        var_dump($loaiBaiViet);exit();
+        $listCity =  City::getCity()->toArray();
+
         $datas = array(
             'user' => $user,
-//            'info' => $info,
-//            'thongtinxe' =>$thongtinxe,
             'thongso'=>$thongso,
             'result' =>$result,
             'baiviet' =>$bv,
             'hangxes' =>$hangxes,
+            'listCity'=>$listCity
 
         );
         return View('Post.free-post',$datas);

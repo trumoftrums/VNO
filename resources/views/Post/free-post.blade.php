@@ -117,13 +117,13 @@
                                     <select <?php if(!empty($baiviet)) echo ' disabled="disabled"'; ?> type="select" class="free-post-input <?php if($thongso["thongso_62"]['required']=="true"){echo 'fm_required';}?>" name="thongso_62">
                                         <option value=""><i style="color: #d1d1d1;">Click chọn</i></option>
                                         <?php
-                                        if(isset($thongso["thongso_62"]["arr_options"]) && !empty($thongso["thongso_62"]["arr_options"])){
-                                            foreach ($thongso["thongso_62"]["arr_options"] as $k=>$v){
-                                                $selected = "";
-                                                if(isset($baiviet['thongso']['thongso_62']) && $k == $baiviet['thongso']['thongso_62']) {
-                                                    $selected =' selected="selected" ';
+                                        if(!empty($listCity)){
+                                            foreach ($listCity as $v){
+                                                $selected="";
+                                                if(isset($baiviet['thongso']['thongso_62']) && $k == $baiviet['thongso']['thongso_62']){
+                                                    $selected =' selected="selected"';
                                                 }
-                                                echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
+                                                echo '<option value="'.$v['city_name'].'" '.$selected.'>'.$v['city_name'].'</option>';
                                             }
                                         }
                                         ?>

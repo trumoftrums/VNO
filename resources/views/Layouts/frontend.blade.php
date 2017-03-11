@@ -215,14 +215,28 @@
                             <option value="2000-1000000">trên 2 tỷ</option>
                         </select>
                         <?php
-                        if(!empty($list_thongso) && !empty($list_thongso['thongso_62'])){
-                            $thongso_62 =null;
-                            if(isset($searchform['thongso_62']) && $searchform['thongso_62']){
-                                $thongso_62 =$searchform['thongso_62'];
-                            }
-                            echo \App\Helpers\Helper::search_field($list_thongso['thongso_62'],"Tỉnh thành",$thongso_62,"tinh");
-                        }
+//                        if(!empty($list_thongso) && !empty($list_thongso['thongso_62'])){
+//                            $thongso_62 =null;
+//                            if(isset($searchform['thongso_62']) && $searchform['thongso_62']){
+//                                $thongso_62 =$searchform['thongso_62'];
+//                            }
+//                            echo \App\Helpers\Helper::search_field($list_thongso['thongso_62'],"Tỉnh thành",$thongso_62,"tinh");
+//                        }
                         ?>
+                            <select  name="tinh" id="ft_thongso_62" class="form-control inp-filter inp-filter-2">
+                                <option value="">Tỉnh thành</option>
+                            <?php
+                            if(!empty($listCity)){
+                                foreach ($listCity as $v){
+                                    $selected="";
+                                    if(isset($searchform['thongso_62']) && $searchform['thongso_62']==$k){
+                                        $selected =' selected="selected"';
+                                    }
+                                    echo '<option value="'.$v['city_name'].'" '.$selected.'>'.$v['city_name'].'</option>';
+                                }
+                            }
+                            ?>
+                            </select>
                     </div>
                     <input class="bt-submit-filter" type="submit" value=" ">
                 </form>
