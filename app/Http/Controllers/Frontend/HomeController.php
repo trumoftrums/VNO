@@ -81,18 +81,29 @@ class HomeController extends Controller {
 
         ]);
     }
+    private  function getHangXe($id){
+        $dt = Hangxe::where('id',$id)->get()->toArray();
+        if(!empty($dt)){
+            return $dt[0]['hang_xe'];
+        }
+        return null;
+    }
     public function index_post()
     {
 
         $result = array(
             'result' =>true,
-            'mess' =>''
+            'mess' =>'',
+            'branch' => 'all',
+            'totalPage' => 0,
+            'currentPage' => 0
         );
-        $listPost = array();
-//        var_dump(Request::all());exit();
+        $listPost = null;
         if(isset(Request::all()['searchform'])){
 
+
             $searchform =  Request::all()['searchform'] ;
+//            var_dump($searchform);exit();
             ##################
 
             $have_search = false;
@@ -104,20 +115,29 @@ class HomeController extends Controller {
                     $have_search = true;
                     $v = trim($v);
                     switch ($k){
+                        case "thongso_20":
+                            $vv = $this->getHangXe($v);
+                            if(!empty($v)){
+                                $conditions ="index_key_str ='$k' and index_value ='$vv' ";
+                            }
+
+
+                            break;
                         case "keyword":
                             $conditions = "(index_key_str ='tieude' or index_key_str ='thongso_67') and index_value like '%$v%' ";
                             break;
                         case "thongso_65":
-                            $v0 = substr($v,0,1);
-                            $v1 = substr($v,1);
-                            $conditions = "index_key_str ='$k' and index_value $v0 $v1 ";
+                            $arr = explode("-",$searchform['thongso_65']);
+                            $arr[0] *=1000000;
+                            $arr[1] *=1000000;
+                            $conditions = "index_key_str ='$k' and REPLACE(index_value,'.','') >= $arr[0]  and REPLACE(index_value,'.','') <= $arr[1] ";
                             break;
 
                         default:
                             $conditions ="index_key_str ='$k' and index_value ='$v' ";
                             break;
                     }
-//                    var_dump($conditions);
+//                    var_dump($conditions);exit();
                     $result['searchform'][$k] = $v;
                     $posts_idx = Baivietindex::whereRaw($conditions)->distinct('baivietID')->get()->toArray();
 //                    var_dump($conditions);var_dump($posts_idx);exit();
@@ -152,6 +172,7 @@ class HomeController extends Controller {
                     }
 
                 }
+//                var_dump($arr_idx);exit();
                 if(!empty($arr_idx)){
                     $listPost = Baiviet::where('status', 'PUBLIC')->whereIn('id',$arr_idx)->paginate(self::POST_PER_PAGE);
                 }else{
@@ -170,15 +191,28 @@ class HomeController extends Controller {
             $listPost = Baiviet::where('status', 'PUBLIC')->paginate(self::POST_PER_PAGE);
 
         }
-        foreach ($listPost as $item){
-            $item->thongso = json_decode($item->thongso,true);
+//        var_dump($listPost);exit();
+        if(!empty($listPost)){
+            foreach ($listPost as $item){
+                $item->thongso = json_decode($item->thongso,true);
+            }
+            $res = $listPost->toArray();
+            $totalPage = $res['last_page'];
+            $currentPage = $res['current_page'];
+            if($totalPage == 0){
+                $currentPage = 0;
+            }
+            $result['totalPage'] = $totalPage;
+            $result['currentPage'] = $currentPage;
         }
+
         $result['listPost'] = $listPost;
 
         $listVipSalon = VipSalon::where('status', VipSalon::STATUS_ACTIVE)
             ->limit(10)
             ->get();
-
+//        var_dump($searchform);exit();
+        $result['searchform'] = $searchform;
 
         $result['listVipSalon'] = $listVipSalon;
 

@@ -152,25 +152,34 @@
                 <form action="/" method="post" name="searchform" >
                     <div class="form-filter">
                         <input type="text" <?php if(isset($searchform['keyword'])){ echo ' value="'.$searchform['keyword'].'"';} ?> class="form-control" name="searchform[keyword]" placeholder="Từ khóa..."/>
-                        <select class="form-control inp-filter" name="searchform[thongso_20]">
+                        <select class="form-control inp-filter" id="filter_hang_xe" name="searchform[thongso_20]">
                             <option value="">Hãng Xe</option>
                             <?php
                             if(!empty($hangxes)){
                                 foreach ($hangxes as $k=>$v){
-                                    echo '<option value="'.$k.'">'.$v.'</option>';
+                                    $selected="";
+//                                    var_dump($searchform);exit();
+                                    if(isset($searchform['thongso_20']) && $searchform['thongso_20']==$k){
+                                        $selected =' selected="selected"';
+                                    }
+                                    echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
                                 }
                             }
                             ?>
                         </select>
-                        <select class="form-control inp-filter">
-                            <option>Dòng xe</option>
+                        <select  id="filter_dong_xe" name="searchform[thongso_75]" class="form-control inp-filter">
+                            <option value="">Dòng xe</option>
 
                         </select>
                         {{--<select class="form-control inp-filter" name="searchform[thongso_25]">--}}
                             {{--<option>Dáng xe</option>--}}
                             <?php
                             if(!empty($list_thongso) && !empty($list_thongso['thongso_25'])){
-                                echo \App\Helpers\Helper::search_field($list_thongso['thongso_25'],"Dáng xe",null);
+                                $thongso_25 =null;
+                                if(isset($searchform['thongso_25']) && $searchform['thongso_25']){
+                                    $thongso_25 =$searchform['thongso_25'];
+                                }
+                                echo \App\Helpers\Helper::search_field($list_thongso['thongso_25'],"Dáng xe",$thongso_25);
                             }
                             ?>
                         {{--</select>--}}
@@ -178,22 +187,42 @@
                     <div class="form-filter form-filter-2">
                         <?php
                         if(!empty($list_thongso) && !empty($list_thongso['thongso_24'])){
-                            echo \App\Helpers\Helper::search_field($list_thongso['thongso_24'],"Tình trạng",null);
+                            $thongso_24 =null;
+                            if(isset($searchform['thongso_24']) && $searchform['thongso_24']){
+                                $thongso_24 =$searchform['thongso_24'];
+                            }
+                            echo \App\Helpers\Helper::search_field($list_thongso['thongso_24'],"Tình trạng",$thongso_24);
                         }
                         ?>
                         <?php
                         if(!empty($list_thongso) && !empty($list_thongso['thongso_22'])){
-                            echo \App\Helpers\Helper::search_field($list_thongso['thongso_22'],"Năm SX",null);
+                            $thongso_22 =null;
+                            if(isset($searchform['thongso_22']) && $searchform['thongso_22']){
+                                $thongso_22 =$searchform['thongso_22'];
+                            }
+                            echo \App\Helpers\Helper::search_field($list_thongso['thongso_22'],"Năm SX",$thongso_22);
                         }
                         ?>
-                        <select class="form-control inp-filter inp-filter-2">
-                            <option>Giá tiền</option>
+                        <select  name="searchform[thongso_65]" id="ft_thongso_65" class="form-control inp-filter inp-filter-2">
+                            <option value="">Giá tiền</option>
+                            <option value="0-200">0 tr - 200 tr</option>
+                            <option value="201-400">201 tr - 400 tr</option>
+                            <option value="401-600">401 tr - 600 tr</option>
+                            <option value="601-800">601 tr - 800 tr</option>
+                            <option value="801-1000">801 tr - 1 tỷ</option>
+                            <option value="1001-1500">1 tỷ - 1.5 tỷ</option>
+                            <option value="1501-2000">1.5 tỷ - 2 tỷ</option>
+                            <option value="2000-1000000">trên 2 tỷ</option>
                         </select>
-                            <?php
-                            if(!empty($list_thongso) && !empty($list_thongso['thongso_62'])){
-                                echo \App\Helpers\Helper::search_field($list_thongso['thongso_62'],"Tỉnh thành",null);
+                        <?php
+                        if(!empty($list_thongso) && !empty($list_thongso['thongso_62'])){
+                            $thongso_62 =null;
+                            if(isset($searchform['thongso_62']) && $searchform['thongso_62']){
+                                $thongso_62 =$searchform['thongso_62'];
                             }
-                            ?>
+                            echo \App\Helpers\Helper::search_field($list_thongso['thongso_62'],"Tỉnh thành",$thongso_62);
+                        }
+                        ?>
                     </div>
                     <input class="bt-submit-filter" type="submit" value=" ">
                 </form>
@@ -652,6 +681,67 @@
         $(".vert").css({'height': (h_standard - h2 - h3 - h4 - 70) + 'px'});
         $(".list-news .simply-scroll-clip").css({'height': (h_standard - h2 - h3 - h4 - 50) + 'px'});
         $(".first-col ,.header , .last-col").css({'height': (h_standard + 10) + 'px'});
+    });
+    $("#filter_hang_xe").change(function() {
+        var vl = $("#filter_hang_xe").val();
+        if(vl!=''){
+            filter_getDongXe(vl);
+        }
+
+    });
+    function filter_getDongXe(vl){
+        $.ajax({
+            url: '/getdongxe',
+            type: 'POST',
+            dataType: "json",
+            cache: false,
+            enctype: 'multipart/form-data',
+            data : {id:vl},
+            success : function(data) {
+                if(data.result){
+                    filter_generate_dongxe(data.data);
+
+                }else{
+                    filter_generate_dongxe(null);
+                }
+            }
+        });
+    }
+    function filter_generate_dongxe(data){
+        var sl = $("#filter_dong_xe");
+        sl.html('<option value="">Dòng xe</option>');
+        var dx = 0;
+        <?php
+            if(isset($searchform['thongso_75']) && !empty($searchform['thongso_75'])){
+                echo 'dx = '.$searchform['thongso_75'].';';
+            }
+
+        ?>
+        if(data != null){
+            $.each(data, function(key,value) {
+
+                if(key==dx){
+                    sl.append('<option  selected="selected" value="'+key+'">'+value+'</option>');
+                }else{
+                    sl.append('<option value="'+key+'">'+value+'</option>');
+                }
+//                sl.append('<option value="'+key+'">'+value+'</option>');
+
+
+            });
+        }
+
+    }
+    $(document).ready(function() {
+        <?php
+            if(isset($searchform['thongso_20']) && !empty($searchform['thongso_20'])){
+                echo 'filter_getDongXe('.$searchform['thongso_20'].');';
+            }
+            //ft_thongso_65
+            if(isset($searchform['thongso_65']) && !empty($searchform['thongso_65'])){
+                echo '$("#ft_thongso_65").val("'.$searchform['thongso_65'].'");';
+            }
+        ?>
     });
 </script>
 </body>
