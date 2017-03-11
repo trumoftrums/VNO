@@ -205,11 +205,11 @@
                         ?>
                         <select  name="searchform[thongso_65]" id="ft_thongso_65" class="form-control inp-filter inp-filter-2">
                             <option value="">Giá tiền</option>
-                            <option value="0-200">0 tr - 200 tr</option>
-                            <option value="201-400">201 tr - 400 tr</option>
-                            <option value="401-600">401 tr - 600 tr</option>
-                            <option value="601-800">601 tr - 800 tr</option>
-                            <option value="801-1000">801 tr - 1 tỷ</option>
+                            <option value="0-200">0 triệu - 200 triệu</option>
+                            <option value="201-400">201 triệu - 400 triệu</option>
+                            <option value="401-600">401 triệu - 600 triệu</option>
+                            <option value="601-800">601 triệu - 800 triệu</option>
+                            <option value="801-1000">801 triệu - 1 tỷ</option>
                             <option value="1001-1500">1 tỷ - 1.5 tỷ</option>
                             <option value="1501-2000">1.5 tỷ - 2 tỷ</option>
                             <option value="2000-1000000">trên 2 tỷ</option>

@@ -270,12 +270,12 @@ class HomeController extends Controller {
     {
         $active_tab2 = Input::get('page', '');
         $user = Auth::user();
-        $listPost = Baiviet::where('userid', $user->id)->where('status', 'PUBLIC')->paginate(self::POST_PER_PAGE);;
+        $listPost = Baiviet::where('userid', $user->id)->where('status','<>' ,'DELETED')->paginate(self::POST_PER_PAGE);;
         foreach ($listPost as $item){
             $item->thongso = json_decode($item->thongso,true);
         }
 //        echo '<pre>';print_r($listPost);exit();
-        $totalPost = Baiviet::where('userid', $user->id)->where('status', 'PUBLIC')->count();
+        $totalPost = Baiviet::where('userid', $user->id)->where('status','<>' ,'DELETED')->count();
         return View('Users.index', [
             'user' => $user,
             'listPost' => $listPost,
@@ -424,44 +424,92 @@ class HomeController extends Controller {
         if(!Auth::check()){
             return Redirect::to("admin/login");
         }
-//        $res = Thongtinxe::join('md_nhom_thongso', 'md_nhom_thongso.parentid', '=', 'md_thongtinxe.id')
-//            ->join('md_thongso', 'md_thongso.group', '=', 'md_nhom_thongso.id')
-//            ->select('md_thongso.*','md_nhom_thongso.name as nameNhom', 'md_nhom_thongso.id as idNhom',
-//                'md_thongtinxe.id as idTab', 'md_thongtinxe.name as nameTab','md_nhom_thongso.hidden')
-//            ->where('md_thongtinxe.status',1)
-//            ->where('md_nhom_thongso.status',1)
-//            ->where('md_thongso.status',1)
-//            ->get()->toArray();
-//
-//        $info =  array(
-//            'title' =>'Admin DashBoard',
-//            'content' =>'This is admin dashboard page'
-//        );
-//        $thongtinxe = array();
-//        foreach ($res as $v){
-//            $thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['ls'][] = $v;
-//            if(!isset($thongtinxe[$v['idTab']]['nameTab'])){
-//                $thongtinxe[$v['idTab']]['nameTab'] = $v['nameTab'];
-//            }
-//            if(!isset($thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['nameNhom'])){
-//                $thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['nameNhom'] = $v['nameNhom'];
-//                $thongtinxe[$v['idTab']]['ls'][$v['idNhom']]['hidden'] = $v['hidden'];
-//            }
-//        }
-//        var_dump($thongtinxe[2]);exit();
         $result =array();
         $user = Auth::user();
         $bv = array();
+        $formData =  Request::all();
         if(!empty($id_slug)){
 
             $arr_pid = explode("-",$id_slug);
             $pid = $arr_pid[0];
             $baiviet = Baiviet::where('status','<>','DELETED')->where('id','=',$pid)->get()->toArray();
+
 //            var_dump($baiviet);exit();
             if(!empty($baiviet)){
                 $bv = $baiviet[0];
                 if($user->id == $bv['userid']){
                     $bv['thongso'] = json_decode($bv['thongso'],true);
+                    if(Request::getMethod() == 'POST' && !empty($formData)){
+
+                        $upbv = array();
+
+                        $upbv['updated_by'] = Auth::id();
+                        $bv['thongso']['thongso_35'] = $formData['thongso_35'];
+                        $bv['thongso']['thongso_27'] = $formData['thongso_27'];
+                        $bv['thongso']['thongso_32'] = $formData['thongso_32'];
+                        $bv['thongso']['thongso_34'] = $formData['thongso_34'];
+                        $bv['thongso']['thongso_33'] = $formData['thongso_33'];
+                        $bv['thongso']['thongso_30'] = $formData['thongso_30'];
+                        $bv['thongso']['thongso_29'] = $formData['thongso_29'];
+                        $bv['thongso']['thongso_35'] = $formData['thongso_35'];
+                        $bv['thongso']['thongso_63'] = $formData['thongso_63'];
+                        $bv['thongso']['thongso_68'] = $formData['thongso_68'];
+                        $bv['thongso']['thongso_65'] = $formData['thongso_65'];
+                        $bv['thongso']['thongso_73'] = $formData['thongso_73'];
+                        $bv['thongso']['thongso_67'] = str_replace("\r\n","<br>",$formData['thongso_67']);
+                        $arr1 = explode("/",$formData['photo1']);
+                        $arr2 = explode("/",$formData['photo2']);
+                        $arr3= explode("/",$formData['photo3']);
+                        $arr4= explode("/",$formData['photo4']);
+                        $arr5 = explode("/",$formData['photo5']);
+                        $bv['thongso']['photo1'] = $arr1[count($arr1)-1];
+                        $bv['thongso']['photo2'] = $arr2[count($arr2)-1];
+                        $bv['thongso']['photo3'] = $arr3[count($arr3)-1];
+                        $bv['thongso']['photo4'] = $arr4[count($arr4)-1];
+                        $bv['thongso']['photo5'] = $arr5[count($arr5)-1];
+
+                        $upbv['mo_ta'] = str_replace("\r\n","<br>",$formData['thongso_67']);
+                        $upbv['dia_chi'] =$formData['thongso_68'];
+                        $upbv['gia_goc'] = $formData['thongso_65'];
+                        $upbv['gia_sale'] = $formData['thongso_65'];
+                        $upbv['status'] = 'PENDING';
+                        $upbv['photo1'] = $bv['thongso']['photo1'];
+                        $upbv['photo2'] = $bv['thongso']['photo2'];
+                        $upbv['photo3'] = $bv['thongso']['photo3'];
+                        $upbv['photo4'] = $bv['thongso']['photo4'];
+                        $upbv['photo5'] = $bv['thongso']['photo5'];
+                        $upbv['slug'] = $bv['id'].'-'.str_slug($bv['tieu_de'], '-');
+                        $upbv['thongso'] = json_encode($bv['thongso']);
+
+                        $needindexs = DB::table('md_thongso')->where('md_thongso.status', 1)->where('md_thongso.need_index', 1)->pluck('id')->toArray();
+                        DB::beginTransaction();
+                        $r1 = Baiviet::where('id',$bv['id'])->update($upbv);
+                        $r2 = true;
+                        if(!empty($needindexs)){
+                            foreach ($bv['thongso'] as $k => $v){
+                                $arr = explode("_",$k);
+                                if(count($arr)==2 && in_array($arr[1],$needindexs)){
+                                    if($k =="thongso_67"){
+                                        $v = $this->convert_vi_to_en($v);
+                                        $v = $this->clean($v);
+                                    }
+                                    $r2 = Baivietindex::where('baivietID',$bv['id'])->where('index_key',$arr[1])->update(array('index_value'=>$v));
+                                    if(!$r2){
+                                        break;
+                                    }
+                                }
+
+                            }
+                        }
+                        if($r2 && $r1){
+                            DB::commit();
+                            $result['result'] = true;
+                            $result['mess'] = 'Lưu bài viết thành công!, Bài viết của bạn đang được các quản trị viên xử lý...';
+                            $_POST = array();
+                        }else{
+                            DB::rollback();
+                        }
+                    }
 
                 }else{
                     $result['result'] =false;
@@ -471,13 +519,9 @@ class HomeController extends Controller {
                 $result['result'] =false;
                 $result['mess'] = "Không tìm thấy bài viết!";
             }
-        }
 
-
-        $thongso = $this->get_thongso_init();
-        $formData =  Request::all();
-
-        if(Request::getMethod() == 'POST' && !empty($formData)){
+        }else{
+            if(Request::getMethod() == 'POST' && !empty($formData)){
 
 //                var_dump($formData);exit();
                 $rules =[];
@@ -526,7 +570,14 @@ class HomeController extends Controller {
                     $_POST = array();
 
                 }
+            }
         }
+
+
+        $thongso = $this->get_thongso_init();
+
+
+
         $listHangXe =  Hangxe::where('status',1)->get()->toArray();
         $hangxes = array();
         if(!empty($listHangXe)){
@@ -545,6 +596,7 @@ class HomeController extends Controller {
             'result' =>$result,
             'baiviet' =>$bv,
             'hangxes' =>$hangxes,
+
         );
         return View('Post.free-post',$datas);
     }
@@ -619,9 +671,9 @@ class HomeController extends Controller {
                 $thongso[$k] = $dt;
                 $arrk = explode("_",$k);
                 if(count($arrk)==2){
-                    if(in_array($arrk[1],$this->THONGSO_TITLE)){
-                        $tieude .= $dt." ";
-                    }
+//                    if(in_array($arrk[1],$this->THONGSO_TITLE)){
+//                        $tieude .= $dt." ";
+//                    }
                     if($arrk[1]==$this->THONGSO_MOTA){
                         $mota = $dt;
                     }
