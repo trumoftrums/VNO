@@ -131,11 +131,27 @@
             <h3><img src="{{ URL::asset('images/icon-title-news.png')}}"/> {{$detailPost->tieu_de}}</h3>
             <p>Đăng bởi <span>{{$detailPost->username}}</span> - {{date_format(date_create($detailPost->created_at), 'd/m/Y H:i a')}}</p>
             <div class="cover-img-post">
-                <img onclick="openModal();currentSlide(1)" class="hover-shadow" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo1)}}"/>
-                <img onclick="openModal();currentSlide(2)" class="hover-shadow" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo2)}}"/>
-                <img onclick="openModal();currentSlide(3)" class="hover-shadow" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo3)}}"/>
-                <img onclick="openModal();currentSlide(4)" class="hover-shadow" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo4)}}"/>
-                <img onclick="openModal();currentSlide(5)" class="hover-shadow" src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo5)}}"/>
+                <div class="item-img-detail">
+                    <img onclick="openModal();currentSlide(1)" class="hover-shadow"
+                         src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo1)}}"/>
+
+                </div>
+                <div class="item-img-detail">
+                    <img onclick="openModal();currentSlide(2)" class="hover-shadow"
+                         src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo2)}}"/>
+                </div>
+                <div class="item-img-detail">
+                    <img onclick="openModal();currentSlide(3)" class="hover-shadow"
+                         src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo3)}}"/>
+                </div>
+                <div class="item-img-detail">
+                    <img onclick="openModal();currentSlide(4)" class="hover-shadow"
+                         src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo4)}}"/>
+                </div>
+                <div class="item-img-detail">
+                    <img onclick="openModal();currentSlide(5)" class="hover-shadow"
+                         src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo5)}}"/>
+                </div>
             </div>
         </div>
         <div class="info-post">
