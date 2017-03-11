@@ -1244,24 +1244,30 @@ textarea:focus, input:focus{
     width: 100%;
     border-top: 1px solid #0c834a;
 }
-.detail-post .header-post h3{
+.detail-post .header-post .cover-title-date{
+    float: left;
+    width: 100%;
+    padding-top: 10px;
+}
+.detail-post .header-post .cover-title-date h3{
     text-transform: uppercase;
     color: #0c834a;
     float: left;
     font-size: 20px;
     margin-left: 10px;
-    margin-top: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
-.detail-post .header-post p{
+.detail-post .header-post .cover-title-date p{
     float: left;
     font-size: 13px;
-    margin-top: 15px;
+    margin-top: 5px;
     margin-left: 10px;
 }
-.detail-post .header-post span{
+.detail-post .header-post .cover-title-date span{
     color: #0c834a;
 }
-.detail-post .header-post h3 img{
+.detail-post .header-post .cover-title-date h3 img{
     width: 12px;
     margin-top: -5px;
 }
@@ -1376,7 +1382,7 @@ textarea:focus, input:focus{
 }
 .cover-img-post .item-img-detail{
     float: left;
-    height: 10vw;
+    height: 9vw;
     width: 20%;
     text-align: center;
     background: #bfbfbf;
@@ -1582,6 +1588,9 @@ textarea:focus, input:focus{
     margin-top: 10px;
     border-bottom: 1px dotted #0c834a;
 }
+.info-post-detail ul li div span b{
+    font-size: 13px;
+}
 .common-info{
     width: 100%;
     text-align: center;
@@ -1648,8 +1657,9 @@ textarea:focus, input:focus{
     height: 41px;
     border-right: 1px solid #0c834a;
     padding-left: 1vw;
-    line-height: 42px;
     width: 60%;
+    display: flex;
+    align-items: center;
 }
 .info-post-detail{
     float: left;
