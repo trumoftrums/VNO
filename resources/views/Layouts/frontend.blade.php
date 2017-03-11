@@ -298,9 +298,9 @@
     </div>
     <div class="footer">
             <div class="info">
-                <p>Vietnamoto.net - Bản quyền @ 2017 Goldlands.vn</p>
+                <p>Vietnamoto.net - Bản quyền @ 2017 Hoàng Sang Group</p>
                 <span>Địa chỉ: 02, Phạm Văn Đồng, P. Linh Đông, Q. Thủ Đức, Tp.HCM</span>
-                <span>Hotline: 0970 7777 929 - Email: batdongsangoldlands@gmail.com</span>
+                <span>Hotline: 089 815 4544 - Email: customerservice@vietnamoto.net</span>
             </div>
             <div class="menu-bottom">
                 <ul>

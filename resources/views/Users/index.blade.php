@@ -85,32 +85,36 @@
         </div>
         <div id="post" class="tab-pane fade @if($activeTab != '') in active @endif">
             <div class="list-items">
-                @foreach($listPost as $item)
-                <div class="col-md-4 item">
-                    <div class="inner-item">
-                        <div class="hover-item">
-                            <div class="cover-zoom">
-                                <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><img src="{{ URL::asset('images/icon-zoom.png')}}"/></a>
-                                <a rel="nofollow" class="detail" href="{{ URL::to('/dang-tin-free/'.$item->id.'-'.str_slug($item->tieu_de, '-')) }}">Sửa bài viết</a>
+                @if(count($listPost)>0)
+                    @foreach($listPost as $item)
+                        <div class="col-lg-4 col-md-6 col-sm-6 item">
+                            <div class="inner-item">
+                                <div class="hover-item">
+                                    <div class="cover-zoom">
+                                        <a href="{{ URL::to('/dang-tin-free/'.$item->id.'-'.str_slug($item->tieu_de, '-')) }}"><img src="./images/icon-edit.png"/></a>
+                                        <a rel="nofollow" class="detail" href="{{ URL::to('/dang-tin-free/'.$item->id.'-'.str_slug($item->tieu_de, '-')) }}">Chỉnh sửa</a>
+                                    </div>
+                                </div>
+                                <div class="left-item">
+                                    <img src="./uploads/baiviet/{{$item->photo1}}"/>
+                                    <span class="price">{{$item->thongso['thongso_65']}} VND</span>
+                                </div>
+                                <div class="right-item">
+                                    <h4>{{$item->tieu_de}}</h4>
+                                    <p>- Tình trạng: {{$item->thongso['thongso_24']}}</p>
+                                    <p>- Dáng xe: {{$item->thongso['thongso_25']}}</p>
+                                    <p>- Năm SX: {{$item->thongso['thongso_22']}}</p>
+                                    <p>- Nhiên liệu: {{$item->thongso['thongso_32']}}</p>
+                                    <p class="phone-address-item">- {{$item->thongso['thongso_62']}} - {{$item->thongso['thongso_63']}}</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="left-item">
-                            <img src="{{ URL::asset('uploads/baiviet/'.$item->photo1)}}"/>
-                            <span class="price">{{$item->thongso['thongso_65']}} VND</span>
-                        </div>
-                        <div class="right-item">
-                            <h4>{{$item->tieu_de}}</h4>
-                            <p>- Tình trạng: {{$item->thongso['thongso_24']}}</p>
-                            <p>- Dáng xe: {{$item->thongso['thongso_25']}}</p>
-                            <p>- Năm SX: {{$item->thongso['thongso_22']}}</p>
-                            <p>- Nhiên liệu: {{$item->thongso['thongso_32']}}</p>
-                            <p class="phone-address-item">- {{$item->thongso['thongso_62']}} - {{$item->thongso['thongso_63']}}</p>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
+                    @endforeach
+                @else
+                    <p>Chưa có dữ liệu. Vui lòng thử lại sau.</p>
+                @endif
                 <div class="paging-div">
-                    {{ $listPost->links() }}
+                    <?php if(!empty($listPost)) echo $listPost->links() ?>
                 </div>
             </div>
         </div>
