@@ -45,6 +45,11 @@ class HomeController extends Controller {
         'tinh'=>'thongso_62',
         'keyword'=>'keyword',
     );
+    private $arrayLogoBranch = [
+        'Acura','BMW','Chevrolet','Daewoo','Daihatshu','Fiat','FORD','Honda','Hyundai','Isuzu',
+        'Suzuki','Audi','Kia','LandRover','Lexus','Mazda','Mercedes-Benz','Mitsubishi','Nissan',
+        'Peugeot','Porsche','Renault','SsangYong','Toyota','Volkswagen'
+    ];
     public function index()
     {
         $params = Request::all();
@@ -66,14 +71,27 @@ class HomeController extends Controller {
                     ->paginate(self::POST_PER_PAGE);
             }else{
                 if ($branch != '' && $branch != 'all') {
-                    $cond_str = "index_key_str = 'thongso_20' and index_value ='$branch'";
-                    $listPost = Baivietindex::whereRaw($cond_str)
-                        ->distinct('baivietID')
-                        ->where('op_baiviets.status', 'PUBLIC')
-                        ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
-                        ->OrderBy('op_baiviets.id', 'desc')
-                        ->paginate(self::POST_PER_PAGE)
-                        ->setPath('?branch=' . $branch);
+                    if($branch == 'khac'){
+                        $branch = 'khác';
+                        $cond_str = "index_key_str = 'thongso_20'";
+                        $listPost = Baivietindex::whereRaw($cond_str)
+                            ->whereNotIn('index_value', $this->arrayLogoBranch)
+                            ->distinct('baivietID')
+                            ->where('op_baiviets.status', 'PUBLIC')
+                            ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
+                            ->OrderBy('op_baiviets.id', 'desc')
+                            ->paginate(self::POST_PER_PAGE)
+                            ->setPath('?branch=khac');
+                    }else{
+                        $cond_str = "index_key_str = 'thongso_20' and index_value ='$branch'";
+                        $listPost = Baivietindex::whereRaw($cond_str)
+                            ->distinct('baivietID')
+                            ->where('op_baiviets.status', 'PUBLIC')
+                            ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
+                            ->OrderBy('op_baiviets.id', 'desc')
+                            ->paginate(self::POST_PER_PAGE)
+                            ->setPath('?branch=' . $branch);
+                    }
                 } else {
                     $branch = 'TẤT CẢ CÁC HÃNG XE';
                     $listPost = Baiviet::where('status', 'PUBLIC')

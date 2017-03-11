@@ -79,7 +79,7 @@
                 <a href="{{ URL::to('?branch=Kia') }}"><img src="./images/logo_brands/kia-motors.png"/></a>
             </div>
             <div>
-                <a href="{{ URL::to('?branch=Land Rover') }}"><img src="./images/logo_brands/landrover.png"/></a>
+                <a href="{{ URL::to('?branch=LandRover') }}"><img src="./images/logo_brands/landrover.png"/></a>
             </div>
             <div>
                 <a href="{{ URL::to('?branch=Lexus') }}"><img src="./images/logo_brands/lexus.png"/></a>
@@ -116,6 +116,9 @@
             </div>
             <div>
                 <a href="{{ URL::to('?branch=Volkswagen') }}"><img src="./images/logo_brands/volkswagen.png"/></a>
+            </div>
+            <div>
+                <a style="margin-top: 15px;" class="all-branch" href="{{ URL::to('?branch=khac') }}">KHÁC</a>
             </div>
         </ul>
     </div>
