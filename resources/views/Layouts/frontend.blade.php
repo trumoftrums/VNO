@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/jquery.simplyscroll.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/style_vno.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/media_screen.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/jquery-ui.css') }}">
     <script src="{{ URL::asset('js/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
