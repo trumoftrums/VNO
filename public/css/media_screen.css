@@ -133,8 +133,3 @@
         width: 48.5%;
     }
 }
-@media (max-width: 1065px) {
-    .detail-post .header-post p{
-        margin-top: -5px;
-    }
-}
