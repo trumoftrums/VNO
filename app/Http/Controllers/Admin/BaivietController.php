@@ -452,7 +452,7 @@ class BaivietController extends Controller {
                 $path = "uploads/baiviet/";
                 if(move_uploaded_file($_FILES["file"]["tmp_name"], $path.$k)){
                     $result['result'] = true;
-                    $result['url'] = $path.$k;
+                    $result['url'] = "/".$path.$k;
                 }else{
                     $result['mess'] = 'Upload failed!';
                 }

@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
             $user = [];
             if(Auth::check()){
                 $user = Auth::user();
-                $totalPost = Baiviet::where('userid', $user->id)->count();
+                $totalPost = Baiviet::where('userid', $user->id)->where('status','<>','DELETED')->count();
             }
             $list_thongso = Thongso::where('filter',1)->get()->toArray();
             $arr_listts = array();
