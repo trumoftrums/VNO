@@ -158,7 +158,7 @@
             <div class="address-price-phone">
                 <p class="price">@if(isset($detailPost->thongso['thongso_65'])) {{$detailPost->thongso['thongso_65']}} @endif VND</p>
                 <p class="address">@if(isset($detailPost->thongso['thongso_68'])) {{$detailPost->thongso['thongso_68']}} @endif</p>
-                <p class="phone">ĐT: @if(isset($detailPost->thongso['thongso_63'])) {{$detailPost->thongso['thongso_63']}} @endif</p>
+                <p class="phone">@if(isset($detailPost->thongso['thongso_63'])) {{$detailPost->thongso['thongso_63']}} @endif</p>
             </div>
             <div class="info-post-detail">
                 <div class="left">

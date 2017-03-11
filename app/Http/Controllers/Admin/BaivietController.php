@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Models\Thongso;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Baiviet;
@@ -451,8 +452,10 @@ class BaivietController extends Controller {
                 $k = md5_file($_FILES["file"]["tmp_name"]);
                 $path = "uploads/baiviet/";
                 if(move_uploaded_file($_FILES["file"]["tmp_name"], $path.$k)){
+                    chmod($path.$k, 0666);
                     $result['result'] = true;
-                    $result['url'] = $path.$k;
+                    $pathFinal = HomeController::createWatermark('./'.$path.$k);
+                    $result['url'] = $pathFinal.'?'.filemtime($pathFinal);
                 }else{
                     $result['mess'] = 'Upload failed!';
                 }

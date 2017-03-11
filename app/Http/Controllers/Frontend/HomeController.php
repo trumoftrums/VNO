@@ -81,6 +81,35 @@ class HomeController extends Controller {
 
         ]);
     }
+
+    public static function createWatermark($file){
+        $watermark = imagecreatefrompng('./images/watermark.png');
+        $source = getimagesize($file);
+        $source_mime = $source['mime'];
+        $posx = $source[0] - 155;
+        $posy = $source[1] - 155;
+        switch ($source_mime){
+            case 'image/png':
+                $image = imagecreatefrompng($file);
+                break;
+            case 'image/jpeg':
+                $image = imagecreatefromjpeg($file);
+                break;
+            case 'image/gif':
+                $image = imagecreatefromgif($file);
+                break;
+            default:
+                break;
+
+        }
+        imagecopy($image, $watermark, $posx, $posy, 0, 0, imagesx($watermark), imagesy($watermark));
+        imagepng($image, $file);
+        imagedestroy($image);
+        imagedestroy($watermark);
+
+        return $file;
+    }
+
     private  function getHangXe($id){
         $dt = Hangxe::where('id',$id)->get()->toArray();
         if(!empty($dt)){

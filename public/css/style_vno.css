@@ -1376,11 +1376,16 @@ textarea:focus, input:focus{
 }
 .cover-img-post .item-img-detail{
     float: left;
-    /*height: 130px;*/
+    height: 10vw;
     width: 20%;
     text-align: center;
     background: #bfbfbf;
     overflow: hidden;
+}
+.cover-img-post .item-img-detail:hover{
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 1px 4px 10px 1px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .related-post{
     float: left;
