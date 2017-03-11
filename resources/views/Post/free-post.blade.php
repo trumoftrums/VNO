@@ -268,7 +268,7 @@
                                 <div class="item-cover-one">
 
                                     <label>Số điện thoại<?php if($thongso["thongso_63"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
-                                    <input maxlength="11" type="text" class="free-post-inp-text onlynumber  <?php if($thongso["thongso_63"]['required']=="true"){echo 'fm_required';}?>" name="thongso_63" placeholder="Nhập số điện thoại" value="<?php if(isset($baiviet['thongso']['thongso_63'])) echo $baiviet['thongso']['thongso_63']; ?>">
+                                    <input maxlength="15" type="text" class="free-post-inp-text onlynumber  <?php if($thongso["thongso_63"]['required']=="true"){echo 'fm_required';}?>" name="thongso_63" placeholder="Nhập số điện thoại" value="<?php if(isset($baiviet['thongso']['thongso_63'])) echo $baiviet['thongso']['thongso_63']; ?>">
 
                                 </div>
                                 <div class="item-cover-two">

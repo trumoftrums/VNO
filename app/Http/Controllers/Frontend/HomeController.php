@@ -34,52 +34,71 @@ class HomeController extends Controller {
      * @param  int  $id
      * @return Response
      */
+    private $filterParams = array(
+        'hangxe'=>'thongso_20',
+        'dongxe'=>'thongso_75',
+        'dangxe'=>'thongso_25',
+        'tinhtrang'=>'thongso_24',
+        'namsx'=>'thongso_22',
+        'gia'=>'thongso_65',
+        'tinh'=>'thongso_62',
+        'keyword'=>'keyword',
+    );
     public function index()
     {
-        $branch = Input::get('branch');
-        $price = Input::get('price');
-        if($price != ''){
-            $cond_str_price = "index_key_str = 'thongso_65' and index_value ='$price' ";
-            $listPost = Baivietindex::whereRaw($cond_str_price)
-                ->distinct('baivietID')
-                ->where('op_baiviets.status', 'PUBLIC')
-                ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
-                ->OrderBy('op_baiviets.id', 'desc')
-                ->paginate(18);
+        $params = Request::all();
+        if(!empty($params) && isset($params['search']) && !empty($params['search'])){
+
+            $result = $this->index_post();
+            return View('Home.index', $result);
+
         }else{
-            if ($branch != '' && $branch != 'all') {
-                $cond_str = "index_key_str = 'thongso_20' and index_value ='$branch'";
-                $listPost = Baivietindex::whereRaw($cond_str)
+            $branch = Input::get('branch');
+            $price = Input::get('price');
+            if($price != ''){
+                $cond_str_price = "index_key_str = 'thongso_65' and index_value ='$price' ";
+                $listPost = Baivietindex::whereRaw($cond_str_price)
                     ->distinct('baivietID')
                     ->where('op_baiviets.status', 'PUBLIC')
                     ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
                     ->OrderBy('op_baiviets.id', 'desc')
-                    ->paginate(18)
-                    ->setPath('?branch=' . $branch);
-            } else {
-                $branch = 'TẤT CẢ CÁC HÃNG XE';
-                $listPost = Baiviet::where('status', 'PUBLIC')
-                    ->OrderBy('id', 'desc')
                     ->paginate(18);
+            }else{
+                if ($branch != '' && $branch != 'all') {
+                    $cond_str = "index_key_str = 'thongso_20' and index_value ='$branch'";
+                    $listPost = Baivietindex::whereRaw($cond_str)
+                        ->distinct('baivietID')
+                        ->where('op_baiviets.status', 'PUBLIC')
+                        ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
+                        ->OrderBy('op_baiviets.id', 'desc')
+                        ->paginate(18)
+                        ->setPath('?branch=' . $branch);
+                } else {
+                    $branch = 'TẤT CẢ CÁC HÃNG XE';
+                    $listPost = Baiviet::where('status', 'PUBLIC')
+                        ->OrderBy('id', 'desc')
+                        ->paginate(18);
+                }
             }
-        }
-        $res = $listPost->toArray();
-        $totalPage = $res['last_page'];
-        $currentPage = $res['current_page'];
-        if($totalPage == 0){
-            $currentPage = 0;
-        }
-        foreach ($listPost as $item){
-            $item->thongso = json_decode($item->thongso,true);
+            $res = $listPost->toArray();
+            $totalPage = $res['last_page'];
+            $currentPage = $res['current_page'];
+            if($totalPage == 0){
+                $currentPage = 0;
+            }
+            foreach ($listPost as $item){
+                $item->thongso = json_decode($item->thongso,true);
+            }
+
+            return View('Home.index', [
+                'listPost' => $listPost,
+                'branch' => $branch,
+                'totalPage' => $totalPage,
+                'currentPage' => $currentPage
+
+            ]);
         }
 
-        return View('Home.index', [
-            'listPost' => $listPost,
-            'branch' => $branch,
-            'totalPage' => $totalPage,
-            'currentPage' => $currentPage
-
-        ]);
     }
 
     public static function createWatermark($file){
@@ -128,12 +147,17 @@ class HomeController extends Controller {
             'currentPage' => 0
         );
         $listPost = null;
-        if(isset(Request::all()['searchform'])){
-
-
-            $searchform =  Request::all()['searchform'] ;
-//            var_dump($searchform);exit();
-            ##################
+        $params = Request::all();
+        $urlParams = "?search=1";
+        $searchform =array();
+        foreach ($this->filterParams as $k=>$v){
+            if(isset($params[$k])){
+                $urlParams .="&".$k."=".$params[$k];
+                $searchform[$v] = $params[$k];
+            }
+        }
+//        var_dump($searchform);exit();
+        if(isset($searchform)){
 
             $have_search = false;
             $array_all_id = array();
@@ -182,8 +206,6 @@ class HomeController extends Controller {
 
             }
 
-//            var_dump($array_all_id);exit();
-
             $arr_idx = array();
             if(!empty($array_all_id)){
 
@@ -203,13 +225,13 @@ class HomeController extends Controller {
                 }
 //                var_dump($arr_idx);exit();
                 if(!empty($arr_idx)){
-                    $listPost = Baiviet::where('status', 'PUBLIC')->whereIn('id',$arr_idx)->paginate(self::POST_PER_PAGE);
+                    $listPost = Baiviet::where('status', 'PUBLIC')->whereIn('id',$arr_idx)->paginate(self::POST_PER_PAGE)->setPath($urlParams);;
                 }else{
                     $result['result'] = false;
                     $result['mess'] = "Không tìm thấy bài viết nào !";
                 }
             }elseif(!$have_search){
-                $listPost = Baiviet::where('status', 'PUBLIC')->paginate(self::POST_PER_PAGE);
+                $listPost = Baiviet::where('status', 'PUBLIC')->paginate(self::POST_PER_PAGE)->setPath($urlParams);
 
             }
 
@@ -217,7 +239,7 @@ class HomeController extends Controller {
 
             ##################
         }else{
-            $listPost = Baiviet::where('status', 'PUBLIC')->paginate(self::POST_PER_PAGE);
+            $listPost = Baiviet::where('status', 'PUBLIC')->paginate(self::POST_PER_PAGE)->setPath($urlParams);
 
         }
 //        var_dump($listPost);exit();
@@ -245,7 +267,7 @@ class HomeController extends Controller {
 
         $result['listVipSalon'] = $listVipSalon;
 
-        return View('Home.index', $result);
+        return $result;
     }
 
     public function register()

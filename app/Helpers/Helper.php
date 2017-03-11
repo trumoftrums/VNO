@@ -47,13 +47,17 @@ class Helper
         return $content;
     }
 
-    public  static  function  search_field($thongso = array(),$init_value =null,$default_value = null){
+    public  static  function  search_field($thongso = array(),$init_value =null,$default_value = null,$name = null){
 
         $content = "";
         if(!empty($thongso)){
+
+            if(empty($name)){
+                $name = 'thongso_'.$thongso['id'];
+            }
             switch ($thongso['type']){
                 case "combo":
-                    $content .='<select class="form-control inp-filter" name="searchform[thongso_'.$thongso['id'].']">';
+                    $content .='<select class="form-control inp-filter" name="'.$name.'">';
                     if(!empty($init_value)){
                         $content .='<option value="">'.$init_value.'</option>';
                     }

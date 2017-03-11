@@ -149,10 +149,10 @@
         </div>
         <div class="center-content-col">
             <div class="filter">
-                <form action="/" method="post" name="searchform" >
+                <form action="/" method="post" name="searchform" id="searchform" >
                     <div class="form-filter">
-                        <input type="text" <?php if(isset($searchform['keyword'])){ echo ' value="'.$searchform['keyword'].'"';} ?> class="form-control" name="searchform[keyword]" placeholder="Từ khóa..."/>
-                        <select class="form-control inp-filter" id="filter_hang_xe" name="searchform[thongso_20]">
+                        <input type="text" <?php if(isset($searchform['keyword'])){ echo ' value="'.$searchform['keyword'].'"';} ?> class="form-control" name="keyword" placeholder="Từ khóa..."/>
+                        <select class="form-control inp-filter" id="filter_hang_xe" name="hangxe">
                             <option value="">Hãng Xe</option>
                             <?php
                             if(!empty($hangxes)){
@@ -167,7 +167,7 @@
                             }
                             ?>
                         </select>
-                        <select  id="filter_dong_xe" name="searchform[thongso_75]" class="form-control inp-filter">
+                        <select  id="filter_dong_xe" name="dongxe" class="form-control inp-filter">
                             <option value="">Dòng xe</option>
 
                         </select>
@@ -179,7 +179,7 @@
                                 if(isset($searchform['thongso_25']) && $searchform['thongso_25']){
                                     $thongso_25 =$searchform['thongso_25'];
                                 }
-                                echo \App\Helpers\Helper::search_field($list_thongso['thongso_25'],"Dáng xe",$thongso_25);
+                                echo \App\Helpers\Helper::search_field($list_thongso['thongso_25'],"Dáng xe",$thongso_25,"dangxe");
                             }
                             ?>
                         {{--</select>--}}
@@ -191,7 +191,7 @@
                             if(isset($searchform['thongso_24']) && $searchform['thongso_24']){
                                 $thongso_24 =$searchform['thongso_24'];
                             }
-                            echo \App\Helpers\Helper::search_field($list_thongso['thongso_24'],"Tình trạng",$thongso_24);
+                            echo \App\Helpers\Helper::search_field($list_thongso['thongso_24'],"Tình trạng",$thongso_24,"tinhtrang");
                         }
                         ?>
                         <?php
@@ -200,10 +200,10 @@
                             if(isset($searchform['thongso_22']) && $searchform['thongso_22']){
                                 $thongso_22 =$searchform['thongso_22'];
                             }
-                            echo \App\Helpers\Helper::search_field($list_thongso['thongso_22'],"Năm SX",$thongso_22);
+                            echo \App\Helpers\Helper::search_field($list_thongso['thongso_22'],"Năm SX",$thongso_22,"namsx");
                         }
                         ?>
-                        <select  name="searchform[thongso_65]" id="ft_thongso_65" class="form-control inp-filter inp-filter-2">
+                        <select  name="gia" id="ft_thongso_65" class="form-control inp-filter inp-filter-2">
                             <option value="">Giá tiền</option>
                             <option value="0-200">0 triệu - 200 triệu</option>
                             <option value="201-400">201 triệu - 400 triệu</option>
@@ -220,7 +220,7 @@
                             if(isset($searchform['thongso_62']) && $searchform['thongso_62']){
                                 $thongso_62 =$searchform['thongso_62'];
                             }
-                            echo \App\Helpers\Helper::search_field($list_thongso['thongso_62'],"Tỉnh thành",$thongso_62);
+                            echo \App\Helpers\Helper::search_field($list_thongso['thongso_62'],"Tỉnh thành",$thongso_62,"tinh");
                         }
                         ?>
                     </div>
@@ -742,6 +742,26 @@
                 echo '$("#ft_thongso_65").val("'.$searchform['thongso_65'].'");';
             }
         ?>
+
+
+    });
+    $('#searchform').submit(function (e) {
+        var ac = $('#searchform').attr("action");
+        if(ac.length <9){
+            e.preventDefault();
+            var urlPath = "?search=1";
+            var formDT = $('#searchform').serializeArray();
+            var l = formDT.length;
+            for (var i = 0; i < l; i++) {
+//            console.log(formDT[i]);
+                var obj = formDT[i];
+                urlPath +="&"+obj.name+"="+obj.value;
+            }
+            $('#searchform').attr("action",urlPath);
+//            console.log(urlPath);
+            $('#searchform').submit();
+        }
+
     });
 </script>
 </body>
