@@ -23,7 +23,7 @@ use Mews\Captcha\Facades\Captcha;
 use Validator;
 class HomeController extends Controller {
 
-    const POST_PER_PAGE = 9;
+    const POST_PER_PAGE = 18;
     public function __construct()
     {
 
@@ -62,7 +62,7 @@ class HomeController extends Controller {
                     ->where('op_baiviets.status', 'PUBLIC')
                     ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
                     ->OrderBy('op_baiviets.id', 'desc')
-                    ->paginate(18);
+                    ->paginate(POST_PER_PAGE);
             }else{
                 if ($branch != '' && $branch != 'all') {
                     $cond_str = "index_key_str = 'thongso_20' and index_value ='$branch'";
@@ -71,13 +71,13 @@ class HomeController extends Controller {
                         ->where('op_baiviets.status', 'PUBLIC')
                         ->join('op_baiviets', 'op_baiviets.id', '=', 'op_baiviet_indexs.baivietID')
                         ->OrderBy('op_baiviets.id', 'desc')
-                        ->paginate(18)
+                        ->paginate(self::POST_PER_PAGE)
                         ->setPath('?branch=' . $branch);
                 } else {
                     $branch = 'TẤT CẢ CÁC HÃNG XE';
                     $listPost = Baiviet::where('status', 'PUBLIC')
                         ->OrderBy('id', 'desc')
-                        ->paginate(18);
+                        ->paginate(self::POST_PER_PAGE);
                 }
             }
             $res = $listPost->toArray();
