@@ -19,6 +19,10 @@ class DashboardController extends Controller {
         if(!Auth::check()){
             return Redirect::to("admin/login");
         }
+        $user = Auth::user();
+        if($user->group!=1){
+            return Redirect::to("/");
+        }
         $info =  array(
             'title' =>'Admin DashBoard',
         );

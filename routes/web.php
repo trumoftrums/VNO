@@ -40,6 +40,7 @@ Route::post('/dang-tin-free', 'Frontend\HomeController@freePost');
 Route::get('/dang-tin-free/{id_slug}', 'Frontend\HomeController@freePost');
 Route::post('/dang-tin-free/{id_slug}', 'Frontend\HomeController@freePost');
 Route::post('/upload-avatar', 'Frontend\HomeController@uploadAvatar');
+Route::get('/forgotpass', 'Frontend\ServiceController@forgotPass');
 
 Route::post('/baiviet/save_bai_viet', 'Frontend\HomeController@save_bai_viet');
 Route::post('/getdongxe', 'Frontend\HomeController@getdongxe');
@@ -71,7 +72,9 @@ Route::group(['prefix' => 'admin'], function()
     Route::get('/getnews', 'Admin\NewsController@get_news');
     Route::post('/delnews', 'Admin\NewsController@del_news');
     Route::post('/save_news', 'Admin\NewsController@save_news');
-    Route::get('/baiviet/get_total_news', 'Admin\BaivietController@get_total_news');
+    Route::get('/posts/get_total_news', 'Admin\BaivietController@get_total_news');
+    Route::get('/posts/add_bai_viet', 'Admin\BaivietController@add_bai_viet');
+    Route::post('/posts/add_bai_viet', 'Admin\BaivietController@add_bai_viet');
 
 
     Route::get('/users', 'Admin\UsersController@index');

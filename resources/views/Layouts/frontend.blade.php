@@ -324,8 +324,8 @@
                 </ul>
             </div>
             <div class="social-bottom">
-                <p>Truy cập: <span>300400</span></p><br>
-                <p>User: <span>3000</span></p>
+                <p>Truy cập: <span>{{$countView}}</span></p><br>
+                <p>User: <span>{{$countUser}}</span></p>
             </div>
         </div>
 </div>

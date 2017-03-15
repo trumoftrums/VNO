@@ -6,11 +6,14 @@ use App\City;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Models\Baiviet;
 use App\Models\Hangxe;
+use App\Models\Users;
 use App\News;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Thongso;
+use App\Models\ViewLog;
+use Mockery\CountValidator\Exception;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,7 +22,8 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-
+    const COUNTUSER_START = 3000;
+    const COUNTVIEW_START = 31200;
     public static function isMobile()
     {
         $uaFull = strtolower($_SERVER['HTTP_USER_AGENT']);
@@ -270,6 +274,12 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('Layouts.frontend', function ($view)
         {
+            try{
+                $this->saveLog();
+            }catch ( Exception $e){
+
+            }
+
             $listNewsHome = News::where('status', News::STATUS_ACTIVE)
                 ->orderBy('id', 'desc')
                 ->limit(10)
@@ -297,14 +307,17 @@ class AppServiceProvider extends ServiceProvider
             //list city
             $listCity =  City::getCity()->toArray();
 
-//            var_dump($hangxes);exit();
+            $countUser = self::COUNTUSER_START + Users::where("status","Actived")->count();
+            $countView = self::COUNTVIEW_START + ViewLog::count();
             $view->with([
                 'listNewsHome' => $listNewsHome,
                 'user' => $user,
                 'totalPost' => $totalPost,
                 'list_thongso'=>$arr_listts,
                 'hangxes' =>$hangxes,
-                'listCity'=>$listCity
+                'listCity'=>$listCity,
+                'countUser'=>$countUser,
+                'countView'=>$countView
             ]);
         });
         view()->composer('Layouts.backend', function ($view)
@@ -342,5 +355,41 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+    private function saveLog(){
+        $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        if(strpos($actual_link,"/uploads/") === false){
+            $l =  new ViewLog;
+            $l->ip =$this->get_client_ip();
+
+            $l->url = $actual_link;
+            if(isset($_SERVER['HTTP_REFERER'])){
+                $l->refer_url = $_SERVER['HTTP_REFERER'];
+            }
+            if(isset($_SERVER['HTTP_USER_AGENT'])){
+                $l->user_agent = $_SERVER['HTTP_USER_AGENT'];
+            }
+
+            $l->save();
+        }
+
+    }
+    protected function get_client_ip() {
+        $ipaddress = '';
+        if (getenv('HTTP_CLIENT_IP'))
+            $ipaddress = getenv('HTTP_CLIENT_IP');
+        else if(getenv('HTTP_X_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+        else if(getenv('HTTP_X_FORWARDED'))
+            $ipaddress = getenv('HTTP_X_FORWARDED');
+        else if(getenv('HTTP_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_FORWARDED_FOR');
+        else if(getenv('HTTP_FORWARDED'))
+            $ipaddress = getenv('HTTP_FORWARDED');
+        else if(getenv('REMOTE_ADDR'))
+            $ipaddress = getenv('REMOTE_ADDR');
+        else
+            $ipaddress = 'UNKNOWN';
+        return $ipaddress;
     }
 }

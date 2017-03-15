@@ -281,7 +281,7 @@
                             <li>
                                 <div class="item-cover-one">
                                     <label>Giá tiền<?php if($thongso["thongso_65"]['required']=="true"){echo '<span style="color:red;">*</span>';}?></label>
-                                    <input type="text" class="free-post-inp-text onlynumber <?php if($thongso["thongso_65"]['required']=="true"){echo 'fm_required';}?>" name="thongso_65" placeholder="Nhập giá tiền" value="<?php if(isset($baiviet['thongso']['thongso_65'])) echo $baiviet['thongso']['thongso_65']; ?>">
+                                    <input type="text" class="free-post-inp-text onlynumber autonumber <?php if($thongso["thongso_65"]['required']=="true"){echo 'fm_required';}?>" name="thongso_65" placeholder="Nhập giá tiền" value="<?php if(isset($baiviet['thongso']['thongso_65'])) echo $baiviet['thongso']['thongso_65']; ?>">
 
                                 </div>
                                 <div class="item-cover-two">
@@ -497,15 +497,12 @@
             var type = $(this).attr("type");
 
             var vl =$(this).val();
-            //var vl = $("*[name='"+name+"']").val();
-//            console.log(index+":"+name+":"+type+":"+vl);
 
             if(type=="textarea"){
 //                vl = CKEDITOR.instances['comment'].getData();
             }
 
             if(vl == null ||vl=="undefined" || vl==""){
-                console.log("empty:"+$(this).attr("name"));
                 if(name.startsWith("photo")){
                     photo = true;
                 }
@@ -545,7 +542,7 @@
     });
     $(".onlynumber").keydown(function(e) {
         // Allow: backspace, delete, tab, escape, enter and .
-        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+        if ($.inArray(e.keyCode, [8, 9, 27, 13, 110, 190]) !== -1 ||
             // Allow: Ctrl+A
             (e.keyCode == 65 && e.ctrlKey === true) ||
             // Allow: home, end, left, right
@@ -557,6 +554,19 @@
         if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
             e.preventDefault();
         }
+    });
+    $('input.autonumber').keyup(function(event) {
+
+        // skip for arrow keys
+        if(event.which >= 37 && event.which <= 40) return;
+
+        // format number
+        $(this).val(function(index, value) {
+            return value
+                .replace(/\D/g, "")
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                ;
+        });
     });
     $(".upload-image").change(function () {
         upload_img($(this).attr("id"));
@@ -582,7 +592,6 @@
             data : {id:vl},
             success : function(data) {
                 if(data.result){
-//                        console.log(data.data);
                     generate_dongxe('thongso_75',data.data);
 
                 }else{
@@ -603,7 +612,6 @@
 
         ?>
         $.each(data, function(key,value) {
-//            console.log(key+":"+value);
 
             if(key==dx){
                 sl.append('<option  selected="selected" value="'+key+'">'+value+'</option>');
