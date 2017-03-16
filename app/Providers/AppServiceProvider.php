@@ -356,9 +356,13 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+    private $SKIP_LOG =array(".js",".png",".gif",".jpg",".css",".map");
     private function saveLog(){
         $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        if(strpos($actual_link,"/uploads/") === false){
+        $last3 = strtolower(substr($actual_link,strlen($actual_link)-3,3));
+        $last4 = strtolower(substr($actual_link,strlen($actual_link)-4,4));
+
+        if(strpos($actual_link,"/uploads/") === false && !in_array($last3,$this->SKIP_LOG) && !in_array($last4,$this->SKIP_LOG)){
             $l =  new ViewLog;
             $l->ip =$this->get_client_ip();
 

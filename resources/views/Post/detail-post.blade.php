@@ -158,7 +158,7 @@
         </div>
         <div class="info-post">
             <div class="address-price-phone">
-                <p class="price">@if(isset($detailPost->thongso['thongso_65'])) {{$detailPost->thongso['thongso_65']}} @endif VND</p>
+                <p class="price"><?php if( isset($detailPost->thongso['thongso_65'])) echo number_format(str_replace(".","",$detailPost->thongso['thongso_65']),0,",","."); ?> VND</p>
                 <p class="address">@if(isset($detailPost->thongso['thongso_68'])) {{$detailPost->thongso['thongso_68']}} @endif</p>
                 <p class="phone">@if(isset($detailPost->thongso['thongso_63'])) {{$detailPost->thongso['thongso_63']}} @endif</p>
             </div>
@@ -245,7 +245,7 @@
                         <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><img class="thumb" src="{{ URL::asset('/uploads/baiviet/'.$item->photo1)}}"/></a>
                         <div class="right-item">
                             <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><span class="sp-title">@if(isset($item->tieu_de)) {{$item->tieu_de}} @endif</span></a>
-                            <span>@if(isset($item->thongso['thongso_65'])) {{$item->thongso['thongso_65']}} @endif VNĐ</span>
+                            <span><?php if( isset($item->thongso['thongso_65'])) echo number_format(str_replace(".","",$item->thongso['thongso_65']),0,",","."); ?> VNĐ</span>
                             <span>@if(isset($item->thongso['thongso_62'])) {{$item->thongso['thongso_62']}} @endif</span>
                         </div>
                     </div>
@@ -263,7 +263,7 @@
                         <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><img class="thumb" src="{{ URL::asset('/uploads/baiviet/'.$item->photo1)}}"/></a>
                         <div class="right-item">
                             <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><span class="sp-title">@if(isset($item->tieu_de)) {{$item->tieu_de}} @endif</span></a>
-                            <span>@if(isset($item->thongso['thongso_65'])) {{$item->thongso['thongso_65']}} @endif VNĐ</span>
+                            <span><?php if( isset($item->thongso['thongso_65'])) echo number_format(str_replace(".","",$item->thongso['thongso_65']),0,",","."); ?> VNĐ</span>
                             <span>@if(isset($item->thongso['thongso_62'])) {{$item->thongso['thongso_62']}} @endif</span>
                         </div>
                     </div>
