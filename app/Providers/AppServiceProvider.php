@@ -267,10 +267,10 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        if (self::isMobile()) {
+        /*if (self::isMobile()) {
             header('Location: http://m.vietnamoto.net/');
             exit;
-        }
+        }*/
 
         view()->composer('Layouts.frontend', function ($view)
         {

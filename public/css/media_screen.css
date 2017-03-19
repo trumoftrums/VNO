@@ -133,3 +133,130 @@
         width: 48.5%;
     }
 }
+@media (max-width: 980px) {
+    .first-col , .last-col{
+        display: none;
+    }
+    .header .center-content-col {
+        width: 100%;
+    }
+    .click-menu-branch{
+        display: none;
+    }
+    .header{
+        width: 99%;
+    }
+    .header-mobile{
+        display: block;
+    }
+    .menu-header-mobile{
+        float: left;
+        margin-top: 23px;
+        margin-left: 4px;
+    }
+    .header-mobile .logo-mobile{
+        text-align: center;
+        padding-top: 5px;
+        width: 90%;
+    }
+    .header-mobile .logo-mobile a img{
+        height: 70px;
+    }
+    .menu-header-mobile .dropdown .dropdown-menu{
+        left: 0px;
+    }
+    .menu-header-mobile .dropdown .icon-menu img{
+        height: 25px;
+    }
+    .post-free-mobile{
+        display: block;
+        float: left;
+        width: 100%;
+    }
+    .header .bt-reg-free{
+        background: url(../images/bg-bt-reg-free.png);
+        padding: 10px 20px;
+        border-radius: 5px;
+        float: left;
+        text-align: center;
+        color: #fff;
+        text-decoration: none;
+        width: 100%;
+        font-size: 16px;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+    .header .center-content-col .filter .form-filter {
+        height: auto;
+    }
+    .list-services-mobile{
+        float: left;
+        width: 100%;
+    }
+    .list-services-mobile .item-service{
+        float: left;
+        width: 25%;
+        padding: 8px;
+    }
+    .list-services-mobile .item-service a img{
+        float: left;
+        width: 100%;
+        border-radius: 10px;
+    }
+    .header .center-content-col .filter .form-filter input{
+        width: 100%;
+        border-right:none;
+        border-radius: 6px;
+        height: 40px;
+    }
+    .header .center-content-col .filter .form-filter select{
+        width: 100%;
+        border-right:none;
+        border-radius: 6px;
+        height: 40px;
+    }
+    .header .center-content-col .filter .form-filter-2 {
+        width: 100%;
+    }
+    .header .center-content-col .filter .form-filter-2 select {
+        width: 100%;
+        border-right:none;
+        border-radius: 6px;
+    }
+    .header .center-content-col .filter .form-filter {
+        margin-bottom: 0px;
+        background:none;
+    }
+    .inp-filter {
+        background: url(../images/icon-arrow-filter.png) #0c834a 98% / 9px no-repeat !important;
+    }
+    .header .center-content-col .filter .bt-submit-filter {
+        width: 50%;
+        margin-left: 25%;
+        float: left;
+        margin-bottom: 10px;
+        margin-top: 5px;
+    }
+    .header .center-content-col .filter {
+        border-bottom: 2px dotted #0c834a;
+        margin-bottom: 10px;
+    }
+    .img-header-news-page {
+        width: 100% !important;
+    }
+    .item-support-page {
+        margin-left: 0px;
+        height: 71px;
+        width: 100%;
+    }
+    .item-support-page img {
+        width: 70px;
+        height: 70px;
+    }
+    .item-support-page .cover-info-support {
+        width: 75%;
+    }
+    .item-support-page .cover-info-support p, .item-support-page .cover-info-support .p-phone, .item-support-page .cover-info-support h4 {
+        font-size: 11px;
+    }
+}

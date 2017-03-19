@@ -3,6 +3,7 @@
 <head>
     <title>Vietnam Oto</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
     <link href="{{ URL::asset('images/logo.png') }}" rel="shortcut icon" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
@@ -158,6 +159,28 @@
             </div>
         </div>
         <div class="center-content-col">
+            <div class="header-mobile">
+                <div class="menu-header-mobile">
+                    <div class="dropdown">
+                            <span class="icon-menu" data-toggle="dropdown">
+                                <img src="{{ URL::asset('images/icon-menu-mobile.png') }}"/>
+                            </span>
+                        <ul class="dropdown-menu">
+                            <span class="close-menu"> <img src="{{ URL::asset('images/icon-close-menu.png') }}"/> </span>
+                            <li><a href="{{ URL::to('') }}">Trang Chủ</a></li>
+                            <li><a href="{{ URL::to('vip-salon/all') }}">Showroom toàn quốc</a></li>
+                            <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Sửa xe toàn quốc</a></li>
+                            <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Cứu hộ toàn quốc</a></li>
+                            <li><a href="{{ URL::to('bai-giu-xe/all') }}">Bãi giữ xe toàn quốc</a></li>
+                            <li><a href="{{ URL::to('/tin-tuc') }}">Tin tức về xe</a></li>
+                            <li><a href="{{ URL::to('dich-vu-huong-dan') }}">Dịch vụ & Hướng dẫn</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="logo-mobile">
+                    <a href="{{ URL::to('') }}"><img class="logo-vno" src="{{ URL::asset('images/logo.png')}}"/></a>
+                </div>
+            </div>
             <div class="filter">
                 <form action="/" method="post" name="searchform" id="searchform" >
                     <div class="form-filter">
@@ -250,6 +273,37 @@
                     </div>
                     <input class="bt-submit-filter" type="submit" value=" ">
                 </form>
+            </div>
+            <div class="post-free-mobile">
+                <a class="bt-reg-free"
+                   @if(\Illuminate\Support\Facades\Auth::check())
+                   href="{{ URL::to('/dang-tin-free') }}"
+                   @else
+                   data-toggle="modal" ng-click="clickOpenModalLog()" data-target="#myModalLog"
+                        @endif
+                >Đăng tin miễn phí</a>
+                <div class="list-services-mobile">
+                    <div class="item-service">
+                        <a href="{{ URL::to('vip-salon/all') }}">
+                            <img class="icon-service" src="{{ URL::asset('images/icon-ser01-mobile.png')}}"/>
+                        </a>
+                    </div>
+                    <div class="item-service">
+                        <a href="{{ URL::to('do-xe-uy-tin/all') }}">
+                            <img class="icon-service" src="{{ URL::asset('images/icon-ser02-mobile.png')}}"/>
+                        </a>
+                    </div>
+                    <div class="item-service">
+                        <a href="{{ URL::to('thong-tin-cuu-ho/all') }}">
+                            <img class="icon-service" src="{{ URL::asset('images/icon-ser03-mobile.png')}}"/>
+                        </a>
+                    </div>
+                    <div class="item-service">
+                        <a href="{{ URL::to('bai-giu-xe/all') }}">
+                            <img class="icon-service" src="{{ URL::asset('images/icon-ser05-mobile.png')}}"/>
+                        </a>
+                    </div>
+                </div>
             </div>
             @yield('content')
         </div>
