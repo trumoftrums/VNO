@@ -15,6 +15,7 @@
     <script src="{{ URL::asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('js/jquery.simplyscroll.min.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('js/angular.min.js') }}"></script>
+    <script src="{{ URL::asset('js/jquery.marquee.js') }}"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -179,6 +180,7 @@
                 </div>
                 <div class="logo-mobile">
                     <a href="{{ URL::to('') }}"><img class="logo-vno" src="{{ URL::asset('images/logo.png')}}"/></a>
+                    <img class="toggle-form-search" src="{{ URL::asset('images/icon-search-mobile.png')}}"/>
                 </div>
             </div>
             <div class="filter">
@@ -274,6 +276,37 @@
                     <input class="bt-submit-filter" type="submit" value=" ">
                 </form>
             </div>
+            <div class="slide-show-mobile">
+                <div class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <a target="_blank" href="http://www.bmw.vn/vi/all-models/3-series/gran_turismo/2013/start.html">
+                                <img class="img-slide" src="{{ URL::asset('images/slides/BMW-Series-3-sedan.png')}}"/>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a target="_blank" href="https://hondaoto.com.vn/hondaaccord">
+                                <img class="img-slide" src="{{ URL::asset('images/slides/Accord.png')}}"/>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a target="_blank" href="http://mazdamotors.vn/san-pham/3/Mazda6.aspx">
+                                <img class="img-slide" src="{{ URL::asset('images/slides/Mazda-6.png')}}"/>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a target="_blank" href="http://www.chevrolet.com.vn/cars/trax/model-overview.html">
+                                <img class="img-slide" src="{{ URL::asset('images/slides/Chevrolet-Trax-2017.png')}}"/>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a target="_blank" href="http://www.mitsubishi-motors.com.vn/all-new-pajero-sport">
+                                <img class="img-slide" src="{{ URL::asset('images/slides/Pajero-Sport.png')}}"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="post-free-mobile">
                 <a class="bt-reg-free"
                    @if(\Illuminate\Support\Facades\Auth::check())
@@ -358,6 +391,24 @@
                     @endfor
                 </ul>
             </div>
+        </div>
+    </div>
+    <div class="footer-mobile">
+        <a class="top-page" href="#top">TOP PAGE <img src="{{ URL::asset('images/icon-top-page.png')}}"/></a>
+        <ul>
+            <li><a href="{{ URL::to('') }}">Trang chủ</a> </li>
+            <li><a href="{{ URL::to('vip-salon/all') }}">Showroom toàn quốc</a> </li>
+            <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Sửa xe toàn quốc</a> </li>
+            <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Cứu hộ toàn quốc</a> </li>
+            <li><a href="{{ URL::to('bai-giu-xe/all') }}">Bãi giữ xe toàn quốc</a> </li>
+            <li><a href="{{ URL::to('tin-tuc') }}">Tin tức về xe</a> </li>
+            <li><a href="{{ URL::to('dich-vu-huong-dan') }}">Dịch vụ & Hướng dẫn</a> </li>
+        </ul>
+        <div class="info">
+            <p>Vietnamoto.net - Bản quyền @ 2017 HoangSanggroup</p>
+            <span>02 Phạm Văn Đồng, P. Linh Đông, Q. Thủ Đức, Tp.HCM</span>
+            <span>Hotline: 089 815 4544</span>
+            <span>Email: customerservice@vietnamoto.net</span>
         </div>
     </div>
     <div class="footer">
@@ -703,6 +754,14 @@
             manualMode: 'loop',
             frameRate: 20,
             speed: 1
+        });
+        $(".toggle-form-search").click(function(){
+            $(".filter").toggle('slow');
+        });
+
+        $("a[href='#top']").click(function() {
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+            return false;
         });
         $('#filter-city-support').on('change', function() {
             window.location = '/thong-tin-cuu-ho/'+this.value;

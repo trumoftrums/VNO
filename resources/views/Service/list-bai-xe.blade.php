@@ -4,8 +4,14 @@
         background: none !important;
     }
     .img-header-news-page {
-        width: 350px !important;
+        width: 350px;
     }
+    @media (max-width: 980px){
+        .img-header-news-page {
+            width: 65% !important;
+        }
+    }
+
 </style>
 @section('content')
     <div class="news-page">

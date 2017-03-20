@@ -1,5 +1,11 @@
 @extends('Layouts.frontend')
-
+<style>
+    @media (max-width: 980px) {
+        .slide-show-mobile {
+            display: block !important;
+        }
+    }
+</style>
 @section('content')
     <div class="slide-top">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">

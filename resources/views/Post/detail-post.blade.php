@@ -163,7 +163,7 @@
                 <p class="phone">@if(isset($detailPost->thongso['thongso_63'])) {{$detailPost->thongso['thongso_63']}} @endif</p>
             </div>
             <div class="info-post-detail">
-                <div class="left">
+                <div class="left guide-pc">
                     <p class="p-title-area">MÔ TẢ CƠ BẢN</p>
                     <ul>
                         <li>
@@ -211,6 +211,70 @@
                             <div>
                                 <span><img src="{{ URL::asset('images/icon-detail-post/tieu-thu.png')}}"/><b>Tiêu thụ:</b> @if(isset($detailPost->thongso['thongso_35'])) {{$detailPost->thongso['thongso_35']}} @endif</span>
                             </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/so-ghe.png')}}"/><b>Số ghế:</b> @if(isset($detailPost->thongso['thongso_30'])) {{$detailPost->thongso['thongso_30']}} @endif</span>
+                            </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/so-cua.png')}}"/><b>Số cửa:</b> @if(isset($detailPost->thongso['thongso_29'])) {{$detailPost->thongso['thongso_29']}} @endif</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span><img src="{{ URL::asset('images/icon-detail-post/dan-dong.png')}}"/><b>Dẫn động:</b> @if(isset($detailPost->thongso['thongso_33'])) {{$detailPost->thongso['thongso_33']}} @endif</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="left guide-mobile">
+                    <p class="p-title-area">MÔ TẢ CƠ BẢN</p>
+                    <ul>
+                        <li>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/car.png')}}"/><b>Dáng xe:</b> @if(isset($detailPost->thongso['thongso_25'])) {{$detailPost->thongso['thongso_25']}} @endif</span>
+                            </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/city.png')}}"/><b>Tỉnh thành:</b> @if(isset($detailPost->thongso['thongso_62'])) {{$detailPost->thongso['thongso_62']}} @endif</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/info.png')}}"/><b>Tình trạng:</b>
+                                    @if(isset($detailPost->thongso['thongso_24']))
+                                        @if($detailPost->thongso['thongso_24'] == 'Đã sử dụng')
+                                            Đ.sử dụng
+                                        @else
+                                            {{$detailPost->thongso['thongso_24']}}
+                                        @endif
+                                    @endif
+                                </span>
+                            </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/calendar.png')}}"/><b>Năm SX:</b> @if(isset($detailPost->thongso['thongso_22'])) {{$detailPost->thongso['thongso_22']}} @endif</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/location.png')}}"/><b>Xuất xứ:</b> @if(isset($detailPost->thongso['thongso_70'])) {{$detailPost->thongso['thongso_70']}} @endif</span>
+                            </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/km.png')}}"/><b>KM đã đi:</b> @if(isset($detailPost->thongso['thongso_26'])) {{$detailPost->thongso['thongso_26']}} @endif km</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/gearbox.png')}}"/><b>Hộp số:</b> @if(isset($detailPost->thongso['thongso_34'])) {{$detailPost->thongso['thongso_34']}} @endif</span>
+                            </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/oils.png')}}"/><b>Nhiên liệu:</b> @if(isset($detailPost->thongso['thongso_32'])) {{$detailPost->thongso['thongso_32']}} @endif</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/color.png')}}"/><b>Màu sắc:</b> @if(isset($detailPost->thongso['thongso_27'])) {{$detailPost->thongso['thongso_27']}} @endif</span>
+                            </div>
+                            <div>
+                                <span><img src="{{ URL::asset('images/icon-detail-post/tieu-thu.png')}}"/><b>Tiêu thụ:</b> @if(isset($detailPost->thongso['thongso_35'])) {{$detailPost->thongso['thongso_35']}} @endif</span>
+                            </div>
+                        </li>
+                        <li>
                             <div>
                                 <span><img src="{{ URL::asset('images/icon-detail-post/so-ghe.png')}}"/><b>Số ghế:</b> @if(isset($detailPost->thongso['thongso_30'])) {{$detailPost->thongso['thongso_30']}} @endif</span>
                             </div>

@@ -4,7 +4,12 @@
         background: none !important;
     }
     .img-header-news-page {
-        width: 380px !important;
+        width: 380px;
+    }
+    @media (max-width: 980px){
+        .img-header-news-page {
+            width: 80% !important;
+        }
     }
 </style>
 @section('content')

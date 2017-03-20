@@ -4,7 +4,7 @@
         background: none !important;
     }
     .img-header-news-page {
-        width: 500px !important;
+        width: 500px;
     }
 </style>
 @section('content')

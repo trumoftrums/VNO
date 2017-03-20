@@ -3,6 +3,11 @@
     .container-fluid{
         background: none !important;
     }
+    @media (max-width: 980px){
+        .img-header-news-page {
+            width: 60% !important;
+        }
+    }
 </style>
 @section('content')
     <div class="news-page">

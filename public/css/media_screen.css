@@ -157,7 +157,13 @@
     .header-mobile .logo-mobile{
         text-align: center;
         padding-top: 5px;
-        width: 90%;
+        width: 100%;
+    }
+    .header-mobile .logo-mobile .toggle-form-search{
+        float: right;
+        width: 35px;
+        margin-top: 18px;
+        margin-right: 7px;
     }
     .header-mobile .logo-mobile a img{
         height: 70px;
@@ -172,6 +178,7 @@
         display: block;
         float: left;
         width: 100%;
+        margin-top: 5px;
     }
     .header .bt-reg-free{
         background: url(../images/bg-bt-reg-free.png);
@@ -207,13 +214,13 @@
         width: 100%;
         border-right:none;
         border-radius: 6px;
-        height: 40px;
+        height: 38px;
     }
     .header .center-content-col .filter .form-filter select{
         width: 100%;
         border-right:none;
         border-radius: 6px;
-        height: 40px;
+        height: 38px;
     }
     .header .center-content-col .filter .form-filter-2 {
         width: 100%;
@@ -242,7 +249,7 @@
         margin-bottom: 10px;
     }
     .img-header-news-page {
-        width: 100% !important;
+        width: 100%;
     }
     .item-support-page {
         margin-left: 0px;
@@ -258,5 +265,168 @@
     }
     .item-support-page .cover-info-support p, .item-support-page .cover-info-support .p-phone, .item-support-page .cover-info-support h4 {
         font-size: 11px;
+    }
+    .modal-dialog {
+        width: 95%;
+    }
+    .footer-mobile{
+        display: block;
+        float: left;
+        width: 100%;
+    }
+    .footer{
+        display: none;
+    }
+    .footer-mobile .top-page{
+        background: #0c834a;
+        width: 100%;
+        float: left;
+        text-align: center;
+        color: #fff;
+        height: 35px;
+        line-height: 38px;
+    }
+    .footer-mobile .top-page img{
+        width: 16px;
+        margin-top: -4px;
+    }
+    .footer-mobile ul{
+        list-style: none;
+        padding: 0px;
+        background: #d2d2d2;
+        float: left;
+        margin-bottom: 0px;
+    }
+    .footer-mobile ul li{
+        float: left;
+        width: 100%;
+        border-top: 1px solid #999;
+    }
+    .footer-mobile ul li a{
+        color: #242424;
+        padding: 8px;
+        float: left;
+    }
+    .footer-mobile .info{
+        float: left;
+        background: #0c834a;
+        text-align: center;
+    }
+    .footer-mobile .info p{
+        color: #fff000;
+        margin: 8px 0px 0px 0px;
+    }
+    .footer-mobile .info span{
+        color: #fff;
+        width: 100%;
+        font-size: 13px;
+        float: left;
+    }
+    .header .center-content-col .list-items .item .inner-item {
+        width: 100%;
+    }
+    .header .center-content-col .list-items .item {
+        width: 100%;
+        float: left;
+    }
+    .slide-top, .filter{
+        display: none;
+    }
+    .header .center-content-col .paging p{
+        font-size:14px;
+    }
+    .slide-show-mobile{
+        margin-top: 5px;
+        display: none;
+    }
+    .header .center-content-col .list-items .item .hover-item .cover-zoom {
+        width: 50%;
+        padding-top: 20px;
+    }
+    .address-price-phone .price{
+        width: 100%;
+    }
+    .address-price-phone .address{
+        width: 100%;
+        margin-top: -2px;
+        border-right: none;
+        line-height: 18px;
+    }
+    .address-price-phone{
+        height:auto;
+    }
+    .address-price-phone .phone {
+        margin-top: -10px;
+        margin-bottom: 0px;
+        font-weight:bold;
+    }
+    .cover-tab-free ul li .item-cover-one {
+        width: 100%;
+    }
+    .cover-tab-free ul li label {
+        margin-left: 0px !important;
+    }
+    .cover-tab-free ul li .item-cover-one .free-post-input {
+        width: 60%;
+        margin-top: 5px;
+    }
+    .cover-tab-free ul li .free-post-inp-text {
+        width: 60%;
+        margin-top: 5px;
+    }
+    .cover-tab-free ul li .item-cover-two {
+        width: 100%;
+    }
+    .parent-img-upload {
+        width: 100%;
+    }
+    .div-post-normal ul li .img-cap {
+        width: 28.5%;
+    }
+    .div-post-normal ul li .code {
+        width: 30%;
+    }
+    .div-post-normal ul li label {
+        width: 30%;
+    }
+    .div-post-normal ul li .inp-price {
+        width: 60%;
+    }
+    .common-info .cover-div-first .div-one, .common-info .cover-div-first .div-two, .common-info .cover-div-first .div-three {
+        width: 100%;
+    }
+    .common-info .cover-div-first .calendar-inp {
+        margin-bottom: 5px;
+        width: 60%;
+    }
+    .common-info .cover-div-first .cover-radio {
+        float: left;
+        margin-left: 10%;
+    }
+    .guide-mobile ul li div{
+        width: 50% !important;
+    }
+    .guide-mobile{
+        display: block;
+    }
+    .info-post-detail .guide-pc{
+        display: none;
+    }
+    .info-post-detail .right .price {
+        font-size: 18px;
+    }
+    .info-post-detail .right .price img {
+        width: 25px;
+        top: 14%;
+        left: 43%;
+    }
+    .post-relate-type .item-relate-post {
+        width: 98%;
+    }
+    .item-news-page .cover-info-item-news .summary-news-page, .item-news-page .cover-info-item-news .p-post-by{
+        margin-left: 0px;
+    }
+    .pagination>li>a, .pagination>li>span {
+        padding: 2px 7px;
     }
 }
