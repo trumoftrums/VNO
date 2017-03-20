@@ -25,6 +25,7 @@ use Validator;
 class HomeController extends Controller {
 
     const POST_PER_PAGE = 18;
+    const NEWS_PER_PAGE = 10;
     public function __construct()
     {
 
@@ -380,7 +381,7 @@ class HomeController extends Controller {
             ->leftJoin('md_users', 'md_users.id', '=', 'op_news.userid')
             ->OrderBy('op_news.id','desc')
             ->select('op_news.*', 'md_users.username')
-            ->paginate(self::POST_PER_PAGE);
+            ->paginate(self::NEWS_PER_PAGE);
         return View('News.list-news', [
             'listNews' => $res
         ]);

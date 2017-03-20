@@ -338,7 +338,9 @@
                     </div>
                 </div>
             </div>
-            @yield('content')
+            <div class="cal-height" style="float: left;">
+                @yield('content')
+            </div>
         </div>
         <div class="last-col">
             <div class="avatar">
@@ -380,6 +382,7 @@
                 <h3 class="title-list-news"><img src="{{ URL::asset('images/icon-news.png')}}" />TIN TỨC MỚI CẬP NHẬT</h3>
                 <div id="scroller">
                     <ul>
+                        @for($i=0;$i<2;$i++)
                         @foreach($listNewsHome as $val)
                             <li class="item-news">
                                 <a href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}"><img src="{{ URL::asset($val->image)}}"/></a>
@@ -388,6 +391,7 @@
                                 <a class="bt-detail-news" href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}">Chi tiết<small> >> </small></a>
                             </li>
                         @endforeach
+                        @endfor
                     </ul>
                 </div>
             </div>
@@ -749,25 +753,18 @@
         linear: true,
         step: 1,
         delay: 0,
-        speed: 100,
+        speed:50,
         infiniteLoop: true,
     });
-    $( window ).resize(function() {
+    $(window).on('resize', function(){
         setHeightDiv();
     });
     setHeightDiv();
     function setHeightDiv(){
-        var h = ($(".center-content-col").height());
-        var h_first_col = ($(".first-col").height());
-        var h_standard = h;
-        if (h_first_col > h) {
-            h_standard = h_first_col;
-        }
+        var h = ($(".cal-height").height());
         var h2 = ($(".list-services").height());
-        var h3 = ($(".avatar").height());
         var h4 = ($(".title-list-news").height());
-
-        $(".list-news #scroller").css({'height': (h_standard - h2 - h3 - h4 - 50) + 'px'});
+        $(".list-news #scroller").css({'height': (h - h2 - h4 - 10) + 'px'});
     }
     $(window).on("load", function() {
         $(".toggle-form-search").click(function(){

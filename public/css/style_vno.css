@@ -595,7 +595,7 @@
     overflow: hidden;
 }
 .header .last-col .list-news #scroller ul{
-    height: 1000px;
+    height: 2000px;
     padding: 0px;
     list-style: none;
 }
