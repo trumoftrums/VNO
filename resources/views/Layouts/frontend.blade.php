@@ -15,7 +15,7 @@
     <script src="{{ URL::asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('js/jquery.simplyscroll.min.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('js/angular.min.js') }}"></script>
-    <script src="{{ URL::asset('js/jquery.marquee.js') }}"></script>
+    <script src="{{ URL::asset('js/jquery.scrollbox.js') }}"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -378,18 +378,18 @@
             </div>
             <div class="list-news">
                 <h3 class="title-list-news"><img src="{{ URL::asset('images/icon-news.png')}}" />TIN TỨC MỚI CẬP NHẬT</h3>
-                <ul id="scroller">
-                    @for($i=0;$i<2;$i++)
-                    @foreach($listNewsHome as $val)
-                    <li class="item-news">
-                        <a href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}"><img src="{{ URL::asset($val->image)}}"/></a>
-                        <span>{{date_format(date_create($val->created_date), 'd/m/Y H:i a')}}</span>
-                        <a class="title-item-news" href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}">{{$val->title}}</a>
-                        <a class="bt-detail-news" href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}">Chi tiết<small> >> </small></a>
-                    </li>
-                    @endforeach
-                    @endfor
-                </ul>
+                <div id="scroller">
+                    <ul>
+                        @foreach($listNewsHome as $val)
+                            <li class="item-news">
+                                <a href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}"><img src="{{ URL::asset($val->image)}}"/></a>
+                                <span>{{date_format(date_create($val->created_date), 'd/m/Y H:i a')}}</span>
+                                <a class="title-item-news" href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}">{{$val->title}}</a>
+                                <a class="bt-detail-news" href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}">Chi tiết<small> >> </small></a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -745,20 +745,34 @@
             e.preventDefault();
         }
     });
+    $('#scroller').scrollbox({
+        linear: true,
+        step: 1,
+        delay: 0,
+        speed: 100,
+        infiniteLoop: true,
+    });
+    $( window ).resize(function() {
+        setHeightDiv();
+    });
+    setHeightDiv();
+    function setHeightDiv(){
+        var h = ($(".center-content-col").height());
+        var h_first_col = ($(".first-col").height());
+        var h_standard = h;
+        if (h_first_col > h) {
+            h_standard = h_first_col;
+        }
+        var h2 = ($(".list-services").height());
+        var h3 = ($(".avatar").height());
+        var h4 = ($(".title-list-news").height());
+
+        $(".list-news #scroller").css({'height': (h_standard - h2 - h3 - h4 - 50) + 'px'});
+    }
     $(window).on("load", function() {
-        $("#scroller").simplyScroll({
-            customClass: 'vert',
-            orientation: 'vertical',
-            auto: true,
-            autoMode: 'loop',
-            manualMode: 'loop',
-            frameRate: 20,
-            speed: 1
-        });
         $(".toggle-form-search").click(function(){
             $(".filter").toggle('slow');
         });
-
         $("a[href='#top']").click(function() {
             $("html, body").animate({ scrollTop: 0 }, "slow");
             return false;
@@ -804,20 +818,6 @@
             });
             return false;
         });
-
-        var h = ($(".center-content-col").height());
-        var h_first_col = ($(".first-col").height());
-        var h_standard = h;
-        if (h_first_col > h) {
-            h_standard = h_first_col;
-        }
-        var h2 = ($(".list-services").height());
-        var h3 = ($(".avatar").height());
-        var h4 = ($(".title-list-news").height());
-
-        $(".vert").css({'height': (h_standard - h2 - h3 - h4 - 70) + 'px'});
-        $(".list-news .simply-scroll-clip").css({'height': (h_standard - h2 - h3 - h4 - 50) + 'px'});
-        $(".first-col ,.header , .last-col").css({'height': (h_standard + 10) + 'px'});
     });
     $("#filter_hang_xe").change(function() {
         var vl = $("#filter_hang_xe").val();

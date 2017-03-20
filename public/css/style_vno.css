@@ -11,6 +11,7 @@
     float: left;
     width:100%;
     height:auto;
+    display: flex;
 }
 .header .first-col{
     width: 22%;
@@ -588,6 +589,15 @@
     float: left;
     width: 100%;
     padding: 0px 5px;
+}
+.header .last-col .list-news #scroller{
+    height: 100%;
+    overflow: hidden;
+}
+.header .last-col .list-news #scroller ul{
+    height: 1000px;
+    padding: 0px;
+    list-style: none;
 }
 .header .last-col .list-news .title-list-news{
     color: #056839;
