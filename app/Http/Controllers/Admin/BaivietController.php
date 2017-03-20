@@ -448,9 +448,16 @@ class BaivietController extends Controller {
                 $path = "uploads/baiviet/";
                 if(move_uploaded_file($_FILES["file"]["tmp_name"], $path.$k)){
                     chmod($path.$k, 0666);
+
                     $result['result'] = true;
                     $pathFinal = HomeController::createWatermark('./'.$path.$k);
                     $result['url'] = $pathFinal.'?'.filemtime($pathFinal);
+                    $rtb = $this->makeThumbnails($path,$k);
+                    if($rtb === false){
+                        //retry create thumbnail
+                        $rtb = $this->makeThumbnails($path,$k);
+                    }
+
                 }else{
                     $result['mess'] = 'Upload failed!';
                 }
@@ -468,6 +475,54 @@ class BaivietController extends Controller {
             ]);
 
 
+    }
+    private $THUMB_FOLDER = "thumb";
+    private function makeThumbnails($updir, $img, $width=414,$height=282)
+    {
+        if(!empty($img) && !empty($updir)){
+            if(!file_exists("$updir" . "$this->THUMB_FOLDER/")){
+                mkdir("$updir" . "$this->THUMB_FOLDER", 0777);
+            }
+            if(!file_exists("$updir" . "$this->THUMB_FOLDER" . "$img")){
+
+                $arr_image_details = getimagesize("$updir" . "$img");
+//                var_dump($arr_image_details);exit();
+                $original_width = $arr_image_details[0];
+                $original_height = $arr_image_details[1];
+                if ($original_width > $original_height) {
+                    $new_width = $width;
+                    $new_height = intval($original_height * $new_width / $original_width);
+                } else {
+                    $new_height = $height;
+                    $new_width = intval($original_width * $new_height / $original_height);
+                }
+                $dest_x = intval(($width - $new_width) / 2);
+                $dest_y = intval(($height - $new_height) / 2);
+                if ($arr_image_details[2] == IMAGETYPE_GIF) {
+                    $imgt = "ImageGIF";
+                    $imgcreatefrom = "ImageCreateFromGIF";
+                }
+                if ($arr_image_details[2] == IMAGETYPE_JPEG) {
+                    $imgt = "ImageJPEG";
+                    $imgcreatefrom = "ImageCreateFromJPEG";
+                }
+                if ($arr_image_details[2] == IMAGETYPE_PNG) {
+                    $imgt = "ImagePNG";
+                    $imgcreatefrom = "ImageCreateFromPNG";
+                }
+                if ($imgt) {
+                    $old_image = $imgcreatefrom("$updir" . "$img");
+                    $new_image = imagecreatetruecolor($width, $height);
+                    imagecopyresized($new_image, $old_image, $dest_x, $dest_y, 0, 0, $new_width, $new_height, $original_width, $original_height);
+                    $imgt($new_image, "$updir" . "$this->THUMB_FOLDER/" . "$img");
+                    return  "$updir" . "$this->THUMB_FOLDER/" . "$img";
+                }
+            }
+
+
+        }
+
+        return false;
     }
     private function get_thongso_init(){
         $list_thongso = Thongso::where('status',1)->get()->toArray();

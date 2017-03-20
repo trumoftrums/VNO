@@ -354,7 +354,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
     private $SKIP_LOG =array(".js",".png",".gif",".jpg",".css",".map");
     private function saveLog(){
