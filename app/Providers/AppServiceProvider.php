@@ -282,7 +282,7 @@ class AppServiceProvider extends ServiceProvider
 
             $listNewsHome = News::where('status', News::STATUS_ACTIVE)
                 ->orderBy('id', 'desc')
-                ->limit(10)
+                ->limit(20)
                 ->get();
             $totalPost = 0;
             $user = [];
