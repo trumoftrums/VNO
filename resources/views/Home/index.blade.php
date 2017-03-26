@@ -4,6 +4,9 @@
         .slide-show-mobile {
             display: block !important;
         }
+        .post-free-mobile{
+            margin-top: 5px !important;
+        }
     }
 </style>
 @section('content')

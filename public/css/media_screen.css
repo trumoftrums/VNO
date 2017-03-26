@@ -139,6 +139,8 @@
     }
     .header .center-content-col {
         width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
     }
     .click-menu-branch{
         display: none;
@@ -148,6 +150,10 @@
     }
     .header-mobile{
         display: block;
+        position: fixed;
+        z-index: 1;
+        background: #efefef;
+        width: 100%;
     }
     .menu-header-mobile{
         float: left;
@@ -166,7 +172,8 @@
         margin-right: 7px;
     }
     .header-mobile .logo-mobile a img{
-        height: 70px;
+        height: 60px;
+        margin-bottom:5px;
     }
     .menu-header-mobile .dropdown .dropdown-menu{
         left: 0px;
@@ -177,8 +184,8 @@
     .post-free-mobile{
         display: block;
         float: left;
-        width: 100%;
-        margin-top: 5px;
+        width: 101%;
+        margin-top: 75px;
     }
     .header .bt-reg-free{
         background: url(../images/bg-bt-reg-free.png);
@@ -246,8 +253,11 @@
         margin-top: 5px;
     }
     .header .center-content-col .filter {
-        border-bottom: 2px dotted #0c834a;
         margin-bottom: 10px;
+        position: fixed;
+        z-index: 1;
+        background: #efefef;
+        margin-top: 68px;
     }
     .img-header-news-page {
         width: 100%;
@@ -335,12 +345,17 @@
     .slide-top, .filter{
         display: none;
     }
+    .header .center-content-col .paging{
+        width: 101%;
+    }
     .header .center-content-col .paging p{
         font-size:14px;
     }
     .slide-show-mobile{
-        margin-top: 5px;
+        margin-top: 75px;
         display: none;
+        float: left;
+        width: 101%;
     }
     .header .center-content-col .list-items .item .hover-item .cover-zoom {
         width: 50%;

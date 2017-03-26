@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/jquery.simplyscroll.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/style_vno.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/media_screen.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/style_vno.css') }}?ver=1.1">
+    <link rel="stylesheet" href="{{ URL::asset('css/media_screen.css') }}?ver=1.1">
     <link rel="stylesheet" href="{{ URL::asset('css/jquery-ui.css') }}">
     <script src="{{ URL::asset('js/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
@@ -281,27 +281,27 @@
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
                             <a target="_blank" href="http://www.bmw.vn/vi/all-models/3-series/gran_turismo/2013/start.html">
-                                <img class="img-slide" src="{{ URL::asset('images/slides/BMW-Series-3-sedan.png')}}"/>
+                                <img class="img-slide" src="{{ URL::asset('images/slides/ipad/BMW-Series-3-sedan.jpg')}}"/>
                             </a>
                         </div>
                         <div class="item">
                             <a target="_blank" href="https://hondaoto.com.vn/hondaaccord">
-                                <img class="img-slide" src="{{ URL::asset('images/slides/Accord.png')}}"/>
+                                <img class="img-slide" src="{{ URL::asset('images/slides/ipad/Accord.jpg')}}"/>
                             </a>
                         </div>
                         <div class="item">
                             <a target="_blank" href="http://mazdamotors.vn/san-pham/3/Mazda6.aspx">
-                                <img class="img-slide" src="{{ URL::asset('images/slides/Mazda-6.png')}}"/>
+                                <img class="img-slide" src="{{ URL::asset('images/slides/ipad/Mazda-6.jpg')}}"/>
                             </a>
                         </div>
                         <div class="item">
                             <a target="_blank" href="http://www.chevrolet.com.vn/cars/trax/model-overview.html">
-                                <img class="img-slide" src="{{ URL::asset('images/slides/Chevrolet-Trax-2017.png')}}"/>
+                                <img class="img-slide" src="{{ URL::asset('images/slides/ipad/Chevrolet-Trax-2017.jpg')}}"/>
                             </a>
                         </div>
                         <div class="item">
                             <a target="_blank" href="http://www.mitsubishi-motors.com.vn/all-new-pajero-sport">
-                                <img class="img-slide" src="{{ URL::asset('images/slides/Pajero-Sport.png')}}"/>
+                                <img class="img-slide" src="{{ URL::asset('images/slides/ipad/Pajero-Sport.jpg')}}"/>
                             </a>
                         </div>
                     </div>
@@ -383,14 +383,19 @@
                 <div id="scroller">
                     <ul>
                         @for($i=0;$i<2;$i++)
-                        @foreach($listNewsHome as $val)
-                            <li class="item-news">
-                                <a href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}"><img src="{{ URL::asset($val->image)}}"/></a>
-                                <span>{{date_format(date_create($val->created_date), 'd/m/Y H:i a')}}</span>
-                                <a class="title-item-news" href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}">{{$val->title}}</a>
-                                <a class="bt-detail-news" href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}">Chi tiết<small> >> </small></a>
-                            </li>
-                        @endforeach
+                            @foreach($listNewsHome as $val)
+                                <li class="item-news">
+                                    <a href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}"><img
+                                                src="{{ URL::asset($val->image)}}"/></a>
+                                    <span>{{date_format(date_create($val->created_date), 'd/m/Y H:i a')}}</span>
+                                    <a class="title-item-news"
+                                       href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}">{{$val->title}}</a>
+                                    <a class="bt-detail-news"
+                                       href="{{ URL::to('tin-tuc/'.$val->id.'/'.str_slug($val->title, '-')) }}">Chi tiết
+                                        <small> >></small>
+                                    </a>
+                                </li>
+                            @endforeach
                         @endfor
                     </ul>
                 </div>
@@ -409,7 +414,7 @@
             <li><a href="{{ URL::to('dich-vu-huong-dan') }}">Dịch vụ & Hướng dẫn</a> </li>
         </ul>
         <div class="info">
-            <p>Vietnamoto.net - Bản quyền @ 2017 HoangSanggroup</p>
+            <p>Vietnamoto.net - Bản quyền @ 2013 HoangSangGroup</p>
             <span>02 Phạm Văn Đồng, P. Linh Đông, Q. Thủ Đức, Tp.HCM</span>
             <span>Hotline: 089 815 4544</span>
             <span>Email: customerservice@vietnamoto.net</span>
@@ -417,7 +422,7 @@
     </div>
     <div class="footer">
             <div class="info">
-                <p>Vietnamoto.net - Bản quyền @ 2017 Hoàng Sang Group</p>
+                <p>Vietnamoto.net - Bản quyền @ 2013 HoangSangGroup</p>
                 <span>Địa chỉ: 02, Phạm Văn Đồng, P. Linh Đông, Q. Thủ Đức, Tp.HCM</span>
                 <span>Hotline: 089 815 4544 - Email: customerservice@vietnamoto.net</span>
             </div>
