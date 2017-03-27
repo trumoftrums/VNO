@@ -386,6 +386,12 @@ class HomeController extends Controller {
             'listNews' => $res
         ]);
     }
+    public function contact()
+    {
+        return View('Contact.contact', [
+
+        ]);
+    }
     public function newsDetail($id)
     {
         $res = News::where('op_news.id', $id)
