@@ -286,7 +286,7 @@
                                 </div>
                                 <div class="item-cover-two">
                                     <label class="mar-right">Xe này có thể vay</label>
-                                    <input type="text" class="free-post-inp-text inp-address" name="thongso_73" value="<?php if(isset($baiviet['thongso']['thongso_73'])) echo $baiviet['thongso']['thongso_73']; ?>" placeholder="Nhập số tiền hỗ trợ">
+                                    <input type="text" class="free-post-inp-text inp-address onlynumber autonumber " name="thongso_73" value="<?php if(isset($baiviet['thongso']['thongso_73'])) echo $baiviet['thongso']['thongso_73']; ?>" placeholder="Nhập số tiền hỗ trợ">
                                 </div>
                             </li>
                             <li>
