@@ -7,13 +7,13 @@
     <link href="{{ URL::asset('images/logo.png') }}" rel="shortcut icon" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/jquery.simplyscroll.css') }}">
+    {{--<link rel="stylesheet" href="{{ URL::asset('css/jquery.simplyscroll.css') }}">--}}
     <link rel="stylesheet" href="{{ URL::asset('css/style_vno.css') }}?ver=1.1">
     <link rel="stylesheet" href="{{ URL::asset('css/media_screen.css') }}?ver=1.1">
     <link rel="stylesheet" href="{{ URL::asset('css/jquery-ui.css') }}">
     <script src="{{ URL::asset('js/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ URL::asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
-    <script src="{{ URL::asset('js/jquery.simplyscroll.min.js') }}" type="text/javascript"></script>
+    {{--<script src="{{ URL::asset('js/jquery.simplyscroll.min.js') }}" type="text/javascript"></script>--}}
     <script src="{{ URL::asset('js/angular.min.js') }}"></script>
     <script src="{{ URL::asset('js/jquery.scrollbox.js') }}"></script>
     <script>

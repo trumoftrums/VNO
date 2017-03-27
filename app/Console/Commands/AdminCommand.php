@@ -44,8 +44,8 @@ class AdminCommand extends Command
      */
     public function handle()
     {
-        $path = public_path()."\\uploads\\baiviet\\";
-        $thumnailPath = $path.$this->THUMB_FOLDER."\\";
+        $path = public_path()."/uploads/baiviet/";
+        $thumnailPath = $path.$this->THUMB_FOLDER."/";
         if(is_dir($path)){
 
             $arrFiles = scandir($path);
@@ -72,17 +72,17 @@ class AdminCommand extends Command
     private $THUMB_FOLDER = "thumb";
     private $ADJUST_FOLDER ="adjust";
     private  $THUMB_TYPE = array(
-        'pc'=>array(
-            'folder'=>'pc',
-            'width' =>414,
-            'height'=>282
-        ),
-        'tablet'=>array(
-            'folder'=>'tablet',
-            'width' =>212,
-            'height'=>141
-
-        ),
+//        'pc'=>array(
+//            'folder'=>'pc',
+//            'width' =>414,
+//            'height'=>282
+//        ),
+//        'tablet'=>array(
+//            'folder'=>'tablet',
+//            'width' =>212,
+//            'height'=>141
+//
+//        ),
         'mobile'=>array(
             'folder'=>'m',
             'width' =>142,
@@ -135,7 +135,7 @@ class AdminCommand extends Command
                 }else{
                     $result['img'] = false;
                 }
-
+                imagedestroy($old_image);
                 $old_image = null;
 
                 return $result;
@@ -170,8 +170,9 @@ class AdminCommand extends Command
 //                    imagecopyresampled($new_image, $old_image, $dest_x, $dest_y, 0, 0, $new_width, $new_height, $original_width, $original_height);
                             $imgt = $old_image['imgType'];
                             $imgt($new_image, "$updir" . "$this->THUMB_FOLDER/".$type['folder']."/" . "$img");
+//                            imagegif($new_image, "$updir" . "$this->THUMB_FOLDER/".$type['folder']."/" . "$img");
                         }
-
+                        $old_image = null;
                         $result =  true;
                     }
                     error_reporting($er);
