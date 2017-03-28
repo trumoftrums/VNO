@@ -75,6 +75,8 @@ Route::group(['prefix' => 'admin'], function()
     Route::get('/posts/get_total_news', 'Admin\BaivietController@get_total_news');
     Route::get('/posts/add_bai_viet', 'Admin\BaivietController@add_bai_viet');
     Route::post('/posts/add_bai_viet', 'Admin\BaivietController@add_bai_viet');
+    Route::get('/posts/add_bai_viet/{id_slug}', 'Admin\BaivietController@add_bai_viet');
+    Route::post('/posts/add_bai_viet/{id_slug}', 'Admin\BaivietController@add_bai_viet');
 
 
     Route::get('/users', 'Admin\UsersController@index');
@@ -82,6 +84,7 @@ Route::group(['prefix' => 'admin'], function()
     Route::post('/getuserinfo', 'Admin\UsersController@get_user_info');
     Route::post('/tool/dhtmlxform_photo_user', 'Admin\ToolController@dhtmlxform_photo_user');
     Route::get('/tool/dhtmlxform_photo_user', 'Admin\ToolController@dhtmlxform_photo_user');
+    Route::get('/profile', 'Admin\UsersController@getProfile');
 
 
 

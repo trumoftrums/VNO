@@ -56,7 +56,7 @@ class NewsController extends Controller {
         $content .= '</head>';
 
 
-        $arr_final = News::where('status','<>','DE')->get()->toArray();
+        $arr_final = News::where('status','<>','DE')->orderBy('updated_at', 'desc')->get()->toArray();
         $no =1;
         foreach ($arr_final as $v){
 //            var_dump($v);
@@ -238,7 +238,7 @@ class NewsController extends Controller {
             $r = News::where('id',$bvid)->update(["status"=>"DE"]);
             if($r){
                 $result['result'] = true;
-                $result['mess'] = "Xóa bài viết thành công";
+                $result['mess'] = "Xóa tin thành công";
             }else{
                 $result['mess'] = "Xóa không thành công, vui lòng thử lại!!";
             }

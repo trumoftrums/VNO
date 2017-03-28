@@ -259,5 +259,13 @@ class UsersController extends Controller {
         ]);
 
     }
+    public function getProfile(){
+        $user = [];
+        if(Auth::check()){
+            $user = Auth::user();
 
+        }
+        $datas['user'] = $user;
+        return view('Admin.Users.profile')->with($datas);
+    }
 }

@@ -290,7 +290,7 @@
                 <div class="right">
                     <p class="p-title-area">SỐ TIỀN CÓ THỂ VAY</p>
                     <div class="cover-price-bank">
-                        <p class="price"><img src="{{ URL::asset('images/icon-detail-post/icon-price.png')}}"/><?php if(isset($detailPost->thongso['thongso_73'])&& !empty($detailPost->thongso['thongso_73'])) {echo number_format(str_replace(".","",$detailPost->thongso['thongso_73']),0,",",".");} ?> VND</p>
+                        <p class="price"><img src="{{ URL::asset('images/icon-detail-post/icon-price.png')}}"/><?php if(isset($detailPost->thongso['thongso_73'])&& !empty($detailPost->thongso['thongso_73'])) { if (is_numeric(str_replace(".","",$detailPost->thongso['thongso_73']))){ echo number_format(str_replace(".","",$detailPost->thongso['thongso_73']),0,",",".");}else{ echo $detailPost->thongso['thongso_73'];}} ?> VND</p>
                         <img class="img-bank" src="{{ URL::asset('images/icon-detail-post/img-bank.png')}}"/>
                     </div>
                 </div>

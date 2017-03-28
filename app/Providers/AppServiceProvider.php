@@ -2,18 +2,23 @@
 
 namespace App\Providers;
 
+use App\BaiXe;
 use App\City;
+use App\DesignCar;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Models\Baiviet;
 use App\Models\Hangxe;
 use App\Models\Users;
 use App\News;
+use App\SupportCar;
+use App\VipSalon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Thongso;
 use App\Models\ViewLog;
 use Mockery\CountValidator\Exception;
+use App\Models\Groups;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -91,6 +96,43 @@ class AppServiceProvider extends ServiceProvider
                 'tt_news'=>$ttn
             ]);
         });
+        view()->composer('Admin.Dashboard.index', function ($view)
+        {
+
+            $user = [];
+            if(Auth::check()){
+                $user = Auth::user();
+
+            }
+            $listHangXe =  Hangxe::where('status',1)->get()->toArray();
+            $hangxes = array();
+            if(!empty($listHangXe)){
+                foreach ($listHangXe as $hx){
+                    $hangxes[$hx['id']]=$hx['hang_xe'];
+                }
+            }
+            //list city
+            $listCity =  City::getCity()->toArray();
+            $tt = $this->get_total_baiviet();
+            $ttn = $this->get_total_news();
+            $ttsl = $this->get_total_salons();
+            $ttch = $this->get_total_cuuho();
+            $ttgx = $this->get_total_giuxe();
+            $ttsx = $this->get_total_suaxe();
+            $groups = Groups::where("status","=","Actived")->get()->toArray();
+            $view->with([
+                'user' => $user,
+                'tt_baiviet' => $tt,
+                'tt_news'=>$ttn,
+                'tt_salons'=>$ttsl,
+                'tt_cuuhos'=>$ttch,
+                'tt_giuxes'=>$ttgx,
+                'tt_suaxes'=>$ttsx,
+                'hangxes' =>$hangxes,
+                'listCity'=>$listCity,
+                'groups'=>$groups
+            ]);
+        });
     }
     private  function get_total_baiviet(){
         $tt = Baiviet::where('status','<>','DELETED')->count();
@@ -100,7 +142,22 @@ class AppServiceProvider extends ServiceProvider
         $tt = News::where('status','<>','DE')->count();
         return $tt;
     }
-
+    private  function get_total_salons(){
+        $tt = VipSalon::where('status','<>','DE')->count();
+        return $tt;
+    }
+    private  function get_total_cuuho(){
+        $tt = SupportCar::where('status','<>','DE')->count();
+        return $tt;
+    }
+    private  function get_total_suaxe(){
+        $tt = DesignCar::where('status','<>','DE')->count();
+        return $tt;
+    }
+    private  function get_total_giuxe(){
+        $tt = BaiXe::where('status','<>','DE')->count();
+        return $tt;
+    }
     /**
      * Register any application services.
      *

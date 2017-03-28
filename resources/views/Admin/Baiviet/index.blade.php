@@ -40,6 +40,20 @@
         bottom:0px;
         width:100%;
     }
+    #Divcontent{
+        width: 100%;
+        height: auto;
+        float: left;
+    }
+    #Divpaging{
+        width: 100%;
+        height: 50px;
+        float: left;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+    }
+
 
 </style>
 
@@ -47,7 +61,11 @@
 <link rel="stylesheet" type="text/css" href="../js/dhtmlx5/fonts/font_roboto/roboto.css"/>
 <script src="../js/dhtmlx5/dhtmlx.js"></script>
 @section('content')
-    <div id="layoutObj" class="row  border-bottom white-bg dashboard-header"></div>
+    <div id="layoutObj" class="row  border-bottom white-bg dashboard-header">
+        <div id="Divcontent" ></div>
+        <div id="Divpaging" ></div>
+    </div>
+
     <script>
         var myLayout;
         var myWins = new dhtmlXWindows();
@@ -59,7 +77,7 @@
         });
         function doOnLoad() {
             myLayout = new dhtmlXLayoutObject({
-                parent: "layoutObj",
+                parent: "Divcontent",
                 pattern: "1C",
                 offsets: {          // optional, offsets for fullscreen init
                     top:    0,     // you can specify all four sides
@@ -113,7 +131,8 @@
                             },
                             success: function (data) {
                                 if(data.result){
-                                    add_baiviet(data.data);
+                                    var bv = data.data.id+'-'+data.data.tieu_de.replace(" ","-");
+                                    add_baiviet(bv);
 
                                 }else{
                                     dhtmlx.alert(data.mess);
@@ -176,10 +195,12 @@
 
 
             });
+
             mygrid = myLayout.cells("a").attachGrid();
             mygrid.setImagePath("../js/dhtmlx5/imgs/");
-//            mygrid.enablePaging(true,50,3,"recinfoArea");
+            mygrid.enablePaging(true,50,3,"Divpaging");
 //            mygrid.setPagingSkin("toolbar","dhx_skyblue");
+            mygrid.setPagingSkin("bricks");
             mygrid.enableBlockSelection();
 
             mygrid.init();
@@ -189,16 +210,16 @@
             mygrid.attachEvent("onXLS", function(grid_obj){
                 myLayout.cells("a").progressOn();
             });
-//            var h = mygrid.attachEvent("onPaging",function(){
-//                this.aToolBar.setAlign("right");
-//                this.detachEvent(h);
-//            });
+            var h = mygrid.attachEvent("onPaging",function(){
+                this.aToolBar.setAlign("right");
+                this.detachEvent(h);
+            });
             mygrid.setAwaitedRowHeight(25);
             mygrid.loadXML("getbaiviet");
 
         }
         var baiviet_form_tabbar;
-        function add_baiviet(baiviet) {
+        function add_baiviet_bk(baiviet) {
             {{--var dbc  = "{!! Helper::test('this is how to use autoloading correctly!!') !!}";--}}
             {{--dhtmlx.alert(dbc);--}}
 
@@ -456,6 +477,30 @@
 
 
         }
+        function add_baiviet(baiviet) {
+            var baiviet_thongso;
+            var viewportWidth = $(window).width();
+            var viewportHeight = $(window).height();
+            var wd = 1020;
+            var hg = $("#layoutObj").height()-50;
+            var left = (viewportWidth / 2) - (wd / 2) ;
+            var top = (viewportHeight / 2) - (hg / 2);
+            var win = myWins.createWindow("w_add", left, top, wd, hg);
+            var url = "posts/add_bai_viet";
+            if(baiviet !== null && baiviet !=="undefined"){
+                win.setText("Sửa bài viết ... ");
+                url += "/"+baiviet;
+            }else{
+                win.setText("Đăng bài viết ... ");
+            }
+
+            win.setModal(true);
+            win.button("minmax").disable();
+            win.button("park").disable();
+            win.attachURL(url);
+
+
+        }
         var photo1,photo2,photo3,photo4,photo5;
         $(document ).ready(function() {
 
@@ -470,7 +515,7 @@
         });
         function adjust_size(){
             var pr = $( window );
-            var h = pr.height() - $("#toolbar_top").height()-5;
+            var h = pr.height() - $("#toolbar_top").height()-55;
             var w = pr.width() - $("#menu-left").width();
             $("#layoutObj").css("height",h);
             $("#layoutObj").css("width",w);
