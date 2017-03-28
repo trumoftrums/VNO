@@ -24,6 +24,8 @@ Route::post('/change-password', 'Frontend\HomeController@changePassword');
 Route::get('/tin-tuc', 'Frontend\HomeController@news');
 Route::get('/tin-tuc/{id}/{name}', 'Frontend\HomeController@newsDetail');
 
+Route::get('/lien-he', 'Frontend\HomeController@contact');
+
 Route::get('/thong-tin-cuu-ho/{city}', 'Frontend\ServiceController@supportCar');
 Route::get('/bai-giu-xe/{city}', 'Frontend\ServiceController@baiGiuXe');
 
