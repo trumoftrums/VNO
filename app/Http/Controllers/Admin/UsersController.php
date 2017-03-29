@@ -70,7 +70,11 @@ class UsersController extends Controller {
 //            var_dump($v);
             $content .=  '<row id="'.$v['id'].'">';
             $content .=  '<cell><![CDATA['.$no.']]></cell>';
-            $content .=  '<cell style="max-height: 60px !important;"><![CDATA[../'.$v['avatar'].']]></cell>';
+            $avatar = "images/not-found.jpg";
+            if(!empty($v['avatar'])){
+                $avatar = $v['avatar'];
+            }
+            $content .=  '<cell style="max-height: 60px !important;"><![CDATA[/'.$avatar.']]></cell>';
             $content .=  '<cell><![CDATA['.$v['username'].']]></cell>';
             $content .=  '<cell><![CDATA['.$v['phone'].']]></cell>';
             $content .=  '<cell><![CDATA['.$v['email'].']]></cell>';

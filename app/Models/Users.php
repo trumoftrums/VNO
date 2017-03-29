@@ -27,4 +27,10 @@ class Users extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public static function getUsers()
+    {
+        $list = Users::where('status','Actived')->get()->toArray();
+
+        return $list;
+    }
 }

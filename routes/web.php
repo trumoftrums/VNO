@@ -67,6 +67,8 @@ Route::group(['prefix' => 'admin'], function()
     Route::post('/save_bai_viet', 'Admin\BaivietController@save_bai_viet');
     Route::post('/tool/dhtmlxform_image', 'Admin\ToolController@dhtmlxform_image');
     Route::get('/tool/dhtmlxform_image', 'Admin\ToolController@dhtmlxform_image');
+    Route::post('/tool/dhtmlxform_image_user', 'Admin\ToolController@dhtmlxform_image_user');
+    Route::get('/tool/dhtmlxform_image_user', 'Admin\ToolController@dhtmlxform_image_user');
 
     Route::get('/posts', 'Admin\BaivietController@index');
     Route::get('/news', 'Admin\NewsController@index');
@@ -88,7 +90,27 @@ Route::group(['prefix' => 'admin'], function()
     Route::get('/tool/dhtmlxform_photo_user', 'Admin\ToolController@dhtmlxform_photo_user');
     Route::get('/profile', 'Admin\UsersController@getProfile');
 
+    Route::get('/getsalons', 'Admin\SalonController@get');
+    Route::post('/save_salon', 'Admin\SalonController@save_salon');
+    Route::post('/getsaloninfo', 'Admin\SalonController@getsaloninfo');
+    Route::post('/delsalon', 'Admin\SalonController@delete');
 
+    Route::get('/getsuaxes', 'Admin\SuaxeController@get');
+    Route::post('/save_suaxe', 'Admin\SuaxeController@save');
+    Route::post('/getsuaxeinfo', 'Admin\SuaxeController@getinfo');
+    Route::post('/delsuaxe', 'Admin\SuaxeController@delete');
+
+
+    Route::get('/getcuuhos', 'Admin\CuuhoController@get');
+    Route::post('/save_cuuho', 'Admin\CuuhoController@save');
+    Route::post('/getcuuhoinfo', 'Admin\CuuhoController@getinfo');
+    Route::post('/delcuuho', 'Admin\CuuhoController@delete');
+
+
+    Route::get('/getbaixes', 'Admin\BaixeController@get');
+    Route::post('/save_baixe', 'Admin\BaixeController@save');
+    Route::post('/getbaixeinfo', 'Admin\BaixeController@getinfo');
+    Route::post('/delbaixe', 'Admin\BaixeController@delete');
 
 //    Route::get('/tool/dhtmlxform_image/{id}', function ($id) {
 //

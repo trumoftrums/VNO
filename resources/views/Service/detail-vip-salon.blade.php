@@ -61,7 +61,7 @@
                                             <p>- Tình trạng: {{$item->thongso['thongso_24']}}</p>
                                             <p>- Dòng xe: {{$item->thongso['thongso_25']}}</p>
                                             <p>- Năm SX: {{$item->thongso['thongso_22']}}</p>
-                                            <p>- {{$item->thongso['thongso_31']}}</p>
+                                            <p>- Nhiên liệu: <?php if(!empty($item->thongso['thongso_32'])) echo $item->thongso['thongso_32']; ?></p>
                                             <p class="phone-address-item">- {{$item->thongso['thongso_62']}} - {{$item->thongso['thongso_63']}}</p>
                                         </div>
                                     </div>

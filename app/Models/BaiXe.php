@@ -11,4 +11,12 @@ class BaiXe extends Model
     const STATUS_ACTIVE = 'AC';
     const STATUS_INACTIVE = 'IA';
     const STATUS_DELETE = 'DE';
+    public static function getBaixebyID($id)
+    {
+        $list = BaiXe::where('status', '<>',BaiXe::STATUS_DELETE)->where('id', $id)->get()->toArray();
+        if(!empty($list)){
+            return $list[0];
+        }
+        return [];
+    }
 }

@@ -17,4 +17,12 @@ class City extends Model
         $listCity = City::where('status', City::STATUS_ACTIVE)->get();
         return $listCity;
     }
+    public static function getCitybyID($id)
+    {
+        $listCity = City::where('status', City::STATUS_ACTIVE)->where('id', $id)->get()->toArray();
+        if(!empty($listCity)){
+            return $listCity[0];
+        }
+        return [];
+    }
 }

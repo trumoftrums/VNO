@@ -41,7 +41,7 @@
         myToolbar.loadStruct(cfg_button);
 
         myToolbar.attachEvent("onClick", function (id) {
-            if(id=="home"){
+            if(id=='home'){
                 var win = window.open('/', '_blank');
                 if (win) {
                     //Browser has allowed it to be opened
@@ -51,58 +51,78 @@
                     dhtmlx.alert('Please allow popups for this website');
                 }
             }
+            if(id=='logout'){
+                window.location = '/logout';
+            }
 
         });
         myFilter = myLayout.cells("c").attachAccordion({
             icons_path: live_site_index + "backend/dhtmlx5/common/icons/",
             items: [
-                {id: "users", text: "Người dùng ", icon: "ico-users.png"},
-                {id: "posts", text: "Bài viết ({{$tt_baiviet}})", icon: "ico-post.png"},
-                {id: "news", text: "Tin tức ({{$tt_news}})", icon: "ico-news.png"},
-                {id: "salon", text: "Salon({{$tt_salons}})", icon: "icon-ser01.png"},
-                {id: "suaxe", text: "Sửa xe ({{$tt_suaxes}})", icon: "icon-ser02.png"},
-                {id: "cuuho", text: "Cứu hộ ({{$tt_cuuhos}})", icon: "icon-ser03.png"},
-                {id: "giuxe", text: "Giữ Xe ({{$tt_giuxes}})", icon: "icon-ser04.png"}
+                {id: "report", text: "Tổng quan", icon: "report.png"}
+                <?php if(in_array(2,$menuPermission)) echo ',{id: "users", text: "Người dùng ('.count($listUsers).') ", icon: "ico-users.png"}'; ?>
+                <?php if(in_array(3,$menuPermission)) echo ',{id: "posts", text: "Bài viết ('.$tt_baiviet.')", icon: "ico-post.png"}'; ?>
+                <?php if(in_array(4,$menuPermission)) echo ',{id: "news", text: "Tin tức ('.$tt_news.')", icon: "ico-news.png"}'; ?>
+                <?php if(in_array(5,$menuPermission)) echo ',{id: "salon", text: "Salon('.$tt_salons.')", icon: "icon-ser01.png"}'; ?>
+                <?php if(in_array(6,$menuPermission)) echo ',{id: "suaxe", text: "Sửa xe ('.$tt_suaxes.')", icon: "icon-ser02.png"}'; ?>
+                <?php if(in_array(7,$menuPermission)) echo ',{id: "cuuho", text: "Cứu hộ ('.$tt_cuuhos.')", icon: "icon-ser03.png"}'; ?>
+                <?php if(in_array(8,$menuPermission)) echo ',{id: "baixe", text: "Bãi giữ Xe ('.$tt_giuxes.')", icon: "icon-ser04.png"}'; ?>
 
 
             ]
         });
-        current_menu = "users";
+        current_menu = "report";
 
 
         init_profile(myLayout.cells("a"));
 
         myFilter.attachEvent("onActive", function(id, state){
             current_menu = id;
-            switch (current_menu){
-                case 'users':
-                    init_users(myFilter.cells("users"),myLayout.cells("b"));
+            init_dashboard(current_menu);
 
-                    break;
-
-                case 'posts':
-                    init_form_posts(myFilter.cells("posts"),myLayout.cells("b"));
-                    break;
-                case 'news':
-                    init_form_news(myFilter.cells("news"),myLayout.cells("b"));
-                    break;
-                case 'salon':
-                    init_salon(myFilter.cells("salon"),myLayout.cells("b"));
-                    break;
-            }
         });
         myLayout.cells("b").attachStatusBar({
             text: '<div style="width: 100%;"><span id="pagingArea" style="display: inline-flex"></span>&nbsp;<span id="infoArea"></span></div>',
             paging: true
         });
 
-        init_users(myFilter.cells("users"),myLayout.cells("b"));
+//        init_users(myFilter.cells("users"),myLayout.cells("b"));
+        init_dashboard(current_menu);
 
     }
     $(document ).ready(function() {
         doOnLoad();
 
     });
+    function  init_dashboard(current_menu) {
+
+        switch (current_menu){
+            case 'users':
+                init_users(myFilter.cells("users"),myLayout.cells("b"));
+
+                break;
+
+            case 'posts':
+                init_form_posts(myFilter.cells("posts"),myLayout.cells("b"));
+                break;
+            case 'news':
+                init_form_news(myFilter.cells("news"),myLayout.cells("b"));
+                break;
+            case 'salon':
+                init_salon(myFilter.cells("salon"),myLayout.cells("b"));
+                break;
+
+            case 'suaxe':
+                init_suaxe(myFilter.cells("suaxe"),myLayout.cells("b"));
+                break;
+            case 'cuuho':
+                init_cuuho(myFilter.cells("suaxe"),myLayout.cells("b"));
+                break;
+            case 'baixe':
+                init_baixe(myFilter.cells("suaxe"),myLayout.cells("b"));
+                break;
+        }
+    }
     function init_profile(Dhxcell){
         Dhxcell.attachURL("/admin/profile");
 
@@ -528,7 +548,7 @@
         });
 //            console.log("OK");
         wform.attachEvent("onButtonClick", function (id) {
-            console.log("Click button"+id);
+            //console.log("Click button"+id);
             if(id=="btnSave"){
 
                 if(wform.validate()){
@@ -550,7 +570,7 @@
                         },
                         success: function (data) {
                             wform.clear();
-                            CKupdate();
+                            CKupdate(CKEDITOR);
                             dhtmlx.alert(data.mess);
 
                         },
@@ -570,7 +590,7 @@
         CKEDITOR.instances[des_id].setData(baiviet.description);
 
     }
-    function CKupdate(){
+    function CKupdate(CKEDITOR){
         for ( instance in CKEDITOR.instances ){
             CKEDITOR.instances[des_id].updateElement();
             CKEDITOR.instances[des_id].setData('');
@@ -704,7 +724,7 @@
         var cfgform1 = [
             {type: "settings", position: "label-left"},
             {type: "block", offsetLeft: 10, inputWidth: 480, list: [
-                {type: "image", id:"photo", required:true,name: "photo",labelWidth: 80, label: "Avatar",inputWidth: 150, inputHeight: 150, imageHeight: 150, url: "./tool/dhtmlxform_photo_user", value:user.avatar},
+                {type: "image", id:"photo", required:true,name: "photo",labelWidth: 80, label: "Avatar",inputWidth: 150, inputHeight: 150, imageHeight: 150, url: "./tool/dhtmlxform_image_user", value:user.avatar},
                 {type: "input", name: "username",required:true, label: "Username", labelWidth: 80, inputWidth: 150, value:user.username},
                 {type: "input", name: "phone", required:true,label: "Phone", labelWidth: 80, inputWidth: 150, value:user.phone},
                 {type: "input", id:"email",name: "email", label: "Email", labelWidth: 80, inputWidth: 350, value: user.email},
@@ -775,7 +795,7 @@
                         },
                         success: function (data) {
                             wform.clear();
-                            CKupdate();
+                            CKupdate(CKEDITOR);
                             dhtmlx.alert(data.mess);
 
                         },
@@ -791,16 +811,18 @@
         });
 
     }
+
+    /* begin salon */
     function init_salon(formFilter, LayoutCell) {
         var userLayout = LayoutCell.attachLayout({
-            pattern: "2U",
+            pattern: "1C",
             offsets: {          // optional, offsets for fullscreen init
                 top:    0,     // you can specify all four sides
                 right:  5,     // or only the side where you want to have an offset
                 bottom: 0,
                 left:   3
             },
-            cells: [{id: "a", text: "Danh sách salon"}, {id: "b",width: 510, text: "Thông tin chi tiết"}]
+            cells: [{id: "a", text: "Danh sách salon"}]
         });
         var userToolbar = userLayout.attachToolbar();
         userToolbar.setIconsPath(live_site_index + "backend/dhtmlx5/common/icons/");
@@ -816,73 +838,1047 @@
 
         ];
         userToolbar.loadStruct(cfg_button);
-
-        userToolbar.attachEvent("onClick", function (id) {
-            dhtmlx.alert("Sorry, This function is not available!");
-//            if (id == "add") {
-//
-//            }
-//
-//
-//            if(id=="reload"){
-//                usermygrid.loadXML("/admin/getusers");
-//            }
-
-
-        });
         var usermygrid = userLayout.cells("a").attachGrid();
         usermygrid.setImagePath("../js/dhtmlx5/imgs/");
         usermygrid.init();
+
+        userToolbar.attachEvent("onClick", function (id) {
+            //dhtmlx.alert("Sorry, This function is not available!");
+            if (id == "add") {
+                add_salon(null,usermygrid);
+            }
+            if(id=="edit"){
+                var selectedId = usermygrid.getSelectedRowId();
+                if (selectedId == null) {
+                    dhtmlx.alert("Please select 1 row!");
+                }else{
+
+
+                    $.ajax({
+                        url: '/admin/getsaloninfo',
+                        dataType: "json",
+                        cache: false,
+                        type: 'post',
+                        data: {
+                            id: selectedId
+                        },
+                        beforeSend: function(xhr){
+
+//                            xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        },
+                        success: function (data) {
+
+                            if(data.result){
+                                add_salon(data.data,usermygrid);
+
+
+                            }else{
+                                dhtmlx.alert(data.mess);
+                            }
+                        },
+                        error: function () {
+                            dhtmlx.alert("Error,Please try again!");
+
+                        }
+                    });
+                }
+
+
+
+            }
+
+            if(id=="delete"){
+                var selectedId = usermygrid.getSelectedRowId();
+                if (selectedId == null) {
+                    dhtmlx.alert("Please select 1 row!");
+                }else{
+                    dhtmlx.confirm({
+                        title: "Xóa tin",
+                        type:"confirm-warning",
+                        text: "Bạn chắc chắn muốn xóa salon này?",
+                        callback: function(ok) {
+                            if(ok){
+                                delete_salon(selectedId,usermygrid);
+                            }
+
+                        }
+                    });
+                }
+            }
+            if(id=="reload"){
+                usermygrid.loadXML("/admin/getsalons");
+            }
+
+
+        });
+
         usermygrid.attachEvent("onXLE", function(grid_obj,count){
             userLayout.cells("a").progressOff();
         });
         usermygrid.attachEvent("onXLS", function(grid_obj){
             userLayout.cells("a").progressOn();
         });
-        usermygrid.attachEvent("onRowSelect", function(id,ind){
-            // your code here
-            if(can_change_selected && current_row_id != id){
-//                    dhtmlx.alert(id+":"+ind);
-                current_row_id = id;
-                userLayout.cells("b").progressOn();
-                $.ajax({
-                    url: '/admin/getuserinfo',
-                    dataType: "json",
-                    cache: false,
-                    type: 'post',
-                    data: {
-                        id: id
-                    },
-                    beforeSend: function(xhr){
-
-//                            xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                    },
-                    success: function (data) {
-                        userLayout.cells("b").progressOff();
-                        if(data.result){
-                            add_user(data.data,userLayout.cells("b"));
 
 
-                        }else{
-                            dhtmlx.alert(data.mess);
+        usermygrid.setAwaitedRowHeight(25);
+        usermygrid.loadXML("/admin/getsalons");
+
+    }
+    function add_salon(salon,Dhxgrid) {
+//        console.log(salon);
+        var viewportWidth = $(window).width();
+        var viewportHeight = $(window).height();
+        var wd = 1050;
+        var hg = viewportHeight - 100;
+        var left = (viewportWidth / 2) - (wd / 2) ;
+        var top = (viewportHeight / 2) - (hg / 2);
+        var win = myWins.createWindow("w_add", left, top, wd, hg);
+        var itemid = null;
+        if(salon !== null && salon !=="undefined"){
+            itemid = {type: "hidden", name:"id", value:salon.id};
+            win.setText("Sửa thông tin salon  ... ");
+        }else{
+            win.setText("Thêm mới salon ... ");
+            salon = new Object();
+            salon.title = "";
+            salon.phone = "";
+            salon.description = "";
+            salon.thumb = "";
+            salon.status = "";
+            salon.address = "";
+        }
+//            console.log(salon);
+        win.setModal(true);
+        win.button("minmax").disable();
+        win.button("park").disable();
+
+
+        var wform = win.attachForm();
+
+        var cfgform1 = [
+            {type: "settings", position: "label-left"},
+            {type: "block", offsetLeft: 0, inputWidth: 1000, list: [
+                {type: "combo",labelWidth: 80, required:true, label: "Username", readonly:true,name: "user_id",inputWidth: 860,  options:[
+                    {value: "" , text: "Select user"}
+                    <?php
+                    if(!empty($listUsers)){
+                        foreach ($listUsers as $g){
+                            echo ',{value: "'.$g['id'].'" , text: "'.$g['username'].'-'.$g['phone'].'-'.$g['email'].'"}';
+
                         }
-                    },
-                    error: function () {
-                        dhtmlx.alert("Error,Please try again!");
-                        userLayout.cells("b").progressOff();
                     }
-                });
-            }else{
-                return false;
-            }
+                    ?>
+                ]},
+                {type: "image", name: "images",required:true,labelWidth: 80, label: "Cover image",inputWidth: 860, inputHeight: 137, imageWidth: 860, imageHeight: 137, url: "./tool/dhtmlxform_image_user", value:salon.images},
+                {type: "image",  name: "thumb",required:true,labelWidth: 80, label: "Thumnail",inputWidth: 135, inputHeight: 103,imageWidth: 135, imageHeight: 103, url: "./tool/dhtmlxform_image_user", value:salon.thumb},
+                {type: "input", name: "title",required:true, label: "Name", labelWidth: 80, inputWidth: 860, value:salon.title},
+                {type: "input", name: "phone", required:true,label: "Phone", labelWidth: 80, inputWidth: 400, value:salon.phone},
+
+                {type: "input", id:"address",name: "address", label: "Address", labelWidth: 80, inputWidth: 860, value: salon.address},
+
+                {type: "combo",labelWidth: 80, required:true, label: "City", readonly:true,name: "city",inputWidth: 100,  options:[
+                    {value: "" , text: "Select city"}
+                    <?php
+                    if(!empty($listCity)){
+
+                        foreach ($listCity as $g){
+                            echo ',{value: "'.$g['id'].'" , text: "'.$g['city_name'].'"}';
+
+                        }
+                    }
+                    ?>
+                ]},
+                {type:"checkbox",labelWidth: 80,  name:"status", value:"Actived", label:"Actived"},
+                {type: "input", id:"editor",name: "description", label: "Description", rows: 12,labelWidth: 70, inputWidth: 860}
+            ]},
+
+            {type: "block", offsetLeft: 0, inputWidth: 490, list: [
+                {type: "button", offsetLeft: 80, value: "Save", name: "btnSave"}
+
+            ]}
+        ];
+        wform.loadStruct(cfgform1);
+        if(itemid != null){
+            wform.addItem(null,itemid,0,0);
+        }
+        if(salon != null && salon !="undefined" && salon != ''){
+            wform.setItemValue('city',salon.cityID);
+            wform.setItemValue('user_id',salon.user_id);
+            wform.checkItem('status');
+        }
+
+        wform.attachEvent("onImageUploadSuccess", function(name, value, extra){
 
         });
+        wform.attachEvent("onImageUploadFail", function(name, extra){
+        });
+        wform.attachEvent("onButtonClick", function (id) {
+            if(id=="btnSave"){
 
-//        usermygrid.setAwaitedRowHeight(25);
-//        usermygrid.loadXML("/admin/getusers");
+                if(wform.validate()){
+                    var formData = wform.getFormData();
+                    var description = CKEDITOR.instances[des_id].getData();
+                    formData.description = description;
+                    //console.log(formData);
+
+                        $.ajax({
+                            url: '/admin/save_salon',
+                            dataType: "json",
+                            cache: false,
+                            type: 'post',
+                            data: {
+                                formData: formData
+                            },
+                            beforeSend: function(xhr){
+
+                                //xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                            },
+                            success: function (data) {
+                                dhtmlx.alert(data.mess);
+                                if(data.result){
+                                    win.close();
+                                    getSalons(Dhxgrid);
+                                }
+
+
+                            },
+                            error: function () {
+                                dhtmlx.alert("Error,Please try again!");
+                            }
+                        });
+
+
+                }else {
+                    dhtmlx.alert("Please input all required fields");
+                }
+
+            }
+        });
+
+        des_id = $( "textarea[name='description']" ).attr("id");
+//        console.log(des_id);
+        initSample(des_id);
+        CKEDITOR.instances[des_id].setData(salon.description);
+
+    }
+    function getSalons(Dhxgrid){
+        Dhxgrid.loadXML("/admin/getsalons");
+    }
+    function delete_salon(id,Dhxgrid) {
+        if(id != null && id != "undefined"){
+            $.ajax({
+                url: '/admin/delsalon',
+                dataType: "json",
+                cache: false,
+                type: 'post',
+                data: {
+                    id: id
+                },
+                beforeSend: function(xhr){
+
+//                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                },
+                success: function (data) {
+                    getSalons(Dhxgrid);
+                    dhtmlx.alert(data.mess);
+                },
+                error: function () {
+                    dhtmlx.alert("Error,Please try again!");
+                }
+            });
+        }
 
     }
 
+    /* end salon */
+    /* begin suaxe */
+    function init_suaxe(formFilter, LayoutCell) {
+        var userLayout = LayoutCell.attachLayout({
+            pattern: "1C",
+            offsets: {          // optional, offsets for fullscreen init
+                top:    0,     // you can specify all four sides
+                right:  5,     // or only the side where you want to have an offset
+                bottom: 0,
+                left:   3
+            },
+            cells: [{id: "a", text: "Danh sách điểm sửa xe"}]
+        });
+        var userToolbar = userLayout.attachToolbar();
+        userToolbar.setIconsPath(live_site_index + "backend/dhtmlx5/common/icons/");
+        userToolbar.setAlign("left");
+        var cfg_button = [
+            {id: "add", text: "Add", type: "button", img: "ico-add.png"},
+            {type: "separator"},
+            {id: "edit", text: "Edit", type: "button", img: "ico-edit.png"},
+            {type: "separator"},
+            {id: "delete", text: "Delete", type: "button", img: "ico-del.png"},
+            {type: "separator"},
+            {id: "reload", text: "Reload", type: "button", img: "ico-reload.png"}
+
+        ];
+        userToolbar.loadStruct(cfg_button);
+        var usermygrid = userLayout.cells("a").attachGrid();
+        usermygrid.setImagePath("../js/dhtmlx5/imgs/");
+        usermygrid.init();
+
+        userToolbar.attachEvent("onClick", function (id) {
+            //dhtmlx.alert("Sorry, This function is not available!");
+            if (id == "add") {
+                add_suaxe(null,usermygrid);
+            }
+            if(id=="edit"){
+                var selectedId = usermygrid.getSelectedRowId();
+                if (selectedId == null) {
+                    dhtmlx.alert("Please select 1 row!");
+                }else{
+
+
+                    $.ajax({
+                        url: '/admin/getsuaxeinfo',
+                        dataType: "json",
+                        cache: false,
+                        type: 'post',
+                        data: {
+                            id: selectedId
+                        },
+                        beforeSend: function(xhr){
+
+//                            xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        },
+                        success: function (data) {
+
+                            if(data.result){
+                                add_suaxe(data.data,usermygrid);
+
+
+                            }else{
+                                dhtmlx.alert(data.mess);
+                            }
+                        },
+                        error: function () {
+                            dhtmlx.alert("Error,Please try again!");
+
+                        }
+                    });
+                }
+
+
+
+            }
+
+            if(id=="delete"){
+                var selectedId = usermygrid.getSelectedRowId();
+                if (selectedId == null) {
+                    dhtmlx.alert("Please select 1 row!");
+                }else{
+                    dhtmlx.confirm({
+                        title: "Xóa tin",
+                        type:"confirm-warning",
+                        text: "Bạn chắc chắn muốn xóa điểm sửa xe này?",
+                        callback: function(ok) {
+                            if(ok){
+                                delete_suaxe(selectedId,usermygrid);
+                            }
+
+                        }
+                    });
+                }
+            }
+            if(id=="reload"){
+                getSuaxes(usermygrid);
+            }
+
+
+        });
+
+        usermygrid.attachEvent("onXLE", function(grid_obj,count){
+            userLayout.cells("a").progressOff();
+        });
+        usermygrid.attachEvent("onXLS", function(grid_obj){
+            userLayout.cells("a").progressOn();
+        });
+
+
+        usermygrid.setAwaitedRowHeight(25);
+        getSuaxes(usermygrid);
+
+    }
+    function add_suaxe(item,Dhxgrid) {
+//        console.log(salon);
+        var viewportWidth = $(window).width();
+        var viewportHeight = $(window).height();
+        var wd = 1050;
+        var hg = viewportHeight - 100;
+        var left = (viewportWidth / 2) - (wd / 2) ;
+        var top = (viewportHeight / 2) - (hg / 2);
+        var win = myWins.createWindow("w_add", left, top, wd, hg);
+        var itemid = null;
+        if(item !== null && item !=="undefined"){
+            itemid = {type: "hidden", name:"id", value:item.id};
+            win.setText("Sửa thông tin điểm sủa xe  ... ");
+        }else{
+            win.setText("Thêm mới điểm sủa xe ... ");
+            item = new Object();
+            item.title = "";
+            item.phone = "";
+            item.description = "";
+            item.thumb = "";
+            item.status = "";
+            item.address = "";
+        }
+//            console.log(salon);
+        win.setModal(true);
+        win.button("minmax").disable();
+        win.button("park").disable();
+
+
+        var wform = win.attachForm();
+
+        var cfgform1 = [
+            {type: "settings", position: "label-left"},
+            {type: "block", offsetLeft: 0, inputWidth: 1000, list: [
+
+                {type: "image", name: "images",required:true,labelWidth: 80, label: "Cover image",inputWidth: 860, inputHeight: 137, imageWidth: 860, imageHeight: 137, url: "./tool/dhtmlxform_image_user", value:item.images},
+                {type: "image",  name: "thumb",required:true,labelWidth: 80, label: "Thumnail",inputWidth: 135, inputHeight: 103,imageWidth: 135, imageHeight: 103, url: "./tool/dhtmlxform_image_user", value:item.thumb},
+                {type: "input", name: "title",required:true, label: "Name", labelWidth: 80, inputWidth: 860, value:item.title},
+                {type: "input", name: "phone", required:true,label: "Phone", labelWidth: 80, inputWidth: 400, value:item.phone},
+
+                {type: "input", id:"address",name: "address", label: "Address", labelWidth: 80, inputWidth: 860, value: item.address},
+
+                {type: "combo",labelWidth: 80, required:true, label: "City", readonly:true,name: "city",inputWidth: 100,  options:[
+                    {value: "" , text: "Select city"}
+                    <?php
+                    if(!empty($listCity)){
+
+                        foreach ($listCity as $g){
+                            echo ',{value: "'.$g['id'].'" , text: "'.$g['city_name'].'"}';
+
+                        }
+                    }
+                    ?>
+                ]},
+                {type:"checkbox",labelWidth: 80,  name:"status", value:"Actived", label:"Actived"},
+                {type: "input", id:"editor",name: "description", label: "Description", rows: 12,labelWidth: 70, inputWidth: 860}
+            ]},
+
+            {type: "block", offsetLeft: 0, inputWidth: 490, list: [
+                {type: "button", offsetLeft: 80, value: "Save", name: "btnSave"}
+
+            ]}
+        ];
+        wform.loadStruct(cfgform1);
+        if(itemid != null){
+            wform.addItem(null,itemid,0,0);
+        }
+        if(item != null && item !="undefined" && item != ''){
+            wform.setItemValue('city',item.cityID);
+
+            wform.checkItem('status');
+        }
+
+        wform.attachEvent("onImageUploadSuccess", function(name, value, extra){
+
+        });
+        wform.attachEvent("onImageUploadFail", function(name, extra){
+        });
+        wform.attachEvent("onButtonClick", function (id) {
+            if(id=="btnSave"){
+
+                if(wform.validate()){
+                    var formData = wform.getFormData();
+                    var description = CKEDITOR.instances[des_id].getData();
+                    formData.description = description;
+                    //console.log(formData);
+
+                    $.ajax({
+                        url: '/admin/save_suaxe',
+                        dataType: "json",
+                        cache: false,
+                        type: 'post',
+                        data: {
+                            formData: formData
+                        },
+                        beforeSend: function(xhr){
+
+                            //xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        },
+                        success: function (data) {
+                            dhtmlx.alert(data.mess);
+                            if(data.result){
+                                win.close();
+                                getSuaxes(Dhxgrid);
+                            }
+
+
+                        },
+                        error: function () {
+                            dhtmlx.alert("Error,Please try again!");
+                        }
+                    });
+
+
+                }else {
+                    dhtmlx.alert("Please input all required fields");
+                }
+
+            }
+        });
+
+        des_id = $( "textarea[name='description']" ).attr("id");
+//        console.log(des_id);
+        initSample(des_id);
+        CKEDITOR.instances[des_id].setData(item.description);
+
+    }
+    function getSuaxes(Dhxgrid){
+        Dhxgrid.loadXML("/admin/getsuaxes");
+    }
+    function delete_suaxe(id,Dhxgrid) {
+        if(id != null && id != "undefined"){
+            $.ajax({
+                url: '/admin/delsuaxe',
+                dataType: "json",
+                cache: false,
+                type: 'post',
+                data: {
+                    id: id
+                },
+                beforeSend: function(xhr){
+
+//                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                },
+                success: function (data) {
+                    getSuaxes(Dhxgrid);
+                    dhtmlx.alert(data.mess);
+                },
+                error: function () {
+                    dhtmlx.alert("Error,Please try again!");
+                }
+            });
+        }
+
+    }
+    /* end suaxe */
+
+    /* begin cuuho */
+    function init_cuuho(formFilter, LayoutCell) {
+        var userLayout = LayoutCell.attachLayout({
+            pattern: "1C",
+            offsets: {          // optional, offsets for fullscreen init
+                top:    0,     // you can specify all four sides
+                right:  5,     // or only the side where you want to have an offset
+                bottom: 0,
+                left:   3
+            },
+            cells: [{id: "a", text: "Danh sách thông tin cứu hộ"}]
+        });
+        var userToolbar = userLayout.attachToolbar();
+        userToolbar.setIconsPath(live_site_index + "backend/dhtmlx5/common/icons/");
+        userToolbar.setAlign("left");
+        var cfg_button = [
+            {id: "add", text: "Add", type: "button", img: "ico-add.png"},
+            {type: "separator"},
+            {id: "edit", text: "Edit", type: "button", img: "ico-edit.png"},
+            {type: "separator"},
+            {id: "delete", text: "Delete", type: "button", img: "ico-del.png"},
+            {type: "separator"},
+            {id: "reload", text: "Reload", type: "button", img: "ico-reload.png"}
+
+        ];
+        userToolbar.loadStruct(cfg_button);
+        var usermygrid = userLayout.cells("a").attachGrid();
+        usermygrid.setImagePath("../js/dhtmlx5/imgs/");
+        usermygrid.init();
+
+        userToolbar.attachEvent("onClick", function (id) {
+            //dhtmlx.alert("Sorry, This function is not available!");
+            if (id == "add") {
+                add_cuuho(null,usermygrid);
+            }
+            if(id=="edit"){
+                var selectedId = usermygrid.getSelectedRowId();
+                if (selectedId == null) {
+                    dhtmlx.alert("Please select 1 row!");
+                }else{
+
+
+                    $.ajax({
+                        url: '/admin/getcuuhoinfo',
+                        dataType: "json",
+                        cache: false,
+                        type: 'post',
+                        data: {
+                            id: selectedId
+                        },
+                        beforeSend: function(xhr){
+
+//                            xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        },
+                        success: function (data) {
+
+                            if(data.result){
+                                add_cuuho(data.data,usermygrid);
+
+
+                            }else{
+                                dhtmlx.alert(data.mess);
+                            }
+                        },
+                        error: function () {
+                            dhtmlx.alert("Error,Please try again!");
+
+                        }
+                    });
+                }
+
+
+
+            }
+
+            if(id=="delete"){
+                var selectedId = usermygrid.getSelectedRowId();
+                if (selectedId == null) {
+                    dhtmlx.alert("Please select 1 row!");
+                }else{
+                    dhtmlx.confirm({
+                        title: "Xóa tin",
+                        type:"confirm-warning",
+                        text: "Bạn chắc chắn muốn thông tin cứu hộ này?",
+                        callback: function(ok) {
+                            if(ok){
+                                delete_cuuho(selectedId,usermygrid);
+                            }
+
+                        }
+                    });
+                }
+            }
+            if(id=="reload"){
+                getCuuhos(usermygrid);
+            }
+
+
+        });
+
+        usermygrid.attachEvent("onXLE", function(grid_obj,count){
+            userLayout.cells("a").progressOff();
+        });
+        usermygrid.attachEvent("onXLS", function(grid_obj){
+            userLayout.cells("a").progressOn();
+        });
+
+
+        usermygrid.setAwaitedRowHeight(25);
+        getCuuhos(usermygrid);
+
+    }
+    function add_cuuho(item,Dhxgrid) {
+//        console.log(salon);
+        var viewportWidth = $(window).width();
+        var viewportHeight = $(window).height();
+        var wd = 1050;
+        var hg = viewportHeight - 100;
+        var left = (viewportWidth / 2) - (wd / 2) ;
+        var top = (viewportHeight / 2) - (hg / 2);
+        var win = myWins.createWindow("w_add", left, top, wd, hg);
+        var itemid = null;
+        if(item !== null && item !=="undefined"){
+            itemid = {type: "hidden", name:"id", value:item.id};
+            win.setText("Sửa thông tin cứu hộ  ... ");
+        }else{
+            win.setText("Thêm mới thông tin cứu hộ ... ");
+            item = new Object();
+            item.title = "";
+            item.phone = "";
+//            item.description = "";
+            item.thumb = "";
+            item.status = "";
+            item.address = "";
+        }
+//            console.log(salon);
+        win.setModal(true);
+        win.button("minmax").disable();
+        win.button("park").disable();
+
+
+        var wform = win.attachForm();
+
+        var cfgform1 = [
+            {type: "settings", position: "label-left"},
+            {type: "block", offsetLeft: 0, inputWidth: 1000, list: [
+
+//                {type: "image", name: "images",required:true,labelWidth: 80, label: "Cover image",inputWidth: 860, inputHeight: 137, imageWidth: 860, imageHeight: 137, url: "./tool/dhtmlxform_image_user", value:item.images},
+                {type: "image",  name: "thumb",required:true,labelWidth: 80, label: "Thumnail",inputWidth: 135, inputHeight: 103,imageWidth: 135, imageHeight: 103, url: "./tool/dhtmlxform_image_user", value:item.thumb},
+                {type: "input", name: "title",required:true, label: "Name", labelWidth: 80, inputWidth: 860, value:item.title},
+                {type: "input", name: "phone", required:true,label: "Phone", labelWidth: 80, inputWidth: 400, value:item.phone},
+
+                {type: "input", id:"address",name: "address", label: "Address", labelWidth: 80, inputWidth: 860, value: item.address},
+
+                {type: "combo",labelWidth: 80, required:true, label: "City", readonly:true,name: "city",inputWidth: 100,  options:[
+                    {value: "" , text: "Select city"}
+                    <?php
+                    if(!empty($listCity)){
+
+                        foreach ($listCity as $g){
+                            echo ',{value: "'.$g['id'].'" , text: "'.$g['city_name'].'"}';
+
+                        }
+                    }
+                    ?>
+                ]},
+                {type:"checkbox",labelWidth: 80,  name:"status", value:"Actived", label:"Actived"}
+            ]},
+
+            {type: "block", offsetLeft: 0, inputWidth: 490, list: [
+                {type: "button", offsetLeft: 80, value: "Save", name: "btnSave"}
+
+            ]}
+        ];
+        wform.loadStruct(cfgform1);
+        if(itemid != null){
+            wform.addItem(null,itemid,0,0);
+        }
+        if(item != null && item !="undefined" && item != ''){
+            wform.setItemValue('city',item.cityID);
+
+            wform.checkItem('status');
+        }
+
+        wform.attachEvent("onImageUploadSuccess", function(name, value, extra){
+
+        });
+        wform.attachEvent("onImageUploadFail", function(name, extra){
+        });
+        wform.attachEvent("onButtonClick", function (id) {
+            if(id=="btnSave"){
+
+                if(wform.validate()){
+                    var formData = wform.getFormData();
+
+                    $.ajax({
+                        url: '/admin/save_cuuho',
+                        dataType: "json",
+                        cache: false,
+                        type: 'post',
+                        data: {
+                            formData: formData
+                        },
+                        beforeSend: function(xhr){
+
+                            //xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        },
+                        success: function (data) {
+                            dhtmlx.alert(data.mess);
+                            if(data.result){
+                                win.close();
+                                getCuuhos(Dhxgrid);
+                            }
+
+
+                        },
+                        error: function () {
+                            dhtmlx.alert("Error,Please try again!");
+                        }
+                    });
+
+
+                }else {
+                    dhtmlx.alert("Please input all required fields");
+                }
+
+            }
+        });
+
+
+    }
+    function getCuuhos(Dhxgrid){
+        Dhxgrid.loadXML("/admin/getcuuhos");
+    }
+    function delete_cuuho(id,Dhxgrid) {
+        if(id != null && id != "undefined"){
+            $.ajax({
+                url: '/admin/delcuuho',
+                dataType: "json",
+                cache: false,
+                type: 'post',
+                data: {
+                    id: id
+                },
+                beforeSend: function(xhr){
+
+//                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                },
+                success: function (data) {
+                    getCuuhos(Dhxgrid);
+                    dhtmlx.alert(data.mess);
+                },
+                error: function () {
+                    dhtmlx.alert("Error,Please try again!");
+                }
+            });
+        }
+
+    }
+    /* end cuuho */
+
+    /* begin baixe */
+    function init_baixe(formFilter, LayoutCell) {
+        var userLayout = LayoutCell.attachLayout({
+            pattern: "1C",
+            offsets: {          // optional, offsets for fullscreen init
+                top:    0,     // you can specify all four sides
+                right:  5,     // or only the side where you want to have an offset
+                bottom: 0,
+                left:   3
+            },
+            cells: [{id: "a", text: "Danh sách bãi giữ xe"}]
+        });
+        var userToolbar = userLayout.attachToolbar();
+        userToolbar.setIconsPath(live_site_index + "backend/dhtmlx5/common/icons/");
+        userToolbar.setAlign("left");
+        var cfg_button = [
+            {id: "add", text: "Add", type: "button", img: "ico-add.png"},
+            {type: "separator"},
+            {id: "edit", text: "Edit", type: "button", img: "ico-edit.png"},
+            {type: "separator"},
+            {id: "delete", text: "Delete", type: "button", img: "ico-del.png"},
+            {type: "separator"},
+            {id: "reload", text: "Reload", type: "button", img: "ico-reload.png"}
+
+        ];
+        userToolbar.loadStruct(cfg_button);
+        var usermygrid = userLayout.cells("a").attachGrid();
+        usermygrid.setImagePath("../js/dhtmlx5/imgs/");
+        usermygrid.init();
+
+        userToolbar.attachEvent("onClick", function (id) {
+            //dhtmlx.alert("Sorry, This function is not available!");
+            if (id == "add") {
+                add_baixe(null,usermygrid);
+            }
+            if(id=="edit"){
+                var selectedId = usermygrid.getSelectedRowId();
+                if (selectedId == null) {
+                    dhtmlx.alert("Please select 1 row!");
+                }else{
+
+
+                    $.ajax({
+                        url: '/admin/getbaixeinfo',
+                        dataType: "json",
+                        cache: false,
+                        type: 'post',
+                        data: {
+                            id: selectedId
+                        },
+                        beforeSend: function(xhr){
+
+//                            xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        },
+                        success: function (data) {
+
+                            if(data.result){
+                                add_baixe(data.data,usermygrid);
+
+
+                            }else{
+                                dhtmlx.alert(data.mess);
+                            }
+                        },
+                        error: function () {
+                            dhtmlx.alert("Error,Please try again!");
+
+                        }
+                    });
+                }
+
+
+
+            }
+
+            if(id=="delete"){
+                var selectedId = usermygrid.getSelectedRowId();
+                if (selectedId == null) {
+                    dhtmlx.alert("Please select 1 row!");
+                }else{
+                    dhtmlx.confirm({
+                        title: "Xóa tin",
+                        type:"confirm-warning",
+                        text: "Bạn chắc chắn muốn thông tin cứu hộ này?",
+                        callback: function(ok) {
+                            if(ok){
+                                delete_baixe(selectedId,usermygrid);
+                            }
+
+                        }
+                    });
+                }
+            }
+            if(id=="reload"){
+                getBaixes(usermygrid);
+            }
+
+
+        });
+
+        usermygrid.attachEvent("onXLE", function(grid_obj,count){
+            userLayout.cells("a").progressOff();
+        });
+        usermygrid.attachEvent("onXLS", function(grid_obj){
+            userLayout.cells("a").progressOn();
+        });
+
+
+        usermygrid.setAwaitedRowHeight(25);
+        getBaixes(usermygrid);
+
+    }
+    function add_baixe(item,Dhxgrid) {
+//        console.log(salon);
+        var viewportWidth = $(window).width();
+        var viewportHeight = $(window).height();
+        var wd = 1050;
+        var hg = viewportHeight - 100;
+        var left = (viewportWidth / 2) - (wd / 2) ;
+        var top = (viewportHeight / 2) - (hg / 2);
+        var win = myWins.createWindow("w_add", left, top, wd, hg);
+        var itemid = null;
+        if(item !== null && item !=="undefined"){
+            itemid = {type: "hidden", name:"id", value:item.id};
+            win.setText("Sửa thông tin bãi xe  ... ");
+        }else{
+            win.setText("Thêm mới bãi xe ... ");
+            item = new Object();
+            item.title = "";
+            item.phone = "";
+            item.thumb = "";
+            item.status = "";
+            item.address = "";
+        }
+        win.setModal(true);
+        win.button("minmax").disable();
+        win.button("park").disable();
+
+
+        var wform = win.attachForm();
+
+        var cfgform1 = [
+            {type: "settings", position: "label-left"},
+            {type: "block", offsetLeft: 0, inputWidth: 1000, list: [
+
+
+                {type: "image",  name: "thumb",required:true,labelWidth: 80, label: "Thumnail",inputWidth: 135, inputHeight: 103,imageWidth: 135, imageHeight: 103, url: "./tool/dhtmlxform_image_user", value:item.thumb},
+                {type: "input", name: "title",required:true, label: "Name", labelWidth: 80, inputWidth: 860, value:item.title},
+                {type: "input", name: "phone", required:true,label: "Phone", labelWidth: 80, inputWidth: 400, value:item.phone},
+
+                {type: "input", id:"address",name: "address", label: "Address", labelWidth: 80, inputWidth: 860, value: item.address},
+
+                {type: "combo",labelWidth: 80, required:true, label: "City", readonly:true,name: "city",inputWidth: 100,  options:[
+                    {value: "" , text: "Select city"}
+                    <?php
+                    if(!empty($listCity)){
+
+                        foreach ($listCity as $g){
+                            echo ',{value: "'.$g['id'].'" , text: "'.$g['city_name'].'"}';
+
+                        }
+                    }
+                    ?>
+                ]},
+                {type:"checkbox",labelWidth: 80,  name:"status", value:"Actived", label:"Actived"}
+            ]},
+
+            {type: "block", offsetLeft: 0, inputWidth: 490, list: [
+                {type: "button", offsetLeft: 80, value: "Save", name: "btnSave"}
+
+            ]}
+        ];
+        wform.loadStruct(cfgform1);
+        if(itemid != null){
+            wform.addItem(null,itemid,0,0);
+        }
+        if(item != null && item !="undefined" && item != ''){
+            wform.setItemValue('city',item.cityID);
+
+            wform.checkItem('status');
+        }
+
+        wform.attachEvent("onImageUploadSuccess", function(name, value, extra){
+
+        });
+        wform.attachEvent("onImageUploadFail", function(name, extra){
+        });
+        wform.attachEvent("onButtonClick", function (id) {
+            if(id=="btnSave"){
+
+                if(wform.validate()){
+                    var formData = wform.getFormData();
+
+                    $.ajax({
+                        url: '/admin/save_baixe',
+                        dataType: "json",
+                        cache: false,
+                        type: 'post',
+                        data: {
+                            formData: formData
+                        },
+                        beforeSend: function(xhr){
+
+                            //xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        },
+                        success: function (data) {
+                            dhtmlx.alert(data.mess);
+                            if(data.result){
+                                win.close();
+                                getBaixes(Dhxgrid);
+                            }
+
+
+                        },
+                        error: function () {
+                            dhtmlx.alert("Error,Please try again!");
+                        }
+                    });
+
+
+                }else {
+                    dhtmlx.alert("Please input all required fields");
+                }
+
+            }
+        });
+
+
+    }
+    function getBaixes(Dhxgrid){
+        Dhxgrid.loadXML("/admin/getbaixes");
+    }
+    function delete_baixe(id,Dhxgrid) {
+        if(id != null && id != "undefined"){
+            $.ajax({
+                url: '/admin/delbaixe',
+                dataType: "json",
+                cache: false,
+                type: 'post',
+                data: {
+                    id: id
+                },
+                beforeSend: function(xhr){
+
+//                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                },
+                success: function (data) {
+                    getBaixes(Dhxgrid);
+                    dhtmlx.alert(data.mess);
+                },
+                error: function () {
+                    dhtmlx.alert("Error,Please try again!");
+                }
+            });
+        }
+
+    }
+    /* end baixe */
 </script>
 
 @endsection

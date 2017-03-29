@@ -19,6 +19,7 @@ use App\Models\Thongso;
 use App\Models\ViewLog;
 use Mockery\CountValidator\Exception;
 use App\Models\Groups;
+use App\Models\AdminPermission;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -119,6 +120,14 @@ class AppServiceProvider extends ServiceProvider
             $ttch = $this->get_total_cuuho();
             $ttgx = $this->get_total_giuxe();
             $ttsx = $this->get_total_suaxe();
+            $listUsers = Users::getUsers();
+
+            $menuPermission = array();
+            $arr_permission = AdminPermission::getPerbyUser($user->id);
+            if(!empty($arr_permission)){
+                $menuPermission = json_decode($arr_permission['menuID'],true);
+            }
+//            var_dump($listUsers);exit();
             $groups = Groups::where("status","=","Actived")->get()->toArray();
             $view->with([
                 'user' => $user,
@@ -130,8 +139,11 @@ class AppServiceProvider extends ServiceProvider
                 'tt_suaxes'=>$ttsx,
                 'hangxes' =>$hangxes,
                 'listCity'=>$listCity,
-                'groups'=>$groups
+                'groups'=>$groups,
+                'listUsers' =>$listUsers,
+                'menuPermission'=>$menuPermission
             ]);
+//            var_dump($menuPermission);exit();
         });
     }
     private  function get_total_baiviet(){
