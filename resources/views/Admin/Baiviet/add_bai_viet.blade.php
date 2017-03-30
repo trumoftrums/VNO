@@ -472,6 +472,7 @@
             <?php
             if(isset($result) && !empty($result)){
                 echo 'dhtmlx.alert("'.$result['mess'].'");';
+                echo 'parent.closing();';
             }
             ?>
             try{

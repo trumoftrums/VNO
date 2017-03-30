@@ -332,7 +332,7 @@ class HomeController extends Controller {
         Users::where('id', $user->id)->update([
             'username' => $data['username'],
             'email' => $data['email'],
-            'phone' => $data['phone'],
+            //'phone' => $data['phone'],
             'address' => $data['address'],
             'major' => $data['major'],
             'hobby' => $data['hobby']

@@ -52,13 +52,14 @@ Route::post('/changecaptcha', 'Frontend\HomeController@changecaptcha');
 
 Route::post('/baiviet/uploadimg', 'Admin\BaivietController@uploadimg');
 //Route::get('/get_thongso_init', 'Frontend\HomeController@get_thongso_init');
-Route::group(['prefix' => 'admin'], function()
+Route::get('/admin', 'Admin\DashboardController@index');
+Route::get('/admin/login', 'Auth\LoginController@login');
+Route::post('/admin/login', 'Auth\LoginController@login');
+Route::group(['prefix' => 'admin','middleware'=>'\App\Http\Middleware\AdminPermission::class'], function()
 {
     // Controllers Within The "App\Http\Controllers\Admin" Namespace
     Route::get('/dashboard', 'Admin\DashboardController@index');
-    Route::get('/', 'Admin\DashboardController@index');
-    Route::get('/login', 'Auth\LoginController@login');
-    Route::post('/login', 'Auth\LoginController@login');
+
     Route::get('/getbaiviet', 'Admin\BaivietController@get_bai_viet');
     Route::post('/getbaiviet', 'Admin\BaivietController@get_bai_viet');
     Route::post('/getbaivietedit', 'Admin\BaivietController@get_bai_viet_edit');
@@ -116,4 +117,5 @@ Route::group(['prefix' => 'admin'], function()
 //
 //    })->where('id', '[0-9]+');
 });
+
 

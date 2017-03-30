@@ -127,7 +127,18 @@
         Dhxcell.attachURL("/admin/profile");
 
     }
+    function CKupdate(CKEDITOR){
+        for ( instance in CKEDITOR.instances ){
+            CKEDITOR.instances[des_id].updateElement();
+            CKEDITOR.instances[des_id].setData('');
+        }
+    }
     var formPost,formNews,formUsers ;
+    var can_change_selected = true;
+    var current_row_id =0;
+    var baiviet_form_tabbar;
+
+    /* begin post */
     function init_form_posts(Dhxcell,DhxLayoutToolbar){
         if(Dhxcell!=null){
             var childLayout = DhxLayoutToolbar.attachLayout({
@@ -146,6 +157,8 @@
 
             userToolbar.setAlign("left");
             var cfg_button = [
+                {id: "publish", text: "Publish", type: "button", img: "ico-check.png"},
+                {type: "separator"},
                 {id: "add", text: "Add", type: "button", img: "ico-add.png"},
                 {type: "separator"},
                 {id: "edit", text: "Edit", type: "button", img: "ico-edit.png"},
@@ -236,7 +249,7 @@
                             text: "Bạn chắc chắn muốn public bài viết này?",
                             callback: function(ok) {
                                 if(ok){
-                                    pub_baiviet(bvid);
+                                    pub_baiviet(bvid,formPost,childLayout.cells("a"));
                                 }
 
                             }
@@ -295,6 +308,7 @@
 
         mygrid.loadXML("/admin/getbaiviet?"+"&date_fr="+date_fr+"&date_to="+date_to);
     }
+
     function add_baiviet(baiviet) {
         var baiviet_thongso;
         var viewportWidth = $(window).width();
@@ -304,7 +318,7 @@
         var left = (viewportWidth / 2) - (wd / 2) ;
         var top = (viewportHeight / 2) - (hg / 2);
         var win = myWins.createWindow("w_add", left, top, wd, hg);
-        var url = "posts/add_bai_viet";
+        var url = "/admin/posts/add_bai_viet";
         if(baiviet !== null && baiviet !=="undefined"){
             win.setText("Sửa bài viết ... ");
             url += "/"+baiviet;
@@ -344,6 +358,34 @@
         }
 
     }
+    function pub_baiviet(baivietID,formFilter, LayoutCell) {
+        if(baivietID != null && baivietID != "undefined"){
+            $.ajax({
+                url: '/admin/pubbaiviet',
+                dataType: "json",
+                cache: false,
+                type: 'post',
+                data: {
+                    baivietID: baivietID
+                },
+                beforeSend: function(xhr){
+
+//                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                },
+                success: function (data) {
+                    postGetDT(formFilter, LayoutCell);
+                    dhtmlx.alert(data.mess);
+                },
+                error: function () {
+                    dhtmlx.alert("Error,Please try again!");
+                }
+            });
+        }
+
+    }
+    /* begin post */
+
+    /* begin news */
     function init_form_news(Dhxcell,DhxLayoutToolbar){
         if(Dhxcell!=null){
             var childLayout = DhxLayoutToolbar.attachLayout({
@@ -488,7 +530,6 @@
 
         mygrid.loadXML("/admin/getnews?"+"&date_fr="+date_fr+"&date_to="+date_to);
     }
-
     function add_news(baiviet) {
 
         var viewportWidth = $(window).width();
@@ -523,13 +564,14 @@
             {type: "block", offsetLeft: 10, inputWidth: 980, list: [
                 {type: "input", name: "title",required:true, label: "Tiêu đề", labelWidth: 70, inputWidth: 800, value:baiviet.title},
                 {type: "input", name: "summary", required:true,label: "Tóm tắt", labelWidth: 70, rows: 5, inputWidth: 800, value:baiviet.summary},
+                {type: "input", name: "summary", required:true,label: "Tóm tắt", labelWidth: 70, rows: 5, inputWidth: 800, value:baiviet.summary},
                 {type: "input", id:"editor",name: "description", label: "Nội dung", rows: 12,labelWidth: 70, inputWidth: 800}
 
             ]},
             {type: "block", offsetLeft: 10, inputWidth: 980, list: [
-                {type: "image", id:"photo", required:true,name: "photo",labelWidth: 70, label: "Hình đại diện",inputWidth: 221, inputHeight: 65, imageHeight: 65, url: "./tool/dhtmlxform_image", value:baiviet.img},
+                {type: "image", id:"photo", required:true,name: "photo",labelWidth: 70, label: "Hình đại diện",inputWidth: 221, inputHeight: 65, imageHeight: 65, url: "/admin/tool/dhtmlxform_image", value:baiviet.img},
                 {type: "newcolumn"},
-                {type: "image", id:"thumbnail", required:true, offsetLeft:100 , name: "thumbnail",labelWidth: 80, label: "Thumbnail",inputWidth: 100, inputHeight: 65, imageHeight: 65, url: "./tool/dhtmlxform_image", value:baiviet.thumbnail}
+                {type: "image", id:"thumbnail", required:true, offsetLeft:100 , name: "thumbnail",labelWidth: 80, label: "Thumbnail",inputWidth: 100, inputHeight: 65, imageHeight: 65, url: "/admin/tool/dhtmlxform_image", value:baiviet.thumbnail}
             ]},
             {type: "block", offsetLeft: 10, inputWidth: 980, list: [
                 {type: "button", offsetLeft: 70, value: "Save", name: "btnSave"}
@@ -590,15 +632,6 @@
         CKEDITOR.instances[des_id].setData(baiviet.description);
 
     }
-    function CKupdate(CKEDITOR){
-        for ( instance in CKEDITOR.instances ){
-            CKEDITOR.instances[des_id].updateElement();
-            CKEDITOR.instances[des_id].setData('');
-        }
-    }
-    var can_change_selected = true;
-    var current_row_id =0;
-    var baiviet_form_tabbar;
     function delete_news(baivietID) {
         if(baivietID != null && baivietID != "undefined"){
             $.ajax({
@@ -624,7 +657,10 @@
         }
 
     }
+    /* end news */
 
+
+    /* begin user */
     function init_users(formFilter, LayoutCell) {
         var userLayout = LayoutCell.attachLayout({
             pattern: "2U",
@@ -666,6 +702,9 @@
         });
         var usermygrid = userLayout.cells("a").attachGrid();
         usermygrid.setImagePath("../js/dhtmlx5/imgs/");
+        usermygrid.enablePaging(true,50,10,"pagingArea",true,"infoArea");
+        usermygrid.enableBlockSelection();
+        usermygrid.setPagingSkin("bricks");
         usermygrid.init();
         usermygrid.attachEvent("onXLE", function(grid_obj,count){
             userLayout.cells("a").progressOff();
@@ -724,7 +763,7 @@
         var cfgform1 = [
             {type: "settings", position: "label-left"},
             {type: "block", offsetLeft: 10, inputWidth: 480, list: [
-                {type: "image", id:"photo", required:true,name: "photo",labelWidth: 80, label: "Avatar",inputWidth: 150, inputHeight: 150, imageHeight: 150, url: "./tool/dhtmlxform_image_user", value:user.avatar},
+                {type: "image", id:"photo", required:true,name: "photo",labelWidth: 80, label: "Avatar",inputWidth: 150, inputHeight: 150, imageHeight: 150, url: "/admin/tool/dhtmlxform_image_user", value:user.avatar},
                 {type: "input", name: "username",required:true, label: "Username", labelWidth: 80, inputWidth: 150, value:user.username},
                 {type: "input", name: "phone", required:true,label: "Phone", labelWidth: 80, inputWidth: 150, value:user.phone},
                 {type: "input", id:"email",name: "email", label: "Email", labelWidth: 80, inputWidth: 350, value: user.email},
@@ -811,6 +850,8 @@
         });
 
     }
+    /* end user */
+
 
     /* begin salon */
     function init_salon(formFilter, LayoutCell) {
@@ -840,6 +881,9 @@
         userToolbar.loadStruct(cfg_button);
         var usermygrid = userLayout.cells("a").attachGrid();
         usermygrid.setImagePath("../js/dhtmlx5/imgs/");
+        usermygrid.enablePaging(true,50,10,"pagingArea",true,"infoArea");
+        usermygrid.enableBlockSelection();
+        usermygrid.setPagingSkin("bricks");
         usermygrid.init();
 
         userToolbar.attachEvent("onClick", function (id) {
@@ -969,8 +1013,8 @@
                     }
                     ?>
                 ]},
-                {type: "image", name: "images",required:true,labelWidth: 80, label: "Cover image",inputWidth: 860, inputHeight: 137, imageWidth: 860, imageHeight: 137, url: "./tool/dhtmlxform_image_user", value:salon.images},
-                {type: "image",  name: "thumb",required:true,labelWidth: 80, label: "Thumnail",inputWidth: 135, inputHeight: 103,imageWidth: 135, imageHeight: 103, url: "./tool/dhtmlxform_image_user", value:salon.thumb},
+                {type: "image", name: "images",required:true,labelWidth: 80, label: "Cover image",inputWidth: 860, inputHeight: 137, imageWidth: 860, imageHeight: 137, url: "/admin/tool/dhtmlxform_image_user", value:salon.images},
+                {type: "image",  name: "thumb",required:true,labelWidth: 80, label: "Thumnail",inputWidth: 135, inputHeight: 103,imageWidth: 135, imageHeight: 103, url: "/admin/tool/dhtmlxform_image_user", value:salon.thumb},
                 {type: "input", name: "title",required:true, label: "Name", labelWidth: 80, inputWidth: 860, value:salon.title},
                 {type: "input", name: "phone", required:true,label: "Phone", labelWidth: 80, inputWidth: 400, value:salon.phone},
 
@@ -1119,6 +1163,9 @@
         userToolbar.loadStruct(cfg_button);
         var usermygrid = userLayout.cells("a").attachGrid();
         usermygrid.setImagePath("../js/dhtmlx5/imgs/");
+        usermygrid.enablePaging(true,50,10,"pagingArea",true,"infoArea");
+        usermygrid.enableBlockSelection();
+        usermygrid.setPagingSkin("bricks");
         usermygrid.init();
 
         userToolbar.attachEvent("onClick", function (id) {
@@ -1238,8 +1285,8 @@
             {type: "settings", position: "label-left"},
             {type: "block", offsetLeft: 0, inputWidth: 1000, list: [
 
-                {type: "image", name: "images",required:true,labelWidth: 80, label: "Cover image",inputWidth: 860, inputHeight: 137, imageWidth: 860, imageHeight: 137, url: "./tool/dhtmlxform_image_user", value:item.images},
-                {type: "image",  name: "thumb",required:true,labelWidth: 80, label: "Thumnail",inputWidth: 135, inputHeight: 103,imageWidth: 135, imageHeight: 103, url: "./tool/dhtmlxform_image_user", value:item.thumb},
+                {type: "image", name: "images",required:true,labelWidth: 80, label: "Cover image",inputWidth: 860, inputHeight: 137, imageWidth: 860, imageHeight: 137, url: "/admin/tool/dhtmlxform_image_user", value:item.images},
+                {type: "image",  name: "thumb",required:true,labelWidth: 80, label: "Thumnail",inputWidth: 135, inputHeight: 103,imageWidth: 135, imageHeight: 103, url: "/admin/tool/dhtmlxform_image_user", value:item.thumb},
                 {type: "input", name: "title",required:true, label: "Name", labelWidth: 80, inputWidth: 860, value:item.title},
                 {type: "input", name: "phone", required:true,label: "Phone", labelWidth: 80, inputWidth: 400, value:item.phone},
 
@@ -1388,6 +1435,9 @@
         userToolbar.loadStruct(cfg_button);
         var usermygrid = userLayout.cells("a").attachGrid();
         usermygrid.setImagePath("../js/dhtmlx5/imgs/");
+        usermygrid.enablePaging(true,50,10,"pagingArea",true,"infoArea");
+        usermygrid.enableBlockSelection();
+        usermygrid.setPagingSkin("bricks");
         usermygrid.init();
 
         userToolbar.attachEvent("onClick", function (id) {
@@ -1507,8 +1557,8 @@
             {type: "settings", position: "label-left"},
             {type: "block", offsetLeft: 0, inputWidth: 1000, list: [
 
-//                {type: "image", name: "images",required:true,labelWidth: 80, label: "Cover image",inputWidth: 860, inputHeight: 137, imageWidth: 860, imageHeight: 137, url: "./tool/dhtmlxform_image_user", value:item.images},
-                {type: "image",  name: "thumb",required:true,labelWidth: 80, label: "Thumnail",inputWidth: 135, inputHeight: 103,imageWidth: 135, imageHeight: 103, url: "./tool/dhtmlxform_image_user", value:item.thumb},
+//                {type: "image", name: "images",required:true,labelWidth: 80, label: "Cover image",inputWidth: 860, inputHeight: 137, imageWidth: 860, imageHeight: 137, url: "/admin/tool/dhtmlxform_image_user", value:item.images},
+                {type: "image",  name: "thumb",required:true,labelWidth: 80, label: "Thumnail",inputWidth: 135, inputHeight: 103,imageWidth: 135, imageHeight: 103, url: "/admin/tool/dhtmlxform_image_user", value:item.thumb},
                 {type: "input", name: "title",required:true, label: "Name", labelWidth: 80, inputWidth: 860, value:item.title},
                 {type: "input", name: "phone", required:true,label: "Phone", labelWidth: 80, inputWidth: 400, value:item.phone},
 
@@ -1649,6 +1699,9 @@
         userToolbar.loadStruct(cfg_button);
         var usermygrid = userLayout.cells("a").attachGrid();
         usermygrid.setImagePath("../js/dhtmlx5/imgs/");
+        usermygrid.enablePaging(true,50,10,"pagingArea",true,"infoArea");
+        usermygrid.enableBlockSelection();
+        usermygrid.setPagingSkin("bricks");
         usermygrid.init();
 
         userToolbar.attachEvent("onClick", function (id) {
@@ -1767,7 +1820,7 @@
             {type: "block", offsetLeft: 0, inputWidth: 1000, list: [
 
 
-                {type: "image",  name: "thumb",required:true,labelWidth: 80, label: "Thumnail",inputWidth: 135, inputHeight: 103,imageWidth: 135, imageHeight: 103, url: "./tool/dhtmlxform_image_user", value:item.thumb},
+                {type: "image",  name: "thumb",required:true,labelWidth: 80, label: "Thumnail",inputWidth: 135, inputHeight: 103,imageWidth: 135, imageHeight: 103, url: "/admin/tool/dhtmlxform_image_user", value:item.thumb},
                 {type: "input", name: "title",required:true, label: "Name", labelWidth: 80, inputWidth: 860, value:item.title},
                 {type: "input", name: "phone", required:true,label: "Phone", labelWidth: 80, inputWidth: 400, value:item.phone},
 
@@ -1879,6 +1932,17 @@
 
     }
     /* end baixe */
+
+    function closing(){
+        var win = myWins.window("w_add");
+        if(win != null){
+            try {
+                win.close();
+            }catch(e){
+
+            }
+        }
+    }
 </script>
 
 @endsection

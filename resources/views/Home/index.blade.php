@@ -143,7 +143,7 @@
                     </div>
                 </div>
                 <div class="left-item">
-                    <img src="./uploads/baiviet/thumb/m/{{$item->photo1}}"/>
+                    <img src="./uploads/baiviet/thumb/tablet/{{$item->photo1}}"/>
                     <span class="price"><?php echo number_format(str_replace(".","",$item->thongso['thongso_65']),0,",","."); ?>  VND</span>
                 </div>
                 <div class="right-item">

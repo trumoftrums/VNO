@@ -17,8 +17,35 @@ class NewsController extends Controller {
      * @param  int  $id
      * @return Response
      */
+
     private $PATH_UPLOAD_IMG = "\\uploads\\baiviet\\";
     private $URL_UPLOAD_IMG = "/uploads/baiviet/";
+    public function __construct()
+    {
+        if(!Auth::check()){
+            $result =array(
+                'result' =>false,
+                'mess' =>'Please login to use this function'
+            );
+            return response($result)
+                ->withHeaders([
+                    'Content-Type' => 'application/json'
+                ]);
+        }
+        $user = Auth::user();
+        if($user->group!=1){
+            $result =array(
+                'result' =>false,
+                'mess' =>'You do not have permission to access this function'
+            );
+            return response($result)
+                ->withHeaders([
+                    'Content-Type' => 'application/json'
+                ]);
+        }
+        exit();
+
+    }
     public function index()
     {
         if(!Auth::check()){
