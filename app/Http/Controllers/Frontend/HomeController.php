@@ -396,11 +396,31 @@ class HomeController extends Controller {
     }
     public function sendEmailContact()
     {
+        $MAIL_USERNAME = env("MAIL_USERNAME", "no-reply@vietnamoto.net");
         $param = Input::all();
-        Mail::send('emails.contact', array('name' => 'test', 'email' => $param["email"], 'content' => $param['content']), function ($message) {
-            $message->to('nghiembaospkit@gmail.com', 'Visitor')->subject('Visitor Feedback!');
+        $data = array('name' => 'test', 'email' => $param["email"], 'content' => $param['content']);
+        $header = array(
+            'from' =>array(
+                'email' =>$MAIL_USERNAME,
+                'name'=>'VietnamOTO.net'
+            ),
+            'to'=>array($param["email"]),
+            'cc' =>array(),
+            'bcc'=>array(),
+            'subject' =>"Con ga bao"
+        );
+
+        Mail::send('emails.contact', $data, function($message) use ($header)
+        {
+            $message->from($header['from']['email'], $header['from']['name']);
+            $message->to($header['to'])->cc($header['cc'])->bcc($header['bcc']);
+            $message->subject($header['subject']);
         });
-       /* Session::flash('flash_message', 'Send message successfully!');*/
+        echo 'DONE';exit();
+//        Mail::send('emails.contact', array('name' => 'test', 'email' => $param["email"], 'content' => $param['content']), function ($message) {
+//            $message->to('leethong.it@gmail.com', 'Visitor')->subject('Visitor Feedback!');
+//        });
+//        Session::flash('flash_message', 'Send message successfully!');
 
     }
     public function newsDetail($id)
