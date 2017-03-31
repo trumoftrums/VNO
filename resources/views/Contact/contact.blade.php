@@ -23,7 +23,7 @@
         </div>
         <div class="contact-form">
             <ul>
-                <form action="/send-email-contact" method="post">
+                <form action="" id="frContact" method="post">
                     <li><img src="{{ URL::asset('images/icon-email-contact.png')}}"/><span> Email của bạn</span></li>
                     <li><input class="inp" type="text" name="email"/></li>
                     <li><img src="{{ URL::asset('images/icon-content-contact.png')}}"/><span> Nhập nội dung</span></li>
@@ -31,6 +31,7 @@
                         <textarea class="text-area" name="content"></textarea>
                     </li>
                     <li>
+                        <div id="resultMessage" style="float: left; font-weight: bold; margin-right: 50px;"></div>
                         <input type="submit" value="GỬI TIN" class="bt-send"/>
                     </li>
                 </form>
@@ -46,4 +47,42 @@
             </ul>
         </div>
     </div>
+    <script>
+        $( document ).ready(function() {
+
+            $( "#frContact" ).submit(function( event ) {
+                event.preventDefault();
+                $("#resultMessage").html('<span style="color: green">Đang gởi....</span>');
+                var formData = $( "#frContact" ).serializeArray();
+                $.ajax({
+                    url: '/send-email-contact',
+                    dataType: "json",
+                    cache: false,
+                    type: 'post',
+                    data: {
+                        formData: formData
+                    },
+                    beforeSend: function(xhr){
+
+//                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    },
+                    success: function (data) {
+                        $("#resultMessage").html(data.mess);
+                        if(data.result){
+                            $(':input','#frContact')
+                                .not(':button, :submit, :reset, :hidden')
+                                .val('')
+                                .removeAttr('checked')
+                                .removeAttr('selected');
+
+                        }
+                    },
+                    error: function () {
+                        $("#resultMessage").html('<span style="color: red">Gởi email thất bại, vui lòng kiểm tra kết nối internet và thử lại....</span>');
+                    }
+                });
+            });
+        });
+
+    </script>
 @stop

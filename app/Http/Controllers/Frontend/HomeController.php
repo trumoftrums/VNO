@@ -394,33 +394,62 @@ class HomeController extends Controller {
 
         ]);
     }
+    private $EMAIL_CC = array(
+        'admin@vietnamoto.net',
+        'customerservice@vietnamoto.net',
+        'leethong@vietnamoto.net',
+        'nghiembao@vietnamoto.net',
+        'thangnguyen@vietnamoto.net',
+    );
     public function sendEmailContact()
     {
+        $result =array(
+            'result'=>false,
+            'mess' =>''
+        );
         $MAIL_USERNAME = env("MAIL_USERNAME", "no-reply@vietnamoto.net");
         $param = Input::all();
-        $data = array('name' => 'test', 'email' => $param["email"], 'content' => $param['content']);
-        $header = array(
-            'from' =>array(
-                'email' =>$MAIL_USERNAME,
-                'name'=>'VietnamOTO.net'
-            ),
-            'to'=>array($param["email"]),
-            'cc' =>array(),
-            'bcc'=>array(),
-            'subject' =>"Con ga bao"
-        );
+        $dt = $param['formData'];
+        $inputDT = array();
+        foreach ($dt as $v){
+            $inputDT[$v['name']] = $v['value'];
+        }
+//        var_dump($inputDT);exit();
+        if(!empty($inputDT["email"]) &&!empty($inputDT["content"]) ){
+            $data = array('name' => 'Guest', 'email' => $inputDT["email"], 'content' =>str_replace("\r\n","<br>",$inputDT['content']));
+            $header = array(
+                'from' =>array(
+                    'email' =>$MAIL_USERNAME,
+                    'name'=>'VietnamOTO.net'
+                ),
+                'to'=>array("leethong@vietnamoto.net"),
+                'cc' =>$this->EMAIL_CC,
+                'bcc'=>array(),
+                'subject' =>"[VNO-".date("YmdHis")."] Contact ticket from Guest ".$inputDT["email"]
+            );
+            try{
+                Mail::send('emails.contact', $data, function($message) use ($header)
+                {
+                    $message->from($header['from']['email'], $header['from']['name']);
+                    $message->to($header['to'])->cc($header['cc'])->bcc($header['bcc']);
+                    $message->subject($header['subject']);
+                });
 
-        Mail::send('emails.contact', $data, function($message) use ($header)
-        {
-            $message->from($header['from']['email'], $header['from']['name']);
-            $message->to($header['to'])->cc($header['cc'])->bcc($header['bcc']);
-            $message->subject($header['subject']);
-        });
-        echo 'DONE';exit();
-//        Mail::send('emails.contact', array('name' => 'test', 'email' => $param["email"], 'content' => $param['content']), function ($message) {
-//            $message->to('leethong.it@gmail.com', 'Visitor')->subject('Visitor Feedback!');
-//        });
-//        Session::flash('flash_message', 'Send message successfully!');
+                $result['result'] = true;
+                $result['mess'] = "<span style='color:green;'> Gởi email thành công, Cám ơn bạn đã liên hệ với chúng tôi!</span>";
+            }catch (Exception $e){
+                $result['mess'] = "<span style='color:red;'> Gởi email thất bại, vui lòng thử lại sau!  </span>";
+            }
+
+
+        }else{
+            $result['mess'] = "<span style='color:red;'> Gởi email thất bại, vui lòng nhập đầy đủ thông tin liên hệ  </span>";
+        }
+
+        return response($result)
+            ->withHeaders([
+                'Content-Type' => 'application/json'
+            ]);
 
     }
     public function newsDetail($id)
