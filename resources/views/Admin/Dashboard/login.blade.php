@@ -22,10 +22,13 @@
     <div>
         <div>
 
-            <h1 class="logo-name">IN+</h1>
+            <div class="logo">
+
+                <a href="{{ URL::to('') }}"><img class="logo-vno" src="{{ URL::asset('images/logo.png')}}"/></a>
+            </div>
 
         </div>
-        <h3>Welcome to VNO</h3>
+
 
         <form class="m-t" role="form" method="post" action="">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">

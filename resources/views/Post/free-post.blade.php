@@ -33,9 +33,7 @@
     #tab4 .dhxform_obj_material div.dhxform_item_label_left{
         padding-top: 6px;
     }
-    .img-cap{
-        cursor: pointer;
-    }
+
 </style>
 @section('content')
     <div class="detail-post">
@@ -460,6 +458,7 @@
             }
 
         });
+        /*
         $(".img-cap").click(function () {
             $.ajax({
                 url: '/changecaptcha',
@@ -473,7 +472,7 @@
                 }
             });
         });
-
+        */
 
         $("input:radio[name=optradio]").click(function () {
             var value = $(this).val();

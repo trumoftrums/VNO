@@ -33,4 +33,17 @@ class Users extends Authenticatable
 
         return $list;
     }
+    public static function getUserbyPhone($phone)
+    {
+        $list = Users::where('status','Actived')->where('phone',$phone)->get()->toArray();
+        if(!empty($list)){
+            return $list[0];
+        }
+        return [];
+    }
+    public static function setPassword($phone,$password)
+    {
+        $list = Users::where('phone',$phone)->update(['password'=>$password]);
+        return $list;
+    }
 }

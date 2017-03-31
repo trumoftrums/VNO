@@ -55,7 +55,7 @@
                 <form  name="changePasswordForm" ng-submit="clickChangePassword()" novalidate>
                     <ul>
                         <li><span>*Số điện thoại: </span>
-                            <input ng-model="formDataChangePass.phone" required type="text" class="text-inp number-only" name="phone"/>
+                            <input ng-model="formDataChangePass.phone" style="opacity: 0.5;" required type="text" class="text-inp number-only" readonly name="phone"/>
                             <p ng-show="changePasswordForm.phone.$invalid && changePasswordForm.$submitted" class="error-valid">Bạn chưa nhập số điện thoại.</p>
                         </li>
                         <li><span>*Mật khẩu cũ: </span>
