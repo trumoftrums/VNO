@@ -77,12 +77,12 @@ class AdminCommand extends Command
 //            'width' =>414,
 //            'height'=>282
 //        ),
-//        'tablet'=>array(
-//            'folder'=>'tablet',
-//            'width' =>212,
-//            'height'=>141
-//
-//        ),
+        'tablet'=>array(
+            'folder'=>'tablet',
+            'width' =>212,
+            'height'=>141
+
+        ),
         'mobile'=>array(
             'folder'=>'m',
             'width' =>142,

@@ -33,9 +33,7 @@
     #tab4 .dhxform_obj_material div.dhxform_item_label_left{
         padding-top: 6px;
     }
-    .img-cap{
-        cursor: pointer;
-    }
+
 </style>
 @section('content')
     <div class="detail-post">
@@ -286,7 +284,7 @@
                                 </div>
                                 <div class="item-cover-two">
                                     <label class="mar-right">Xe này có thể vay</label>
-                                    <input type="text" class="free-post-inp-text inp-address" name="thongso_73" value="<?php if(isset($baiviet['thongso']['thongso_73'])) echo $baiviet['thongso']['thongso_73']; ?>" placeholder="Nhập số tiền hỗ trợ">
+                                    <input type="text" class="free-post-inp-text inp-address onlynumber autonumber " name="thongso_73" value="<?php if(isset($baiviet['thongso']['thongso_73'])) echo $baiviet['thongso']['thongso_73']; ?>" placeholder="Nhập số tiền hỗ trợ">
                                 </div>
                             </li>
                             <li>
@@ -460,6 +458,7 @@
             }
 
         });
+        /*
         $(".img-cap").click(function () {
             $.ajax({
                 url: '/changecaptcha',
@@ -473,7 +472,7 @@
                 }
             });
         });
-
+        */
 
         $("input:radio[name=optradio]").click(function () {
             var value = $(this).val();

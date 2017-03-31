@@ -17,8 +17,35 @@ class NewsController extends Controller {
      * @param  int  $id
      * @return Response
      */
+
     private $PATH_UPLOAD_IMG = "\\uploads\\baiviet\\";
     private $URL_UPLOAD_IMG = "/uploads/baiviet/";
+    public function __construct()
+    {
+        if(!Auth::check()){
+            $result =array(
+                'result' =>false,
+                'mess' =>'Please login to use this function'
+            );
+            return response($result)
+                ->withHeaders([
+                    'Content-Type' => 'application/json'
+                ]);
+        }
+        $user = Auth::user();
+        if($user->group!=1){
+            $result =array(
+                'result' =>false,
+                'mess' =>'You do not have permission to access this function'
+            );
+            return response($result)
+                ->withHeaders([
+                    'Content-Type' => 'application/json'
+                ]);
+        }
+        exit();
+
+    }
     public function index()
     {
         if(!Auth::check()){
@@ -56,7 +83,7 @@ class NewsController extends Controller {
         $content .= '</head>';
 
 
-        $arr_final = News::where('status','<>','DE')->get()->toArray();
+        $arr_final = News::where('status','<>','DE')->orderBy('updated_at', 'desc')->get()->toArray();
         $no =1;
         foreach ($arr_final as $v){
 //            var_dump($v);
@@ -238,7 +265,7 @@ class NewsController extends Controller {
             $r = News::where('id',$bvid)->update(["status"=>"DE"]);
             if($r){
                 $result['result'] = true;
-                $result['mess'] = "Xóa bài viết thành công";
+                $result['mess'] = "Xóa tin thành công";
             }else{
                 $result['mess'] = "Xóa không thành công, vui lòng thử lại!!";
             }

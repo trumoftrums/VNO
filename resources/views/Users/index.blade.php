@@ -55,7 +55,7 @@
                 <form  name="changePasswordForm" ng-submit="clickChangePassword()" novalidate>
                     <ul>
                         <li><span>*Số điện thoại: </span>
-                            <input ng-model="formDataChangePass.phone" required type="text" class="text-inp number-only" name="phone"/>
+                            <input ng-model="formDataChangePass.phone" style="opacity: 0.5;" required type="text" class="text-inp number-only" readonly name="phone"/>
                             <p ng-show="changePasswordForm.phone.$invalid && changePasswordForm.$submitted" class="error-valid">Bạn chưa nhập số điện thoại.</p>
                         </li>
                         <li><span>*Mật khẩu cũ: </span>
@@ -96,8 +96,8 @@
                                     </div>
                                 </div>
                                 <div class="left-item">
-                                    <img src="./uploads/baiviet/{{$item->photo1}}"/>
-                                    <span class="price">{{$item->thongso['thongso_65']}} VND</span>
+                                    <img src="./uploads/baiviet/thumb/tablet/{{$item->photo1}}"/>
+                                    <span class="price">{{number_format(str_replace(".","",$item->thongso['thongso_65']),0,",",".")}} VND</span>
                                 </div>
                                 <div class="right-item">
                                     <h4>{{$item->tieu_de}}</h4>

@@ -2143,3 +2143,6 @@ textarea:focus, input:focus{
 .slide-show-mobile, .guide-mobile{
     display: none;
 }
+.img-cap{
+    cursor: pointer;
+}

@@ -17,6 +17,8 @@ Route::post('/', 'Frontend\HomeController@index');
 Route::get('/user', 'Frontend\HomeController@users');
 Route::post('/register', 'Frontend\HomeController@register');
 Route::post('/login-frontend', 'Auth\LoginController@loginFrontend');
+Route::post('/forgot-password', 'Auth\ForgotPasswordController@index');
+
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('/thong-tin-user', 'Frontend\HomeController@userInfo');
 Route::post('/update-info-user', 'Frontend\HomeController@updateUserInfo');
@@ -53,13 +55,14 @@ Route::post('/changecaptcha', 'Frontend\HomeController@changecaptcha');
 
 Route::post('/baiviet/uploadimg', 'Admin\BaivietController@uploadimg');
 //Route::get('/get_thongso_init', 'Frontend\HomeController@get_thongso_init');
-Route::group(['prefix' => 'admin'], function()
+Route::get('/admin', 'Admin\DashboardController@index');
+Route::get('/admin/login', 'Auth\LoginController@login');
+Route::post('/admin/login', 'Auth\LoginController@login');
+Route::group(['prefix' => 'admin','middleware'=>'\App\Http\Middleware\AdminPermission::class'], function()
 {
     // Controllers Within The "App\Http\Controllers\Admin" Namespace
     Route::get('/dashboard', 'Admin\DashboardController@index');
-    Route::get('/', 'Admin\DashboardController@index');
-    Route::get('/login', 'Auth\LoginController@login');
-    Route::post('/login', 'Auth\LoginController@login');
+
     Route::get('/getbaiviet', 'Admin\BaivietController@get_bai_viet');
     Route::post('/getbaiviet', 'Admin\BaivietController@get_bai_viet');
     Route::post('/getbaivietedit', 'Admin\BaivietController@get_bai_viet_edit');
@@ -68,6 +71,8 @@ Route::group(['prefix' => 'admin'], function()
     Route::post('/save_bai_viet', 'Admin\BaivietController@save_bai_viet');
     Route::post('/tool/dhtmlxform_image', 'Admin\ToolController@dhtmlxform_image');
     Route::get('/tool/dhtmlxform_image', 'Admin\ToolController@dhtmlxform_image');
+    Route::post('/tool/dhtmlxform_image_user', 'Admin\ToolController@dhtmlxform_image_user');
+    Route::get('/tool/dhtmlxform_image_user', 'Admin\ToolController@dhtmlxform_image_user');
 
     Route::get('/posts', 'Admin\BaivietController@index');
     Route::get('/news', 'Admin\NewsController@index');
@@ -78,6 +83,8 @@ Route::group(['prefix' => 'admin'], function()
     Route::get('/posts/get_total_news', 'Admin\BaivietController@get_total_news');
     Route::get('/posts/add_bai_viet', 'Admin\BaivietController@add_bai_viet');
     Route::post('/posts/add_bai_viet', 'Admin\BaivietController@add_bai_viet');
+    Route::get('/posts/add_bai_viet/{id_slug}', 'Admin\BaivietController@add_bai_viet');
+    Route::post('/posts/add_bai_viet/{id_slug}', 'Admin\BaivietController@add_bai_viet');
 
 
     Route::get('/users', 'Admin\UsersController@index');
@@ -85,11 +92,33 @@ Route::group(['prefix' => 'admin'], function()
     Route::post('/getuserinfo', 'Admin\UsersController@get_user_info');
     Route::post('/tool/dhtmlxform_photo_user', 'Admin\ToolController@dhtmlxform_photo_user');
     Route::get('/tool/dhtmlxform_photo_user', 'Admin\ToolController@dhtmlxform_photo_user');
+    Route::get('/profile', 'Admin\UsersController@getProfile');
+
+    Route::get('/getsalons', 'Admin\SalonController@get');
+    Route::post('/save_salon', 'Admin\SalonController@save_salon');
+    Route::post('/getsaloninfo', 'Admin\SalonController@getsaloninfo');
+    Route::post('/delsalon', 'Admin\SalonController@delete');
+
+    Route::get('/getsuaxes', 'Admin\SuaxeController@get');
+    Route::post('/save_suaxe', 'Admin\SuaxeController@save');
+    Route::post('/getsuaxeinfo', 'Admin\SuaxeController@getinfo');
+    Route::post('/delsuaxe', 'Admin\SuaxeController@delete');
 
 
+    Route::get('/getcuuhos', 'Admin\CuuhoController@get');
+    Route::post('/save_cuuho', 'Admin\CuuhoController@save');
+    Route::post('/getcuuhoinfo', 'Admin\CuuhoController@getinfo');
+    Route::post('/delcuuho', 'Admin\CuuhoController@delete');
+
+
+    Route::get('/getbaixes', 'Admin\BaixeController@get');
+    Route::post('/save_baixe', 'Admin\BaixeController@save');
+    Route::post('/getbaixeinfo', 'Admin\BaixeController@getinfo');
+    Route::post('/delbaixe', 'Admin\BaixeController@delete');
 
 //    Route::get('/tool/dhtmlxform_image/{id}', function ($id) {
 //
 //    })->where('id', '[0-9]+');
 });
+
 

@@ -538,7 +538,7 @@
                             <input class="bt-in-pop" type="submit" value="Đăng nhập"/>
                         </li>
                     </ul>
-                    <a class="a-forgot" href="#"><img src="{{ URL::asset('images/icon-question.png')}}"/> Bạn quên mật khẩu của mình?</a>
+                    <a class="a-forgot" href="#" ng-click="clickToForgotPopup()" ><img src="{{ URL::asset('images/icon-question.png')}}"/> Bạn quên mật khẩu của mình?</a>
                     <span class="spa-reg"><img src="{{ URL::asset('images/icon-reg.png')}}"/> Bạn chưa có tài khoản. Hãy <a ng-click="clickToRegPopup()" class="a-regs" href="#">đăng ký</a> cùng chúng tôi</span>
                 </form>
             </div>
@@ -555,11 +555,63 @@
         </div>
     </div>
 </div>
+<!-- Modal forgot-->
+<div id="myModalForgot" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <img src="{{ URL::asset('images/icon-close-popup.png')}}"/>
+                </button>
+                <img class="img-logo-popup" src="{{ URL::asset('images/logo.png')}}"/>
+                <img class="img-slogan-popup" src="{{ URL::asset('images/slogan-reg.png')}}"/>
+            </div>
+            <img class="img-line" src="{{ URL::asset('images/line.png')}}"/>
+            <div class="modal-body">
+                <div ng-show="showBefore">
+                    <p class="p-in-pop">BẠN QUÊN MẬT KHẨU?<BR> HÃY NHẬP SỐ ĐIỆN THOẠI ĐÃ ĐĂNG KÝ VỚI VIETNAMOTO.NET</p>
+                    <form class="form-reg" id="form-reg" name="forgotForm" ng-submit="clickForgot()" novalidate>
+                        <ul>
+                            <li>
+                                <span>Số điện thoại:</span>
+                                <input ng-model="formData.phone" class="inp form-control number-only" placeholder="Nhập số điện thoại" name="phone" id ="forgot-phone" required type="text"/>
+                                <p ng-show="forgotForm.phone.$invalid && forgotForm.$submitted" class="error-valid">Bạn chưa nhập số điện thoại.</p>
+                            </li>
+
+                            <li>
+                                <span>Mã xác nhận</span>
+                                <input type="text" ng-model="formData.code" style="width:30%;" class="inp form-control" placeholder="Nhập mã" value="" name="code" id="captcha">
+                                <img  style="width:30%;"  class="img-cap" src="{{Captcha::src()}}"/>
+                                <p ng-show="forgotForm.code.$invalid && forgotForm.$submitted" class="error-valid">Bạn chưa nhập mã xác thực.</p>
+                            </li>
+
+                            <li>
+                                <input class="bt-in-pop" type="submit" value="Gởi mật khẩu mới"/>
+                            </li>
+                        </ul>
+                    </form>
+                    <p class="p-in-pop">VIETNAMOTO.NET SẼ GỞI MẬT KHẨU MỚI QUA ĐIỆN THOẠI CỦA BẠN</p>
+                </div>
+                <div ng-show="showAfter" class="after-reg">
+                    <p>GỞI MẬT KHẨU MỚI THÀNH CÔNG</p>
+                    <p>VUI LÒNG KIỂM TRA TIN NHẮN SMS ĐỂ BIẾT ĐƯỢC MẬT KHẨU MỚI!</p>
+                    <span ng-click="clickToLogPopup()" id="click-to-log-popup">CLICK ĐỂ ĐĂNG NHẬP VIETNAMOTO.NET</span>
+                </div>
+                <div ng-show="showError" style="color: red;" id ="forgot-mess" class="after-reg">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 <script type="text/javascript">
     var app = angular.module('myApp', []);
     app.controller('registerCtrl', function ($scope, $http) {
         $scope.clickOpenModal = function(){
             $scope.showAfter = false;
+            $scope.showError = false;
             $scope.showBefore = true;
             $scope.regForm.$setPristine();
             $scope.regForm.$setUntouched();
@@ -611,6 +663,7 @@
             $scope.existphone = false;
             $scope.notexistphone = false;
             $scope.wrongpass = false;
+            $scope.showError = false;
         };
         resetValidateForm();
         $scope.clickRegister = function () {
@@ -668,9 +721,34 @@
                 });
             }
         }
+        $scope.clickForgot = function () {
+            if ($scope.forgotForm.$valid) {
+                $http({
+                    method: 'POST',
+                    url: '/forgot-password',
+                    data: $.param($scope.formData),
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                    .success(function (data) {
+                        if (data.result) {
+                            $scope.formData.phone = '';
+                            $scope.formData.code ='';
+                            changeCaptcha();
+                            $scope.showError = false;
+                            $scope.showBefore = false;
+                            $scope.showAfter = true;
+
+                        } else {
+                            document.getElementById('forgot-mess').innerHTML = data.mess;
+                            $scope.showError = true;
+                        }
+                    });
+            }
+        }
         $scope.clickToLogPopup = function(){
             $("#myModalLog").modal('show');
             $("#myModalReg").modal('hide');
+            $("#myModalForgot").modal('hide');
             $scope.logForm.$setPristine();
             $scope.logForm.$setUntouched();
             $scope.notexistphone = false;
@@ -679,6 +757,20 @@
         $scope.clickToRegPopup = function(){
             $("#myModalLog").modal('hide');
             $("#myModalReg").modal('show');
+            $("#myModalForgot").modal('hide');
+            $scope.showAfter = false;
+            $scope.showBefore = true;
+            $scope.regForm.$setPristine();
+            $scope.regForm.$setUntouched();
+            $scope.formData = {};
+            $scope.existphone = false;
+        };
+        $scope.clickToForgotPopup = function(){
+            changeCaptcha();
+            $("#myModalLog").modal('hide');
+            $("#myModalReg").modal('hide');
+            $("#myModalForgot").modal('show');
+
             $scope.showAfter = false;
             $scope.showBefore = true;
             $scope.regForm.$setPristine();
@@ -691,11 +783,16 @@
         @if(\Illuminate\Support\Facades\Auth::check())
         $scope.formDataInfo = {
             username: '{{$user->username}}',
-            phone: parseInt('{{$user->phone}}'),
+            phone: '{{$user->phone}}',
             email: '{{$user->email}}',
             address: '{{$user->address}}',
             major: '{{$user->major}}',
             hobby: '{{$user->hobby}}'
+        };
+        $scope.formDataChangePass = {
+            phone: '{{$user->phone}}',
+            password: '',
+            newpassword: '',
         };
         @endif
         $scope.clickUpdateInfo = function () {
@@ -906,6 +1003,23 @@
         }
 
     });
+    $(".img-cap").click(function () {
+        changeCaptcha();
+    });
+    function changeCaptcha(){
+
+        $.ajax({
+            url: '/changecaptcha',
+            type: 'POST',
+            dataType: "html",
+            cache: false,
+            enctype: 'multipart/form-data',
+            data : {},
+            success : function(data) {
+                $(".img-cap").attr("src",data);
+            }
+        });
+    }
 </script>
 </body>
 </html>

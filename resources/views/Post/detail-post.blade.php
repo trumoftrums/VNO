@@ -135,24 +135,24 @@
             <div class="cover-img-post">
                 <div class="item-img-detail">
                     <img onclick="openModal();currentSlide(1)" class="hover-shadow"
-                         src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo1)}}"/>
+                         src="{{ URL::asset('uploads/baiviet/thumb/tablet/'.$detailPost->photo1)}}"/>
 
                 </div>
                 <div class="item-img-detail">
                     <img onclick="openModal();currentSlide(2)" class="hover-shadow"
-                         src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo2)}}"/>
+                         src="{{ URL::asset('uploads/baiviet/thumb/tablet/'.$detailPost->photo2)}}"/>
                 </div>
                 <div class="item-img-detail">
                     <img onclick="openModal();currentSlide(3)" class="hover-shadow"
-                         src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo3)}}"/>
+                         src="{{ URL::asset('uploads/baiviet/thumb/tablet/'.$detailPost->photo3)}}"/>
                 </div>
                 <div class="item-img-detail">
                     <img onclick="openModal();currentSlide(4)" class="hover-shadow"
-                         src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo4)}}"/>
+                         src="{{ URL::asset('uploads/baiviet/thumb/tablet/'.$detailPost->photo4)}}"/>
                 </div>
                 <div class="item-img-detail">
                     <img onclick="openModal();currentSlide(5)" class="hover-shadow"
-                         src="{{ URL::asset('uploads/baiviet/'.$detailPost->photo5)}}"/>
+                         src="{{ URL::asset('uploads/baiviet/thumb/tablet/'.$detailPost->photo5)}}"/>
                 </div>
             </div>
         </div>
@@ -290,7 +290,7 @@
                 <div class="right">
                     <p class="p-title-area">SỐ TIỀN CÓ THỂ VAY</p>
                     <div class="cover-price-bank">
-                        <p class="price"><img src="{{ URL::asset('images/icon-detail-post/icon-price.png')}}"/>@if(isset($detailPost->thongso['thongso_73'])) {{$detailPost->thongso['thongso_73']}} @endif VND</p>
+                        <p class="price"><img src="{{ URL::asset('images/icon-detail-post/icon-price.png')}}"/><?php if(isset($detailPost->thongso['thongso_73'])&& !empty($detailPost->thongso['thongso_73'])) { if (is_numeric(str_replace(".","",$detailPost->thongso['thongso_73']))){ echo number_format(str_replace(".","",$detailPost->thongso['thongso_73']),0,",",".");}else{ echo $detailPost->thongso['thongso_73'];}} ?> VND</p>
                         <img class="img-bank" src="{{ URL::asset('images/icon-detail-post/img-bank.png')}}"/>
                     </div>
                 </div>
@@ -306,7 +306,7 @@
                 <p class="p-relate-post"><img src="{{ URL::asset('images/icon-detail-post/icon-car.png')}}"/>XE CÙNG THỂ LOẠI</p>
                 @foreach($listPostRelatedType as $item)
                     <div class="item-relate-post">
-                        <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><img class="thumb" src="{{ URL::asset('/uploads/baiviet/'.$item->photo1)}}"/></a>
+                        <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><img class="thumb" src="{{ URL::asset('/uploads/baiviet/thumb/tablet/'.$item->photo1)}}"/></a>
                         <div class="right-item">
                             <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><span class="sp-title">@if(isset($item->tieu_de)) {{$item->tieu_de}} @endif</span></a>
                             <span><?php if( isset($item->thongso['thongso_65'])) echo number_format(str_replace(".","",$item->thongso['thongso_65']),0,",","."); ?> VNĐ</span>
@@ -324,7 +324,7 @@
                 <p class="p-relate-post"><img src="{{ URL::asset('images/icon-detail-post/icon-car.png')}}"/>XE CÙNG GIÁ</p>
                 @foreach($listPostRelatedPrice as $item)
                     <div class="item-relate-post">
-                        <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><img class="thumb" src="{{ URL::asset('/uploads/baiviet/'.$item->photo1)}}"/></a>
+                        <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><img class="thumb" src="{{ URL::asset('/uploads/baiviet/thumb/tablet/'.$item->photo1)}}"/></a>
                         <div class="right-item">
                             <a href="{{ URL::to('/bai-dang/'.$item->id.'/'.str_slug($item->tieu_de, '-')) }}"><span class="sp-title">@if(isset($item->tieu_de)) {{$item->tieu_de}} @endif</span></a>
                             <span><?php if( isset($item->thongso['thongso_65'])) echo number_format(str_replace(".","",$item->thongso['thongso_65']),0,",","."); ?> VNĐ</span>
