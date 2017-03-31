@@ -1060,12 +1060,12 @@ textarea:focus, input:focus{
     width: 100%;
 }
 .news-page .contact-map{
-    width: 80%;
+    width: 90%;
     border: 1px solid #0c834a;
     margin: 15px auto;
  }
 .news-page .contact-form{
-    width: 80%;
+    width: 90%;
     margin: 30px auto;
 }
 .news-page .contact-form ul{
@@ -1122,7 +1122,7 @@ textarea:focus, input:focus{
     border-top: 1px solid #0c834a;
 }
 .news-page .header-news img.line-header{
-    width: 100%;
+    width: 98%;
     height: 10px;
     opacity: 0.5;
     margin: 10px;

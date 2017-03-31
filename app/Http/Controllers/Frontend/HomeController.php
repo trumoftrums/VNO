@@ -17,10 +17,12 @@ use App\City;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
 use Request;
 use DB;
 use Illuminate\Support\Facades\Redirect;
 use Mews\Captcha\Facades\Captcha;
+use Symfony\Component\Console\Input\InputInterface;
 use Validator;
 class HomeController extends Controller {
 
@@ -391,6 +393,15 @@ class HomeController extends Controller {
         return View('Contact.contact', [
 
         ]);
+    }
+    public function sendEmailContact()
+    {
+        $param = Input::all();
+        Mail::send('emails.contact', array('name' => 'test', 'email' => $param["email"], 'content' => $param['content']), function ($message) {
+            $message->to('nghiembaospkit@gmail.com', 'Visitor')->subject('Visitor Feedback!');
+        });
+       /* Session::flash('flash_message', 'Send message successfully!');*/
+
     }
     public function newsDetail($id)
     {

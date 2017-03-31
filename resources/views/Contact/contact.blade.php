@@ -23,7 +23,7 @@
         </div>
         <div class="contact-form">
             <ul>
-                <form action="#" method="post">
+                <form action="/send-email-contact" method="post">
                     <li><img src="{{ URL::asset('images/icon-email-contact.png')}}"/><span> Email của bạn</span></li>
                     <li><input class="inp" type="text" name="email"/></li>
                     <li><img src="{{ URL::asset('images/icon-content-contact.png')}}"/><span> Nhập nội dung</span></li>
