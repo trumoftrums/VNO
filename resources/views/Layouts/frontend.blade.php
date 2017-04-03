@@ -421,14 +421,14 @@
             <p>Vietnamoto.net - Bản quyền @ 2013 HoangSangGroup</p>
             <span>02 Phạm Văn Đồng, P. Linh Đông, Q. Thủ Đức, Tp.HCM</span>
             <span>Hotline: 089 815 4544</span>
-            <span>Email: customerservice@vietnamoto.net</span>
+            <span>Email: cskh@vietnamoto.net</span>
         </div>
     </div>
     <div class="footer">
             <div class="info">
                 <p>Vietnamoto.net - Bản quyền @ 2013 HoangSangGroup</p>
                 <span>Địa chỉ: 02, Phạm Văn Đồng, P. Linh Đông, Q. Thủ Đức, Tp.HCM</span>
-                <span>Hotline: 089 815 4544 - Email: customerservice@vietnamoto.net</span>
+                <span>Hotline: 089 815 4544 - Email: cskh@vietnamoto.net</span>
             </div>
             <div class="menu-bottom">
                 <ul>
