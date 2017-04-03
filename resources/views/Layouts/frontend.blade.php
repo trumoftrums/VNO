@@ -27,6 +27,7 @@
 
     </script>
 </head>
+<?php $captchaURL =Captcha::src(); ?>
 <body ng-app="myApp" ng-controller="registerCtrl">
 <div class="container-fluid">
     <div class="header">
@@ -582,7 +583,7 @@
                             <li>
                                 <span>Mã xác nhận</span>
                                 <input type="text" ng-model="formData.code" style="width:30%;" class="inp form-control" placeholder="Nhập mã" value="" name="code" id="captcha">
-                                <img  style="width:30%;"  class="img-cap" src="{{Captcha::src()}}"/>
+                                <img  style="width:30%;"  class="img-cap" src="{{$captchaURL}}"/>
                                 <p ng-show="forgotForm.code.$invalid && forgotForm.$submitted" class="error-valid">Bạn chưa nhập mã xác thực.</p>
                             </li>
 
@@ -607,6 +608,7 @@
     </div>
 </div>
 <script type="text/javascript">
+    var captchaURL = '{{$captchaURL}}';
     var app = angular.module('myApp', []);
     app.controller('registerCtrl', function ($scope, $http) {
         $scope.clickOpenModal = function(){

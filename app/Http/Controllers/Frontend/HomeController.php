@@ -677,6 +677,8 @@ class HomeController extends Controller {
                     }
                     $_POST = array();
 
+                }else{
+
                 }
             }
         }

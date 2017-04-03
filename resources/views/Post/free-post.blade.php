@@ -332,7 +332,7 @@
                         </ul>
                     </div>
                 </div>
-                <?php $src_captcha = Captcha::src();?>
+
                 <div id="tab2" class="tab-pane fade">
                     <p class="p-title-area">CHỌN LOẠI TIN ĐĂNG</p>
                     <div class="common-info">
@@ -368,7 +368,7 @@
                             <li <?php if(!empty($baiviet)) echo ' style="display:none;"'; ?>>
                                 <label>Mã xác nhận</label>
                                 <input type="text" class="code" placeholder="Nhập mã" value="" name="nm_captcha" id="nm_captcha">
-                                <img class="img-cap" src="{{$src_captcha}}"/>
+                                <img class="img-cap" src=""/>
                             </li>
                         </ul>
                     </div>
@@ -400,7 +400,7 @@
                                 <div class="div-item-vip-post" <?php if(!empty($baiviet)) echo ' style="display:none;"'; ?>>
                                     <label>Mã xác nhận</label>
                                     <input type="text" class="code" placeholder="Nhập mã" name="vip_captcha"  value="" id="vip_captcha">
-                                    <img title="Click để đổi hình khác" class="img-cap" src="{{$src_captcha}}"/>
+                                    <img title="Click để đổi hình khác" class="img-cap" src=""/>
 
                                 </div>
                             </li>
@@ -430,6 +430,7 @@
         }
     }
     $( document ).ready(function() {
+        $(".img-cap").attr("src",captchaURL);
         <?php
             if(isset($baiviet['hang_xe'])){
                 echo 'getDongXe('.$baiviet['hang_xe'].');';
