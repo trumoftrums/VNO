@@ -43,7 +43,7 @@
                 <li><span>Nếu bạn có khó khăn trong việc đăng tin, xóa  tin đăng, quên mật khẩu truy cập, hay có ý kiến đóng xây dựng website.</span></li>
                 <li><span>Liên hệ : <b>http://vietnamoto.net</b> - Hotline : <b>089 815 4544</b></span></li>
                 <li><span>Địa chỉ: 02 Phạm Văn Đồng, Phường Linh Đông, Quận Thủ Đức, TPHCM</span></li>
-                <li><span>Email: customerservice@vietnamoto.net</span></li>
+                <li><span>Email: cskh@vietnamoto.net</span></li>
             </ul>
         </div>
     </div>
