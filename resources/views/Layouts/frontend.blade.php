@@ -322,21 +322,25 @@
                     <div class="item-service">
                         <a href="{{ URL::to('vip-salon/all') }}">
                             <img class="icon-service" src="{{ URL::asset('images/icon-ser01-mobile.png')}}"/>
+                            <p class="p-service-mobi"> SHOWROOM <br>TOÀN QUỐC </p>
                         </a>
                     </div>
                     <div class="item-service">
                         <a href="{{ URL::to('do-xe-uy-tin/all') }}">
                             <img class="icon-service" src="{{ URL::asset('images/icon-ser02-mobile.png')}}"/>
+                            <p class="p-service-mobi">SỬA XE <br>TOÀN QUỐC </p>
                         </a>
                     </div>
                     <div class="item-service">
                         <a href="{{ URL::to('thong-tin-cuu-ho/all') }}">
                             <img class="icon-service" src="{{ URL::asset('images/icon-ser03-mobile.png')}}"/>
+                            <p class="p-service-mobi">CỨU HỘ <br>TOÀN QUỐC </p>
                         </a>
                     </div>
                     <div class="item-service">
                         <a href="{{ URL::to('bai-giu-xe/all') }}">
                             <img class="icon-service" src="{{ URL::asset('images/icon-ser05-mobile.png')}}"/>
+                            <p class="p-service-mobi">BÃI GIỮ XE <br>TOÀN QUỐC </p>
                         </a>
                     </div>
                 </div>

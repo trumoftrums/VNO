@@ -207,11 +207,19 @@
         float: left;
         width: 100%;
     }
+
     .list-services-mobile .item-service{
         float: left;
         width: 25%;
         padding: 8px;
         text-align: center;
+    }
+    .list-services-mobile .item-service .p-service-mobi{
+        color: #06743f;
+        margin: 3px 0px -10px 0px;
+        font-size: 10px;
+        font-weight: bold;
+        line-height: 15px;
     }
     .list-services-mobile .item-service a img{
         float: none;
@@ -492,5 +500,6 @@
     .cover-img-post .item-img-detail{
         height:15vw;
     }
+
 }
 
