@@ -39,7 +39,7 @@
                 </ul>
                 <div class="cover-tab tab-content">
                     <div id="info" class="tab-pane fade @if($activeTab == '') in active @endif">
-                        {{$detailVipSalon->description}}
+                        <?php echo $detailVipSalon->description ?>
                     </div>
                     <div id="post" class="tab-pane fade @if($activeTab != '') in active @endif">
                         <div class="list-items">
