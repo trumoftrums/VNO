@@ -578,8 +578,8 @@ class HomeController extends Controller {
 
                         $upbv['mo_ta'] = str_replace("\r\n","<br>",$formData['thongso_67']);
                         $upbv['dia_chi'] =$formData['thongso_68'];
-                        $upbv['gia_goc'] = $formData['thongso_65'];
-                        $upbv['gia_sale'] = $formData['thongso_65'];
+                        $upbv['gia_goc'] = str_replace(".","",$formData['thongso_65']);
+                        $upbv['gia_sale'] = str_replace(".","",$formData['thongso_65']);
                         $upbv['status'] = 'PENDING';
                         $upbv['photo1'] = $bv['thongso']['photo1'];
                         $upbv['photo2'] = $bv['thongso']['photo2'];
@@ -601,7 +601,7 @@ class HomeController extends Controller {
                                         $v = $this->convert_vi_to_en($v);
                                         $v = $this->clean($v);
                                     }
-                                    $r2 = Baivietindex::where('baivietID',$bv['id'])->where('index_key',$arr[1])->update(array('index_value'=>$v));
+                                    $r2 = Baivietindex::where('baivietID',$bv['id'])->where('index_key',$arr[1])->update(array('index_value'=>utf8_encode($v)));
                                     if(!$r2){
                                         break;
                                     }

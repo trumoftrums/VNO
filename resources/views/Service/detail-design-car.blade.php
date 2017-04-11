@@ -23,7 +23,7 @@
         <div class="list-news-page" id="style-4">
             <div class="detail-news" >
                 <img class="thumb-item-news" src="{{ URL::asset($detailDesignCar->images)}}"/>
-                {{$detailDesignCar->description}}
+                <?php echo $detailDesignCar->description ?>
             </div>
         </div>
     </div>
