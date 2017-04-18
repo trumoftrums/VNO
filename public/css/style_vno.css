@@ -705,6 +705,7 @@
 }
 .arrow-before-title{
     width:11px;
+    margin-top: -3px;
 }
 .social-bottom{
     float: right;
@@ -1222,7 +1223,7 @@ textarea:focus, input:focus{
 }
 .header-detail-news h3{
     color: #0c834a;
-    font-size: 14px;
+    font-size: 20px;
     float: left;
     width: 100%;
     margin-top: 15px;
