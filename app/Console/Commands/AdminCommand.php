@@ -88,6 +88,12 @@ class AdminCommand extends Command
             'width' =>142,
             'height'=>94
 
+        ),
+        'share' => array(
+            'folder' => 'share',
+            'width' => 426,
+            'height' => 282
+
         )
     );
     private function createIMGMaxSize($updir,$fName,$width,$height){

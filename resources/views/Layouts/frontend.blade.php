@@ -458,6 +458,7 @@
                     <li><a href="{{ URL::to('bai-giu-xe/all') }}">Bãi giữ xe<br>toàn quốc</a> </li>
                     <li><a href="{{ URL::to('tin-tuc') }}">Tin tức<br>về xe</a> </li>
                     <li><a href="{{ URL::to('dich-vu-huong-dan') }}">Dịch vụ &<br>Hướng dẫn</a> </li>
+                    <li><a class="a-one-line" href="{{ URL::to('videos-xe-oto') }}">Videos Xe</a> </li>
                     <li><a class="a-one-line" href="{{ URL::to('lien-he') }}">Liên hệ</a> </li>
                 </ul>
             </div>

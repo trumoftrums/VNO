@@ -67,7 +67,7 @@
                 <?php if(in_array(6,$menuPermission)) echo ',{id: "suaxe", text: "Sửa xe ('.$tt_suaxes.')", icon: "icon-ser02.png"}'; ?>
                 <?php if(in_array(7,$menuPermission)) echo ',{id: "cuuho", text: "Cứu hộ ('.$tt_cuuhos.')", icon: "icon-ser03.png"}'; ?>
                 <?php if(in_array(8,$menuPermission)) echo ',{id: "baixe", text: "Bãi giữ Xe ('.$tt_giuxes.')", icon: "icon-ser04.png"}'; ?>
-
+                <?php if(in_array(9,$menuPermission)) echo ',{id: "videos", text: "Videos ('.$tt_giuxes.')", icon: "icon-ser04.png"}'; ?>
 
             ]
         });
@@ -120,6 +120,9 @@
                 break;
             case 'baixe':
                 init_baixe(myFilter.cells("suaxe"),myLayout.cells("b"));
+                break;
+            case 'videos':
+                init_videos(myFilter.cells("videos"),myLayout.cells("b"));
                 break;
         }
     }
@@ -1933,6 +1936,282 @@
     }
     /* end baixe */
 
+    /* begin videos */
+    function init_videos(formFilter, LayoutCell) {
+        var userLayout = LayoutCell.attachLayout({
+            pattern: "1C",
+            offsets: {          // optional, offsets for fullscreen init
+                top:    0,     // you can specify all four sides
+                right:  5,     // or only the side where you want to have an offset
+                bottom: 0,
+                left:   3
+            },
+            cells: [{id: "a", text: "Danh sách videos"}]
+        });
+        var userToolbar = userLayout.attachToolbar();
+        userToolbar.setIconsPath(live_site_index + "backend/dhtmlx5/common/icons/");
+        userToolbar.setAlign("left");
+        var cfg_button = [
+            {id: "add", text: "Add", type: "button", img: "ico-add.png"},
+            {type: "separator"},
+            {id: "edit", text: "Edit", type: "button", img: "ico-edit.png"},
+            {type: "separator"},
+            {id: "delete", text: "Delete", type: "button", img: "ico-del.png"},
+            {type: "separator"},
+            {id: "reload", text: "Reload", type: "button", img: "ico-reload.png"}
+
+        ];
+        userToolbar.loadStruct(cfg_button);
+        var usermygrid = userLayout.cells("a").attachGrid();
+        usermygrid.setImagePath("../js/dhtmlx5/imgs/");
+        usermygrid.enablePaging(true,50,10,"pagingArea",true,"infoArea");
+        usermygrid.enableBlockSelection();
+        usermygrid.setPagingSkin("bricks");
+        usermygrid.init();
+
+        userToolbar.attachEvent("onClick", function (id) {
+            //dhtmlx.alert("Sorry, This function is not available!");
+            if (id == "add") {
+                add_videos(null,usermygrid);
+            }
+            if(id=="edit"){
+                var selectedId = usermygrid.getSelectedRowId();
+                if (selectedId == null) {
+                    dhtmlx.alert("Please select 1 row!");
+                }else{
+
+
+                    $.ajax({
+                        url: '/admin/getvideosinfo',
+                        dataType: "json",
+                        cache: false,
+                        type: 'post',
+                        data: {
+                            id: selectedId
+                        },
+                        beforeSend: function(xhr){
+
+//                            xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        },
+                        success: function (data) {
+
+                            if(data.result){
+                                add_videos(data.data,usermygrid);
+
+
+                            }else{
+                                dhtmlx.alert(data.mess);
+                            }
+                        },
+                        error: function () {
+                            dhtmlx.alert("Error,Please try again!");
+
+                        }
+                    });
+                }
+
+
+
+            }
+
+            if(id=="delete"){
+                var selectedId = usermygrid.getSelectedRowId();
+                if (selectedId == null) {
+                    dhtmlx.alert("Please select 1 row!");
+                }else{
+                    dhtmlx.confirm({
+                        title: "Xóa tin",
+                        type:"confirm-warning",
+                        text: "Bạn chắc chắn muốn thông tin cứu hộ này?",
+                        callback: function(ok) {
+                            if(ok){
+                                delete_videos(selectedId,usermygrid);
+                            }
+
+                        }
+                    });
+                }
+            }
+            if(id=="reload"){
+                getVideos(usermygrid);
+            }
+
+
+        });
+
+        usermygrid.attachEvent("onXLE", function(grid_obj,count){
+            userLayout.cells("a").progressOff();
+        });
+        usermygrid.attachEvent("onXLS", function(grid_obj){
+            userLayout.cells("a").progressOn();
+        });
+
+
+        usermygrid.setAwaitedRowHeight(25);
+        getVideos(usermygrid);
+
+    }
+    function add_videos(item,Dhxgrid) {
+//        console.log(salon);
+        var viewportWidth = $(window).width();
+        var viewportHeight = $(window).height();
+        var wd = 1050;
+        var hg = viewportHeight - 100;
+        var left = (viewportWidth / 2) - (wd / 2) ;
+        var top = (viewportHeight / 2) - (hg / 2);
+        var win = myWins.createWindow("w_add", left, top, wd, hg);
+        var itemid = null;
+        if(item !== null && item !=="undefined"){
+            itemid = {type: "hidden", name:"id", value:item.videoID};
+            win.setText("Sửa thông tin video  ... ");
+        }else{
+            win.setText("Thêm mới video ... ");
+            item = new Object();
+            item.title = "";
+            item.description = "";
+            item.keyword = "";
+            item.catID = "";
+            item.embedID = "";
+            item.vID = "";
+            item.url = "";
+
+        }
+        win.setModal(true);
+        win.button("minmax").disable();
+        win.button("park").disable();
+
+
+        var wform = win.attachForm();
+
+        var cfgform1 = [
+            {type: "settings", position: "label-left"},
+            {type: "block", offsetLeft: 0, inputWidth: 1000, list: [
+                {type: "combo",labelWidth: 80, required:true, label: "Category", readonly:true,name: "catID",inputWidth: 200,  options:[
+                    {value: "" , text: "Select Category"}
+                    <?php
+                    if(!empty($listVideoCats)){
+
+                        foreach ($listVideoCats as $g){
+                            echo ',{value: "'.$g['id'].'" , text: "'.$g['catName'].'"}';
+
+                        }
+                    }
+                    ?>
+                ]},
+                {type: "combo",labelWidth: 80, required:true, label: "Nguồn Video", readonly:true,name: "embedID",inputWidth: 200,  options:[
+                    {value: "" , text: "Select source"}
+                    <?php
+                    if(!empty($listVideoEmbeds)){
+
+                        foreach ($listVideoEmbeds as $g){
+                            echo ',{value: "'.$g['id'].'" , text: "'.$g['name'].'"}';
+
+                        }
+                    }
+                    ?>
+                ]},
+                {type: "input", name: "url",required:true, label: "URL", labelWidth: 80, inputWidth: 860, value:item.url},
+                {type: "input", name: "vID",required:false, label: "Video ID", labelWidth: 80, inputWidth: 100, value:item.vID},
+                {type: "input", name: "title",required:true, label: "Title", labelWidth: 80, inputWidth: 860, value:item.title},
+                {type: "input", name: "description",label: "Description", labelWidth: 80, inputWidth: 860,rows:5,  value:item.description},
+
+                {type: "input", id:"keyword",name: "keyword", label: "Keyword", labelWidth: 80,rows:5,  inputWidth: 860, value: item.keyword}
+
+
+
+            ]},
+
+            {type: "block", offsetLeft: 0, inputWidth: 490, list: [
+                {type: "button", offsetLeft: 80, value: "Save", name: "btnSave"}
+
+            ]}
+        ];
+        wform.loadStruct(cfgform1);
+        if(itemid != null){
+            wform.addItem(null,itemid,0,0);
+        }
+        if(item != null && item !="undefined" && item != ''){
+            wform.setItemValue('catID',item.catID);
+            wform.setItemValue('embedID',item.embedID);
+            wform.checkItem('status');
+        }
+
+        wform.attachEvent("onImageUploadSuccess", function(name, value, extra){
+
+        });
+        wform.attachEvent("onImageUploadFail", function(name, extra){
+        });
+        wform.attachEvent("onButtonClick", function (id) {
+            if(id=="btnSave"){
+
+                if(wform.validate()){
+                    var formData = wform.getFormData();
+
+                    $.ajax({
+                        url: '/admin/save_videos',
+                        dataType: "json",
+                        cache: false,
+                        type: 'post',
+                        data: {
+                            formData: formData
+                        },
+                        beforeSend: function(xhr){
+
+                            //xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        },
+                        success: function (data) {
+                            dhtmlx.alert(data.mess);
+                            if(data.result){
+                                win.close();
+                                getVideos(Dhxgrid);
+                            }
+
+
+                        },
+                        error: function () {
+                            dhtmlx.alert("Error,Please try again!");
+                        }
+                    });
+
+
+                }else {
+                    dhtmlx.alert("Please input all required fields");
+                }
+
+            }
+        });
+
+
+    }
+    function getVideos(Dhxgrid){
+        Dhxgrid.loadXML("/admin/getvideos");
+    }
+    function delete_videos(id,Dhxgrid) {
+        if(id != null && id != "undefined"){
+            $.ajax({
+                url: '/admin/delvideos',
+                dataType: "json",
+                cache: false,
+                type: 'post',
+                data: {
+                    id: id
+                },
+                beforeSend: function(xhr){
+
+//                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                },
+                success: function (data) {
+                    getVideos(Dhxgrid);
+                    dhtmlx.alert(data.mess);
+                },
+                error: function () {
+                    dhtmlx.alert("Error,Please try again!");
+                }
+            });
+        }
+
+    }
+    /* end videos */
     function closing(){
         var win = myWins.window("w_add");
         if(win != null){
