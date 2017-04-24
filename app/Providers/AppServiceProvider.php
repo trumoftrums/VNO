@@ -16,6 +16,7 @@ use App\VideoEmbed;
 use App\VipSalon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Thongso;
 use App\Models\ViewLog;
@@ -36,6 +37,25 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('Layouts.frontend', function ($view)
         {
+            if (Request::is('tin-tuc/*') || Request::is('bai-dang/*')) {
+                $idItem = Request::segment(2);
+                if (Request::is('tin-tuc/*')) {
+                    $info = News::find($idItem);
+                    $key_des = $info->title;
+                    $img_share_social = $info->image;
+                }
+                if (Request::is('bai-dang/*')) {
+                    $info = Baiviet::find($idItem);
+                    $key_des = $info->tieu_de;
+                    $img_share_social = $info->photo1;
+                }
+            } else {
+                $key_des = '';
+                $img_share_social = '';
+            }
+
+
+
             try{
                 $this->saveLog();
             }catch ( Exception $e){
@@ -79,7 +99,9 @@ class AppServiceProvider extends ServiceProvider
                 'hangxes' =>$hangxes,
                 'listCity'=>$listCity,
                 'countUser'=>$countUser,
-                'countView'=>$countView
+                'countView'=>$countView,
+                'key_des' => $key_des,
+                'img_share_social' => $img_share_social
             ]);
         });
         view()->composer('Layouts.backend', function ($view)

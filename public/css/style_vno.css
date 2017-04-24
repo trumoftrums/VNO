@@ -686,6 +686,12 @@
     margin: 0px;
     padding: 0px;
 }
+.share-social{
+    float: left;
+    width: 100%;
+    padding-left: 25px;
+    margin-top: -5px;
+}
 .footer .menu-bottom ul li{
     display: inline;
     float: left;
@@ -705,6 +711,7 @@
 }
 .arrow-before-title{
     width:11px;
+    margin-top: -3px;
 }
 .social-bottom{
     float: right;
@@ -1222,7 +1229,7 @@ textarea:focus, input:focus{
 }
 .header-detail-news h3{
     color: #0c834a;
-    font-size: 14px;
+    font-size: 20px;
     float: left;
     width: 100%;
     margin-top: 15px;

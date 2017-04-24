@@ -12,6 +12,16 @@
         <div class="header-detail-news">
             <h3><img class="arrow-before-title" src="{{ URL::asset('images/icon-title-news.png')}}"/> {{$detailNews->title}}</h3>
             <p>Đăng bởi <span>{{$detailNews->username}}</span> - {{date_format(date_create($detailNews->created_date), 'H:i a - d/m/Y')}}</p>
+            <div class="share-social">
+                <!--fb-->
+                <div style="float:left;margin-right: 10px;" class="fb-share-button"
+                     data-href="{{ URL::to('tin-tuc/'.$detailNews->id.'/'.str_slug($detailNews->title, '-')) }}"
+                     data-layout="button_count">
+                </div>
+                <!--//google+-->
+                <script type="text/javascript" src="https://apis.google.com/js/plusone.js" ></script>
+                <g:plusone size="medium" ></g:plusone>
+            </div>
         </div>
         <div class="list-news-page" id="style-4">
             <div class="detail-news" >
