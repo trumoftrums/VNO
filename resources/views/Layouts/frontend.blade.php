@@ -3,15 +3,15 @@
 <head>
     <title>Vietnam Oto</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
     <link href="{{ URL::asset('images/logo.png') }}" rel="shortcut icon" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <meta name="keywords" content="{{$key_des}}"/>
     <meta name="description" content="{{$key_des}}"/>
     <meta name="robots" content="INDEX,FOLLOW"/>
-    <meta property="og:image" content="{{ URL::asset($img_share_social) }}" />
-
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="{{$key_des}}" />
+    <meta property="og:description"   content="{{$key_des}}" />
+    <meta property="og:image"         content="{{ URL::asset($img_share_social) }}" />
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
     {{--<link rel="stylesheet" href="{{ URL::asset('css/jquery.simplyscroll.css') }}">--}}
     <link rel="stylesheet" href="{{ URL::asset('css/style_vno.css') }}?ver=1.1">

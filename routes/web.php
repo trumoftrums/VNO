@@ -49,6 +49,8 @@ Route::post('/dang-tin-free/{id_slug}', 'Frontend\HomeController@freePost');
 Route::post('/upload-avatar', 'Frontend\HomeController@uploadAvatar');
 Route::get('/forgotpass', 'Frontend\ServiceController@forgotPass');
 
+Route::get('/resize-all-images', 'Frontend\HomeController@resizeAllImages');
+
 Route::post('/baiviet/save_bai_viet', 'Frontend\HomeController@save_bai_viet');
 Route::post('/getdongxe', 'Frontend\HomeController@getdongxe');
 Route::post('/getloaibaiviet', 'Frontend\HomeController@getLoaiBaiViet');
