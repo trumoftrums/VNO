@@ -151,6 +151,34 @@ class HomeController extends Controller {
         return $file;
     }
 
+    public function resizeAllImages()
+    {
+        $listNews = News::where('status', News::STATUS_ACTIVE)->get();
+        foreach($listNews as $item){
+            $file = '.'.$item->thumbnail;
+            $output = imagecreatetruecolor(546, 260);
+            $source = getimagesize($file);
+            $source_mime = $source['mime'];
+            switch ($source_mime){
+                case 'image/png':
+                    $image = imagecreatefrompng($file);
+                    break;
+                case 'image/jpeg':
+                    $image = imagecreatefromjpeg($file);
+                    break;
+                case 'image/gif':
+                    $image = imagecreatefromgif($file);
+                    break;
+                default:
+                    break;
+
+            }
+            imagecopyresampled($output, $image, 0, 0, 0, 0, 546, 260, imagesx($image), imagesy($image));
+            imagepng($output, $file);
+        }
+        echo "done";
+    }
+
     private  function getHangXe($id){
         $dt = Hangxe::where('id',$id)->get()->toArray();
         if(!empty($dt)){

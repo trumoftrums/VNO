@@ -691,6 +691,7 @@
     width: 100%;
     padding-left: 25px;
     margin-top: -5px;
+    margin-bottom: 10px;
 }
 .footer .menu-bottom ul li{
     display: inline;
@@ -1252,7 +1253,7 @@ textarea:focus, input:focus{
     width: 100%;
     margin-bottom: 20px;
     float: left;
-    max-height: 180px;
+    /*max-height: 180px;*/
 }
 .related-news{
     border-top: 2px dotted #0c834a;

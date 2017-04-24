@@ -131,6 +131,16 @@
             <div class="cover-title-date">
                 <h3><img src="{{ URL::asset('images/icon-title-news.png')}}"/> {{$detailPost->tieu_de}}</h3>
                 <p>Đăng bởi <span>{{$detailPost->username}}</span> - {{date_format(date_create($detailPost->created_at), 'd/m/Y H:i a')}}</p>
+                <div class="share-social">
+                    <!--fb-->
+                    <div style="float:left;margin-right: 10px;" class="fb-share-button"
+                         data-href="{{ URL::to('bai-dang/'.$detailPost->id.'/'.str_slug($detailPost->tieu_de, '-')) }}"
+                         data-layout="button_count">
+                    </div>
+                    <!--//google+-->
+                    <script type="text/javascript" src="https://apis.google.com/js/plusone.js" ></script>
+                    <g:plusone size="medium" ></g:plusone>
+                </div>
             </div>
             <div class="cover-img-post">
                 <div class="item-img-detail">

@@ -40,12 +40,12 @@ class AppServiceProvider extends ServiceProvider
                 if (Request::is('tin-tuc/*')) {
                     $info = News::find($idItem);
                     $key_des = $info->title;
-                    $img_share_social = $info->image;
+                    $img_share_social = $info->thumbnail;
                 }
                 if (Request::is('bai-dang/*')) {
                     $info = Baiviet::find($idItem);
                     $key_des = $info->tieu_de;
-                    $img_share_social = $info->photo1;
+                    $img_share_social = '/uploads/baiviet/'.$info->photo1;
                 }
             } else {
                 $key_des = '';
