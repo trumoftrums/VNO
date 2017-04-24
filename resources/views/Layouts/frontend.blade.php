@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width">
     <link href="{{ URL::asset('images/logo.png') }}" rel="shortcut icon" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="keywords" content="{{$key_des}}"/>
+    <meta name="description" content="{{$key_des}}"/>
+    <meta name="robots" content="INDEX,FOLLOW"/>
+    <meta property="og:image" content="{{ URL::asset($img_share_social) }}" />
+
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
     {{--<link rel="stylesheet" href="{{ URL::asset('css/jquery.simplyscroll.css') }}">--}}
     <link rel="stylesheet" href="{{ URL::asset('css/style_vno.css') }}?ver=1.1">
@@ -25,6 +31,15 @@
         ga('create', 'UA-93543131-1', 'auto');
         ga('send', 'pageview');
 
+    </script>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
     </script>
 </head>
 <?php $captchaURL =Captcha::src(); ?>
