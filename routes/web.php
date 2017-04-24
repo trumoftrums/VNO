@@ -116,6 +116,11 @@ Route::group(['prefix' => 'admin','middleware'=>'\App\Http\Middleware\AdminPermi
     Route::post('/getbaixeinfo', 'Admin\BaixeController@getinfo');
     Route::post('/delbaixe', 'Admin\BaixeController@delete');
 
+    Route::get('/getvideos', 'Admin\VideoController@get');
+    Route::post('/save_videos', 'Admin\VideoController@save');
+    Route::post('/getvideosinfo', 'Admin\VideoController@getinfo');
+    Route::post('/delvideos', 'Admin\VideoController@delete');
+
 //    Route::get('/tool/dhtmlxform_image/{id}', function ($id) {
 //
 //    })->where('id', '[0-9]+');

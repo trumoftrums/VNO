@@ -12,6 +12,7 @@ use App\Models\Dongxe;
 use  App\Models\Submittoken;
 use App\Models\UsersFactory;
 use App\News;
+use App\Video;
 use App\VipSalon;
 use App\City;
 use Illuminate\Support\Facades\Auth;
@@ -388,6 +389,18 @@ class HomeController extends Controller {
             'listNews' => $res
         ]);
     }
+    public function videos()
+    {
+        $res = Video::where('op_videos.status', Video::STATUS_ACTIVE)
+            ->leftJoin('md_users', 'md_users.id', '=', 'op_videos.userID')
+            ->OrderBy('op_videos.updated_at','desc')
+            ->select('op_news.*', 'md_users.username')
+            ->paginate(self::NEWS_PER_PAGE);
+        return View('News.list-news', [
+            'listNews' => $res
+        ]);
+    }
+
     public function contact()
     {
         return View('Contact.contact', [

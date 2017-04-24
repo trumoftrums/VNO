@@ -11,6 +11,8 @@ use App\Models\Hangxe;
 use App\Models\Users;
 use App\News;
 use App\SupportCar;
+use App\VideoCat;
+use App\VideoEmbed;
 use App\VipSalon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -121,6 +123,8 @@ class AppServiceProvider extends ServiceProvider
             $ttgx = $this->get_total_giuxe();
             $ttsx = $this->get_total_suaxe();
             $listUsers = Users::getUsers();
+            $listVideoCats = VideoCat::getCats();
+            $listVideoEmbeds = VideoEmbed::getEmbeds();
 
             $menuPermission = array();
             $arr_permission = AdminPermission::getPerbyUser($user->id);
@@ -141,7 +145,9 @@ class AppServiceProvider extends ServiceProvider
                 'listCity'=>$listCity,
                 'groups'=>$groups,
                 'listUsers' =>$listUsers,
-                'menuPermission'=>$menuPermission
+                'menuPermission'=>$menuPermission,
+                'listVideoCats'=>$listVideoCats,
+                'listVideoEmbeds'=>$listVideoEmbeds,
             ]);
 //            var_dump($menuPermission);exit();
         });

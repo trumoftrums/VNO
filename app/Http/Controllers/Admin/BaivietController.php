@@ -768,6 +768,12 @@ class BaivietController extends Controller
             'width' => 142,
             'height' => 94
 
+        ),
+        'share' => array(
+            'folder' => 'share',
+            'width' => 426,
+            'height' => 282
+
         )
     );
 
