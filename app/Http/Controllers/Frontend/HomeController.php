@@ -155,12 +155,12 @@ class HomeController extends Controller {
     public function resizeAllImages()
     {
         $listNews = News::where('status', News::STATUS_ACTIVE)->get();
-        foreach($listNews as $item){
-            $file = '.'.$item->thumbnail;
+        foreach ($listNews as $item) {
+            $file = '.' . $item->thumbnail;
             $output = imagecreatetruecolor(546, 260);
             $source = getimagesize($file);
             $source_mime = $source['mime'];
-            switch ($source_mime){
+            switch ($source_mime) {
                 case 'image/png':
                     $image = imagecreatefrompng($file);
                     break;
