@@ -67,7 +67,7 @@
                 <?php if(in_array(6,$menuPermission)) echo ',{id: "suaxe", text: "Sửa xe ('.$tt_suaxes.')", icon: "icon-ser02.png"}'; ?>
                 <?php if(in_array(7,$menuPermission)) echo ',{id: "cuuho", text: "Cứu hộ ('.$tt_cuuhos.')", icon: "icon-ser03.png"}'; ?>
                 <?php if(in_array(8,$menuPermission)) echo ',{id: "baixe", text: "Bãi giữ Xe ('.$tt_giuxes.')", icon: "icon-ser04.png"}'; ?>
-                <?php if(in_array(9,$menuPermission)) echo ',{id: "videos", text: "Videos ('.$tt_giuxes.')", icon: "icon-ser04.png"}'; ?>
+                <?php if(in_array(9,$menuPermission)) echo ',{id: "videos", text: "Videos ('.$ttvd.')", icon: "icon-ser04.png"}'; ?>
 
             ]
         });
@@ -2022,7 +2022,7 @@
                     dhtmlx.confirm({
                         title: "Xóa tin",
                         type:"confirm-warning",
-                        text: "Bạn chắc chắn muốn thông tin cứu hộ này?",
+                        text: "Bạn chắc chắn muốn xóa video này?",
                         callback: function(ok) {
                             if(ok){
                                 delete_videos(selectedId,usermygrid);

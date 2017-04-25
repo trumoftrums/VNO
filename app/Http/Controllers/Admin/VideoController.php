@@ -157,8 +157,8 @@ class VideoController extends Controller {
         $bv->userID =$user->id;
         if($bv->embedID == 1) {//YOUTUBE
             $arr = array(
-                'WIDTH'=>560,
-                'HEIGHT' =>315,
+                'WIDTH'=>'90%',
+                'HEIGHT' =>'90%',
                 'VID' =>$bv->vID
             );
             $bv->embedParams = json_encode($arr);
@@ -207,10 +207,10 @@ class VideoController extends Controller {
 
         $formData = Request::all();
         $bvid = $formData['id'];
-        $r = BaiXe::where('id',$bvid)->update(["status"=>BaiXe::STATUS_DELETE]);
+        $r = Video::where('id',$bvid)->update(["status"=>Video::STATUS_DELETE]);
         if($r){
             $result['result'] = true;
-            $result['mess'] = "Xóa bãi giữ xe thành công";
+            $result['mess'] = "Xóa video thành công";
         }else{
             $result['mess'] = "Xóa không thành công, vui lòng thử lại!!";
         }

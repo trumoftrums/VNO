@@ -13,6 +13,7 @@ use  App\Models\Submittoken;
 use App\Models\UsersFactory;
 use App\News;
 use App\Video;
+use App\VideoCat;
 use App\VipSalon;
 use App\City;
 use Illuminate\Support\Facades\Auth;
@@ -417,16 +418,37 @@ class HomeController extends Controller {
             'listNews' => $res
         ]);
     }
-    public function videos()
+    public function videos($id ="")
     {
-        $res = Video::where('op_videos.status', Video::STATUS_ACTIVE)
-            ->leftJoin('md_users', 'md_users.id', '=', 'op_videos.userID')
-            ->leftJoin('md_video_embed', 'md_video_embed.id', '=', 'op_videos.embedID')
-            ->OrderBy('op_videos.updated_at','desc')
-            ->select('op_videos.*', 'md_users.username','md_video_embed.embedCode')
-            ->paginate(self::NEWS_PER_PAGE);
+
+        if(!empty($id) && $id !="all"){
+            $arr = explode("-",$id);
+            if(count($arr)>0 && is_numeric($arr[0])){
+                $id = $arr[0];
+            }
+            $res = Video::where('op_videos.status', Video::STATUS_ACTIVE)
+                ->leftJoin('md_users', 'md_users.id', '=', 'op_videos.userID')
+                ->leftJoin('md_video_embed', 'md_video_embed.id', '=', 'op_videos.embedID')
+                ->leftJoin('op_video_cat', 'op_video_cat.id', '=', 'op_videos.catID')
+                ->OrderBy('op_videos.updated_at','desc')
+                ->select('op_videos.*', 'md_users.username','md_video_embed.embedCode')
+                ->where("op_video_cat.id",'=',$id)
+                ->paginate(self::NEWS_PER_PAGE);
+        }else{
+            $res = Video::where('op_videos.status', Video::STATUS_ACTIVE)
+                ->leftJoin('md_users', 'md_users.id', '=', 'op_videos.userID')
+                ->leftJoin('md_video_embed', 'md_video_embed.id', '=', 'op_videos.embedID')
+
+                ->OrderBy('op_videos.updated_at','desc')
+                ->select('op_videos.*', 'md_users.username','md_video_embed.embedCode')
+                ->paginate(self::NEWS_PER_PAGE);
+        }
+        $listCats=  VideoCat::getCats();
+
         return View('Videos.list-videos', [
-            'listVideos' => $res
+            'listVideos' => $res,
+            'listCats' =>$listCats,
+            'catSelected'=>$id
         ]);
     }
 

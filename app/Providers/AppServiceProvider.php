@@ -11,6 +11,7 @@ use App\Models\Hangxe;
 use App\Models\Users;
 use App\News;
 use App\SupportCar;
+use App\Video;
 use App\VideoCat;
 use App\VideoEmbed;
 use App\VipSalon;
@@ -144,6 +145,7 @@ class AppServiceProvider extends ServiceProvider
             $ttch = $this->get_total_cuuho();
             $ttgx = $this->get_total_giuxe();
             $ttsx = $this->get_total_suaxe();
+            $ttvd = $this->get_total_videos();
             $listUsers = Users::getUsers();
             $listVideoCats = VideoCat::getCats();
             $listVideoEmbeds = VideoEmbed::getEmbeds();
@@ -163,6 +165,7 @@ class AppServiceProvider extends ServiceProvider
                 'tt_cuuhos'=>$ttch,
                 'tt_giuxes'=>$ttgx,
                 'tt_suaxes'=>$ttsx,
+                'ttvd'=>$ttvd,
                 'hangxes' =>$hangxes,
                 'listCity'=>$listCity,
                 'groups'=>$groups,
@@ -192,6 +195,10 @@ class AppServiceProvider extends ServiceProvider
     }
     private  function get_total_suaxe(){
         $tt = DesignCar::where('status','<>','DE')->count();
+        return $tt;
+    }
+    private  function get_total_videos(){
+        $tt = Video::where('status',Video::STATUS_ACTIVE)->count();
         return $tt;
     }
     private  function get_total_giuxe(){

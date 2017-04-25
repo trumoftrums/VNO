@@ -25,6 +25,7 @@ Route::post('/update-info-user', 'Frontend\HomeController@updateUserInfo');
 Route::post('/change-password', 'Frontend\HomeController@changePassword');
 Route::get('/tin-tuc', 'Frontend\HomeController@news');
 Route::get('/videos-xe-oto', 'Frontend\HomeController@videos');
+Route::get('/videos-xe-oto/{catID}', 'Frontend\HomeController@videos');
 
 Route::get('/tin-tuc/{id}/{name}', 'Frontend\HomeController@newsDetail');
 
