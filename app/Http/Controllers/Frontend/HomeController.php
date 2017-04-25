@@ -421,11 +421,12 @@ class HomeController extends Controller {
     {
         $res = Video::where('op_videos.status', Video::STATUS_ACTIVE)
             ->leftJoin('md_users', 'md_users.id', '=', 'op_videos.userID')
+            ->leftJoin('md_video_embed', 'md_video_embed.id', '=', 'op_videos.embedID')
             ->OrderBy('op_videos.updated_at','desc')
-            ->select('op_news.*', 'md_users.username')
+            ->select('op_videos.*', 'md_users.username','md_video_embed.embedCode')
             ->paginate(self::NEWS_PER_PAGE);
-        return View('News.list-news', [
-            'listNews' => $res
+        return View('Videos.list-videos', [
+            'listVideos' => $res
         ]);
     }
 
