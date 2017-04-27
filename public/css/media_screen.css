@@ -500,6 +500,10 @@
     .cover-img-post .item-img-detail{
         height:15vw;
     }
+    .item-video-page{
+        width: 100%;
+        float: left;
+    }
 
 }
 

@@ -11,7 +11,48 @@
     iframe {
         max-height: 315px !important;
     }
+    .item-video-page{
+        width: 25%;
+        float: left;
+    }
+    .video-page{
+        width: 100%;
+    }
+    .cal-height{
+        width: 100% !important;
+    }
+    .header-video{
+        width: 100%;
+        text-align: center;
+    }
+    .cover-info-item-video{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        padding-right: 10%;
+        margin-top: 4%;
+        text-align: left;
+    }
+    .cover-info-item-video a{
+        font-size: large;
+        color: #0c834a;
 
+
+    }
+    .list-video-page{
+        text-align: center;
+        margin-top: 10px;
+    }
+    .form-filter-video select{
+        height: 34px;
+        width: 300px;
+        color: #585858;
+        background: #f5f5f5;
+        border: 1px solid rgba(204, 204, 204, 0.24);
+    }
+    .item-video-page{
+        text-align: left;
+    }
 </style>
 @section('content')
     <div class="video-page">
@@ -32,7 +73,7 @@
                 @foreach($listVideos as $v)
                 <div class="item-video-page">
                     <div class="cover-info-item-video">
-                        <label>{{$v->title}}</label>
+                        <a href="{{ URL::to('tin-tuc/'.$v->id.'/'.str_slug($v->title, '-')) }}" class="title-item-news"><img class="arrow-before-title" src="{{ URL::asset('images/icon-title-news.png')}}"/> {{$v->title}}</a>
                         <p class="p-post-by">Đăng bởi <span>{{$v->username}}</span> - {{date_format(date_create($v->created_at), 'd/m/Y H:i a')}}</p>
 
                     </div>

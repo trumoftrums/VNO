@@ -192,6 +192,7 @@
                             <li><a href="{{ URL::to('bai-giu-xe/all') }}">Bãi giữ xe toàn quốc</a></li>
                             <li><a href="{{ URL::to('/tin-tuc') }}">Tin tức về xe</a></li>
                             <li><a href="{{ URL::to('dich-vu-huong-dan') }}">Dịch vụ & Hướng dẫn</a></li>
+                            <li><a href="{{ URL::to('videos-xe-oto') }}">Videos Xe</a> </li>
                             <li><a href="{{ URL::to('lien-he') }}">Liên hệ</a></li>
                         </ul>
                     </div>
@@ -434,6 +435,7 @@
             <li><a href="{{ URL::to('bai-giu-xe/all') }}">Bãi giữ xe toàn quốc</a> </li>
             <li><a href="{{ URL::to('tin-tuc') }}">Tin tức về xe</a> </li>
             <li><a href="{{ URL::to('dich-vu-huong-dan') }}">Dịch vụ & Hướng dẫn</a> </li>
+            <li><a href="{{ URL::to('videos-xe-oto') }}">Videos Xe</a> </li>
             <li><a href="{{ URL::to('lien-he') }}">Liên hệ</a> </li>
         </ul>
         <div class="info">
