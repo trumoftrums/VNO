@@ -2155,8 +2155,10 @@ textarea:focus, input:focus{
     cursor: pointer;
 }
 .item-video-page{
-    width: 50%;
+    width: 45%;
     float: left;
+    margin-left: 5%;
+    margin-bottom: 10px;
 }
 .video-page{
     width: 100%;
