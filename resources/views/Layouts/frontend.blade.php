@@ -339,25 +339,31 @@
                     <div class="item-service">
                         <a href="{{ URL::to('vip-salon/all') }}">
                             <img class="icon-service" src="{{ URL::asset('images/icon-ser01-mobile.png')}}"/>
-                            <p class="p-service-mobi"> SHOWROOM <br>TOÀN QUỐC </p>
                         </a>
                     </div>
                     <div class="item-service">
                         <a href="{{ URL::to('do-xe-uy-tin/all') }}">
                             <img class="icon-service" src="{{ URL::asset('images/icon-ser02-mobile.png')}}"/>
-                            <p class="p-service-mobi">SỬA XE <br>TOÀN QUỐC </p>
                         </a>
                     </div>
                     <div class="item-service">
                         <a href="{{ URL::to('thong-tin-cuu-ho/all') }}">
                             <img class="icon-service" src="{{ URL::asset('images/icon-ser03-mobile.png')}}"/>
-                            <p class="p-service-mobi">CỨU HỘ <br>TOÀN QUỐC </p>
                         </a>
                     </div>
                     <div class="item-service">
                         <a href="{{ URL::to('bai-giu-xe/all') }}">
                             <img class="icon-service" src="{{ URL::asset('images/icon-ser05-mobile.png')}}"/>
-                            <p class="p-service-mobi">BÃI GIỮ XE <br>TOÀN QUỐC </p>
+                        </a>
+                    </div>
+                    <div class="item-service">
+                        <a href="{{ URL::to('thue-xe-toan-quoc/all') }}">
+                            <img class="icon-service" src="{{ URL::asset('images/icon-ser06-mobile.png')}}"/>
+                        </a>
+                    </div>
+                    <div class="item-service">
+                        <a href="{{ URL::to('phu-tung-xe-toan-quoc/all') }}">
+                            <img class="icon-service" src="{{ URL::asset('images/icon-ser07-mobile.png')}}"/>
                         </a>
                     </div>
                 </div>
@@ -399,6 +405,18 @@
                     <a href="{{ URL::to('bai-giu-xe/all') }}">
                         <img class="icon-service" src="{{ URL::asset('images/icon-ser05.png')}}"/>
                         <p>BÃI GIỮ XE<br> TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                    </a>
+                </div>
+                <div class="item-service">
+                    <a href="{{ URL::to('thue-xe-toan-quoc/all') }}">
+                        <img class="icon-service" src="{{ URL::asset('images/icon-ser06.png')}}"/>
+                        <p>CHO THUÊ XE<br> TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
+                    </a>
+                </div>
+                <div class="item-service">
+                    <a href="{{ URL::to('phu-tung-xe-toan-quoc/all') }}">
+                        <img class="icon-service" src="{{ URL::asset('images/icon-ser07.png')}}"/>
+                        <p>PHỤ TÙNG XE<br> TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                     </a>
                 </div>
             </div>
@@ -907,6 +925,12 @@
         });
         $('#filter-city-support').on('change', function() {
             window.location = '/thong-tin-cuu-ho/'+this.value;
+        });
+        $('#filter-city-lend').on('change', function() {
+            window.location = '/thue-xe-toan-quoc/'+this.value;
+        });
+        $('#filter-city-accessary').on('change', function() {
+            window.location = '/phu-tung-xe-toan-quoc/'+this.value;
         });
         $('#filter-city-design').on('change', function() {
             window.location = '/do-xe-uy-tin/'+this.value;

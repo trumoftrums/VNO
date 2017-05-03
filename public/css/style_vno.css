@@ -561,6 +561,8 @@
     border-bottom-left-radius: 8px;
     width: 27%;
     height:50px;
+    margin-top: -1px;
+    margin-left: -1px;
 }
 .header .last-col .list-services .item-service .icon-arrow-right{
     float: right;

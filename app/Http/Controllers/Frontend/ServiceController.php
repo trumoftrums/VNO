@@ -1,9 +1,11 @@
 <?php namespace App\Http\Controllers\Frontend;
 
+use App\AccessaryCar;
 use App\BaiXe;
 use App\City;
 use App\DesignCar;
 use App\Http\Controllers\Controller;
+use App\LendCar;
 use App\Models\Baiviet;
 use App\Models\Users;
 use  App\RaoVat;
@@ -63,6 +65,48 @@ class ServiceController extends Controller {
 
         return View('Service.list-support-car', [
             'listSupportCar' => $listSupportCar,
+            'citySelected' => $city,
+            'listCity' => $listCity
+        ]);
+    }
+    public function lendCar($city)
+    {
+        $listLendCar = LendCar::where('status', LendCar::STATUS_ACTIVE)
+            ->OrderBy('id', 'desc')
+            ->paginate(16);
+        if ($city) {
+            if($city != 'all'){
+                $listLendCar = LendCar::where('status', LendCar::STATUS_ACTIVE)
+                    ->OrderBy('id', 'desc')
+                    ->where('city', $city)
+                    ->paginate(16);
+            }
+        }
+        $listCity = City::getCity();
+
+        return View('Service.list-lend-car', [
+            'listLendCar' => $listLendCar,
+            'citySelected' => $city,
+            'listCity' => $listCity
+        ]);
+    }
+    public function accessaryCar($city)
+    {
+        $listAccessaryCar = AccessaryCar::where('status', AccessaryCar::STATUS_ACTIVE)
+            ->OrderBy('id', 'desc')
+            ->paginate(16);
+        if ($city) {
+            if($city != 'all'){
+                $listAccessaryCar = AccessaryCar::where('status', AccessaryCar::STATUS_ACTIVE)
+                    ->OrderBy('id', 'desc')
+                    ->where('city', $city)
+                    ->paginate(16);
+            }
+        }
+        $listCity = City::getCity();
+
+        return View('Service.list-accessary-car', [
+            'listAccessaryCar' => $listAccessaryCar,
             'citySelected' => $city,
             'listCity' => $listCity
         ]);

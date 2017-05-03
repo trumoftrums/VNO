@@ -33,6 +33,8 @@ Route::get('/lien-he', 'Frontend\HomeController@contact');
 Route::post('/send-email-contact', 'Frontend\HomeController@sendEmailContact');
 
 Route::get('/thong-tin-cuu-ho/{city}', 'Frontend\ServiceController@supportCar');
+Route::get('/thue-xe-toan-quoc/{city}', 'Frontend\ServiceController@lendCar');
+Route::get('/phu-tung-xe-toan-quoc/{city}', 'Frontend\ServiceController@accessaryCar');
 Route::get('/bai-giu-xe/{city}', 'Frontend\ServiceController@baiGiuXe');
 
 Route::get('/do-xe-uy-tin/{city}', 'Frontend\ServiceController@designCar');
