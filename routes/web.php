@@ -117,6 +117,15 @@ Route::group(['prefix' => 'admin','middleware'=>'\App\Http\Middleware\AdminPermi
     Route::post('/getcuuhoinfo', 'Admin\CuuhoController@getinfo');
     Route::post('/delcuuho', 'Admin\CuuhoController@delete');
 
+    Route::get('/getthuexe', 'Admin\ThuexeController@get');
+    Route::post('/save_thuexe', 'Admin\ThuexeController@save');
+    Route::post('/getthuexeinfo', 'Admin\ThuexeController@getinfo');
+    Route::post('/delthuexe', 'Admin\ThuexeController@delete');
+
+    Route::get('/getphutung', 'Admin\PhutungController@get');
+    Route::post('/save_phutung', 'Admin\PhutungController@save');
+    Route::post('/getphutunginfo', 'Admin\PhutungController@getinfo');
+    Route::post('/delphutung', 'Admin\PhutungController@delete');
 
     Route::get('/getbaixes', 'Admin\BaixeController@get');
     Route::post('/save_baixe', 'Admin\BaixeController@save');

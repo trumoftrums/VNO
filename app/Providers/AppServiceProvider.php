@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\AccessaryCar;
 use App\BaiXe;
 use App\City;
 use App\DesignCar;
+use App\Http\Controllers\Admin\ThuexeController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\LendCar;
 use App\Models\Baiviet;
 use App\Models\Hangxe;
 use App\Models\Users;
@@ -146,10 +149,11 @@ class AppServiceProvider extends ServiceProvider
             $ttgx = $this->get_total_giuxe();
             $ttsx = $this->get_total_suaxe();
             $ttvd = $this->get_total_videos();
+            $tttx = $this->get_total_thuexe();
             $listUsers = Users::getUsers();
             $listVideoCats = VideoCat::getCats();
             $listVideoEmbeds = VideoEmbed::getEmbeds();
-
+            $ttpt = $this->get_total_phutung();
             $menuPermission = array();
             $arr_permission = AdminPermission::getPerbyUser($user->id);
             if(!empty($arr_permission)){
@@ -166,6 +170,8 @@ class AppServiceProvider extends ServiceProvider
                 'tt_giuxes'=>$ttgx,
                 'tt_suaxes'=>$ttsx,
                 'ttvd'=>$ttvd,
+                'tttx'=>$tttx,
+                'ttpt'=>$ttpt,
                 'hangxes' =>$hangxes,
                 'listCity'=>$listCity,
                 'groups'=>$groups,
@@ -199,6 +205,14 @@ class AppServiceProvider extends ServiceProvider
     }
     private  function get_total_videos(){
         $tt = Video::where('status',Video::STATUS_ACTIVE)->count();
+        return $tt;
+    }
+    private  function get_total_thuexe(){
+        $tt = LendCar::where('status',LendCar::STATUS_ACTIVE)->count();
+        return $tt;
+    }
+    private  function get_total_phutung(){
+        $tt = AccessaryCar::where('status',AccessaryCar::STATUS_ACTIVE)->count();
         return $tt;
     }
     private  function get_total_giuxe(){

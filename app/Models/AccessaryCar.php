@@ -11,7 +11,7 @@ class AccessaryCar extends Model
     const STATUS_ACTIVE = 'AC';
     const STATUS_INACTIVE = 'IA';
     const STATUS_DELETE = 'DE';
-    public static function getCuuhobyID($id)
+    public static function getAccessarybyID($id)
     {
         $list = AccessaryCar::where('status', '<>',AccessaryCar::STATUS_DELETE)->where('id', $id)->get()->toArray();
         if(!empty($list)){

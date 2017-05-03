@@ -68,7 +68,8 @@
                 <?php if(in_array(7,$menuPermission)) echo ',{id: "cuuho", text: "Cứu hộ ('.$tt_cuuhos.')", icon: "icon-ser03.png"}'; ?>
                 <?php if(in_array(8,$menuPermission)) echo ',{id: "baixe", text: "Bãi giữ Xe ('.$tt_giuxes.')", icon: "icon-ser04.png"}'; ?>
                 <?php if(in_array(9,$menuPermission)) echo ',{id: "videos", text: "Videos ('.$ttvd.')", icon: "icon-ser04.png"}'; ?>
-
+                <?php if(in_array(10,$menuPermission)) echo ',{id: "thuexe", text: "Thuê xe ('.$tttx.')", icon: "icon-ser04.png"}'; ?>
+                <?php if(in_array(11,$menuPermission)) echo ',{id: "phutung", text: "Bán phụ tùng ('.$ttpt.')", icon: "icon-ser04.png"}'; ?>
             ]
         });
         current_menu = "report";
@@ -123,6 +124,13 @@
                 break;
             case 'videos':
                 init_videos(myFilter.cells("videos"),myLayout.cells("b"));
+                break;
+            case 'thuexe':
+                init_thuexe(myFilter.cells("thuexe"),myLayout.cells("b"));
+                break;
+
+            case 'phutung':
+                init_phutung(myFilter.cells("phutung"),myLayout.cells("b"));
                 break;
         }
     }
@@ -2212,6 +2220,531 @@
 
     }
     /* end videos */
+    /* begin thuexe */
+    function init_thuexe(formFilter, LayoutCell) {
+        var userLayout = LayoutCell.attachLayout({
+            pattern: "1C",
+            offsets: {          // optional, offsets for fullscreen init
+                top:    0,     // you can specify all four sides
+                right:  5,     // or only the side where you want to have an offset
+                bottom: 0,
+                left:   3
+            },
+            cells: [{id: "a", text: "Danh sách thông tin thuê xe"}]
+        });
+        var userToolbar = userLayout.attachToolbar();
+        userToolbar.setIconsPath(live_site_index + "backend/dhtmlx5/common/icons/");
+        userToolbar.setAlign("left");
+        var cfg_button = [
+            {id: "add", text: "Add", type: "button", img: "ico-add.png"},
+            {type: "separator"},
+            {id: "edit", text: "Edit", type: "button", img: "ico-edit.png"},
+            {type: "separator"},
+            {id: "delete", text: "Delete", type: "button", img: "ico-del.png"},
+            {type: "separator"},
+            {id: "reload", text: "Reload", type: "button", img: "ico-reload.png"}
+
+        ];
+        userToolbar.loadStruct(cfg_button);
+        var usermygrid = userLayout.cells("a").attachGrid();
+        usermygrid.setImagePath("../js/dhtmlx5/imgs/");
+        usermygrid.enablePaging(true,50,10,"pagingArea",true,"infoArea");
+        usermygrid.enableBlockSelection();
+        usermygrid.setPagingSkin("bricks");
+        usermygrid.init();
+
+        userToolbar.attachEvent("onClick", function (id) {
+            //dhtmlx.alert("Sorry, This function is not available!");
+            if (id == "add") {
+                add_thuexe(null,usermygrid);
+            }
+            if(id=="edit"){
+                var selectedId = usermygrid.getSelectedRowId();
+                if (selectedId == null) {
+                    dhtmlx.alert("Please select 1 row!");
+                }else{
+
+
+                    $.ajax({
+                        url: '/admin/getthuexeinfo',
+                        dataType: "json",
+                        cache: false,
+                        type: 'post',
+                        data: {
+                            id: selectedId
+                        },
+                        beforeSend: function(xhr){
+
+//                            xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        },
+                        success: function (data) {
+
+                            if(data.result){
+                                add_thuexe(data.data,usermygrid);
+
+
+                            }else{
+                                dhtmlx.alert(data.mess);
+                            }
+                        },
+                        error: function () {
+                            dhtmlx.alert("Error,Please try again!");
+
+                        }
+                    });
+                }
+
+
+
+            }
+
+            if(id=="delete"){
+                var selectedId = usermygrid.getSelectedRowId();
+                if (selectedId == null) {
+                    dhtmlx.alert("Please select 1 row!");
+                }else{
+                    dhtmlx.confirm({
+                        title: "Xóa tin",
+                        type:"confirm-warning",
+                        text: "Bạn chắc chắn muốn xóa thông tin này?",
+                        callback: function(ok) {
+                            if(ok){
+                                delete_thuexe(selectedId,usermygrid);
+                            }
+
+                        }
+                    });
+                }
+            }
+            if(id=="reload"){
+                getthuexe(usermygrid);
+            }
+
+
+        });
+
+        usermygrid.attachEvent("onXLE", function(grid_obj,count){
+            userLayout.cells("a").progressOff();
+        });
+        usermygrid.attachEvent("onXLS", function(grid_obj){
+            userLayout.cells("a").progressOn();
+        });
+
+
+        usermygrid.setAwaitedRowHeight(25);
+        getthuexe(usermygrid);
+
+    }
+    function add_thuexe(item,Dhxgrid) {
+//        console.log(salon);
+        var viewportWidth = $(window).width();
+        var viewportHeight = $(window).height();
+        var wd = 1050;
+        var hg = viewportHeight - 100;
+        var left = (viewportWidth / 2) - (wd / 2) ;
+        var top = (viewportHeight / 2) - (hg / 2);
+        var win = myWins.createWindow("w_add", left, top, wd, hg);
+        var itemid = null;
+        if(item !== null && item !=="undefined"){
+            itemid = {type: "hidden", name:"id", value:item.id};
+            win.setText("Sửa thông tin thuê xe  ... ");
+        }else{
+            win.setText("Thêm mới thông tin thuê xe ... ");
+            item = new Object();
+            item.title = "";
+            item.phone = "";
+//            item.description = "";
+            item.thumb = "";
+            item.status = "";
+            item.address = "";
+        }
+//            console.log(salon);
+        win.setModal(true);
+        win.button("minmax").disable();
+        win.button("park").disable();
+
+
+        var wform = win.attachForm();
+
+        var cfgform1 = [
+            {type: "settings", position: "label-left"},
+            {type: "block", offsetLeft: 0, inputWidth: 1000, list: [
+
+//                {type: "image", name: "images",required:true,labelWidth: 80, label: "Cover image",inputWidth: 860, inputHeight: 137, imageWidth: 860, imageHeight: 137, url: "/admin/tool/dhtmlxform_image_user", value:item.images},
+                {type: "image",  name: "thumb",required:true,labelWidth: 80, label: "Thumnail",inputWidth: 135, inputHeight: 103,imageWidth: 135, imageHeight: 103, url: "/admin/tool/dhtmlxform_image_user", value:item.thumb},
+                {type: "input", name: "title",required:true, label: "Name", labelWidth: 80, inputWidth: 860, value:item.title},
+                {type: "input", name: "phone", required:true,label: "Phone", labelWidth: 80, inputWidth: 400, value:item.phone},
+
+                {type: "input", id:"address",name: "address", label: "Address", labelWidth: 80, inputWidth: 860, value: item.address},
+
+                {type: "combo",labelWidth: 80, required:true, label: "City", readonly:true,name: "city",inputWidth: 100,  options:[
+                    {value: "" , text: "Select city"}
+                    <?php
+                    if(!empty($listCity)){
+
+                        foreach ($listCity as $g){
+                            echo ',{value: "'.$g['id'].'" , text: "'.$g['city_name'].'"}';
+
+                        }
+                    }
+                    ?>
+                ]},
+                {type:"checkbox",labelWidth: 80,  name:"status", value:"Actived", label:"Actived"}
+            ]},
+
+            {type: "block", offsetLeft: 0, inputWidth: 490, list: [
+                {type: "button", offsetLeft: 80, value: "Save", name: "btnSave"}
+
+            ]}
+        ];
+        wform.loadStruct(cfgform1);
+        if(itemid != null){
+            wform.addItem(null,itemid,0,0);
+        }
+        if(item != null && item !="undefined" && item != ''){
+            wform.setItemValue('city',item.cityID);
+
+            wform.checkItem('status');
+        }
+
+        wform.attachEvent("onImageUploadSuccess", function(name, value, extra){
+
+        });
+        wform.attachEvent("onImageUploadFail", function(name, extra){
+        });
+        wform.attachEvent("onButtonClick", function (id) {
+            if(id=="btnSave"){
+
+                if(wform.validate()){
+                    var formData = wform.getFormData();
+
+                    $.ajax({
+                        url: '/admin/save_thuexe',
+                        dataType: "json",
+                        cache: false,
+                        type: 'post',
+                        data: {
+                            formData: formData
+                        },
+                        beforeSend: function(xhr){
+
+                            //xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        },
+                        success: function (data) {
+                            dhtmlx.alert(data.mess);
+                            if(data.result){
+                                win.close();
+                                getthuexe(Dhxgrid);
+                            }
+
+
+                        },
+                        error: function () {
+                            dhtmlx.alert("Error,Please try again!");
+                        }
+                    });
+
+
+                }else {
+                    dhtmlx.alert("Please input all required fields");
+                }
+
+            }
+        });
+
+
+    }
+    function getthuexe(Dhxgrid){
+        Dhxgrid.loadXML("/admin/getthuexe");
+    }
+    function delete_thuexe(id,Dhxgrid) {
+        if(id != null && id != "undefined"){
+            $.ajax({
+                url: '/admin/delthuexe',
+                dataType: "json",
+                cache: false,
+                type: 'post',
+                data: {
+                    id: id
+                },
+                beforeSend: function(xhr){
+
+//                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                },
+                success: function (data) {
+                    getthuexe(Dhxgrid);
+                    dhtmlx.alert(data.mess);
+                },
+                error: function () {
+                    dhtmlx.alert("Error,Please try again!");
+                }
+            });
+        }
+
+    }
+    /* end thuexe */
+    /* begin phutung */
+    function init_phutung(formFilter, LayoutCell) {
+        var userLayout = LayoutCell.attachLayout({
+            pattern: "1C",
+            offsets: {          // optional, offsets for fullscreen init
+                top:    0,     // you can specify all four sides
+                right:  5,     // or only the side where you want to have an offset
+                bottom: 0,
+                left:   3
+            },
+            cells: [{id: "a", text: "Danh sách cửa hàng bán phụ tùng"}]
+        });
+        var userToolbar = userLayout.attachToolbar();
+        userToolbar.setIconsPath(live_site_index + "backend/dhtmlx5/common/icons/");
+        userToolbar.setAlign("left");
+        var cfg_button = [
+            {id: "add", text: "Add", type: "button", img: "ico-add.png"},
+            {type: "separator"},
+            {id: "edit", text: "Edit", type: "button", img: "ico-edit.png"},
+            {type: "separator"},
+            {id: "delete", text: "Delete", type: "button", img: "ico-del.png"},
+            {type: "separator"},
+            {id: "reload", text: "Reload", type: "button", img: "ico-reload.png"}
+
+        ];
+        userToolbar.loadStruct(cfg_button);
+        var usermygrid = userLayout.cells("a").attachGrid();
+        usermygrid.setImagePath("../js/dhtmlx5/imgs/");
+        usermygrid.enablePaging(true,50,10,"pagingArea",true,"infoArea");
+        usermygrid.enableBlockSelection();
+        usermygrid.setPagingSkin("bricks");
+        usermygrid.init();
+
+        userToolbar.attachEvent("onClick", function (id) {
+            //dhtmlx.alert("Sorry, This function is not available!");
+            if (id == "add") {
+                add_phutung(null,usermygrid);
+            }
+            if(id=="edit"){
+                var selectedId = usermygrid.getSelectedRowId();
+                if (selectedId == null) {
+                    dhtmlx.alert("Please select 1 row!");
+                }else{
+
+
+                    $.ajax({
+                        url: '/admin/getphutunginfo',
+                        dataType: "json",
+                        cache: false,
+                        type: 'post',
+                        data: {
+                            id: selectedId
+                        },
+                        beforeSend: function(xhr){
+
+//                            xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        },
+                        success: function (data) {
+
+                            if(data.result){
+                                add_phutung(data.data,usermygrid);
+
+
+                            }else{
+                                dhtmlx.alert(data.mess);
+                            }
+                        },
+                        error: function () {
+                            dhtmlx.alert("Error,Please try again!");
+
+                        }
+                    });
+                }
+
+
+
+            }
+
+            if(id=="delete"){
+                var selectedId = usermygrid.getSelectedRowId();
+                if (selectedId == null) {
+                    dhtmlx.alert("Please select 1 row!");
+                }else{
+                    dhtmlx.confirm({
+                        title: "Xóa tin",
+                        type:"confirm-warning",
+                        text: "Bạn chắc chắn muốn xóa thông tin này?",
+                        callback: function(ok) {
+                            if(ok){
+                                delete_phutung(selectedId,usermygrid);
+                            }
+
+                        }
+                    });
+                }
+            }
+            if(id=="reload"){
+                getphutung(usermygrid);
+            }
+
+
+        });
+
+        usermygrid.attachEvent("onXLE", function(grid_obj,count){
+            userLayout.cells("a").progressOff();
+        });
+        usermygrid.attachEvent("onXLS", function(grid_obj){
+            userLayout.cells("a").progressOn();
+        });
+
+
+        usermygrid.setAwaitedRowHeight(25);
+        getphutung(usermygrid);
+
+    }
+    function add_phutung(item,Dhxgrid) {
+        var viewportWidth = $(window).width();
+        var viewportHeight = $(window).height();
+        var wd = 1050;
+        var hg = viewportHeight - 100;
+        var left = (viewportWidth / 2) - (wd / 2) ;
+        var top = (viewportHeight / 2) - (hg / 2);
+        var win = myWins.createWindow("w_add", left, top, wd, hg);
+        var itemid = null;
+        if(item !== null && item !=="undefined"){
+            itemid = {type: "hidden", name:"id", value:item.id};
+            win.setText("Sửa thông tin cửa hàng bán phụ tùng  ... ");
+        }else{
+            win.setText("Thêm mới cửa hàng bán phụ tùng ... ");
+            item = new Object();
+            item.title = "";
+            item.phone = "";
+//            item.description = "";
+            item.thumb = "";
+            item.status = "";
+            item.address = "";
+        }
+//            console.log(salon);
+        win.setModal(true);
+        win.button("minmax").disable();
+        win.button("park").disable();
+
+
+        var wform = win.attachForm();
+
+        var cfgform1 = [
+            {type: "settings", position: "label-left"},
+            {type: "block", offsetLeft: 0, inputWidth: 1000, list: [
+
+//                {type: "image", name: "images",required:true,labelWidth: 80, label: "Cover image",inputWidth: 860, inputHeight: 137, imageWidth: 860, imageHeight: 137, url: "/admin/tool/dhtmlxform_image_user", value:item.images},
+                {type: "image",  name: "thumb",required:true,labelWidth: 80, label: "Thumnail",inputWidth: 135, inputHeight: 103,imageWidth: 135, imageHeight: 103, url: "/admin/tool/dhtmlxform_image_user", value:item.thumb},
+                {type: "input", name: "title",required:true, label: "Name", labelWidth: 80, inputWidth: 860, value:item.title},
+                {type: "input", name: "phone", required:true,label: "Phone", labelWidth: 80, inputWidth: 400, value:item.phone},
+
+                {type: "input", id:"address",name: "address", label: "Address", labelWidth: 80, inputWidth: 860, value: item.address},
+
+                {type: "combo",labelWidth: 80, required:true, label: "City", readonly:true,name: "city",inputWidth: 100,  options:[
+                    {value: "" , text: "Select city"}
+                    <?php
+                    if(!empty($listCity)){
+
+                        foreach ($listCity as $g){
+                            echo ',{value: "'.$g['id'].'" , text: "'.$g['city_name'].'"}';
+
+                        }
+                    }
+                    ?>
+                ]},
+                {type:"checkbox",labelWidth: 80,  name:"status", value:"Actived", label:"Actived"}
+            ]},
+
+            {type: "block", offsetLeft: 0, inputWidth: 490, list: [
+                {type: "button", offsetLeft: 80, value: "Save", name: "btnSave"}
+
+            ]}
+        ];
+        wform.loadStruct(cfgform1);
+        if(itemid != null){
+            wform.addItem(null,itemid,0,0);
+        }
+        if(item != null && item !="undefined" && item != ''){
+            wform.setItemValue('city',item.cityID);
+
+            wform.checkItem('status');
+        }
+
+        wform.attachEvent("onImageUploadSuccess", function(name, value, extra){
+
+        });
+        wform.attachEvent("onImageUploadFail", function(name, extra){
+        });
+        wform.attachEvent("onButtonClick", function (id) {
+            if(id=="btnSave"){
+
+                if(wform.validate()){
+                    var formData = wform.getFormData();
+
+                    $.ajax({
+                        url: '/admin/save_phutung',
+                        dataType: "json",
+                        cache: false,
+                        type: 'post',
+                        data: {
+                            formData: formData
+                        },
+                        beforeSend: function(xhr){
+
+                            //xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        },
+                        success: function (data) {
+                            dhtmlx.alert(data.mess);
+                            if(data.result){
+                                win.close();
+                                getphutung(Dhxgrid);
+                            }
+
+
+                        },
+                        error: function () {
+                            dhtmlx.alert("Error,Please try again!");
+                        }
+                    });
+
+
+                }else {
+                    dhtmlx.alert("Please input all required fields");
+                }
+
+            }
+        });
+
+
+    }
+    function getphutung(Dhxgrid){
+        Dhxgrid.loadXML("/admin/getphutung");
+    }
+    function delete_phutung(id,Dhxgrid) {
+        if(id != null && id != "undefined"){
+            $.ajax({
+                url: '/admin/delphutung',
+                dataType: "json",
+                cache: false,
+                type: 'post',
+                data: {
+                    id: id
+                },
+                beforeSend: function(xhr){
+
+//                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                },
+                success: function (data) {
+                    getphutung(Dhxgrid);
+                    dhtmlx.alert(data.mess);
+                },
+                error: function () {
+                    dhtmlx.alert("Error,Please try again!");
+                }
+            });
+        }
+
+    }
+    /* end phutung */
     function closing(){
         var win = myWins.window("w_add");
         if(win != null){
