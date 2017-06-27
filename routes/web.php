@@ -144,19 +144,26 @@ Route::group(['prefix' => 'admin','middleware'=>'\App\Http\Middleware\AdminPermi
 
 Route::get('op_vip_salon/map', 'Op_vip_salon@map' );
 Route::get('op_vip_salon/index', 'Op_vip_salon@index');
+Route::get('op_vip_salon/mobile', 'Op_vip_salon@mobile');
 
 Route::get('op_support_car/map', 'Op_support_car@map' );
-Route::get('op_support_car/index','Op_support_car@index');
+Route::get('op_support_car/index', 'Op_support_car@index');
+Route::get('op_support_car/mobile', 'Op_support_car@mobile');
+
 
 Route::get('op_design_car/map', 'Op_design_car@map' );
 Route::get('op_design_car/index', 'Op_design_car@index');
+Route::get('op_design_car/mobile', 'Op_design_car@mobile');
 
 Route::get('op_bai_giu_xe/map', 'Op_bai_giu_xe@map' );
-Route::get('op_bai_giu_xe/index','Op_bai_giu_xe@index');
+Route::get('op_bai_giu_xe/index', 'Op_bai_giu_xe@index');
+Route::get('op_bai_giu_xe/mobile', 'Op_bai_giu_xe@mobile');
 
 Route::get('op_lend_car/map', 'Op_lend_car@map' );
-Route::get('op_lend_car/index','Op_lend_car@index');
+Route::get('op_lend_car/index', 'Op_lend_car@index');
+Route::get('op_lend_car/mobile', 'Op_lend_car@mobile');
 
 Route::get('op_accessary_car/map', 'Op_accessary_car@map' );
-Route::get('op_accessary_car/index','Op_accessary_car@index');
+Route::get('op_accessary_car/index', 'Op_accessary_car@index');
+Route::get('op_accessary_car/mobile', 'Op_accessary_car@mobile');
 
