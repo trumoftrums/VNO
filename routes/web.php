@@ -142,4 +142,21 @@ Route::group(['prefix' => 'admin','middleware'=>'\App\Http\Middleware\AdminPermi
 //    })->where('id', '[0-9]+');
 });
 
+Route::get('op_vip_salon/map', 'Op_vip_salon@map' );
+Route::get('op_vip_salon/index', 'Op_vip_salon@index');
+
+Route::get('op_support_car/map', 'Op_support_car@map' );
+Route::get('op_support_car/index','Op_support_car@index');
+
+Route::get('op_design_car/map', 'Op_design_car@map' );
+Route::get('op_design_car/index', 'Op_design_car@index');
+
+Route::get('op_bai_giu_xe/map', 'Op_bai_giu_xe@map' );
+Route::get('op_bai_giu_xe/index','Op_bai_giu_xe@index');
+
+Route::get('op_lend_car/map', 'Op_lend_car@map' );
+Route::get('op_lend_car/index','Op_lend_car@index');
+
+Route::get('op_accessary_car/map', 'Op_accessary_car@map' );
+Route::get('op_accessary_car/index','Op_accessary_car@index');
 

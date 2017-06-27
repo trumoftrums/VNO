@@ -226,7 +226,6 @@ class HomeController extends Controller {
                                 $conditions ="index_key_str ='$k' and index_value ='$vv' ";
                             }
 
-
                             break;
                         case "keyword":
                             $conditions = "(index_key_str ='tieude' or index_key_str ='thongso_67') and index_value like '%$v%' ";
