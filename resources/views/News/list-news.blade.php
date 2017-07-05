@@ -22,7 +22,7 @@
                     <a href="{{ URL::to('tin-tuc/'.$news->id.'/'.str_slug($news->title, '-')) }}"><img class="img-thumb-item-news" src="{{ URL::asset($news->thumbnail)}}"/></a>
                     <div class="cover-info-item-news">
                         <a href="{{ URL::to('tin-tuc/'.$news->id.'/'.str_slug($news->title, '-')) }}" class="title-item-news"><img class="arrow-before-title" src="{{ URL::asset('images/icon-title-news.png')}}"/> {{$news->title}}</a>
-                        <p class="p-post-by">Đăng bởi <span>{{$news->username}}</span> - {{date_format(date_create($news->created_date), 'd/m/Y H:i a')}}</p>
+                        <p class="p-post-by">Đăng bởi <span>{{$news->username}}</span> - {{date_format(date_create($news->created_at), 'd/m/Y H:i a')}}</p>
                         <p class="summary-news-page">{{$news->summary}}...</p>
                         <a class="bt-chi-tiet-news" href="{{ URL::to('tin-tuc/'.$news->id.'/'.str_slug($news->title, '-')) }}">Chi tiết <small> >> </small></a>
                     </div>

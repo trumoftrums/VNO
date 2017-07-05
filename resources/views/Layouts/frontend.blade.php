@@ -41,6 +41,7 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+    @yield('headScript')
 </head>
 <?php $captchaURL =Captcha::src(); ?>
 <body ng-app="myApp" ng-controller="registerCtrl">
@@ -57,10 +58,10 @@
                             <ul class="dropdown-menu">
                                 <span class="close-menu"> <img src="{{ URL::asset('images/icon-close-menu.png') }}"/> </span>
                                 <li><a href="{{ URL::to('') }}">Trang Chủ</a></li>
-                                <li><a href="{{ URL::to('vip-salon/all') }}">Showroom toàn quốc</a></li>
-                                <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Sửa xe toàn quốc</a></li>
-                                <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Cứu hộ toàn quốc</a></li>
-                                <li><a href="{{ URL::to('bai-giu-xe/all') }}">Bãi giữ xe toàn quốc</a></li>
+                                <li><a href="{{ URL::to('vip-salon-map/index') }}">Showroom toàn quốc</a></li>
+                                <li><a href="{{ URL::to('do-xe-uy-tin-map/index') }}">Sửa xe toàn quốc</a></li>
+                                <li><a href="{{ URL::to('thong-tin-cuu-ho-map/index') }}">Cứu hộ toàn quốc</a></li>
+                                <li><a href="{{ URL::to('bai-giu-xe-map/index') }}">Bãi giữ xe toàn quốc</a></li>
                                 <li><a href="{{ URL::to('/tin-tuc') }}">Tin tức về xe</a></li>
                                 <li><a href="{{ URL::to('dich-vu-huong-dan') }}">Dịch vụ & Hướng dẫn</a></li>
                                 <li><a href="{{ URL::to('videos-xe-oto') }}">Videos</a> </li>
@@ -187,10 +188,10 @@
                         <ul class="dropdown-menu">
                             <span class="close-menu"> <img src="{{ URL::asset('images/icon-close-menu.png') }}"/> </span>
                             <li><a href="{{ URL::to('') }}">Trang Chủ</a></li>
-                            <li><a href="{{ URL::to('vip-salon/all') }}">Showroom toàn quốc</a></li>
-                            <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Sửa xe toàn quốc</a></li>
-                            <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Cứu hộ toàn quốc</a></li>
-                            <li><a href="{{ URL::to('bai-giu-xe/all') }}">Bãi giữ xe toàn quốc</a></li>
+                            <li><a href="{{ URL::to('vip-salon-map/index') }}">Showroom toàn quốc</a></li>
+                            <li><a href="{{ URL::to('do-xe-uy-tin-map/index') }}">Sửa xe toàn quốc</a></li>
+                            <li><a href="{{ URL::to('thong-tin-cuu-ho-map/index') }}">Cứu hộ toàn quốc</a></li>
+                            <li><a href="{{ URL::to('bai-giu-xe-map/index') }}">Bãi giữ xe toàn quốc</a></li>
                             <li><a href="{{ URL::to('/tin-tuc') }}">Tin tức về xe</a></li>
                             <li><a href="{{ URL::to('dich-vu-huong-dan') }}">Dịch vụ & Hướng dẫn</a></li>
                             <li><a href="{{ URL::to('videos-xe-oto') }}">Videos Xe</a> </li>
@@ -337,27 +338,27 @@
                 >Đăng tin miễn phí</a>
                 <div class="list-services-mobile">
                     <div class="item-service">
-                        <a href="{{ URL::to('vip-salon/all') }}">
+                        <a href="{{ URL::to('vip-salon-map/index') }}">
                             <img class="icon-service" src="{{ URL::asset('images/icon-ser01-mobile.png')}}"/>
                         </a>
                     </div>
                     <div class="item-service">
-                        <a href="{{ URL::to('do-xe-uy-tin/all') }}">
+                        <a href="{{ URL::to('do-xe-uy-tin-map/index') }}">
                             <img class="icon-service" src="{{ URL::asset('images/icon-ser02-mobile.png')}}"/>
                         </a>
                     </div>
                     <div class="item-service">
-                        <a href="{{ URL::to('thong-tin-cuu-ho/all') }}">
+                        <a href="{{ URL::to('thong-tin-cuu-ho-map/index') }}">
                             <img class="icon-service" src="{{ URL::asset('images/icon-ser03-mobile.png')}}"/>
                         </a>
                     </div>
                     <div class="item-service">
-                        <a href="{{ URL::to('bai-giu-xe/all') }}">
+                        <a href="{{ URL::to('bai-giu-xe-map/index') }}">
                             <img class="icon-service" src="{{ URL::asset('images/icon-ser05-mobile.png')}}"/>
                         </a>
                     </div>
                     <div class="item-service">
-                        <a href="{{ URL::to('thue-xe-toan-quoc/all') }}">
+                        <a href="{{ URL::to('thue-xe-toan-quoc-map/index') }}">
                             <img class="icon-service" src="{{ URL::asset('images/icon-ser06-mobile.png')}}"/>
                         </a>
                     </div>
@@ -384,37 +385,37 @@
             </div>
             <div class="list-services">
                 <div class="item-service">
-                    <a href="{{ URL::to('vip-salon/all') }}">
+                    <a href="{{ URL::to('vip-salon-map/index') }}">
                         <img class="icon-service" src="{{ URL::asset('images/icon-ser01.png')}}"/>
                         <p>SHOWROOM<br> TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                     </a>
                 </div>
                 <div class="item-service">
-                    <a href="{{ URL::to('do-xe-uy-tin/all') }}">
+                    <a href="{{ URL::to('do-xe-uy-tin-map/index') }}">
                         <img class="icon-service" src="{{ URL::asset('images/icon-ser02.png')}}"/>
                         <p>SỬA XE<br> TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                     </a>
                 </div>
                 <div class="item-service">
-                    <a href="{{ URL::to('thong-tin-cuu-ho/all') }}">
+                    <a href="{{ URL::to('thong-tin-cuu-ho-map/index') }}">
                         <img class="icon-service" src="{{ URL::asset('images/icon-ser03.png')}}"/>
                         <p>CỨU HỘ<br> TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                     </a>
                 </div>
                 <div class="item-service">
-                    <a href="{{ URL::to('bai-giu-xe/all') }}">
+                    <a href="{{ URL::to('bai-giu-xe-map/index') }}">
                         <img class="icon-service" src="{{ URL::asset('images/icon-ser05.png')}}"/>
                         <p>BÃI GIỮ XE<br> TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                     </a>
                 </div>
                 <div class="item-service">
-                    <a href="{{ URL::to('thue-xe-toan-quoc/all') }}">
+                    <a href="{{ URL::to('thue-xe-toan-quoc-map/index') }}">
                         <img class="icon-service" src="{{ URL::asset('images/icon-ser06.png')}}"/>
                         <p>CHO THUÊ XE<br> TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                     </a>
                 </div>
                 <div class="item-service">
-                    <a href="{{ URL::to('phu-tung-xe-toan-quoc/all') }}">
+                    <a href="{{ URL::to('phu-tung-xe-toan-quoc-map/index') }}">
                         <img class="icon-service" src="{{ URL::asset('images/icon-ser07.png')}}"/>
                         <p>PHỤ TÙNG XE<br> TOÀN QUỐC <img class="icon-arrow-right" src="{{ URL::asset('images/icon-arrow-right.png')}}"/></p>
                     </a>
@@ -448,10 +449,10 @@
         <a class="top-page" href="#top">TOP PAGE <img src="{{ URL::asset('images/icon-top-page.png')}}"/></a>
         <ul>
             <li><a href="{{ URL::to('') }}">Trang chủ</a> </li>
-            <li><a href="{{ URL::to('vip-salon/all') }}">Showroom toàn quốc</a> </li>
-            <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Sửa xe toàn quốc</a> </li>
-            <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Cứu hộ toàn quốc</a> </li>
-            <li><a href="{{ URL::to('bai-giu-xe/all') }}">Bãi giữ xe toàn quốc</a> </li>
+            <li><a href="{{ URL::to('vip-salon-map/index') }}">Showroom toàn quốc</a> </li>
+            <li><a href="{{ URL::to('do-xe-uy-tin-map/index') }}">Sửa xe toàn quốc</a> </li>
+            <li><a href="{{ URL::to('thong-tin-cuu-ho-map/index') }}">Cứu hộ toàn quốc</a> </li>
+            <li><a href="{{ URL::to('bai-giu-xe-map/index') }}">Bãi giữ xe toàn quốc</a> </li>
             <li><a href="{{ URL::to('tin-tuc') }}">Tin tức về xe</a> </li>
             <li><a href="{{ URL::to('dich-vu-huong-dan') }}">Dịch vụ & Hướng dẫn</a> </li>
             <li><a href="{{ URL::to('videos-xe-oto') }}">Videos</a> </li>
@@ -473,10 +474,10 @@
             <div class="menu-bottom">
                 <ul>
                     <li><a class="a-one-line" href="{{ URL::to('') }}">Trang chủ</a> </li>
-                    <li><a href="{{ URL::to('vip-salon/all') }}">Showroom<br>toàn quốc</a> </li>
-                    <li><a href="{{ URL::to('do-xe-uy-tin/all') }}">Sửa xe<br>toàn quốc</a> </li>
-                    <li><a href="{{ URL::to('thong-tin-cuu-ho/all') }}">Cứu hộ<br>toàn quốc</a> </li>
-                    <li><a href="{{ URL::to('bai-giu-xe/all') }}">Bãi giữ xe<br>toàn quốc</a> </li>
+                    <li><a href="{{ URL::to('vip-salon-map/index') }}">Showroom<br>toàn quốc</a> </li>
+                    <li><a href="{{ URL::to('do-xe-uy-tin-map/index') }}">Sửa xe<br>toàn quốc</a> </li>
+                    <li><a href="{{ URL::to('thong-tin-cuu-ho-map/index') }}">Cứu hộ<br>toàn quốc</a> </li>
+                    <li><a href="{{ URL::to('bai-giu-xe-map/index') }}">Bãi giữ xe<br>toàn quốc</a> </li>
                     <li><a href="{{ URL::to('tin-tuc') }}">Tin tức<br>về xe</a> </li>
                     <li><a href="{{ URL::to('dich-vu-huong-dan') }}">Dịch vụ &<br>Hướng dẫn</a> </li>
                     <li><a class="a-one-line" href="{{ URL::to('videos-xe-oto') }}">Videos</a> </li>
@@ -484,8 +485,8 @@
                 </ul>
             </div>
             <div class="social-bottom">
-                <p>Truy cập: <span>{{$countView}}</span></p><br>
-                <p>User: <span>{{$countUser}}</span></p>
+                {{--<p>Truy cập: <span>{{$countView}}</span></p><br>--}}
+                {{--<p>User: <span>{{$countUser}}</span></p>--}}
             </div>
         </div>
 </div>

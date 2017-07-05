@@ -142,28 +142,27 @@ Route::group(['prefix' => 'admin','middleware'=>'\App\Http\Middleware\AdminPermi
 //    })->where('id', '[0-9]+');
 });
 
-Route::get('op_vip_salon/map', 'Op_vip_salon@map' );
-Route::get('op_vip_salon/index', 'Op_vip_salon@index');
-Route::get('op_vip_salon/mobile', 'Op_vip_salon@mobile');
+Route::get('vip-salon-map/map', 'Op_vip_salon@map' );
+Route::get('vip-salon-map/index', 'Op_vip_salon@index');
+Route::get('vip-salon-map/mobile', 'Op_vip_salon@mobile');
 
-Route::get('op_support_car/map', 'Op_support_car@map' );
-Route::get('op_support_car/index', 'Op_support_car@index');
-Route::get('op_support_car/mobile', 'Op_support_car@mobile');
+Route::get('thong-tin-cuu-ho-map/map', 'Op_support_car@map' );
+Route::get('thong-tin-cuu-ho-map/index', 'Op_support_car@index');
+Route::get('thong-tin-cuu-ho-map/mobile', 'Op_support_car@mobile');
 
 
-Route::get('op_design_car/map', 'Op_design_car@map' );
-Route::get('op_design_car/index', 'Op_design_car@index');
-Route::get('op_design_car/mobile', 'Op_design_car@mobile');
+Route::get('do-xe-uy-tin-map/map', 'Op_design_car@map' );
+Route::get('do-xe-uy-tin-map/index', 'Op_design_car@index');
+Route::get('do-xe-uy-tin-map/mobile', 'Op_design_car@mobile');
 
-Route::get('op_bai_giu_xe/map', 'Op_bai_giu_xe@map' );
-Route::get('op_bai_giu_xe/index', 'Op_bai_giu_xe@index');
-Route::get('op_bai_giu_xe/mobile', 'Op_bai_giu_xe@mobile');
+Route::get('bai-giu-xe-map/map', 'Op_bai_giu_xe@map' );
+Route::get('bai-giu-xe-map/index', 'Op_bai_giu_xe@index');
+Route::get('bai-giu-xe-map/mobile', 'Op_bai_giu_xe@mobile');
 
-Route::get('op_lend_car/map', 'Op_lend_car@map' );
-Route::get('op_lend_car/index', 'Op_lend_car@index');
-Route::get('op_lend_car/mobile', 'Op_lend_car@mobile');
+Route::get('thue-xe-toan-quoc-map/map', 'Op_lend_car@map' );
+Route::get('thue-xe-toan-quoc-map/index', 'Op_lend_car@index');
+Route::get('thue-xe-toan-quoc-map/mobile', 'Op_lend_car@mobile');
 
-Route::get('op_accessary_car/map', 'Op_accessary_car@map' );
-Route::get('op_accessary_car/index', 'Op_accessary_car@index');
-Route::get('op_accessary_car/mobile', 'Op_accessary_car@mobile');
-
+Route::get('phu-tung-toan-quoc-map/map', 'Op_accessary_car@map' );
+Route::get('phu-tung-toan-quoc-map/index', 'Op_accessary_car@index');
+Route::get('phu-tung-toan-quoc-map/mobile', 'Op_accessary_car@mobile');

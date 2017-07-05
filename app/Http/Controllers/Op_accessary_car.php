@@ -10,6 +10,7 @@ use Response;
 class Op_accessary_car extends Controller
 {
     public function index()
+
     {
         $data =  DB::table('op_accessary_car')->paginate(4);
         return view('op_accessary_car.index', ['data' => $data]);

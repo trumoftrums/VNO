@@ -11,7 +11,7 @@
     <div class="news-page">
         <div class="header-detail-news">
             <h3><img class="arrow-before-title" src="{{ URL::asset('images/icon-title-news.png')}}"/> {{$detailNews->title}}</h3>
-            <p>Đăng bởi <span>{{$detailNews->username}}</span> - {{date_format(date_create($detailNews->created_date), 'H:i a - d/m/Y')}}</p>
+            <p>Đăng bởi <span>{{$detailNews->username}}</span> - {{date_format(date_create($detailNews->created_at), 'H:i a - d/m/Y')}}</p>
             <div class="share-social">
                 <!--fb-->
                 <div style="float:left;margin-right: 10px;" class="fb-share-button"

@@ -12,7 +12,7 @@ class Op_bai_giu_xe extends Controller
     public function index()
     {
         $data =  DB::table('op_bai_giu_xe')->paginate(4);
-        return view('op_bai_giu_xe.index', ['data' => $data]);
+        return view('Service.list-bai-xe-map', ['data' => $data]);
     }
 
     public function mobile()

@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Title</title>
+@extends('Layouts.frontend')
+@section('headScript')
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-      <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="{!! asset('css/font-awesome.css') !!}">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
@@ -26,9 +19,14 @@
     <script type="text/javascript" src="{!! asset('js/jquery-ui.min.js') !!}"></script>
     <link rel="stylesheet" type="text/css" href="{!! asset('css/jquery-ui.min.css') !!}" />
     <link rel="stylesheet" type="text/css" href="{!! asset('css/style.css') !!}" />
-</head>
-<body>
-    <div class="container map-container">
+@section('content')
+    <div class="news-page">
+        <div class="header-news">
+            <img class="img-header-news-page" src="{{ URL::asset('images/icon-phu-tung-xe.png')}}"/>
+            <img class="line-header" src="{{ URL::asset('images/line-news-page.png')}}"/>
+        </div>
+        <div class="list-news-page" id="style-4">
+    <div class="map-container">
         <div class="col-xs-12 map-search">
             <label class="hidden-xs">Tìm Kiếm: </label>
             <div class="clearfix"></div>
@@ -165,5 +163,7 @@
             </div>
         </div>
     </div>
-</body>
+        </div>
+    </div>
+    @stop
 </html>

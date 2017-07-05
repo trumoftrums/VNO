@@ -41,7 +41,7 @@ class ServiceController extends Controller {
         }
         $listCity = City::getCity();
 
-        return View('Service.list-bai-xe', [
+        return View('Service.list-bai-xe-map', [
             'listBaiGiuXe' => $listBaiGiuXe,
             'citySelected' => $city,
             'listCity' => $listCity
